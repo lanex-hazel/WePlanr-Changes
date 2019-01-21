@@ -1,0 +1,14 @@
+/.bundle
+.DS_STORE
+
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+.byebug_history
+
+/config/database.yml
+/config/secrets.yml
+
+/public/system/*
+/coverage/
