@@ -1,3 +1,3 @@
 # weplanr-changes
 
-Go to each project repository to read the readme for each.
+Go to corresponding project repository to read the README for each.
