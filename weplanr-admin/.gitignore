@@ -1,0 +1,11 @@
+node_modules/
+bower_components/
+.bundle/
+coverage/
+.sass-cache/
+.idea/
+.tmp/
+dist/
+log/
+.DS_Store
+.env
