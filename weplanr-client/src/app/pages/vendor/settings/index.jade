@@ -1,0 +1,94 @@
+header(logout="logout()" current-user="user" current-vendor="currentVendor" page-title="{{uiState.currentTab == 'referral' ? 'Referral' : 'Edit Settings'}}" search-url="vendor/search")
+.main-content
+  .vendor-settings-container
+    .row.no-margin.content-container.white-box(ng-show="!$root.menuView")
+      .col-xs-12.col-md-12.col-lg-12.no-padding
+        vendor-settings-nav(current-tab="uiState.currentTab")
+
+      .col-xs-12.col-md-12.col-lg-12.no-padding
+        .inner-settings-container.scroll-box(ng-if="uiState.currentTab == 'profile'")
+            profile-settings(
+              vendor="currentVendor"
+              loading="uiState.loading"
+              uploading="uiState.uploading"
+              upload-percent="uploadPercent"
+              submit="save(vendor,redirect)"
+              upload="uploadAvatarPhoto(file)"
+              disabled="uiState.disabled"
+              service-opt="services"
+              location-opt="locations"
+            )
+
+        .inner-settings-container.scroll-box(ng-if="uiState.currentTab == 'portfolio'")
+            portfolio-settings(loading="uiState.loading" uploading="uiState.uploading" photos="currentVendor.photo_urls" upload="uploadPortfolio(files,redirect)" destroy="deletePhoto(image)" set-cover="setCoverPhoto(obj)")
+
+        .inner-settings-container.scroll-box(ng-if="uiState.currentTab == 'account'")
+            account-settings(
+              vendor="currentVendor"
+              user="user"
+              loading="uiState.loading"
+              submit="saveAccount(currentVendor,user,redirect)"
+              temp="temp"
+              deactivate="deleteAccount()"
+              errors="uiState.errors"
+            )
+
+        .inner-settings-container.scroll-box(ng-if="uiState.currentTab == 'referral' && $root.referralState.vendor")
+          br
+          img.banner(src="/vendor/images/banner-vendor-referral.png" alt="WePlanr")
+          #referral-container
+            br
+            p.text-center *Refer a friend in the wedding business to sign up to WePlanr and we'll give you $40 credit into your account when they become a registered business. Your friends will also receive a further $10 off our discounted registration fee for a limited time only. A small token of our appreciation from us, to you, to say thanks for your support!
+            br
+            table
+              tbody
+                tr.form-input
+                  td(width="100%" style="padding-right: 15px;")
+                    input.form-control(
+                      name="email"
+                      type="text"
+                      ng-model="refer.email"
+                      ng-class="{'has-error': refer.error && !refer.email || refer.pattern}"
+                      ng-enter="referVendor()"
+                      placeholder="Add friend's email address"
+                    )
+                  td(width="25%")
+                    a.btn.btn-success(ng-click="referVendor(referForm)") REFER A BUSINESS
+                tr.form-input
+                  td.errors(colspan="2" valign="top")
+                    .animate(ng-if="refer.error && !refer.email") Please enter an email
+                    .animate(ng-if="refer.pattern") Please enter a valid email
+              br
+            br
+            p.copy-instruction.text-center Copy &amp; Paste Your Unique Referral Code Below
+            h3.code.text-center {{referrals.vendor.code}}
+            br
+            #refer
+              .divider
+                h4 Successful referrals
+                table
+                  tbody.list
+                    tr(ng-if="referrals.list.length == 0")
+                      td.text-center None
+                    tr(ng-repeat="item in referrals.list")
+                      td(ng-bind="item.attributes.referred_email")
+              .divider
+                h4 Your savings
+                .text-center
+                  .divider.credits.text-left.mleft-15
+                    | Successful referrals
+                  .divider.credits.col-right
+                    span(ng-bind="referral_count")
+
+                  .divider.credits.text-left.mleft-15
+                    | Total credits earned
+                  .divider.credits.col-right
+                    span(ng-bind="referrals.vendor.accumulated_credit | dollarNum")
+
+                  .divider.credits.text-left.mleft-15
+                    | Remaining Credits
+                  .divider.credits.col-right
+                    span(ng-bind="referrals.vendor.current_credit | dollarNum")
+            br
+            br
+            .disclaimer *The Business Referral Promotion is only valid when referred business vendors use the unique invitation code provided to them by you upon their registration to WePlanr. Your unique invitation code can be found on your referral page and can be sent automatically to them when you provide WePlanr with an eligible email address. Successful registration by businesses require payment of a non-refundable registration fee.  Credits are automatically applied to your account upon successful registration and can be accrued but are not redeemable for cash. This promotion is valid until 30 March 2018. WePlanr reserves the right to amend the terms of this promotion at any time, without notice to you.

@@ -1,0 +1,44 @@
+.modal
+  .modal-body
+    a.pull-right.icon.icon-exit(ng-click="close('login-modal')")
+    section
+      p Plan your wedding effortlessly,
+        br
+        | organise everything beautifully
+    section
+      span.title LOGIN
+      br
+      form(name="loginform" novalidate="true" autocomplete="off")
+        .form-input
+          input.form-control(
+            type="email"
+            name="login_email"
+            required=true
+            ng-model="creds.email"
+            ng-enter="login(loginform)"
+            ng-class="{'not-empty': !loginform.login_email.$error.required, 'has-error': login_email.$error.blank || (loginform.login_email.$error.invalidEmail && !loginform.login_email.$error.required  && loginform.login_email.$pristine)}"
+          )
+          label(for="login_email") Email
+          span.errors.danger.animate(ng-if="loginform.login_email.$error.invalidEmail && !loginform.login_email.$error.required  && loginform.login_email.$pristine") The email address doesn't match any account
+        .form-input
+          input.form-control(
+            type="password"
+            name="login_password"
+            required=true
+            ng-model="creds.password"
+            ng-enter="login(loginform)"
+          )
+          label(for="login_password") Password
+      br
+    section
+      .btn-container
+        spinner(ng-show="uiState.loading")
+        a.btn.btn-success(ng-click="login(loginform)" ng-show="!uiState.loading" ng-class="{'disabled': loginform.$invalid}" ) LOG IN
+        br
+        a.log-in(ng-click="redirect('login-modal','register-modal')") OR REGISTER AN ACCOUNT
+        br
+    section#options
+      .box
+        input.radio-form-control(type="checkbox" name="keepLogin" ng-model="keepLogin" ng-value="true")
+        span.radio-option-text &nbsp; Keep me signed in
+        a.pull-right(ng-click="redirect('login-modal','forgot-modal')") Forgot password?

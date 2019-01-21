@@ -1,0 +1,8 @@
+.col-xs-12.inner-container
+  b.title-label Portfolio
+  b.title-label.green &nbsp; ({{$ctrl.vendor.photo_urls.length}})
+  .detail-container
+    .animate(ng-if="$ctrl.vendor.photo_urls.length == 0") No photos yet
+    ul#portfolio-slideshow.animate(ng-if="$ctrl.vendor.photo_urls.length > 0")
+      li.default(ng-repeat="photo in $ctrl.vendor.photo_urls track by $index" ng-class="{'active': $index == $ctrl.currentSlide}")
+        img(ng-src="{{$root.setPhoto(photo.url)}}" alt="{{$ctrl.vendor.tags.join(' ')}}" ng-click="$ctrl.openGallery($index)")

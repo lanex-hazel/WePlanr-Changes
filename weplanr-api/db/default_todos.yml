@@ -1,0 +1,368 @@
+todos:
+  - name: Ceremony
+    budget_percent: 1.67
+    timing: 18-12
+    category: Venue
+    suggestion_copy_female: The ceremony is the most important aspect of your big day. Make sure that you book the perfect ceremony venue for you and you partner to say your I Do's.
+    question_copy: To recap, have you booked your ceremony venue yet?
+    reminder_copy: It doesn't look like you've decided on your ceremony venue yet, here are some of our favourite venues to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">ceremony</span> venues to help you get started.
+    is_initial_plan: true
+  - name: Reception
+    budget_percent: 8.5
+    timing: 18-12
+    category: Venue
+    suggestion_copy_female: Sing like no one is listening. Dance like nobody's watching, and live like it's heaven on earth - that's what wedding receptions are about! Make sure that you book the perfect reception venue to celebrate your special day surrounded by only the best people.
+    question_copy: To recap, have you booked your reception venue yet?
+    reminder_copy: It doesn't look like you've decided on your reception venue yet, here are some of our favourite venues to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">reception</span> venues to help you get started.
+    is_initial_plan: true
+  - name: Accommodation
+    budget_percent: 1.5
+    timing: 18-12
+    category: Venue
+    suggestion_copy_female: Need a honeymoon suite for the night? Make sure you book accommodation that's not only convenient, but beautifully presented too - you may even want to take your pre ceremony photos there. Also consider booking not just for the night of but the night before as well!
+    question_copy: To recap, have you booked your accommodation venue yet?
+    reminder_copy: It doesn't look like you've decided on your accommodation yet, here are some of our favourite venues to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">accommodation</span> venues to help you get started.
+    is_initial_plan: false
+  - name: Save The Dates
+    budget_percent: 1
+    timing: 12-8
+    category: Stationery
+    suggestion_copy_female: Make sure your guests have enough time to plan for your big day with a Save The Date!
+    question_copy: Have you organised your Save The Date?
+    reminder_copy: It doesn't look like you've decided on your Save The Date yet, here are some of our favourite designers to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">Save The Date</span> designers to help you get started.
+    is_initial_plan: false
+  - name: Makeup Trial
+    budget_percent: 0.3
+    timing: 12-8
+    category: Beauty
+    suggestion_copy_female: It's important to make sure your skin is at its best for your big day. Now is a great time to speak to a makeup artist to give you enough time for a consultation and to book a trial or two.
+    question_copy: Have you booked your makeup trial yet?
+    reminder_copy: It doesn't look like you've booked a makeup trial yet, here are some of our favourite makeup artists to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">makeup</span> artists to help you get started.
+    is_initial_plan: false
+  - name: Hair Trial
+    budget_percent: 0.3
+    timing: 12-8
+    category: Beauty
+    suggestion_copy_female: It's important to maintain your hair in good condition ahead of your wedding. Now is a great time to speak to a hairstylist to give you enough time for a consultation and to book a trial or two.
+    suggestion_copy_male: It's important for your bride to maintain her hair in good condition ahead of your wedding. Now is a great time for her to speak to a hairstylist to give her enough time for a consultation and to book a trial or two.
+    question_copy: Have you booked your hair trial yet?
+    reminder_copy: It doesn't look like you've booked a hair trial yet, here are some of our favourite hair stylists to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">hairstylists</span> to help you get started.
+    is_initial_plan: false
+  - name: Planning
+    budget_percent: 5.4
+    timing: 12-6
+    category: Planning & Coordination
+    suggestion_copy_female: We're here to help you every step of the way, but if you still need an extra pair of hands, finding a wedding planner can take off a lot of pressure and now's the best time to start looking.
+    question_copy: Have you booked your wedding planner yet?
+    reminder_copy: It doesn't look like you've found a wedding planner yet, here are some of our favourite planners to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">wedding planners</span> to help you get started.
+    is_initial_plan: false
+  - name: Catering
+    budget_percent: 15
+    timing: 12-6
+    category: Food & Drinks
+    suggestion_copy_female: Great food and even better company, that's what it's all about! Now is the best time to start looking for a caterer to provide all your food and beverage needs if this is not something your reception venue caters to.
+    question_copy: Have you booked your caterers yet?
+    reminder_copy: It doesn't look like you've found catering yet, here are some of our favourite caterers to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">caterers</span> to help you get started.
+    is_initial_plan: true
+  - name: Beverage
+    budget_percent: 3.84
+    timing: 12-6
+    category: Beauty
+    suggestion_copy_female: Add some bubbles and sparkling to your drinks menu. Now is the best time to look for someone that can help with your beverages.
+    question_copy: Have you booked your beverage providers yet?
+    reminder_copy: It doesn't look like you've found someone to cater to your beverages yet, here are some of our favourite beverage providers to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">beverage</span> providers to help you get started.
+    is_initial_plan: true
+  - name: Celebrant
+    budget_percent: 1.3
+    timing: 12-6
+    category: Celebrant
+    suggestion_copy_female: It's not official until you sign the dotted line and your celebrant says so! Now that you've locked in your date and venue, now is a good time to find someone for this special job.
+    question_copy: Have you booked your celebrant yet?
+    reminder_copy: It doesn't look like you've found a celebrant yet, here are some of our favourite celebrants to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">celebrants</span> to help you get started.
+    is_initial_plan: true
+  - name: Photography
+    budget_percent: 8.33
+    timing: 12-6
+    category: Film & Footage
+    suggestion_copy_female: A picture is worth a thousand words and a great photographer can help you relive your day with a single shot. Now that you've locked in your date and venue, now is a good time to find that special someone that can perfectly capture your day!
+    question_copy: Have you booked your photographer yet?
+    reminder_copy: It doesn't look like you've found a photographer yet, here are some of our favourite photographers to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">photographers</span> to help you get started.
+    is_initial_plan: true
+  - name: Videography
+    budget_percent: 8.33
+    timing: 12-6
+    category: Film & Footage
+    suggestion_copy_female: If a picture is worth a thousand words, then footage of your wedding is worth that many times over. Don't miss out on finding the perfect someone to capture your day in film and start your search for a videographer now.
+    question_copy: Have you booked your videographer yet?
+    reminder_copy: It doesn't look like you've found a videographer yet, here are some of our favourite videographers to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">videographers</span> to help you get started.
+    is_initial_plan: true
+  - name: Bridalwear
+    budget_percent: 6
+    timing: 12-6
+    category: Clothing
+    suggestion_copy_female: Finding your wedding dress is one of the most exciting parts of planning your wedding. Start now and give yourself plenty of time to say yes to that dress!
+    suggestion_copy_male: Finding the wedding dress can be one of the most exciting part of planning your wedding for your bride-to-be, start now and give your partner plenty of time to say yes to her dream wedding dress.
+    question_copy: Have you said yes to the dress yet?
+    reminder_copy: It doesn't look like you've found THE dress yet, here are some of our favourite bridalwear designers to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">bridalwear</span> designers to help you get started.
+    is_initial_plan: true
+  - name: Styling
+    budget_percent: 4
+    timing: 12-6
+    category: Styling & Decorations
+    suggestion_copy_female: Styling sets the mood and feel for the entire day and represents you as a couple. Now is a great time to look for your stylist to help you pull your vision together.
+    question_copy: Have you booked your stylist yet?
+    reminder_copy: It doesn't look like you've organised for styling yet, here are some of our favourite stylists to help you get started.
+    redirect_copy: Here are some of our favourite wedding <span class="service">stylists</span> to help you get started.
+    is_initial_plan: true
+  - name: Floristry
+    budget_percent: 8.33
+    timing: 12-6
+    category: Styling & Decorations
+    suggestion_copy_female: Flowers are a beautiful touch to your big day - the earlier you speak to a florist the better your chances of having a range of flowers to choose from to suit your style.
+    question_copy: Have you booked your florist yet?
+    reminder_copy: It doesn't look like you've found a florist yet, here are some of our favourite florists to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">florists</span> to help you get started.
+    is_initial_plan: true
+  - name: Makeup
+    budget_percent: 1.25
+    timing: 12-6
+    category: Beauty
+    suggestion_copy_female: Make sure you book a makeup artist that can not only get you looking your best, but is someone that you genuinely enjoy being around for your big day. Now is a good time to lock someone in to help make sure you and your bridal party are glowing on your big day!
+    suggestion_copy_male: Make sure you book a makeup artist that can not only get your bridal party looking your best, but is someone that you genuinely enjoy being around for your big day. Now is a good time to lock someone in to help make sure everyone's glowing for the big day!
+    question_copy: Have you booked your makeup artist yet?
+    reminder_copy: It doesn't look like you've found a makeup artist yet, here are some of our favourite makeup artists to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">makeup artists</span> to help you get started.
+    is_initial_plan: true
+  - name: Hair
+    budget_percent: 1.25
+    timing: 12-6
+    category: Beauty
+    suggestion_copy_female: Make sure that you book a hairstylist that can get you looking and feeling your best for your big day. Now is a good time to lock someone in to make sure you get luscious locks on your big day.
+    suggestion_copy_male: Make sure that you book a hairstylist that can get your bridal party looking and feeling their best for the big day. Now is a good time to lock someone in to make sure they get luscious locks for the big day.
+    question_copy: Have you booked your hairstylist yet?
+    reminder_copy: It doesn't look like you've found a hairstylist yet, here are some of our favourite hairstylists to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">hairstylists</span> to help you get started.
+    is_initial_plan: true
+  - name: Groomswear
+    budget_percent: 1.67
+    timing: 8-4
+    category: Clothing
+    suggestion_copy_female: Don't forget about the groom! He'll need the perfect outfit to look his best and complement you on the most important day of your lives. Now is a great time to look for groomswear.
+    suggestion_copy_male: This is your special day and you'll need the perfect outfit to complement your bride and look your best on the most important day of your lives. Now is a great time to look for your groomswear.
+    question_copy: Have you found your groom's outfit yet?
+    reminder_copy: It doesn't look like you've found your groom's outfit yet, here are some of our favourite groomswear designers to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">groomswear</span> designers to help you get started.
+    is_initial_plan: true
+  - name: Invitations
+    budget_percent: 3.45
+    timing: 8-4
+    category: Stationery
+    suggestion_copy_female: Your invitations help set the tone and build anticipation for your big day - you'll need enough time to organise these and now is a good time to start.
+    question_copy: Have you organised your invitations?
+    reminder_copy: It doesn't look like you've decided on your invitations yet, here are some of our favourite invitations designers to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">invitations</span> designers to help you get started.
+    is_initial_plan: true
+  - name: Bridesmaids
+    budget_percent: 2
+    timing: 8-4
+    category: Clothing
+    suggestion_copy_female: Sharing the day with your nearest and dearest is part of what makes the day so much fun! Now is a good time to get your bridesmaids' dresses organised to make sure they're looking their best.
+    question_copy: Have you found your bridesmaid's dresses yet?
+    reminder_copy: It doesn't look like you've found your bridesmaid's dresses yet, here are some of our favourite dress shops to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">bridesmaids</span> dress shops to help you get started.
+    is_initial_plan: true
+  - name: Groomsmen
+    budget_percent: 2
+    timing: 8-4
+    category: Clothing
+    suggestion_copy_female: Sharing the day with your nearest and dearest is part of what makes the day so much fun! Now is a good time to get your groomsmen's outfits organised to make sure they're looking their best.
+    question_copy: Have you organised your groomsmen's outfits yet?
+    reminder_copy: It doesn't look like you've found your groomsmen's outfits yet, here are some of our favourite tailors to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">tailors</span> to help you get started.
+    is_initial_plan: false
+  - name: Jewellery
+    budget_percent: 4
+    timing: 8-4
+    category: Jewellery & Accessories
+    suggestion_copy_female: Your wedding bands are a symbol of your promise to each other on your big day! Now is a good time to organise your rings to make sure you allow for additional fittings or customisations.
+    question_copy: Have you organised your wedding rings yet?
+    reminder_copy: It doesn't look like you've found your wedding rings yet, here are some of our favourite jewellers to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">jewellers</span> to help you get started.
+    is_initial_plan: true
+  - name: Stationery
+    budget_percent: 0.35
+    timing: 8-4
+    category: Stationery
+    suggestion_copy_female: Miscellaneous wedding stationery like place cards and menus, add the finishing touches to your table setting  - you'll need enough time to organise these and now is a good time to start.
+    question_copy: Have you organised your stationery yet?
+    reminder_copy: It doesn't look like you've decided on your stationery yet, here are some of our favourite stationery designers to help you get started.
+    redirect_copy: Here are some of our <span class="service">stationery</span> designers to help you get started.
+    is_initial_plan: false
+  - name: Music
+    budget_percent: 2.8
+    timing: 6-3
+    category: Entertainment
+    suggestion_copy_female: Have you thought about whether you want live music? Now is a good time to find a band, duo or singer for your ceremony and/or reception.
+    question_copy: Have you organised live music for your ceremony and/or reception yet?
+    reminder_copy: It doesn't look like you've booked any live music yet, here are some of our favourite musicians to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">musicians</span> to help you get started.
+    is_initial_plan: true
+  - name: DJ
+    budget_percent: 1.5
+    timing: 6-3
+    category: Entertainment
+    suggestion_copy_female: Now is a good time to find a DJ for your reception that can get your guests out of their seats and on to the dance floor!
+    question_copy: Have you booked a DJ for your reception yet?
+    reminder_copy: It doesn't look like you've booked a DJ for your reception yet, here are some of our favourite DJs to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">DJs</span> to help you get started.
+    is_initial_plan: true
+  - name: Entertainment
+    budget_percent: 1.7
+    timing: 6-3
+    category: Entertainment
+    suggestion_copy_female: Fancy a belly dancer? Or maybe a fire dancer or perhaps an aerial acrobat to awe and wow your guests? Now is a good time to book any additional entertainment that you might have in mind.
+    question_copy: Have you booked the additional entertainment that you wanted yet?
+    reminder_copy: It doesn't look like you've booked additional entertainment for your reception yet, here are some of our favourite entertainers to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">entertainers</span> to help you get started.
+    is_initial_plan: true
+  - name: Cakes
+    budget_percent: 2
+    timing: 6-3
+    category: Food & Drinks
+    suggestion_copy_female: Your wedding cake should taste as good as it looks! Whether you're after chocolate or vanilla, red velvet or wheels of cheese, now is a good time to start looking for something that both you and your partner can agree on. Bon apetite!
+    question_copy: Have you organised your wedding cake yet?
+    reminder_copy: It doesn't look like you've organised your cake yet, here are some of our favourite bakers to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">bakers</span> vendors to help you get started.
+    is_initial_plan: true
+  - name: Transportation
+    budget_percent: 3.33
+    timing: 6-3
+    category: Transportation
+    suggestion_copy_female: Whether you prefer a classic or something more modern as your wedding transportation, now is a good time to look for your getaway car.
+    question_copy: Have you booked your wedding transportation yet?
+    reminder_copy: It doesn't seem like you've arranged for your wedding transportation yet, here are some of our favourite transportation providers to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">transportation</span> providers to help you get started.
+    is_initial_plan: false
+  - name: Rental Hire
+    budget_percent: 3
+    timing: 6-3
+    category: Styling & Decorations
+    suggestion_copy_female: Do you need any additional elements to help you complete your wedding? From tablerunners to crockery and candelabra, now is a great time to arrange for the rental of any miscellaneous items you may need to help you complete the look you need.
+    question_copy: Have you organised all your rental or hire items yet?
+    reminder_copy: It doesn't look like you've organised for any rental or hire items yet, here are some of our favourite rentals to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">rentals</span> to help you get started.
+    is_initial_plan: true
+  - name: Lighting
+    budget_percent: 1.5
+    timing: 6-3
+    category: Entertainment
+    suggestion_copy_female: Do you need any lighting equipment for the night? Now is a good time to start organising for it.
+    question_copy: Have you organised your lighting equipment yet?
+    reminder_copy: It doesn't look like you've organised for any lighting equipment yet, here are some of our favourite lighting providers to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">lighting</span> providers to help you get started.
+    is_initial_plan: true
+  - name: Audio
+    budget_percent: 1.5
+    timing: 6-3
+    category: Entertainment
+    suggestion_copy_female: Do you need any audio equipment for the night? Now is a good time to start organising for it.
+    question_copy: Have you organised your audio equipment yet?
+    reminder_copy: It doesn't look like you've organised for any audio equipment yet, here are some of our favourite audio equipment providers to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">audio</span> equipment providers to help you get started.
+    is_initial_plan: true
+  - name: MC
+    budget_percent: 0.83
+    timing: 6-3
+    category: Entertainment
+    suggestion_copy_female: You definitely need someone to welcome your guests and host one of the most important celebrations of your life! Now is a good time to look for your MC.
+    question_copy: Have you booked your MC yet?
+    reminder_copy: It doesn't look like you've found an MC yet, here are some of our favourite MCs to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">MCs</span> to help you get started.
+    is_initial_plan: false
+  - name: Accessories
+    budget_percent: 1
+    timing: 6-3
+    category: Jewellery & Accessories
+    suggestion_copy_female: As the saying goes, you may need something old, something new, something borrowed, or something blue! Now is a good time to look for any accessories you may need to complete your look.
+    question_copy: Have you organised your accessories yet?
+    reminder_copy: It doesn't look like you've found any accessories yet, here are some of our favourite accessories shops to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">accessories</span> shops to help you get started.
+    is_initial_plan: true
+  - name: Women's Footwear
+    budget_percent: 0.5
+    timing: 6-3
+    category: Clothing
+    suggestion_copy_female: There's nothing like finding the perfect pair of shoes to match your wedding dress. Start looking now to give you enough time to wear them in!
+    suggestion_copy_male: There's nothing like finding the perfect pair of shoes to match your bride-to-be's wedding dress. Your bride will need to start looking now to give herself enough time to wear them in!
+    question_copy: Have you organised your bridal shoes yet?
+    reminder_copy: It doesn't look like you've found the perfect pair of bridal shoes to match the dress yet, here are some of our favourite women's footwear to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">women's footwear</span> to help you get started.
+    is_initial_plan: true
+  - name: Men's Footwear
+    budget_percent: 0.5
+    timing: 6-3
+    category: Clothing
+    suggestion_copy_female: There's nothing like finding the perfect pair of shoes to complete your groom-to-be's outfit and now is a good time to start looking.
+    suggestion_copy_male: There's nothing like finding the perfect pair of shoes to complete your outfit and now is a good time to start looking.
+    question_copy: Have you organised your groom's shoes yet?
+    reminder_copy: It doesn't look like you've found the perfect pair of shoes for the groom yet, here are some of our favourite men's footwear to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">men's footwear</span> to help you get started.
+    is_initial_plan: true
+  - name: Gifts
+    budget_percent: 1
+    timing: 6-3
+    category: Gifts & Favours
+    suggestion_copy_female: Wedding gifts are a great way to show your loved ones how thankful you are for their presence during your big day. Now is a good time to start looking.
+    question_copy: Have you organised your wedding gifts for your loved ones yet?
+    reminder_copy: It doesn't look like you've organised for any wedding gifts yet, here are some of our favourite wedding gift makers to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">wedding gift</span> makers to help you get started.
+    is_initial_plan: false
+  - name: Favours
+    budget_percent: 1
+    timing: 6-3
+    category: Gifts & Favours
+    suggestion_copy_female: Wedding favours are great mementos of your special day and a lovely gesture to say thanks to all your guests for being a part of it. Get organised now and stress less closer to your big day.
+    question_copy: Have you organised your wedding favours for your loved ones yet?
+    reminder_copy: It doesn't look like you've organised your wedding favours yet, here are some of our favourite wedding favour makers to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">wedding favours</span> makers to help you get started.
+    is_initial_plan: true
+  - name: Coordination
+    budget_percent: 3.4
+    timing: 4-2
+    category: Planning & Coordination
+    suggestion_copy_female: If your venue doesn't have a wedding coordinator then an extra pair of hands to help you on the days leading up to your wedding can take off a lot of pressure! Now's the best time to start looking.
+    question_copy: Have you booked your wedding coordinator yet?
+    reminder_copy: It doesn't look like you've found a wedding coordinator yet, here are some of our favourite wedding coordinators to help you get started.
+    redirect_copy: Here are some of our favourite wedding <span class="service">coordinators</span> to help you get started.
+    is_initial_plan: true
+  - name: Juniorwear
+    budget_percent: 0.5
+    timing: 4-2
+    category: Clothing
+    suggestion_copy_female: There's nothing cuter than your flower girls and ring bearers walking down that aisle - now is the perfect time to find their outfits.
+    question_copy: Have you organised juniorwear yet?
+    reminder_copy: It doesn't look like you've organised juniorwear yet, here are some of our favourite juniorwear to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">juniorwear</span> to help you get started.
+    is_initial_plan: true
+  - name: Thank You Cards
+    budget_percent: 0.85
+    timing: 3-1
+    category: Stationery
+    suggestion_copy_female: If your invitations didn't include Thank You Cards then now is a good time to get these sorted - it's a great way to honour your guests and say thanks for their generosity.
+    question_copy: Have you organised your Thank You Cards yet?
+    reminder_copy: It doesn't look like you've organised your Thank You Cards yet, here are some of our favourite Thank You Cards designers to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">Thank You Cards</span> designers to help you get started.
+    is_initial_plan: true

@@ -1,0 +1,506 @@
+#organiser-container
+  // margin: 5px
+  position: relative
+
+  .item-summary
+    width: 100%
+    height: 221px
+    overflow-x: scroll
+    overflow-y: hidden
+    // border: 1px solid
+    white-space: nowrap
+    +respond-to(1200px, 0)
+      width: 44.5%
+      float: left
+      white-space: initial
+      overflow: initial
+    .box
+      display: inline-block
+      min-width: 278px
+      margin: 8px 5px 11px 0
+      padding-top: 51px
+      padding-bottom: 35px
+      width: 100%
+      vertical-align: middle
+      +respond-to(1200px, 0)
+        width: 504px
+        margin: 4.5px 5px 4.5px 0
+      +respond-to(763px, 1199px)
+        width: calc(73% - 202px)
+      +respond-to(480px, 768px)
+        width: 368px
+      &.light-blue
+        background-color: #eef8fc
+        +respond-to(1200px, 0)
+          height: 235px
+          margin-top: 0px
+      &.gray
+        background-color: #fbfbfb
+      &:first-child
+        margin-left: 7px
+        +respond-to(1200px,0)
+          margin-left: 4.5px
+      .round-progress
+        width: 72px !important
+        height: 72px
+        padding-bottom: 0 !important
+        +respond-to(1200px, 0)
+          width: 85.3px !important
+          height: 85.3px
+        > svg
+          top: 72px
+          left: 31px
+      > .progress-filter
+        display: inline-block
+        position: relative
+        &.first
+          padding-left: 31px
+          +respond-to(1200px, 0)
+            padding-left: 43px
+          +respond-to(0, 320px)
+            padding-left: 21px
+        &.second
+          padding-left: 23px
+          padding-right: 39.54px
+          +respond-to(1200px, 0)
+            padding-left: 47.5px
+        > .filters
+          line-height: 2.1
+          font-size: 14px
+          letter-spacing: -0.8px
+          max-width: 222px
+          white-space: nowrap
+          text-overflow: ellipsis
+          overflow: hidden
+          +respond-to(1200px, 0)
+            font-size: 16px
+            max-width: 260px
+            &.large
+              font-size: 20px
+          +respond-to(992px, 1199px)
+            max-width: 380px
+          +respond-to(0, 320px)
+            max-width: 170px
+          &.small
+            font-size: 10px
+            letter-spacing: -0.5px
+            text-align: center
+            +respond-to(1200px, 0)
+              font-size: 14px
+        > .filters
+          .link
+            background-color: transparent
+            color: #f57676
+            text-decoration: underline
+            &.disabled
+              color: #4a4a4a
+              text-decoration: none
+        > .item-progress
+          position: absolute
+          letter-spacing: -0.6px
+          font-size: 22px
+          top: 22px
+          margin-left: 24px
+          margin-right: 24px
+          &.ones
+            margin-left: 30px
+          +respond-to(1200px,0)
+            top: 24px
+            font-size: (@font-size + 3)
+            letter-spacing: (@letter-spacing - 1)
+            margin-left: 28.5px
+            margin-right: 28.5px
+            &.ones
+              margin-left: 35.5px
+  .category-container
+    margin-left: 7px
+    margin-right: 7px
+    +respond-to(1200px, 0)
+      width: 54.3%
+      float: left
+      margin-right: 0
+  .search-form
+    border: 1px solid #979797
+    width: 100%
+    padding: 3px
+    > .search-bar, .icon-search
+      display: inline-block
+    > .search-bar
+      height: 37px
+      font-size: 14px
+      width: calc(100% - 36px)
+      border: 0
+      outline: none
+    > .icon-search
+      -ms-transform: rotateY(180deg) /* IE 9 */
+      -webkit-transform: rotateY(180deg) /* Chrome, Safari, Opera */
+      transform: rotateY(180deg)
+      margin-right: 2px
+      margin-left: 5px
+      &:before
+        font-size: 25px
+        color: #919295
+  .button-actions
+    margin-top: 17px
+    margin-bottom: 29px
+    +respond-to(1200px, 0)
+      display: inline-block
+      margin-top: 24px
+      margin-bottom: 0
+    > .btn-add
+        padding: 5px 18px
+        border-radius: 7px
+        color: #ffffff
+        font-size: 12px
+        font-weight: 600
+        letter-spacing: -0.5px
+        &:before
+          font-weight: normal
+          content: "\e91f"
+          vertical-align: middle
+        +respond-to(1200px, 0)
+          font-size: (@font-size + 2)
+          letter-spacing: (@letter-spacing - 0.2)
+    > .btn-delete
+        font-size: 10px
+        letter-spacing: -0.5px
+        text-align: center
+        color: #4a4a4a
+        margin-left: 17px
+        &:hover, &:focus
+          text-decoration: underline
+        &.back
+          color: #f57676
+        +respond-to(1200px, 0)
+          font-size: (@font-size + 2)
+          letter-spacing: (@letter-spacing - 0.1)
+  .category-tabs
+    color: #4a4a4a
+    +respond-to(1200px, 0)
+      float: right
+      margin-top: 24px
+      margin-bottom: 0
+    > .view
+      font-size: 12px
+      font-weight: 600
+      letter-spacing: -0.6px
+      margin-right: 3px
+      margin-left: 3px
+      &:hover, &:focus, &:active, &.active
+        color: #d04055
+        text-decoration: none
+        > span
+          text-decoration: underline
+      > span
+          margin-left: 5px
+      &.category:before
+        content: "\e905"
+        font-weight: normal
+      &.timeline:before
+        content: "\e911"
+        font-weight: normal
+  .mobile-navigation
+    position: relative
+    top: -8px
+    > .icon
+      display: inline-block
+      width: 80px
+      text-align: center
+      border: 1px solid #979797
+      border-radius: 20px
+      line-height: 30px
+      opacity: 0.5
+      margin-right: 7px
+      &:after
+        font-size: 10px
+        color: #9b9b9b
+      &.active
+        background-color: #f9ce48
+        border-color: #f9ce48
+        opacity: 1
+        &:after
+          color: #ffffff
+  .budget-breakdown
+    margin-top: 25px
+    color: #4a4a4a
+    +respond-to(0,320px)
+      margin-top: 34px
+  .budget-deleted
+    margin-top: 15px
+    height: 358px
+    overflow-y: auto
+    +respond-to(1025px, 1199px)
+      height: 236px
+    +respond-to(1200px, 0)
+      height: 482px
+
+  .mobile-form-overlay
+    position: absolute;
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    background: #fff
+    overflow: hidden
+    width: 100%
+    -moz-transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s
+    -webkit-transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s
+    transition: top 0.3s, right 0.3s, bottom 0.3s, left 0.3s
+    &.top
+      top: 100%
+    &.show-form.top
+      top: 0
+      +respond-to(1200px, 0)
+        top: -1px
+        height: 590px
+      +respond-to(0, 768px)
+        overflow-y: scroll
+    
+#budget-items-scroll
+  height: 281px
+  overflow-y: auto
+  +respond-to(1025px, 1199px)
+    height: 154px
+  +respond-to(1200px, 0)
+    height: 391px
+  &::-webkit-scrollbar
+    display: none
+.budget-column
+  font-size: 12px
+  letter-spacing: -0.6px
+  position: relative
+  +respond-to(769px, 0)
+    font-size: (@font-size + 2)
+  &.highlight
+    font-size: 14px
+    letter-spacing: -0.7px
+    height: 37px
+    background-color: #fbf6ef
+    border: solid 1px #faead4
+    border-bottom: 4px solid #f9e0c0
+    line-height: 2.2
+    margin-bottom: 5px
+    +respond-to(769px, 0)
+      height: 44px
+      line-height: 2.5
+    &.gray
+      background-color: #fbfbfb
+      border: solid 1px #e9e5e5
+      line-height: 2.5
+      +respond-to(769px, 0)
+        height: 64px
+        line-height: 3.8
+      &:hover, &:focus, &:active
+        background-color: #fcf9f5
+        border: solid 1px #faead4
+  > .label-item
+    width: 70px
+    display: inline-block
+    text-align: right
+    vertical-align: top
+    text-transform: capitalize
+    padding-right: 3px
+    +respond-to(769px, 0)
+      font-size: 14px
+    +respond-to(769px, 1199px)
+      width: 80px
+    +respond-to(0,320px)
+      width: 59px
+    &.header-amount
+      font-weight: 600
+      +respond-to(769px, 0)
+        font-weight: 300
+    &.header-label
+      font-weight: 500
+    &.empty
+      width: 18px
+      +respond-to(769px, 1199px)
+        width: 36px
+      +respond-to(0,768px)
+        width: 7px
+      +respond-to(0,320px)
+        width: 0
+    &:first-child
+      width: calc(100% - 220px)
+      text-align: left
+      +respond-to(769px, 0)
+        width: calc(100% - 590px)
+      +respond-to(1200px, 0)
+        width: 165px
+      +respond-to(0,320px)
+        width: 118px
+    &.header-item
+      padding-left: 14px
+      +respond-to(769px,0)
+        font-size: 20px
+        font-weight: 600
+        line-height: 2
+    &.item-category
+      font-weight: 500
+      margin-left: 7px
+      margin-top: 3px
+      width: 50%
+      +respond-to(0,768px)
+        width: 100%
+    &.non-zero
+      color: #f6b428
+      font-weight: bold
+    &.zero
+      color: #9b9b9b
+    &.right
+      margin-right: 13.5px
+    &.actions, &.right
+      width: auto
+      position: relative
+  > .label-item > .restore-link
+    font-size: 12px
+    font-weight: bold
+    letter-spacing: -0.6px
+    color: #f5a623
+  > .label-item > .icon:before
+    font-size: 13px
+    letter-spacing: -0.7px
+    text-align: center
+    color: #ffffff
+    background-color: #fae6c6
+    border-color: #fae6c6
+    padding: 4px
+    border: 0
+  > .label-item > .overdue
+      margin-right: 7px
+      &.inactive:before
+        background-color: #bab8b8
+  > .label-item > .overdue:before
+      background-color: #D87481
+      border: 1px solid #fff
+      color: #fff
+      padding: 2.5px 8px
+  > .label-item > .overdue:hover:before
+    background-color: #D87481 !important
+  > .label-item > .overdue.inactive:hover:before
+    background-color: #bab8b8 !important
+  > .label-item > .icon:hover:before
+    background-color: #f9ce48
+  > .label-item > .name
+    width: calc(100% - 64px)
+    overflow: hidden
+    display: inline-block
+    vertical-align: middle
+    text-overflow: ellipsis
+    line-height: normal
+    white-space: nowrap
+    &:hover
+      color: $primary-hover
+      cursor: pointer
+  > .label-item.actions > .btn-more
+    color #bab8b8
+    border 0
+    background-color transparent
+    cursor pointer
+    &:hover, &:focus, &:active, &:active:hover, &:active:focus,
+    &:disabled, &:disabled:hover, &:disabled:focus
+      color: #f9ce48
+      border: 0
+      background-color: transparent
+      box-shadow: none
+      outline: none
+  > .label-item > .overdue .tooltip-text, > .label-item > .name .tooltip-text
+    display: none
+    color: #D87481
+    line-height: normal
+    font-weight: normal
+    font-size: 10px
+    text-transform: initial
+    position: absolute
+    z-index: 1
+    bottom: 5px
+    margin-top: 2px
+    &.due
+      left: 30px
+  > .label-item > .overdue.inactive .tooltip-text
+    color: #bab8b8
+    left: 23px
+  > .label-item > .overdue:hover .tooltip-text, > .label-item > .name:hover .tooltip-text
+    display: block
+    +respond-to(0, 992px)
+      display: none
+  > .label-item.actions
+    &:hover, &:active, &:focus
+      > .dropdown-items
+        display block
+      > .btn-more
+        color #f9ce48
+        border 0
+        background-color transparent
+        box-shadow none
+    > .dropdown-items
+      display: none
+      position: absolute
+      border: 1px solid #e9e5e5
+      z-index: 1
+      background-color: #fff
+      right: 0
+      top: 35px
+    > .dropdown-items > li
+      display: block
+      border: 1px solid #e9e5e5
+      padding: 12px 20px
+      font-size: 12px
+      line-height: normal
+      white-space: nowrap
+      text-align: left
+      background-color: #fbfbfb
+      &:last-child
+        border-bottom: 0
+      &:hover, &:active, &:focus
+        background-color: #fcf9f5
+        border: solid 1px #faead4
+        color: $primary-hover
+
++respond-to(1200px,0)
+  .budget-items.end:nth-last-child(2) > .budget-column > .label-item.actions > .dropdown-items
+    top: 35px !important
+.budget-items
+  padding-top: 16px
+  &.end
+    > .budget-column > .label-item.actions > .dropdown-items
+      top: -66px
+      +respond-to(0, 768px)
+        top: -89px
+      &.add
+        top: -108px
+        +respond-to(0, 768px)
+          top: -130px
+  .checkbox
+    width: 23px
+    height: 23px
+    background-color: #ffffff
+    border: solid 1px #979797
+    display: inline
+    margin-right: 7px
+    margin-left: 7px
+    position: relative
+    &.checked:before
+      content: "\e91c"
+      font-weight: normal
+      position: absolute
+      left: 3px
+      font-size: 15px
+      color: #80e0ca
+      +respond-to(769px, 0)
+        top: -17px
+  .editable
+    width: 100%
+    border-style: none
+    border-bottom: solid 1px #979797
+    background-color: transparent
+    text-align: right
+    height: 19px
+    line-height: 1
+    padding: 0
+    border-radius: 0
+    cursor: pointer
+    &:hover
+      color: $primary-hover !important
+    &.editActive
+      color: #4A4A4A

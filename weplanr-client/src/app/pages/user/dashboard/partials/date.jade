@@ -1,0 +1,7 @@
+.calendar.center-text(ui-sref="user.settings")
+  div(style="height: 15px;" ng-show="!currentUser.user_settings.customised")
+    a.pull-right.editable(ui-sref="user.settings" ng-hide="!!currentUser.wedding_details.date") EDIT
+    br
+  span.day(ng-bind="wedding_date.day")
+  span.date(ng-bind="wedding_date.mon")
+  span.date(ng-bind="wedding_date.yr")

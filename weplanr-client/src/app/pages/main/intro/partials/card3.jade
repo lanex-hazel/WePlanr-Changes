@@ -1,0 +1,18 @@
+section#questionare-3
+  .card-section
+    .card-label
+      b {{location_label}}
+    .card-questionare
+      p Where are you thinking of getting married?
+      .select-dropdown
+        select.select-form.form-control(
+          placeholder="Select a location"
+          ng-model="q"
+          ng-change="changeCard(q,'q3')"
+          ng-enter="enterCard(q,'q3')"
+        )
+          option(value="") Select a location
+          option(ng-repeat="location in locations" value="{{location.attributes.name}}") {{location.attributes.name}}
+
+      a.btn.btn-gray.animate-if(ng-if="!uiState.step3" ng-click="suggest()") I'M NOT SURE
+      a.btn.btn-success.animate-if(ng-if="uiState.step3" ui-sref="main.search({q: q, services: 'Reception Ceremony', redirect: true})") SEARCH

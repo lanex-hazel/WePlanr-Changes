@@ -1,0 +1,38 @@
+table.table.table-hover.table-responsive
+  thead
+    tr
+      th Business Name
+      th &nbsp;
+      th Contact Name
+      th Email
+      th Location
+      th Date Joined
+      th Last seen
+      th Actions
+  tbody
+    tr(ng-show="$ctrl.collection.length == 0")
+      td(colspan="8" align="center") No Data
+    tr(ng-repeat="obj in $ctrl.collection")
+      td(ng-bind="obj.attributes['business_name']")
+      td(ng-style="{color: obj.attributes['confirmed'] ? 'green' : 'red', fontSize: '2rem'}") &#9679;
+      td(ng-bind="obj.attributes['public_contact_name']")
+      td.btn-backlink(ng-bind="obj.attributes['email']" ui-sref="admin.vendors_detail({id: obj.attributes.slug})")
+      td(ng-bind="obj.attributes['address_summary']")
+      td(ng-bind="obj.attributes['created_at'] | date: 'd MMM, yyyy h:mma'")
+      td(ng-bind="obj.attributes['last_activity_at'] | date: 'd MMM, yyyy h:mma'")
+      td.action-td
+        a(ng-click="invite(obj)" ng-if="obj.attributes.status == 'Not yet invited'")
+          i.fa.fa-envelope
+          span Send Invitation
+          br/
+        a(ng-click="invite(obj)" ng-if="obj.attributes.status == 'Invited'")
+          i.fa.fa-envelope
+          span Resend Invitation
+          br/
+        a.btn-backlink(ng-click="loginAs(obj)" ng-if="obj.attributes.status == 'Registered'")
+          i.fa.fa-key
+          span Login
+          br/
+        a.btn-backlink(ng-click="$ctrl.delete({obj: obj})")
+          i.fa.fa-trash 
+          span Delete

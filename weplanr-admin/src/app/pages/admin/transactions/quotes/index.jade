@@ -1,0 +1,38 @@
+form#search-form.form-horizontal(ng-submit="page = 1;getData(page)")
+  .form-group
+    label.col-sm-2.col-form-label(for="quote-date-rangepicker") Date raised: 
+    input.col-sm-10.form-control(id="quote-date-rangepicker" ng-model="dateRange")
+  .form-group
+    .col-sm-2
+    .col-sm-10(style="padding-left: 0;")
+      button.btn.btn-default(type="submit")
+        i.fa.fa-search
+        span Search
+      label.btn.btn-success(ng-click="downloadCSV()")
+        i.fa.fa-download
+        span CSV Download
+br
+br
+table.table.table-hover.table-list
+  thead
+    tr
+      th Couple's name
+      th Business name
+      th Date Raised
+      th Quote No
+      th Total Service Fee
+      th Status
+  tbody(ng-show="!loading")
+    tr(ng-show="collection.length <= 0")
+      td(colspan="5") No data found
+    tr.btn-backlink(ng-repeat="obj in collection" ng-show="collection.length > 0" ui-sref="admin.transactions.quotes.show({id: obj.id})")
+      td(ng-bind="obj.attributes.wedding.name")
+      td(ng-bind="obj.attributes.vendor.name")
+      td(ng-bind="obj.attributes.created_at | date: 'dd/MM/yy'")
+      td(ng-bind="obj.attributes.quote_no")
+      td(ng-bind="obj.attributes.payment_breakdown.total | currency:'$':2")
+      td(ng-bind="obj.attributes.status | uppercase")
+spinner(ng-show="loading")
+pagination(count="count" page="page" on-change="getData(page)" ng-hide="count <= 10 || loading")
+
+

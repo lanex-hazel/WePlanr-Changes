@@ -1,0 +1,54 @@
+.account-container
+  form(name="vendorForm" novalidate="true" autocomplete="off")
+    .form-group
+      label Email
+      input.form-control(
+        type="email"
+        name="email"
+        ng-model="vendor['email']"
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")
+      span.error(ng-show="vendorForm.email.$error.pattern") Invalid Email
+    .form-group
+      label Invitation Code
+      input.form-control(
+        type="text"
+        name="invitation_code"
+        ng-model="vendor['invitation_code']")
+    .form-group
+      label Primary Phone
+      input.form-control(
+        type="text"
+        name="primary_phone"
+        ng-model="vendor['primary_phone']"
+        pattern="^[0-9]*$")
+      span.error(ng-show="vendorForm.primary_phone.$error.pattern") Can only contain numbers
+    .form-group
+      label Secondary Phone
+      input.form-control(
+        type="text"
+        name="secondary_phone"
+        ng-model="vendor['secondary_phone']"
+        pattern="^[0-9]*$")
+      span.error(ng-show="vendorForm.secondary_phone.$error.pattern") Can only contain numbers
+    .form-group
+      .col-xs-12.col-md-6.no-padding
+        label Insurance Cover?
+        br
+        input.radio-form-control(type="radio" name="insurance" ng-value="false" ng-model="vendor.insurance")
+        span.radio-option-text &nbsp; No
+        | &nbsp;&nbsp;&nbsp;&nbsp;
+        input.radio-form-control(type="radio" name="insurance" ng-value="true" ng-model="vendor.insurance")
+        span.radio-option-text &nbsp; Yes
+      .col-xs-12.col-md-6.no-padding
+        label Registered for GST?
+        br
+        input.radio-form-control(type="radio" name="gst" ng-value="false" ng-model="vendor.registered_for_gst")
+        span.radio-option-text &nbsp; No
+        | &nbsp;&nbsp;&nbsp;&nbsp;
+        input.radio-form-control(type="radio" name="gst" ng-value="true" ng-model="vendor.registered_for_gst")
+        span.radio-option-text &nbsp; Yes
+    .col-xs-12
+        spinner.animate(ng-if="uiState.loading")
+        .option-links.text-center.animate(ng-if="!uiState.loading")
+          a.danger-bg(ng-click="onCancel()") Cancel
+          a.success-bg(ng-click="onSave(vendorForm)") Save

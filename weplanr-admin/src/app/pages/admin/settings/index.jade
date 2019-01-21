@@ -1,0 +1,16 @@
+.content-container
+  .user-container
+    main-menu
+    .row
+      .col-xs-12.col-md-6
+        h3 Settings
+      .col-xs-12
+        br
+        br
+        spinner(ng-show="loading")
+        .row(ng-repeat="item in features")
+          .col-xs-3(ng-bind="item.attributes.name")
+          .col-xs-2
+            label.switch
+              input(type="checkbox" ng-model="item.attributes.status" ng-true-value="1" ng-false-value="0" ng-change="updateStatus(item)")
+              span.slider.round

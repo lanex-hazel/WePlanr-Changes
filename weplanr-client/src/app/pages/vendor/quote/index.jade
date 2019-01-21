@@ -1,0 +1,65 @@
+header(logout="logout()" current-vendor="currentVendor")
+.main-content
+  #raise-quote-container.row.no-margin.content-container
+    .col-xs-12.col-md-12.col-lg-12.no-padding
+      p#quote-details
+        a.pull-right.icon.icon-exit(ng-click="goBack()")
+        strong QUOTE #
+          span(ng-bind="obj.attributes.quote_no")
+        br/
+        strong(ng-bind="obj.attributes.wedding")
+        br/
+        |Date 
+        span(ng-bind="obj.attributes.updated_at | date:'d MMM yyyy'")
+        span(ng-if="obj.attributes.status == 'offered'")
+          br/
+          | This quotation expires in 7 days on 
+          span(ng-bind="expiryDate | date:'d MMM yyyy'")
+        br/
+        span(ng-bind="obj.attributes.vendor.business_name")
+      br/
+      br/
+      #quote-table-row
+        table#quote-table
+          thead
+            tr
+              th ITEM
+              th DESCRIPTION
+              th QTY
+              th COST
+              th TOTAL
+                span(ng-if="obj.attributes.is_gst")  (INC GST)
+          tbody
+            tr(ng-repeat="obj in obj.attributes.quote_items")
+              td(ng-bind="obj.name")
+              td(ng-bind="obj.description")
+              td(ng-bind="obj.quantity")
+              td(ng-bind="obj.cost | currency:'$ '")
+              td(ng-bind="obj.total | currency:'$ '")
+          tfoot
+            tr
+              td(colspan="4")
+                strong*TOTAL SERVICE FEE
+              td(ng-bind="obj.attributes.total | currency:'$ '")
+            tr
+              td(colspan="100%") &nbsp;
+            tr
+              td(colspan="4")
+                strong PAYMENT SCHEDULE
+              td
+            tr(ng-if="obj.attributes.delivery_date")
+              td.payment-date(colspan="4")
+                |FINAL DELIVERY DATE 
+                span(ng-bind-html="obj.attributes.delivery_date | date: 'dd/MM/yyyy'")
+              td
+            tr
+              td(colspan="4") 40% DEPOSIT REQUIRED TO SECURE BOOKING
+              td(ng-bind="deposit | currency:'$ '")
+            tr
+              td.payment-date(colspan="4") 60% DUE ON {{obj.attributes.payment_due | date: 'dd/MM/yyyy'}}
+              td(ng-bind="dueCost | currency:'$ '")
+            tr
+              td(colspan="100%") &nbsp;
+            tr
+              td.action(colspan="100%")
+                strong(ng-bind="obj.attributes.status | uppercase")

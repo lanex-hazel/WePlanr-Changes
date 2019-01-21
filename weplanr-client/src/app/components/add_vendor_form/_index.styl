@@ -1,0 +1,152 @@
+.custom-form
+  padding: 15px 8px 0
+  color: #4a4a4a
+  +respond-to(769px, 1200px)
+    height: 716px
+    overflow-y: scroll
+  > .title-form
+    font-size: 16px
+    letter-spacing: -0.8px
+    position: relative
+    > .heading
+      width: calc(100% - 72px)
+    > .subtitle-form
+      color: #bab8b8
+      font-size: 12px
+      +respond-to(1200px,0)
+        font-size: (@font-size + 2)
+    +respond-to(1200px,0)
+      padding: 30px 27px 10px
+      border: 1px solid #e9e5e5
+      border-top: 0
+      border-bottom: 0
+  > .title-form > .exit-modal:before
+    border: 0
+    padding: 0
+    font-size: 20px
+    position: absolute
+    top: -3px
+    right: 11px
+    +respond-to(769px,0)
+      top: 27px
+      right: 30px
+  > .vendor-form
+    padding: 25px 8px
+    +respond-to(1200px, 0)
+      height: 428px
+      border: 1px solid #e9e5e5
+      border-top: 0
+      &.add
+        height: 407px
+        padding: 6px 8px
+    .form-label
+      font-size: 12px
+      font-weight: 600
+      letter-spacing: -1.2px
+      text-align: center
+      color: #d87481
+      > .required
+        color: #d0021b
+    .select-dropdown
+      padding: 0
+      &:after
+        content: "\e91b"
+        right: 4px
+        bottom: 4px
+    .btn-create
+      border-radius: 7px
+      font-size: 16px
+      font-weight: 600
+      letter-spacing: -0.8px
+      text-align: center
+      color: #ffffff
+      padding: 11px 22px
+      width: 100%
+      +respond-to(1200px, 0)
+        width: 154px
+        margin-left: auto
+    .vendor-form-group > .form-group
+      position: relative
+      .input-prefix
+        position: absolute
+        top: 24px
+        left: 0
+        font-size: 16px
+        +respond-to(1024px,0)
+          top: 29px
+      .has-prefix
+        padding-left: 15px
+    .vendor-form-group > .form-group > .form-control
+      &.static
+        border: 0
+      &.amount
+        font-size: 16px
+      &.link
+        font-weight: 600
+        color: #1c80c2
+    .vendor-form-group > .form-group > .form-error
+      font-size: 12px
+      color: $primary-hover
+      visibility: hidden
+      &.show
+        visibility: visible
+  +respond-to(1200px,0)
+    .vendor-form-group
+      float: left
+      width: 44.5%
+      margin-right: 27px
+      margin-left: 27px
+      > .form-group > .form-control
+        font-size: 16px
+      &.btn-actions
+        width: (@width * 2) + 5
+        > .form-group
+          top: -30px
+    .budget-column
+      border-bottom: 4px solid #e1dede
+      &:hover
+        border-bottom: 4px solid #f9e0c0
+  .budget-items
+    position: relative
+  .budget-column.heading
+    position: absolute
+    top: 22px
+    left: 0
+    border: 0
+    font-size: 10px
+    text-align: center
+    > .label-item
+      font-weight: 600
+      font-size: 10px
+      letter-spacing: -0.5px
+      color: #f5a623
+  .budget-column > .label-item:first-child
+    width: calc(100% - 75px)
+    white-space: nowrap
+    text-overflow: ellipsis
+    overflow: hidden
+    +respond-to(0,320px)
+      width: 236px
+  +respond-to(769px, 0)
+    .budget-column > .label-item
+      width: 80px
+      text-align: right
+      vertical-align: middle
+      &.empty
+        width: 22px
+      &.empty
+        width: 22px
+      &:first-child
+        width: 240px
+        text-align: left
+  .budget-column > .label-item > .form-control
+    background-color: transparent
+    line-height: 2
+    font-size: 16px
+    padding-left: 2px
+    padding-right: 2px
+  .budget-column > .label-item > .icon:before
+    margin-right: 6px
+    vertical-align: baseline
+    +respond-to(769px,0)
+      margin-right: 28px

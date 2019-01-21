@@ -1,0 +1,31 @@
+header
+.main
+  .main--with-container
+    .favourite-container
+      .row
+        .col-md-12
+          .row(ng-repeat="service in services")
+            .col-md-12.header-label
+              span.title-label(ng-bind="service")
+            .favourite-result-container
+              .col-md-12(ng-repeat="result in collection track by result.type")
+                .col-md-3(ng-repeat="data in result.data" ng-if="result.type == service")
+                  .col-md-12.img-featured-container.no-padding
+                    a(ng-href="/user/vendor/show/{{data.id}}")
+                      .featured-photo(ng-show="data.attributes.photo_urls.length == 0" ng-style="{ 'background-image' : 'url(/vendor/images/sample.jpg)'}")
+                      .featured-photo(ng-show="data.attributes.photo_urls.length > 0" 
+                      ng-style="{ 'background-image' : 'url(http://api.weplanr.spstage.com' + data.attributes.photo_urls[0].url + ')'}")
+                  .img-container
+                    img.avatar-photo(ng-show="data.attributes.profile_photo != ''" ng-src="http://api.weplanr.spstage.com{{data.attributes.profile_photo}}")
+                    img.avatar-photo(ng-show="data.attributes.profile_photo == ''" src="/vendor/images/default_user.png")
+                  .vendor-info
+                    a.name(ng-href="/user/vendor/show/{{data.id}}")
+                      span.mright-5(ng-bind="data.attributes.public_contact_name")
+                    .address
+                      i.fa.fa-map-marker
+                      span(ng-bind="data.attributes.address_summary")
+                  .col-md-12.no-padding
+                    .service-list
+                      ul
+                        li.service-item-list(ng-repeat="s in data.attributes.services | split")
+                          span.services-text(ng-bind="s")

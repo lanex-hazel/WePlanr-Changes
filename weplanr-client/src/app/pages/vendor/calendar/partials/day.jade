@@ -1,0 +1,81 @@
+#dayView.show-element.animate-show-hide(ng-show="view == 'day'")
+  .dialog
+    .section.day-header
+      .icon-arrow-left(ng-click="previousday()")
+      span {{currentDay.format('DD MMMM')}}
+      .icon-arrow-right(ng-click="nextday()")
+    .section.schedule-time
+      .row.animate.text-center(ng-class="{'disabled' : !state.blockdatesLoaded}" ng-if="state.blockdatesLoaded")
+        .col-xs-12.col-md-6.text-left
+          a.btn.btn-clear-border.animate(ng-if="!isBlocked(currentDay) && !isClosed(currentDay)" ng-click="setBlock(currentDay, 'fullybooked')") MARK FULLY BOOKED
+        .col-xs-12.col-md-6.text-right
+          a.btn.btn-clear-border.animate(ng-if="!isClosed(currentDay) && !isBlocked(currentDay)" ng-click="setBlock(currentDay, 'closed')") MARK BUSINESS CLOSED
+        .col-xs-12
+          a.btn.btn-gray.animate(ng-if="isBlocked(currentDay)" ng-click="unsetBlock('fullybooked')" ) RE-OPEN
+          a.btn.btn-gray.animate(ng-if="isClosed(currentDay)" ng-click="unsetBlock('closed')" ) RE-OPEN
+        spinner(ng-if="!state.blockdatesLoaded")
+    .section.animate(ng-show="!hasEvent || (hasEvent && state.add)")
+      booking-add-form
+    .section.schedule-time.animate(ng-if="hasEvent && (hasEvent && !state.add)")
+      ul.tab-nav
+        li(ng-repeat="time in eventTime track by $index")
+          a(ng-click="changeTab($index)" ng-bind="bookedDays[$index].attributes.schedule_time" ng-class="{'active' : currentTab == $index}")
+    .section.animate(ng-show="hasEvent && (hasEvent && !state.add)")
+      div(ng-show="state.edit")
+        booking-edit-form
+      div(ng-show="!state.edit")
+        .form-input
+          input.form-control.text-right(
+            type="text"
+            name="time"
+            ng-model="bookedDays[currentTab].attributes.schedule_time"
+            disabled="!state.edit"
+          )
+          label(for="time") Time
+
+        .form-input
+          input.form-control.text-right(
+            type="text"
+            name="name"
+            ng-model="bookedDays[currentTab].attributes.client"
+            disabled="!state.edit"
+          )
+          label(for="name") Name
+
+        .form-input.icon.icon-map-marker
+          input.form-control.text-right(
+            type="text"
+            name="location"
+            disabled="!state.edit"
+          )
+          #location-text.text-right(ng-bind="bookedDays[currentTab].attributes.location")
+          label(for="location") Location
+
+        .form-input
+          input.form-control.text-right(
+            type="text"
+            name="details"
+            ng-model="bookedDays[currentTab].attributes.details"
+            disabled="!state.edit"
+          )
+          label(for="details") Details
+
+        a.btn.btn-clear-border(ng-click="state.add = true") + Add new booking
+    .section(style="padding-top: 0; padding-bottom: 0;")
+      br
+      .row(ng-if="!hasEvent || (hasEvent && state.add)")
+        .col-xs-6.text-left
+          a.btn.btn-gray.animate(ng-click="changeView('month')" ng-if="!hasEvent") CANCEL
+          a.btn.btn-gray.animate(ng-click="onCancel()" ng-if="hasEvent") CANCEL
+          
+        .col-xs-6.text-right
+          a.btn.btn-success.animate(ng-click="onBook(form, currentDay)") SAVE
+          
+      .row(ng-if="hasEvent && (hasEvent && !state.add)")
+        .col-xs-12.col-md-6.col-md-push-6.text-right
+          a.btn.btn-success.animate(ng-if="state.edit" ng-click="onEdit(bookedDays[currentTab])" ) SAVE
+          a.btn.btn-success.animate(ng-if="!state.edit" ng-click="toggleEdit(true)") EDIT BOOKING
+        .col-xs-12.col-md-6.col-md-pull-6.text-left
+          a.btn.btn-clear(ng-if="!state.edit" ng-click="onDelete(bookedDays[currentTab],currentDay)") Remove
+          a.btn.btn-gray.animate(ng-if="state.edit" ng-click="toggleEdit(false)") CANCEL
+      br

@@ -1,0 +1,75 @@
+@import '../../../vendor/bootstrap.css'
+@import '../../../vendor/angle.css'
+@import '../../../vendor/growl.css'
+@import '../../../vendor/swal.css'
+
+
+$primary-bg = #f5efef
+$primary-text = #383b40
+$primary-hover = #ce4257
+$secondary-bg = #ffffff
+$secondary-text = #88898c
+
+$border=  #e4e4e4
+
+$success = #7fc35c
+$default = #dde1e7
+$danger = #E07A5F
+$red = #F14D4D
+$white = #fff
+$warning = #F2CC8F
+$pink = #dd5f72
+$light-gray = #a7a8aa
+$dark-gray = #65686d
+$dark-red = #8e1719
+
+$active-td = #FFF8DC
+
+.success
+  color: $success !important
+
+.danger
+  color: $danger !important
+
+.warning
+  color: $warning !important
+
+.danger-bg
+  background-color: $danger !important
+  color: $white !important
+
+.success-bg
+  background-color: $success !important
+  color: $white !important
+
+.warning-bg
+  background-color: $warning !important
+  color: $white !important
+
+.swal2-overlay
+  background-color: rgba(0, 0, 0, 0.7)
+  z-index: 2000
+
+[ng-click], [ui-sref]
+  cursor: pointer
+
+a[ui-sref]:hover
+  text-decoration: underline
+
+a:not([href])
+  cursor: auto
+
+/* Do not remove the comments below. It's the markers used by gulp-inject to inject
+   all your sass files automatically */
+// injector
+// endinjector
+
+
+.table-form
+  a
+    font-size: 12px
+    padding: 8px 12px
+    color: #fff !important
+
+.table > thead > tr > th
+  color #fff

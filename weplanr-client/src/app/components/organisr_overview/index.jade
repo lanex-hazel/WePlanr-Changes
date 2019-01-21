@@ -1,0 +1,33 @@
+#overview.box.gray
+  .title Overview
+  .budget-bar
+    .description Your&nbsp;
+      span.black Ideal Budget
+      | &nbsp;is...
+    .budget-progress-bar.green.space(style="width:100%")
+    .amount-box(ng-if="!$ctrl.edit")
+      .amount {{$ctrl.maxBudget | moneyFormat}}
+      a.link(ng-click="$ctrl.toggle(true)") EDIT
+    .amount-box(ng-if="$ctrl.edit")
+      span.input-prefix $
+      input.form-control.has-prefix(
+        ng-model="$ctrl.maxBudget"
+        maxlength="9"
+        spaced-numbers=""
+      )
+      a.link(ng-click="$ctrl.submit()") SAVE
+      a.link(ng-click="$ctrl.toggle(false)") CANCEL
+  .budget-bar
+    .description Your&nbsp;
+      span.black Planned Budget
+      | &nbsp;is...
+    .budget-progress-bar.yellow(ng-class="{'space': $ctrl.planned > 0}" ng-style="{'width': $ctrl.setWidth($ctrl.planned)}")
+    .amount-box
+      .amount {{$ctrl.planned | moneyFormat}}
+  .budget-bar
+    .description Your&nbsp;
+      span.black Actual Spend
+      | &nbsp;is...
+    .budget-progress-bar.red(ng-class="{'space': $ctrl.actual > 0}" ng-style="{'width': $ctrl.setWidth($ctrl.actual)}")
+    .amount-box
+      .amount {{$ctrl.actual | moneyFormat}}

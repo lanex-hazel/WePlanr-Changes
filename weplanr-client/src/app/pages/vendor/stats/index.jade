@@ -1,0 +1,33 @@
+header(logout="logout()" current-vendor="currentVendor" page-title="Statistics" search-url="vendor/search")
+.main-content
+ .vendor-dashboard-container
+    .content-container.white-box(ng-show="!$root.menuView")
+      vendor-nav
+
+      #stats-page.row.no-margin
+        .col-md-6.col-xs-12.profile-views-container(style="background: none;")
+          .section-label
+            strong Profile Views
+            span.pull-right
+              #rangepicker
+                label
+          br/
+          spinner(ng-show="loading")
+          .canvas-wrapper(ng-hide="loading")
+            canvas#profile-view-analytics(height="180")
+          br/
+          br/
+          #stats-summary.row.no-margin
+            .col-sm-3.col-xs-6
+              span(ng-bind="bookings")
+              span BOOKINGS
+            .col-sm-3.col-xs-6
+              span(ng-bind="inquiries")
+              span ENQUIRIES
+            .col-sm-3.col-xs-6
+              span(ng-bind="views")
+              span PROFILE VIEWS
+            .col-sm-3.col-xs-6
+              span(ng-bind="favorites")
+              span FAVOURITES
+        div(style="clear: both;")

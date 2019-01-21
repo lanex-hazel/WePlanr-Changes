@@ -1,0 +1,27 @@
+.menu-vendor-container
+  .col-md-12.no-padding
+    ul(ng-if="$ctrl.isVendor")
+      li
+        a(ng-href="/vendor/dashboard" ng-class="{'active':$root.title == 'Dashboard'}") Dashboard
+      li
+        a(ng-href="/vendor/messages") Messages
+      li
+        a(ng-href="#") Calendar
+      li
+        a(ng-href="#") Earnings
+      li
+        a(ng-href="#") Transactions
+      li
+        a(ng-href="#") Statistics
+
+    ul(ng-if="!$ctrl.isVendor")
+      li
+        a(ng-href="/vendor/dashboard" ng-class="{'active':$root.title == 'Dashboard'}") Dashboard
+      li
+        a(ng-href="#") Budget
+      li
+        a(ng-href="/user/favourites") Favourites
+      li
+        a(ng-href="#") To Do List
+      li
+        a(ng-href="/user/messages") Messages

@@ -1,0 +1,45 @@
+div[id="wrapper"]
+  min-height 100vh
+  display flex
+  display -webkit-flex
+  display -moz-flex
+  display -webkit-box
+  display -moz-box
+  display -ms-flexbox
+  display -ms-flexbox
+  flex-direction column
+
+.header, .footer
+  height 67px
+
+.main-landing
+  flex 1
+  padding-bottom 67px
+
+.main-content
+  max-width 100%
+  margin-top 69px
+  margin-left 0!important
+  margin-right 0!important
+  
+
+.content-container
+  max-width 1152px
+  margin auto
+  background-color $white
+
+.white-box
+  height: 675px
+  overflow: hidden
+  +respond-to(0, 1024px)
+    height: auto
+
+@media only screen and (max-width 768px)
+  .header
+    height 59px
+  .main-content
+    margin-top 55px
+    &.vprofile-main
+      margin-top: 100px
+  .content-container
+    max-width 100%

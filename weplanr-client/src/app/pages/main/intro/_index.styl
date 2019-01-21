@@ -1,0 +1,521 @@
+#banner
+  text-align: center
+  padding: 1em
+  background-color: rgb(247, 236, 205)
+  margin-bottom 1rem
+  h4
+    font-family: Open Sans, sans-serif
+    font-weight: 400
+    margin-bottom: 2px
+    +respond-to(0,480px)
+      font-size: 14px
+  p
+    color: rgba(39,43,47,0.5)
+    -webkit-font-smoothing: antialiased
+    +respond-to(0,480px)
+      font-size: 12px
+  .email
+    color: $primary-hover
+    text-decoration: underline
+    font-size: 16px
+    padding: 0
+    +respond-to(0,480px)
+      font-size: 14px
+#onboard
+  padding 1rem
+  a
+    font-size 1.5rem
+    font-weight 500
+    line-height 1.5
+#landing
+  background url('/vendor/images/customer-landing.jpg')
+  background-size cover
+  background-repeat no-repeat
+  color $primary-hover
+  margin-bottom 1rem
+  background-position calc(100%) calc(28%)
+  .landing-section
+    margin auto
+    text-align center
+    padding-top 15%
+    padding-bottom 12%
+    font-weight 300
+    p
+      font-size 1.8rem
+      line-height 1.5
+      opacity 0.9
+      -webkit-font-smoothing antialiased
+      margin-bottom 5rem
+      &.tagline
+        font-size 3.5rem
+        letter-spacing 1px
+        line-height 1.25
+        margin-bottom 30px
+      +respond-to(0, 512px)
+        font-size 1.5rem
+        &.tagline
+          font-size 2.6rem
+          font-weight: 400
+      +respond-to(0, 438px)
+        font-size 1.2rem
+        margin-bottom 0
+        &.tagline
+          font-size 1.8rem
+          letter-spacing 0.5px
+          margin-bottom 13px
+          padding 0
+    a
+      width 20%
+#landing-features
+  padding 3rem 4rem 2rem
+  background rgba(232,232, 232, 0.2)
+  text-align center
+  margin auto
+  img
+    width 90%
+    +respond-to(0,768px)
+      max-width 50%
+    +respond-to(0,512px)
+      max-width 70%
+    +respond-to(0,438px)
+      max-width 80%
+  li
+    display block
+    color rgba(32, 32, 32, 0.6)
+    padding 1.5rem 0
+    span
+      font-size 1.8rem
+      font-weight 400
+      line-height 1.5
+      +respond-to(0,512px)
+        font-size 1.5rem
+      +respond-to(0,400px)
+        font-size 1.1rem
+    .icon-details
+        margin 2rem
+      &:before
+        font-weight normal
+#inquiry
+  background url('/vendor/images/onboard-tulips.jpg')
+  background-size cover
+  background-repeat no-repeat
+  box-shadow inset 2000px 0 0 0 rgba(39,43,47,0.3)
+  margin-top 1rem
+  span, b
+    color $white
+    font-size 1.3rem
+    font-weight 500
+    line-height 4
+  .icon:after
+    color $white
+    font-size 1rem
+    font-weight normal
+    vertical-align initial
+.card-questionare
+  background-color $white
+  text-align center
+  height 58.8%
+  margin-top 1rem
+  padding 13% 0
+  p
+    font-size 3rem
+    font-weight 300
+    line-height 1
+    color rgba(0, 0, 0, 0.6)
+    margin-bottom 3rem
+    &.onboard-label
+      color #202020
+      font-size 4rem
+  a
+    margin-top 3rem
+    width 60%
+  .form-control
+    margin auto
+    width 55%
+    font-size 2rem
+    line-height 1.5
+    color rgba(0, 0, 0, 0.8)
+    padding-bottom 10px
+    height 50px
+    &::-webkit-input-placeholder
+      font-style: italic
+      font-weight: 300
+      color: rgba(0, 0, 0, 0.3)
+    &:-moz-placeholder
+      font-style: italic
+      font-weight: 300
+      color: rgba(0, 0, 0, 0.3)
+    &::-moz-placeholder
+      font-style: italic
+      font-weight: 300
+      color: rgba(0, 0, 0, 0.3)
+    &:-ms-input-placeholder
+      font-style: italic
+      font-weight: 300
+      color: rgba(0, 0, 0, 0.3)
+    &:focus::-webkit-input-placeholder
+      color: transparent
+    &:focus::-moz-placeholder
+      color: transparent
+    &:focus:-moz-placeholder
+      color: transparent
+    +respond-to(0,768px)
+      width 320px
+    +respond-to(0,400px)
+      width 100%
+.card-section
+  margin auto
+  max-width 64.5%
+  padding 10rem 0
+
+#questionare-1, #questionare-2, #questionare-3
+  margin-top 1rem
+  span, b
+    color $white
+    line-height 4
+  p
+    margin-bottom 4rem
+  a
+    margin-top 3.5rem
+    width 35%
+#questionare-1
+  background-color rgba(191,229,244, 0.8)
+#questionare-2
+  background-color rgba(171,207,133, 0.55)
+  select
+    font-size 2rem
+    line-height 1.5
+    border-radius 0
+    color #000000
+    -webkit-appearance none
+    -moz-appearance none
+    appearance none
+  .form-control
+    margin initial
+    width 100%
+  .select
+    position relative
+    width 20%
+    margin auto
+    display inline-block
+    padding 1rem
+    +respond-to(0,768px)
+      width 120px
+    +respond-to(0,438px)
+      width 85px
+      padding 1rem 0.2rem
+    &:after
+      position absolute
+      right 10px
+      bottom 27px
+      z-index 1
+      text-align center
+      pointer-events none
+      box-sizing border-box
+      content "\f0da"
+      color #ce4257
+      font normal normal normal 12px/1 FontAwesome
+#questionare-3
+  background-color rgba(206,66,87, 0.4)
+  .select-dropdown
+    display: block
+    width: 55%
+    +respond-to(0,768px)
+      width 320px
+    +respond-to(0,400px)
+      width 100%
+      &:after
+        bottom: 25px
+    > .form-control
+      width: 100%
+#suggestions, .search-results
+  position: relative
+  margin-top 1rem
+  +respond-to(0,768px)
+    white-space nowrap
+    overflow hidden
+    margin-bottom 3rem
+    border-bottom 1px solid #f7f8f9
+  p
+    text-align center
+    color #202020
+    font-size 3.5rem
+    font-weight 300
+    line-height 1.25
+  span
+    color #ce4257
+    font-size 1.3rem
+    line-height 2
+    &.service
+      font-size: 18px
+      text-decoration: underline
+    &.fave
+      font-size 3.5rem
+      text-decoration underline
+      font-weight 100
+      line-height 1
+    &.category
+      color $light-black
+      font-weight bold
+      text-transform uppercase
+    &.more
+      font-weight 400
+      cursor pointer
+    &.keyword
+      text-transform capitalize
+      font-size 1.5rem
+      font-weight 500
+  .icon:after, .icon-search:before
+    color #ce4257
+  .icon-search:before
+    font-size 1.2rem
+  .collection
+    padding-left 5%
+    padding-right 5%
+  .items
+    display inline-table
+    margin 3rem 1.36rem 2rem
+    width 23%
+    z-index -1
+    vertical-align bottom
+    &:nth-child(4n+1)
+      margin-left 0 !important
+    &:nth-child(4n+4)
+      margin-right 0 !important
+    +respond-to(769px,1200px)
+      &:nth-child(4n+1)
+        margin-left 2rem !important
+      &:nth-child(4n+4)
+        margin-right 2rem !important
+    +respond-to(993px,1200px)
+      width: calc(54% - 246px) !important
+    +respond-to(769px, 992px)
+      width calc(74% - 246px) !important
+    +respond-to(0, 768px)
+      margin-left 0
+      margin-right 0
+      display inline-block
+      white-space nowrap
+      overflow hidden
+      width 253px
+    span
+      color #272b2f
+      font-size 1.8rem
+      line-height normal
+      &.location
+        color rgba(39, 43, 47, 0.6)
+        font-size 1.4rem
+        vertical-align top
+        line-height 1.5 !important
+      &.name
+        display block
+        padding-left 1rem
+        overflow hidden
+        text-overflow ellipsis
+        white-space: nowrap
+        width: 191px
+    img
+      width 42px
+      height 41.5px
+      border-radius 50%
+      vertical-align top
+      object-fit cover
+      position absolute
+      background-color: $white
+      &.default
+        background-color: $default-photo-bg
+        object-fit: contain
+    .icon
+      line-height 2
+      padding-left 1rem
+      &:before
+        font-size 1.1rem
+        vertical-align top
+      +respond-to(0, 768px)
+        white-space pre-line
+        padding-right 4.5rem
+    .user-info
+      display inline-block
+      vertical-align middle
+      padding-left 4.3rem
+      text-align left
+  .feature-vendor
+    position relative
+    .icon:before, .icon-f:before
+      font-size 1.8rem
+      font-weight normal
+      position absolute
+      bottom 1.1rem
+      right 1.6rem
+      padding-top 0.8rem
+      padding-bottom 0.8rem
+    .icon-f:before
+      font-size 2.1rem
+      padding 1.05rem 1.55rem
+  .fadeout
+    position absolute
+    bottom 0
+    height 45rem
+    width 90%
+    background: -webkit-linear-gradient(rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%)
+    background-image -moz-linear-gradient(rgba(255, 255, 255, 0) 0%,rgba(255, 255, 255, 1) 100%)
+    background-image -o-linear-gradient(rgba(255, 255, 255, 0) 0%,rgba(255, 255, 255, 1) 100%)
+    background-image linear-gradient(rgba(255, 255, 255, 0) 0%,rgba(255, 255, 255, 1) 100%)
+    background-image -ms-linear-gradient(rgba(255, 255, 255, 0) 0%,rgba(255, 255, 255, 1) 100%)
+  .feature-display
+    background-size cover
+    background-repeat no-repeat
+    width 100%
+    height 195px
+    background-color: $white
+    &.default
+      background-color: $default-photo-bg
+      background-size: 95%
+      background-position: center
+    +respond-to(992px,1024px)
+      height 248px
+    +respond-to(0,768px)
+      height 232px
+  .services
+    white-space: initial
+    height: 30px
+    overflow: hidden
+    > li
+      border solid 1px rgba(39, 43, 47, 0.5)
+      padding 0.5rem 1rem
+      width auto
+      color $primary-text
+      background-color $white
+      font-size 1rem
+      text-transform uppercase
+      margin 2px
+
+  .ellipsis
+    overflow hidden
+    white-space nowrap
+    text-overflow ellipsis
+    width 175px
+    display inline-block
+
+  .limit
+    height 32px
+    overflow hidden
+    white-space wrap
+.setHeight
+  min-height calc(20rem + 45.8vh)
+
++respond-to(0, 768px)
+  #onboard
+    padding 0
+    a
+      font-size 16px
+      padding 1rem
+      width 340px
+      max-width 100%
+      margin-top 3rem
+  #landing
+    margin 1rem
+    background-position bottom
+    .landing-section
+      padding-bottom 25%
+      padding-top 38%
+      a
+        width auto
+        padding 13px
+  #landing-features, #banner
+    margin 1rem
+    li > span
+      letter-spacing -0.2px
+    .icon-details:before
+      font-size 2rem
+      padding 1.1rem 1.2rem
+    .no-left
+      padding-left 0
+    .no-right
+      padding-right 0
+  .card-section
+    max-width 97%
+    padding 10rem 0
+  .card-questionare
+    padding 20% 2rem
+    a
+      margin-top 2rem
+    p
+      font-size 2rem
+      margin-bottom 4rem
+      &.onboard-label
+        margin-bottom 2rem !important
+        font-size 2.8rem
+    .form-control
+      font-size 1.5rem
+      padding-bottom 0
+  .card-label
+    padding 0 1rem
+  #inquiry, #questionare-1,
+  #questionare-2, #questionare-3
+    span
+      font-size 1rem
+      line-height 2.2
+    b
+      font-size 1.1rem
+      font-weight bold
+      line-height 2
+    p
+      margin-bottom 3rem
+    a
+      font-size 1.5rem
+    .icon-arrow-right:after
+      display none
+  #inquiry
+    .card-questionare
+      a
+        margin-top 3rem
+  #questionare-1
+    p
+      padding 0 1rem
+  #questionare-3
+    p
+      padding 1.5rem
+  #questionare-2
+    .select
+      font-size 1.5rem
+      &:after
+        right 2px
+        bottom 21px
+    .form-control
+      padding 0
+      height 38px
+    select
+      font-size 1.4rem
+  #suggestions > .collection > div > span.category
+    padding-left: 30px
+  #suggestions, .search-results
+    .search-keywords
+      padding-left: 2.5rem
+      padding-right: 2.5rem
+      white-space: initial
+    a
+      margin-top 0
+      padding 0
+    p
+      font-size 2.5rem
+    span
+      &.fave
+        font-size 2.5rem
+    .collection
+      padding 0
+    .items
+      margin 0
+      > .mtop-15
+          margin-left 1rem
+    .services
+      white-space normal
+      margin-left 5.8rem
+  .setHeight
+    min-height 545px
+
++respond-to(0, 480px)
+  #landing .landing-section a
+    width auto
+    padding 8px 26px
+    font-size 11px

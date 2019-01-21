@@ -1,0 +1,19 @@
+div(ui-sref="user.messages")
+  .messages(ng-click="goToMsg()" ng-hide="unreadCount")
+    span.title No New Messages
+  .messages(ng-click="goToMsg()" ng-if="unreadCount")
+    span.title New Messages
+    .badge-success.pull-right
+      |{{unreadCount}}
+    .message
+      .caption
+        .dashboard-profile-photo(ng-class="{'default': !currentSnippet.attributes.profile_photo}" ng-style="{'background-image': 'url('+ $root.setPhoto(currentSnippet.attributes.profile_photo) +')'}")
+        .contact
+          span.title-name
+            |{{currentSnippet.attributes.name}}
+          .icon.icon-map-marker.loc
+            span.location
+              |{{currentSnippet.attributes.location}}
+      p.message-text(ng-bind="currentSnippet.attributes.snippet || 'New quote received'")
+    .message-indicators(ng-if="snippets.length > 1")
+      span.indicator(ng-repeat="obj in snippets" ng-class="{active: currentSnippet.attributes.uid == obj.attributes.uid}")

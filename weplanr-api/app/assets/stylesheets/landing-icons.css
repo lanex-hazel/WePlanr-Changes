@@ -1,0 +1,73 @@
+.landing-icon {
+  width: 45px;
+  height: 45px;
+  background-image: url(https://s3-ap-southeast-2.amazonaws.com/weplanr/weplanr/landing-icons.png);
+  margin: auto;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.notepad {
+ background-position: 0 -140px;
+}
+.storage {
+  background-position: 0 -191px;
+}
+.calendar {
+  background-position: 0 -238px;
+}
+.message {
+  background-position: 0 0;
+}
+.star {
+  background-position: 0 -46px;
+}
+.switch {
+  background-position: 0 -93px;
+}
+
+.wp-icon {
+  background-image: url(https://s3-ap-southeast-2.amazonaws.com/weplanr/weplanr/icons.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.wp-icon.search {
+  width: 40px;
+  height: 40px;
+  margin-top: 7px;
+  background-position: 0 -34px;
+}
+
+.wp-icon.burger-menu {
+  width: 40px;
+  height: 33px;
+  margin-top: 4px;
+  margin-right: 45px;
+  background-position: -8px 11px;
+}
+
+@media only screen and (max-width: 768px){
+  .wp-icon.search {
+    width: 31px;
+    height: 34px;
+    margin-top: 18px;
+    background-position: 0 -26px;
+  }
+
+  .wp-icon.burger-menu {
+    width: 34px;
+    height: 29px;
+    margin-top: 10px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+  .wp-icon.search {
+    margin-right: 10px;
+  }
+
+  .wp-icon.burger-menu {
+    margin-left: 10px;
+  }
+}

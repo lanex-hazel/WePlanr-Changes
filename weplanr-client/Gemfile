@@ -1,0 +1,9 @@
+source 'https://rubygems.org'
+
+group :development do
+  gem 'capistrano'
+  gem 'capistrano-gulp', "~> 0.0.2"
+  gem 'capistrano-npm'
+  gem 'capistrano-nvm'
+  gem 'capistrano-bower'
+end

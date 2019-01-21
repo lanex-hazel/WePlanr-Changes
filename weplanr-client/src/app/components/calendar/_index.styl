@@ -1,0 +1,126 @@
+calendar
+  float: left
+  display: block
+  background: white
+  width: 100%
+  border: 0
+  margin-bottom: 10px
+  .calendar-header 
+    float: left
+    width: 100%
+    background: $white
+    height: 40px
+    color: #272b2f
+    height: 30px
+    line-height: 30px !important
+    display: inline-block
+    vertical-align: middle
+    [class*='icon-']
+      position relative
+      &:after
+        font-weight normal
+        position absolute
+        padding 1px 13px
+        border 1px solid #ededed
+        border-radius 50%
+        font-size 12px
+        cursor pointer
+    .icon-arrow-right
+      left 32px*-1
+        
+    span
+      float: left
+      width: 100%
+      text-transform: uppercase
+      padding-left: 40px+10px
+      margin-left: 40px*-1
+      text-align: center
+      padding-right: 40px
+      color: inherit
+      margin auto
+
+  .week
+    td
+      padding 3px
+      position relative
+      &.names
+        color: #272b2f !important
+        font-weight: 300 !important
+    > td
+      text-align center
+      .day
+        width 34px
+        height 34px
+        line-height 34px
+        margin 0 auto
+        +respond-to(769px, 0)
+          width 27px
+          height 27px
+          line-height 27px
+      &.different-month
+        visibility: hidden
+      &.not-available
+        .day
+          border-radius 50%
+          background: #383b40 !important
+          color: white !important
+        &:hover
+          .legend
+            visibility visible
+            background-color #383b40 !important
+            &:after
+              border-color: transparent transparent #383b40 transparent !important
+      &.closed
+        .day
+          border-radius 50%
+          background rgba(206, 66, 87, 0.6) !important
+          color: white !important
+        &:hover
+          .legend
+            visibility visible
+            background-color #e28e9a !important
+            &:after
+              border-color: transparent transparent #e28e9a transparent !important
+      &.partial
+        .day
+          border-radius 50%
+          background rgba(56, 59, 64, 0.4)
+          color: white
+        &:hover
+          .legend
+            visibility visible
+            background-color #afb1b3
+            &:after
+               border-color: transparent transparent #afb1b3 transparent
+      .legend
+        visibility: hidden
+        width: 104px
+        background-color: black
+        color: #fff
+        text-align: center
+        border-radius: 6px
+        padding: 5px 0
+        position: absolute
+        z-index: 1
+        top: 115%
+        left: 50%
+        margin-left: -60px
+        &:after
+          content: ""
+          position: absolute
+          bottom: 100%
+          left: 50%
+          margin-left: -5px
+          border-width: 5px
+          border-style: solid
+          border-color: transparent transparent black transparent
+
+ @media screen and (max-width 768px)
+  calendar
+    .calendar-header span
+      text-align left
+      padding 0
+      font-weight bold
+    .icon-arrow-left
+      left 75px*-1
+      text-align right

@@ -1,0 +1,131 @@
+.vendor-detail-container
+  .form-input
+    box-shadow 0 0 0 #000 !important
+    height 35px !important
+    padding 6px 16px
+    border 1px solid #dde6e9
+    border-radius 4px
+    &.disabled
+      background-color #edf1f2
+      color #aaa
+  .remove-option
+    font-size 12px
+    color $danger
+  .form-control
+    &.read-only
+      border 0
+      box-shadow none
+  .form-container
+    margin-bottom 15px
+  .option-links
+    padding 30px 0
+    a
+      padding 10px 60px
+      border-radius 23px
+      margin 30px
+  .ui-select-choices-group
+    width 100%
+  .no-padding
+    padding 0
+
+  .vendor-photos-container
+    padding 0 30px
+    .title-label
+      padding-bottom 15px
+      font-size 20px
+      font-weight 100
+    .photo-container
+      padding 30px 15px
+
+  .img-box
+    background-color: #f7f7f7
+    border: 2px solid #ccc
+    margin: 10px
+    display: inline-block
+    position relative
+    width: 256px
+    height: 192px
+
+    .show-image
+      width 100%
+      height 100%
+      position relative
+      background-size auto 100%
+      background-repeat no-repeat
+      background-position center
+      background-color rgba(39,43,47,0.3)
+    .show-image:hover, .isCover
+      box-shadow inset 2000px 0 0 0 rgba(39,43,47,0.3)
+      transition all 0.5s
+      -webkit-transition all 0.5s
+      .icon
+        display block
+        position absolute
+        right 8px
+        top 5px
+        &:before
+          color $primary-hover
+    .icon
+      position absolute
+      display none
+    .icon-cover
+      display block
+      position absolute
+      bottom 18px
+      left 7px
+      z-index 1
+      &:after,&:before
+        font-size 15px
+        border-radius 50%
+        background-color rgba(255,255,255,0.6)
+        padding 15px 16px
+      &:hover
+        font-weight normal
+      &:after
+        color #fae737
+      &:before
+        color #383b40
+  ul.photos
+    margin 0 50px
+    li
+      width 300px
+      display inline-block
+      vertical-align top
+
+  .progress
+    display inline-block
+    width calc(100% - 80px)
+    vertical-align bottom
+    margin-bottom 15px
+    .progress-bar
+      background-color #f0506b
+
+  #photo-crop-upload
+    section
+      padding-left 1.5rem
+      padding-right 1.5rem
+    .btn
+      font-size 1.3rem
+      font-weight 500
+      line-height 1.5
+      padding 8px 44px
+      margin-bottom 15px
+      &.btn-green
+        background-color rgb(102,212,126)
+      &.btn-gray
+        background-color #bbb
+    .crop-area
+      background #E4E4E4
+      overflow hidden
+      width 480px
+      height 300px
+      max-width 90%
+      margin 0 auto
+
+  .custom-vendor-fees
+    input
+      width 4.25rem
+      text-align right
+      padding-left 0
+      padding-right 4px
+      margin-right 4px

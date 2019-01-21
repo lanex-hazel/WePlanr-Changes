@@ -1,0 +1,259 @@
+.profile-settings-container
+  .row.no-margin
+    .col-xs-12.col-md-12.settings-block.fill-container(style="padding-right: 0;")
+      img.img-avatar(ng-class="{'default': !$ctrl.profile_photo}" ng-src="{{$root.setPhoto($ctrl.profile_photo)}}")
+      .inline(type="file" ng-model="$ctrl.newAvatar" ngf-select="" ng-show="!$ctrl.uploading" ngf-accept="'image/*'" ngf-validate="{pattern: '.jpg,.jpeg,.png'}" ngf-model-options="{allowInvalid: true}" ngf-change="$ctrl.setImage($files)")
+        a.add-link.avatar(ng-show="!$ctrl.uploading") Upload a new avatar
+      .progress(ng-show="$ctrl.uploading")
+        .progress-bar(role='progressbar', aria-valuenow='50', aria-valuemin='0', aria-valuemax='100',
+            ng-style="{ width: $ctrl.uploadPercent + '%' }" ng-bind="$ctrl.uploadPercent + '%'")
+    .col-xs-12.col-md-12.settings-block
+      form(name="vendorForm" novalidate="true" autocomplete="off")
+        label.form-label(style="text-transform: none; font-style: italic;") Information on this page is visible on your profile
+        .form-group
+          label.form-label Business Name
+          input.form-control(
+            style="height: 40px;"
+            name="business_name"
+            ng-model="$ctrl.vendor.business_name"
+            required=true
+            ng-class="{'error': $ctrl.vendorForm.business_name.$error.required}"
+          )
+        .row
+          .col-xs-12.col-md-6
+            .form-group
+              label.form-label First Name
+              input.form-control(
+                style="height: 40px;"
+                name="contact_firstname"
+                ng-model="$ctrl.vendor.firstname"
+                required=true
+                ng-class="{'error': $ctrl.vendorForm.contact_firstname.$error.required}"
+              )
+          .col-xs-12.col-md-6
+            .form-group
+              label.form-label Last Name
+              input.form-control(
+                style="height: 40px;"
+                name="contact_lastname"
+                ng-model="$ctrl.vendor.lastname"
+                required=true
+                ng-class="{'error': $ctrl.vendorForm.contact_lastname.$error.required}"
+              )
+        .row
+          .col-xs-12.col-md-6
+            .form-group
+              label.form-label Suburb
+              input.form-control(
+                style="height: 40px;"
+                ng-model="$ctrl.vendor.suburb"
+              )
+          .col-xs-12.col-md-6
+            .form-group
+              label.form-label State
+              input.form-control(
+                style="height: 40px;"
+                ng-model="$ctrl.vendor.state"
+              )
+          .col-xs-12
+            div#map
+        br
+        .form-group(style="position:relative;")
+          label.form-label Primary Services
+          ui-select.services(multiple tagging tagging-label='false' remove-selected="false" ng-model='$ctrl.vendor.primary_services' theme='bootstrap' style='width: 100%;' title='Services' ng-class="{'disabled': $ctrl.vendor.primary_service_id == 14}")
+            ui-select-match(ng-style="$ctrl.serviceMargin()" placeholder='Choose a primary service...')  {{$item.attributes.name}}
+            ui-select-choices(repeat='service.attributes.name as service in $ctrl.primary_services  | filter:$select.search') {{service.attributes.name}}
+        .form-group(style="position:relative;")
+          label.form-label Secondary Services
+          ui-select.services(multiple tagging tagging-label='false' remove-selected="false" ng-model='$ctrl.vendor.secondary_services' theme='bootstrap' style='width: 100%;' title='Services')
+            ui-select-match(ng-style="$ctrl.serviceMargin()" placeholder='Choose a secondary service...')  {{$item.attributes.name}}
+            ui-select-choices(repeat='service.attributes.name as service in $ctrl.secondary_services  | filter:$select.search') {{service.attributes.name}}
+        .form-group
+          .row.no-margin
+            .col-xs-4.no-padding
+              label.form-label Service Locations
+            .col-xs-7.col-md-pull-1.link-option(style="padding-left: 0;")
+              a.add-link(ng-click="$ctrl.newVal('loc')") Add new location
+            .col-xs-1.no-padding.text-right
+              a.edit-link(ng-show="$ctrl.disabled" ng-click="$ctrl.toggle(false)") Edit
+              a.edit-link(ng-show="!$ctrl.disabled" ng-click="$ctrl.toggle(true)") Cancel
+          
+          .form-group
+            .row
+              .col-xs-12.col-sm-6
+                ui-select(ng-model="$ctrl.newLocation" theme="selectize" ng-change="$ctrl.addLoc()" ng-show="$ctrl.state.addLocation")
+                  ui-select-match(placeholder="Choose a location") {{$item}}
+                  ui-select-choices(repeat="item in $ctrl.locationOpt | filter: $select.search") {{item}}
+              .col-xs-12
+                ul.location-container(ng-show="$ctrl.vendor.locations.length > 0")
+                  li.location-item(ng-repeat="loc in $ctrl.vendor.locations track by $index")
+                    a.icon-map-marker(ng-show="$ctrl.disabled") &nbsp;{{loc}}
+                    a.icon-exit(ng-click="$ctrl.removeLocation($index)" ng-show="!$ctrl.disabled") &nbsp;{{loc}}
+
+        .form-group
+          label.form-label Other Service Locations
+          tags-input(ng-model="$ctrl.vendor.other_location_list" replace-spaces-with-dashes="false")
+        .form-group
+          label.form-label Tags
+          tags-input(ng-model="$ctrl.vendor.tag_list" replace-spaces-with-dashes="false")
+        .form-group
+          label.form-label About
+          textarea#aboutcontent.form-control.about-textarea(content-adjust
+            style="height: 40px;"
+            name="about"
+            ng-model="$ctrl.vendor.about"
+          )
+        .form-group
+          label.form-label Website
+          input.form-control(
+            name="website"
+            ng-model="$ctrl.vendor.website"
+          )
+        .form-group
+          .row.no-margin
+            .col-xs-4.no-padding
+              label.form-label Services & Pricing
+            .col-xs-7.col-md-pull-1.link-option(style="padding-left: 0;")
+              a.add-link(ng-click="$ctrl.addData($ctrl.newPackage)") Add services
+            .col-xs-1.no-padding.text-right
+              a.edit-link(ng-show="$ctrl.disabled" ng-click="$ctrl.toggle(false)") Edit
+              a.edit-link(ng-show="!$ctrl.disabled" ng-click="$ctrl.toggle(true)") Cancel
+            
+          .row.no-margin(ng-repeat="new in $ctrl.newPackage")
+            ng-form(name="packageFieldForm")
+              .col-xs-6.sub-form.left
+                input.form-control(
+                  ng-model="new.name"
+                  placeholder="Service"
+                  name="package_service"
+                  required=true
+                  ng-change=)
+                span.danger(ng-show="packageFieldForm.package_service.$error.required && packageFieldForm.package_service.$dirty") This field is required
+              .col-xs-6.sub-form.right
+                input.form-control(
+                  ng-model="new.price"
+                  placeholder="Price"
+                  name="package_price"
+                  required=true
+                  pattern="^[0-9]*$")
+                span.danger(ng-show="packageFieldForm.package_price.$error.required && packageFieldForm.package_price.$dirty") This field is required
+                span.danger(ng-show="packageFieldForm.package_price.$error.pattern") Price can only contain numbers
+              a.remove-option(ng-click="$ctrl.removeData($index,$ctrl.newPackage)")
+                i.fa.fa-close.danger
+
+          .row.no-margin(ng-repeat="package in $ctrl.vendor.pricing_and_packages")
+            ng-form(name="packagesForm")
+              .col-xs-6.sub-form.left
+                input.form-control(
+                  ng-class="{ 'disabled' : $ctrl.disabled}"
+                  ng-model="package.name"
+                  placeholder="Service"
+                  name="package_service"
+                  required=true)
+                span.danger(ng-show="!$ctrl.disabled && packagesForm.package_service.$error.required") This field is required
+              .col-xs-6.sub-form.right
+                .price-form(ng-class="{'right' : $ctrl.disabled}")
+                  input.form-control(
+                    ng-class="{ 'disabled' : $ctrl.disabled, 'right' : $ctrl.disabled}"
+                    ng-model="package.price"
+                    placeholder="Price"
+                    name="package_price"
+                    required=true
+                    pattern="^[0-9]*$"
+                  )
+                span.danger(ng-show="!$ctrl.disabled && packagesForm.package_price.$error.required") This field is required
+                span.danger(ng-show="!$ctrl.disabled && packagesForm.package_price.$error.pattern") Price can only contain numbers
+              a.remove-option(ng-click="$ctrl.removeData($index,$ctrl.vendor.pricing_and_packages)" ng-show="!$ctrl.disabled")
+                i.fa.fa-close.danger
+
+        .form-group
+          .row.no-margin
+            .col-xs-3.no-padding
+              label.form-label Social
+            .col-xs-8.col-md-pull-1.link-option
+              a.add-link(ng-click="$ctrl.addData($ctrl.newSocial,true)" ng-class="{'disabled':$ctrl.state.disableAdd}") Add social links
+            .col-xs-1.no-padding.text-right
+              a.edit-link(ng-show="$ctrl.disabled" ng-click="$ctrl.toggle(false)") Edit
+              a.edit-link(ng-show="!$ctrl.disabled" ng-click="$ctrl.toggle(true)") Cancel
+          .row.no-margin(ng-repeat="new in $ctrl.newSocial | limitTo: $ctrl.socialOpt.length")
+            ng-form(name="socialFieldForm")
+              .col-xs-6.sub-form.left
+                ui-select(ng-model="$ctrl.selectedSocial[$index]"
+                    ng-change="$ctrl.addSocial($index, $ctrl.selectedSocial[$index])" theme="selectize")
+                  ui-select-match(placeholder="Choose a social network") {{$select.selected}}
+                  ui-select-choices(repeat="item in $ctrl.socialOpt | exclude:$ctrl.selectedSocial:$ctrl.selectedSocial[$index] | filter: $select.search ")
+                    span(ng-bind-html="item| highlight: $select.search")
+              .col-xs-6.sub-form.right
+                input.form-control(
+                  ng-model="new.link"
+                  placeholder="www.example.com"
+                  name="social_link"
+                  required=true
+                  pattern="^www\.[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$"
+                  ng-style="{'height': '49px'}"
+                  ng-model-options="{ updateOn: 'blur' }"
+                )
+                span.danger(ng-show="socialFieldForm.social_link.$error.required && socialFieldForm.social_link.$dirty") This field is required
+                span.danger(ng-show="socialFieldForm.social_link.$error.pattern && socialFieldForm.social_link.$touched") Please enter a valid URL
+              a.remove-option(ng-click="$ctrl.removeData($index,$ctrl.newSocial,true)")
+                i.fa.fa-close.danger
+          .row.no-margin(ng-repeat="(key,value) in $ctrl.vendor.social_channels")
+             ng-form(name="socialForm")
+              .col-xs-6.sub-form.left
+                 input.form-control(
+                  ng-class="{ 'disabled' : true}"
+                  ng-model="key"
+                  placeholder="Social Network"
+                  name="social_name"
+                  ng-style="{'height': '33px', 'text-transform': 'capitalize'}"
+                )
+              .col-xs-6.sub-form.right
+                input.form-control(
+                  ng-class="{ 'disabled' : $ctrl.disabled, 'right' : $ctrl.disabled}"
+                  ng-model="$ctrl.vendor.social_channels[key]"
+                  placeholder="www.example.com"
+                  name="social_link"
+                  required=true
+                  pattern="^www\.[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$"
+                  ng-style="{'height': '33px'}"
+                )
+                span.danger(ng-show="!$ctrl.disabled && socialForm.social_link.$error.required && socialForm.social_link.$error.touched") This field is required
+                span.danger(ng-show="!$ctrl.disabled && socialForm.social_link.$error.pattern") Please enter a valid URL
+              a.remove-option(ng-click="$ctrl.removeData(key,$ctrl.vendor.social_channels)" ng-show="!$ctrl.disabled")
+                i.fa.fa-close.danger
+    .col-xs-12.col-md-12.settings-block.fill-container.settings-menu-option
+      div(ng-show="!$ctrl.loading")
+        .col-xs-12.col-sm-pull-0.col-sm-12.col-md-push-3.col-md-6.no-padding.option-save(style="z-index:1;")
+          a.btn.btn-green(ng-click="$ctrl.onSubmit(vendorForm, 'portfolio')" ng-disabled="vendorForm.$invalid") SAVE &amp; CONTINUE
+        .col-xs-12.col-sm-pull-0.col-sm-12.col-md-5.col-md-push-1.no-padding.option-save
+          a.btn.btn-green(ng-click="$ctrl.onSubmit(vendorForm)" ng-disabled="vendorForm.$invalid") SAVE &amp; CLOSE
+        .col-xs-12.col-xs-pull-0.col-sm-12.col-md-1.col-md-pull-11.no-padding
+          a.btn.cancel-info(ui-sref="vendor.dashboard") CANCEL &amp; DO NOT SAVE
+      spinner(ng-show="$ctrl.loading")
+
+  modal#photo-crop-vendor(ng-class="{'show':!!$ctrl.cropAvatar, 'in':!!$ctrl.cropAvatar}")
+    .modal
+      .modal-body
+        a.pull-right.icon.icon-exit(ng-click="$ctrl.cancelUpload()")
+        section
+          p Upload Photo
+        section
+          .crop-area
+            img-crop(
+              image="$ctrl.cropAvatar"
+              result-image="$ctrl.newAvatar"
+              area-type="circle"
+              result-image-quality="1.0"
+              result-image-size="600"
+              result-image-format="image/jpeg")
+          br
+        section
+          .hide-mobile
+            a.btn.btn-gray(ng-click="$ctrl.cancelUpload()") CANCEL
+            | &nbsp;&nbsp;&nbsp;&nbsp;
+            a.btn.btn-green(ng-click="$ctrl.onUpload($ctrl.newAvatar)") UPLOAD PHOTO
+          .hide-desktop
+            a.btn.btn-green(ng-click="$ctrl.onUpload($ctrl.newAvatar)") UPLOAD PHOTO
+            br
+            a.btn.btn-gray(ng-click="$ctrl.cancelUpload()") CANCEL
+    .modal-backdrop

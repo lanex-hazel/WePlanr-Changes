@@ -1,0 +1,243 @@
+#directory-container
+  min-height: 731px
+  position: relative
+  padding-top: 30px
+  padding-bottom: 30px
+  border-top: 25px solid rgb(245, 245, 245)
+  +respond-to(0,768px)
+    padding-bottom: 0
+    padding-top: 0
+    min-height: 645px
+    border-top: 0
+  .directory
+    position: relative
+    padding-right: 0
+    width: 0
+    -webkit-transition: all cubic-bezier(0, 1, 0.5, 1) 0.5s
+    -moz-transition: all cubic-bezier(0, 1, 0.5, 1) 0.5s
+    -o-transition: all cubic-bezier(0, 1, 0.5, 1) 0.5s
+    &.show
+      width: calc(25% - 30px)
+    +respond-to(0,768px)
+      padding-left: 0
+      &.show
+        width: 100%
+  .selectize-control.single .selectize-input
+    border: 0
+    border-radius: 0
+    background: rgb(192, 213, 153)
+    color: #ffffff
+    letter-spacing: 1px
+    font-weight: 300
+    text-align: center
+    &:after
+      border-color: #ffffff transparent transparent transparent
+  .search-container
+    position: relative
+    .icon
+      position: absolute
+      top: 6px
+      left: 10px
+      &:before
+        color: #ce4257
+        border: none
+        padding: 0
+    .icon-exit
+      left: calc(100% - 25px)
+      top: 1px
+    .search-bar
+      border-bottom: 1px solid $border
+      padding-left: 26px
+      padding-right: 26px
+      text-align: center
+
+  .vendor-container
+    padding-left: 10px
+    padding-top: 5px
+    &.expand
+      width: 100% !important
+    +respond-to(0,768px)
+      padding: 0
+    .mobile-breadcrumb
+      background-color: #f8f2f2
+      width: 100%
+      max-width: 1068px
+      margin: 0 auto 12px
+      a
+        color rgba(206, 66, 87, 0.8)
+        font-weight 500
+        padding: 10px
+        &.icon-arrow-leftb:before
+          font-weight normal
+          font-size 1.5rem
+          color rgb(56, 59, 64)
+    #category-selected
+      font-size: 14px
+      margin-left: 25px
+      display: inline-block
+      +respond-to(0, 768px)
+        font-size: 16px
+        border-bottom: 1px solid rgba(72, 72, 72, 0.2)
+        line-height: 3
+        margin: auto
+        padding-left: 15px
+        display: block
+        .active
+          color: rgb(171, 207, 133)
+      +respond-to(769px, 0)
+        span
+          margin-left: 15px
+    #filter-location.selectize-control.single
+      margin-right: 26px
+      margin-bottom: 5px
+      margin-top: 5px
+      float: right
+      .selectize-input
+        border: 0
+        background: none
+        color: $primary-hover
+        width: auto
+        text-overflow: ellipsis
+        white-space: nowrap
+        padding: 0 5px
+        box-shadow: none
+        -webkit-box-shadow: none
+        +respond-to(0,768px)
+          width: 160px
+        &:after
+          left: 0
+          border: 0
+          content: "\e903"
+          font-size: 10px
+          top: 20%
+          font-weight: normal
+        > *, > input
+          padding-left 8px !important
+      +respond-to(0,768px)
+        float: none
+        margin: auto
+        padding: 15px
+    .selectize-control > .selectize-dropdown
+      width: 100%
+      +respond-to(0, 768px)
+        width: calc(100% - 30px)
+    .list
+      height: 485px
+      overflow: auto
+      display: flex
+      display: -webkit-flex
+      display: -moz-flex
+      flex-flow: row wrap
+      -webkit-flex-flow: row wrap
+      -moz-flex-flow: row wrap
+      justify-content: flex-start
+      margin-top: 30px
+      width: 100%
+      &::-webkit-scrollbar
+        display: none
+      +respond-to(0, 768px)
+        margin-top: 0
+      .item
+        width: 228px
+        max-height: 293px
+        margin: 0 25px 22px
+        position: relative
+        +respond-to(0,768px)
+          width: 282px
+        +respond-to(0,480px)
+          width: 100%
+          margin-bottom: 70px
+          margin-right: 0
+          margin-left: 0
+        .icon:before, .icon-f:before
+          font-size 1.5rem
+          font-weight normal
+          position absolute
+          bottom 11.1rem
+          right 1.6rem
+          padding-top 1.2rem
+          padding-bottom 1.2rem
+          +respond-to(0,480px)
+            bottom: 6.1rem
+        .icon-f:before
+          font-size 1.7rem
+          padding 1.05rem 1.55rem
+        .cover-photo
+          height: 192px
+          width: 100%
+          background-color: #B9B9BE
+          margin-bottom: 5px
+          background-repeat: no-repeat
+          background-size: cover
+          background-position: center
+          padding: 5.2em 2em
+          cursor pointer
+          solid 1px rgba(39,43,47,0.5)
+          +respond-to(0,480px)
+           height: 250px
+           padding-top: 7.2em
+          &.overlay
+            box-shadow: inset 2000px 0 0 0 rgba(39,43,47,0.3)
+            &:hover, &:focus, &:active, &.disabled
+              box-shadow inset 2000px 0 0 0 rgba(255, 255, 255, 0.5)
+              .btn-category
+                  color color
+                  background-color white
+          &.default
+            background-color: $default-photo-bg
+            background-size: 95%
+        .avatar
+          width 42px
+          height 42px
+          background-size cover
+          background-position center
+          background-color: $white
+          background-repeat: no-repeat
+          border-radius 50%
+          &.default
+            background-color: $default-photo-bg
+            background-size: 98%
+        .btn-category
+          min-width: 170px
+          text-transform: uppercase
+          border-radius: 0 !important
+          buttons(rgb(32, 32, 32), rgba(255, 255, 255, 0.8))
+          font-weight: 700
+        span
+          font-size: 18px
+          font-weight: 400
+          overflow: hidden
+          white-space: nowrap
+          text-overflow: ellipsis
+          width: 160px
+          display: inherit
+          line-height: 1.3
+          +respond-to(0,768px)
+            width: 202px
+          +respond-to(0,480px)
+            width: 292px
+          +respond-to(0,320px)
+            width: 226px
+          &:before
+            font-weight: normal
+            font-size: 11px
+          &.address, &.quote
+            font-size: 14px
+            color rgba(39, 43, 47, 0.6)
+            height: 18px
+        .services
+          overflow: hidden
+          height: 32px
+          > li
+            border solid 1px rgba(39, 43, 47, 0.5)
+            padding 0.5rem 1rem
+            width auto
+            color $primary-text
+            background-color $white
+            font-size 1rem
+            text-transform uppercase
+            margin 2px
+            margin-top: 4px
+        +respond-to(0,768px)
+          ul
+            padding-left: 7px

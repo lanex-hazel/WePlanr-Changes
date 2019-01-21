@@ -1,0 +1,10 @@
+weplanr-loader(show="preloader.show")
+div(ng-hide="preloader.show" ng-style="$root.searchWrapper && {'background-color': '#fff'}")
+  #wrapper
+    div(ui-view ng-show="!$root.menuView")
+    div(ng-show="$root.menuView")
+      header(logout="logout()" current-user="currentUser" page-title="Menu" search-url="user/search")
+      .main-content
+        .content-container
+          burger-menu-customer
+    footer(ng-hide="$root.searchWrapper" ng-class="{'hide-mobile' : $root.menuView}")

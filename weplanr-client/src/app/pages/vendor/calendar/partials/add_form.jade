@@ -1,0 +1,43 @@
+form(name="bookingForm" autocomplete="off")
+  .form-input.icon.icon-caret-down
+    input.form-control.timepicker.timepicker-with-dropdown(
+      type="text"
+      id="time"
+      name="time"
+      required=true
+      ng-model="form.time"
+    )
+    label(for="name") Time
+  .form-input
+    input.form-control(
+      type="text"
+      id="name"
+      name="name"
+      required=true
+      ng-model="form.client"
+      maxlength="32"
+    )
+    label(for="name") Name
+  .form-input.icon.icon-map-marker
+    input.form-control(
+      form-geoaddress
+      address="form.location"
+      type="text"
+      id="location"
+      name="location"
+      required=true
+      ng-model="form.location"
+      placeholder=""
+      maxlength="28"
+    )
+    label(for="bookform_location") Location
+  .form-input
+    input.form-control(
+      type="text"
+      id="details"
+      name="details"
+      required=true
+      ng-model="form.details"
+      maxlength="32"
+    )
+    label(for="details") Details

@@ -1,0 +1,78 @@
+.content-container
+  .user-container
+    main-menu
+    .row
+      .col-md-12
+        h3 Couples
+      .col-md-12(style="margin-top: 1em;")
+        .panel.widget
+          .row
+            .col-xs-6.b
+              .row.row-table.row-flush
+                .col-xs-4.text-center.text-info
+                  em.fa.fa-users.fa-2x
+                .col-xs-8
+                  .panel-body.text-center
+                    h4.mt0(ng-bind="meta.confirmed_count")
+                    p.mb0.text-muted Verified
+            .col-xs-6.b
+              .row.row-table.row-flush
+                .col-xs-4.text-center.text-inverse
+                  em.fa.fa-users.fa-2x
+                .col-xs-8
+                  .panel-body.text-center
+                    h4.mt0(ng-bind="meta.unconfirmed_count")
+                    p.mb0.text-muted Unverified
+      .col-md-12(style="margin: 20px 0 1rem;")
+        form#search-form.form-horizontal(ng-submit="getlist(1)")
+          .form-group
+            label.col-sm-2.col-form-label(for="bname") Couple name:
+            input.col-sm-10.form-control(id="cname" placeholder="Search Couple Name" ng-model="searchName" style="display: inline-block;")
+          .form-group
+            label.col-sm-2.col-form-label(for="cstatus") Confirm status: 
+            select.col-sm-10.form-control(id="cstatus" ng-model="statusFilter")
+              option(value="all") All
+              option(value="confirmed") Verified
+              option(value="unconfirmed") Unverified
+          .form-group
+            label.col-sm-2.col-form-label(for="signup-rangepicker") Date joined: 
+            input.col-sm-10.form-control(id="signup-rangepicker")
+          .form-group
+            label.col-sm-2.col-form-label(for="last-seen-rangepicker") Last seen: 
+            input.col-sm-10.form-control(id="last-seen-rangepicker")
+          .form-group
+            .col-sm-2
+            .col-sm-10(style="padding-left: 0;")
+              button.btn.btn-default(type="submit")
+                i.fa.fa-search
+                span Search
+              label.btn.btn-success(ng-click="downloadCSV()")
+                i.fa.fa-download
+                span CSV Download
+      .col-xs-12
+        spinner(ng-show="loading")
+        table.table.table-hover.table-responsive(ng-show="!loading")
+          thead
+            tr
+              th Fullname
+              th &nbsp;
+              th Email
+              th Mobile number
+              th Date Joined
+              th Last seen
+              th
+          tbody
+            tr(ng-show="collection.length == 0 && loading")
+              td(colspan="6" align="center") No Data
+            tr(ng-repeat="obj in collection" ng-show="!loading")
+              td(ng-bind="obj.attributes.firstname + ' ' + obj.attributes.lastname")
+              td(ng-style="{color: obj.attributes.confirmed ? 'green' : 'red', fontSize: '2rem'}") &#9679;
+              td.btn-backlink(ng-bind="obj.attributes.email" ui-sref="admin.users.detail({id: obj.id})")
+              td(ng-bind="obj.attributes.phone")
+              td(ng-bind="obj.attributes.created_at | date: 'd MMM, yyyy h:mma'")
+              td(ng-bind="obj.attributes.last_activity_at | date: 'd MMM, yyyy h:mma'")
+              td.action-td
+                a.btn-backlink(ng-click="loginAs(obj)" ng-if="obj.attributes.email && obj.attributes.confirmed")
+                  i.fa.fa-key
+                  span Login
+  pagination(count="meta.record_count" page="page.number" on-change="getlist(page)" ng-hide="meta.record_count <= 0" ng-show="!loading")

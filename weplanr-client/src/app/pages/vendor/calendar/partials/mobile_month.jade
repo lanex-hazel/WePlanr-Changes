@@ -1,0 +1,21 @@
+#mobile-month(ng-show="view == 'month'")
+  br
+  br
+  br
+  .week(ng-repeat="week in weeks")
+    div.day(ng-repeat="day in week.days" ng-click="changeView('day', day.date.format('YYYY-MM-DD'))")
+      span.day(ng-class="{ 'today': day.isToday, 'partial': day.isBooked, 'not-available': day.isUnavailable, 'closed': day.isClosed}" ng-bind-html=" day.number == 1 ? day.date.format('MMM') + '&nbsp;' + day.number : day.number")
+      .badge-success(ng-bind="day.noOfBookings" ng-if="!!day.noOfBookings")
+  div {{date.month()}}
+    div(ng-repeat="booking in booked" ng-if="booking.isCurrentMonth")
+      .booking-date(ng-bind="formatSched(booking.event_date)" ng-class="{'today': day.isToday, 'not-available':booking.availability == 'fullybooked', 'closed': booking.availability == 'closed'}")
+      .booking(ng-repeat="sched in booking.schedules")
+        table
+          tbody
+            tr
+              td.client(ng-bind="sched.attributes.client")
+              td.text-right(ng-bind="sched.attributes.schedule_time_12hr")
+            tr.details
+              td.icon.location(ng-bind="sched.attributes.location")
+              td.text-right.date(ng-bind="formatSched(sched.attributes.schedule)")
+        img

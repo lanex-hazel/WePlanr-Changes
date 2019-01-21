@@ -1,0 +1,56 @@
+.hide-mobile.calendar-header.row.no-margin
+  .col-xs-6.col-md-4.no-padding
+    b CALENDAR
+  .col-xs-6.col-md-4.col-md-push-4.no-padding
+    #controls.animate(ng-show="view == 'month' || view == 'day'" ng-class="{'disabled': view == 'day'}")
+      .icon-arrow-left(ng-click="previous()")
+      span {{month.format('MMMM YYYY')}} 
+      .icon-arrow-right(ng-click="next()")
+    #controls.animate(ng-show="view == 'year' && state.bookingLoaded")
+      .icon-arrow-left(ng-click="prevyear()")
+      span.year {{months[0].year}} 
+      .icon-arrow-right(ng-click="nextyear()")
+  #control-view.col-xs-12.col-md-4.col-md-pull-4.text-center
+    a(ng-click="view='day'" ng-class="{active : view == 'day'}") Day
+    a(ng-click="view='month'" ng-class="{active : view == 'month'}") Month
+    a(ng-click="view='year'" ng-class="{active : view == 'year'}") Year
+
+#mobile-calheader.hide-desktop
+  #mcontrol-view.text-center
+    a(ng-click="view='day'" ng-class="{active : view == 'day'}") Day
+    a(ng-click="view='month'" ng-class="{active : view == 'month'}") Month
+    a(ng-click="view='year'" ng-class="{active : view == 'year'}") Year
+  #mcontrols.animate(ng-show="view == 'day'" )
+    .icon-arrow-left(ng-click="previousday()")
+    span {{currentDay.format('DD MMMM')}}
+    .icon-arrow-right(ng-click="nextday()")
+    .day-yr {{currentDay.format('YYYY')}}
+  #mcontrols.animate(ng-show="view == 'month'" )
+    .icon-arrow-left(ng-click="previous()")
+    span {{month.format('MMMM YYYY')}}
+    .icon-arrow-right(ng-click="next()")
+  #mcontrols.animate(ng-show="view == 'year'")
+    .icon-arrow-left(ng-click="prevyear()")
+    span.year {{months[0].year}}
+    .icon-arrow-right(ng-click="nextyear()")
+  .week.names(ng-show="view != 'day'")
+    span.day Sun
+    span.day Mon
+    span.day Tue
+    span.day Wed
+    span.day Thu
+    span.day Fri
+    span.day Sat
+
+div(ng-show="state.bookingLoaded")
+  .hide-mobile
+    calendar-month
+    br
+    calendar-day
+    calendar-year
+    br
+  .hide-desktop
+    mobile-calendar-day
+    mobile-calendar-month
+    mobile-calendar-year
+spinner.animate(ng-show="!state.bookingLoaded")

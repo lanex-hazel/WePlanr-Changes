@@ -1,0 +1,13 @@
+#mobile-year(ng-show="view == 'year'")
+  br
+  br
+  .month-calendar(ng-repeat="d in months track by $index" id="{{d.month}}")
+    br
+    b(ng-if="$index == 0") {{d.month}} &nbsp; {{d.year}}
+    b(ng-if="$index != 0") {{d.month}}
+    br
+    br
+    .week(ng-repeat="week in d.weeks")
+      div.day(ng-repeat="day in week.days")
+        span.day(ng-class="{ 'today': day.isToday, 'different-month': !day.isCurrentMonth, 'partial': day.isBooked, 'not-available': day.isUnavailable, 'closed': day.isClosed}" ng-bind-html=" day.number == 1 ? day.date.format('MMM') + '&nbsp;' + day.number : day.number" ng-click="changeView('day', day.date.format('YYYY-MM-DD'))")
+        .badge-success(ng-bind="day.noOfBookings" ng-if="!!day.noOfBookings && day.isCurrentMonth")

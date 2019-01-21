@@ -1,0 +1,49 @@
+header(logout="logout()" current-vendor="vendor" search-url="vendor/search")
+.main-content
+  .content-container.white-box(ng-show="!$root.menuView")
+    #customer-container
+      spinner(ng-show="loading")
+      .row(ng-show="!loading")
+        .col-xs-12.header(ng-style="{ 'background-image': 'url(' + $root.setPhoto(wedding.profile_photo) + ')'}")
+          #countdown-timer
+            br
+            br
+            br
+            span Counting down to the big day
+            br
+            br
+            br
+            countdown-clock(date="wedding.date")
+          br
+          br
+          br
+          #details
+            ul
+              li(ng-bind-html="!!wedding.name ? wedding.name : 'Bride &amp; Groom'")
+              li.icon.icon-map-marker(ng-bind-html="'&nbsp;' + wedding.location")
+        .col-xs-12
+          .grid.col-xs-12.col-md-3
+            ul
+              li
+                .indicator(ng-class="{'online': wedding.online}")
+                div(style="margin-left: 30px" ng-bind="wedding.online ? 'Online' : 'Offline'")
+              li
+                img(src="/vendor/images/verified.png" ng-show="wedding.email != ''")
+                | &nbsp;&nbsp;&nbsp;Email address
+              li
+                a(href="mailto:support@weplanr.com?subject={{replaceText(wedding.name)}}{{subject}}")
+                  i.fa.fa-flag
+                  | &nbsp;&nbsp;&nbsp;Report this user
+            .active.text-center(ng-bind-html="active")
+          .grid.col-xs-12.col-md-4
+            ul(ng-show="!!wedding.date")
+              li(ng-bind="wedding_date.day")
+              li(ng-bind-html="(wedding_date.mon | uppercase) + '&nbsp;' + wedding_date.yr")
+            ul(ng-show="!wedding.date")
+              li 00
+              li WEDDING DATE NOT SET
+
+          .grid.col-xs-12.col-md-4
+            ul
+              li(ng-bind="!wedding.no_of_guests ? '0' : wedding.no_of_guests")
+              li GUESTS

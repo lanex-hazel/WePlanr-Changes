@@ -1,0 +1,60 @@
+.content-container
+  .vendor-container
+    main-menu
+    .row
+      .col-md-12
+        h3 Businesses
+      .col-md-12(style="margin-top: 1em;")
+        .panel.widget
+          .row.row-table.row-flush
+            .col-xs-6.b
+              .row.row-table.row-flush
+                .col-xs-4.text-center.text-success
+                  em.fa.fa-truck.fa-2x
+                .col-xs-8
+                  .panel-body.text-center
+                    h4.mt0(ng-bind="meta.confirmed_count")
+                    p.mb0.text-muted Verified
+            .col-xs-6.b
+              .row.row-table.row-flush
+                .col-xs-4.text-center.text-inverse
+                  em.fa.fa-truck.fa-2x
+                .col-xs-8
+                  .panel-body.text-center
+                    h4.mt0(ng-bind="meta.unconfirmed_count")
+                    p.mb0.text-muted Unverified
+      .col-md-12(style="margin: 20px 0 1rem;")
+        form#search-form.form-horizontal(ng-submit="search()")
+          .form-group
+            label.col-sm-2.col-form-label(for="bname") Business name: 
+            input.col-sm-10.form-control(id="bname" placeholder="Search Business Name" ng-model="searchName" style="display: inline-block;")
+          .form-group
+            label.col-sm-2.col-form-label(for="cstatus") Confirm status: 
+            select.col-sm-10.form-control(id="cstatus" ng-model="statusFilter")
+              option(value="all") All
+              option(value="confirmed") Verified
+              option(value="unconfirmed") Unverified
+          .form-group
+            label.col-sm-2.col-form-label(for="signup-rangepicker") Date joined: 
+            input.col-sm-10.form-control(id="signup-rangepicker")
+          .form-group
+            label.col-sm-2.col-form-label(for="last-seen-rangepicker") Last seen: 
+            input.col-sm-10.form-control(id="last-seen-rangepicker")
+          .form-group
+            .col-sm-2
+            .col-sm-10(style="padding-left: 0;")
+              button.btn.btn-default(type="submit")
+                i.fa.fa-search
+                span Search
+              label.btn.btn-success(ng-click="downloadCSV()")
+                i.fa.fa-download
+                span CSV Download
+              label.btn.btn-info(for="upload")
+                i.fa.fa-upload(ng-disabled="uploadOngoing")
+                span(ng-bind="uploadOngoing ? ' Importing...' : ' CSV Import'")
+              input(type="file" accept=".csv" id="upload" file-model="myFile" ng-disabled="uploadOngoing")
+      .col-md-12
+        spinner(ng-show="loading")
+        vendor-table(collection="data.collection" delete="destroy(obj)" ng-show="!loading")
+      .col-md-12
+        pagination(count="meta.record_count" page="page.number" on-change="getlist(page)" ng-hide="meta.record_count <= 0")

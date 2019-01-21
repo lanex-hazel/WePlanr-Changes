@@ -1,0 +1,114 @@
+br
+a.btn-backlink(ng-click="goBack()") &lt;&lt; Return to list
+br
+br
+.col-xs-12
+  .row.form-group
+    label.col-sm-2 Couple's name
+    .col-sm-10(ng-bind="obj.wedding.name")
+  .row.form-group
+    label.col-sm-2 Business name
+    .col-sm-10(ng-bind="obj.vendor.name")
+  .row.form-group
+    label.col-sm-2 ABN
+    .col-sm-10(ng-bind="obj.vendor.business_number")
+  .row.form-group
+    label.col-sm-2 Date raised
+    .col-sm-10(ng-bind="obj.created_at | date: 'dd/MM/yy'")
+  .row.form-group
+    label.col-sm-2 Expires
+    .col-sm-10(ng-bind="obj.expiry_date | date: 'dd/MM/yy'")
+  .row.form-group
+    label.col-sm-2 Date of delivery
+    .col-sm-10(ng-bind="obj.delivery_date | date: 'dd/MM/yy'")
+
+  br
+  br
+  .row.form-group
+    label.col-xs-12 Total Service Fee
+    label.col-sm-2 Amount
+    .col-sm-10(ng-bind="obj.payment.total | currency:'$':2")
+  .row.form-group
+    label.col-sm-2 Vendor GST
+    .col-sm-10(ng-bind="obj.payment.vendor_gst | currency:'$':2")
+  .row.form-group
+    label.col-sm-2 WePlanr Transaction Fee(%)
+    .col-sm-10(ng-if="obj.vendor_type == 'standard'" ng-bind="obj.payment.fee_standard_pcg + '%'")
+    .col-sm-10(ng-if="obj.vendor_type != 'standard'" ng-bind="obj.payment.fee_custom_pcg  + '%'")
+  .row.form-group(ng-if="obj.vendor_type != 'standard'")
+    label.col-sm-2 WePlanr Transaction Fee(Flat rate)
+    .col-sm-10(ng-bind="obj.payment.fee_custom_flat + ' AUD'")
+  .row.form-group
+    label.col-sm-2 WePlanr Transaction Fee
+    .col-sm-10(ng-bind="'$' + (obj.payment.wp_trnsct_fee | number: 2)")
+  .row.form-group
+    label.col-sm-2 WePlanr GST
+    .col-sm-10(ng-bind="'$' + (obj.payment.wp_gst | number: 2)")
+
+  table.table.table-hover.payment-breakdown(ng-show="obj.downpayment.length > 0 && obj.finalpayment.length > 0")
+    thead
+      th
+      th Booking Fee (40%)
+      th Total Final Fee (60%)
+    tbody
+      tr
+        td Payment Confirmation No
+        td(ng-bind="obj.downpayment[0].invoice_no")
+        td(ng-bind="obj.finalpayment[0].invoice_no")
+      tr
+        td Amount
+        td(ng-bind="'$' + (obj.downpayment[0].amount | number: 2)")
+        td(ng-bind="'$' + (obj.finalpayment[0].amount | number: 2)")
+      tr
+        td Vendor GST
+        td(ng-bind="obj.payment.vendor_gst * 0.40 | currency:'$':2")
+        td(ng-bind="obj.payment.vendor_gst * 0.60 | currency:'$':2")
+      tr
+        td WePlanr Transaction Fee
+        td(ng-bind="'$' + ((obj.payment.wp_trnsct_fee * 0.40) | number: 2)")
+        td(ng-bind="'$' + ((obj.payment.wp_trnsct_fee * 0.60) | number: 2)")
+      tr
+        td WePlanr GST
+        td(ng-bind="'$' + ((obj.payment.wp_gst * 0.40) | number: 2)")
+        td(ng-bind="'$' + ((obj.payment.wp_gst * 0.60) | number: 2)")
+      tr
+        td Due Date
+        td -
+        td(ng-bind="obj.status != 'fulfilled' ? (obj.payment_due | date: 'dd/MM/yy') : '-' ")
+      tr
+        td Status
+        td(ng-bind="obj.downpayment[0].status != 'unpaid' ? 'PAID' : 'PENDING'")
+        td(ng-bind="obj.finalpayment[0].status != 'unpaid' ? 'PAID' : 'PENDING'")
+      tr
+        td Date
+        td(ng-bind="!!obj.accepted_at ? (obj.downpayment[0].updated_at | date: 'dd/MM/yy') : '-'")
+        td(ng-bind="obj.status == 'fulfilled' ? (obj.finalpayment[0].updated_at | date: 'dd/MM/yy') : '-'")
+  table.table.table-hover.payment-breakdown(ng-show="obj.immediatepayment.length > 0")
+    thead
+      th
+      th Immediate Final Fee Payment
+    tbody
+      tr
+        td Payment Confirmation No
+        td(ng-bind="obj.immediatepayment[0].invoice_no")
+      tr
+        td Amount
+        td(ng-bind="'$' + (obj.immediatepayment[0].amount | number: 2)")
+      tr
+        td Vendor GST
+        td(ng-bind="obj.payment.vendor_gst | currency:'$':2")
+      tr
+        td WePlanr Transaction Fee
+        td(ng-bind="'$' + (obj.payment.wp_trnsct_fee | number: 2)")
+      tr
+        td WePlanr GST
+        td(ng-bind="'$' + (obj.payment.wp_gst | number: 2)")
+      tr
+        td Due Date
+        td -
+      tr
+        td Status
+        td(ng-bind="obj.immediatepayment[0].status != 'unpaid' ? 'PAID' : 'PENDING'")
+      tr
+        td Date
+        td(ng-bind="obj.status == 'fulfilled' ? (obj.immediatepayment[0].updated_at | date: 'dd/MM/yy') : '-'")

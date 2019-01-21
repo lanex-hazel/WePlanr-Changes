@@ -1,0 +1,9 @@
+machine:
+  ruby:
+    version: 2.3.0
+  # environment:
+  #   CODECLIMATE_REPO_TOKEN: 1d5a5f1dd7e5ed8fcb9ec3bf2aa4568a6067271754fc57a97976d7a245884089
+dependencies:
+  pre:
+    - gem install bundler
+    - bower install

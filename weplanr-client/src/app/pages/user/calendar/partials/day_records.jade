@@ -1,0 +1,29 @@
+.col-xs-12
+  .col-xs-12.text-right
+    br/
+    a.selection(ng-click="recordView = 'invoices'"  ng-class="{active : recordView == 'invoices'}") Invoices
+    a.selection(ng-click="recordView = 'quotes'"  ng-class="{active : recordView == 'quotes'}") Quotes
+  .day-records.col-xs-12(ng-show="recordView == 'invoices'")
+    br/
+    .item.empty.text-center(ng-show="dayRecord.invoice.record_count == 0")
+      br/
+      b No due invoices
+    .item(ng-repeat="item in dayRecord.invoice.data")
+      b(ng-bind="item.attributes.invoice_no")
+      br/
+      b(ng-bind="item.attributes.vendor")
+      br/
+      span This invoice is due on {{selected.format("DD/MM/YYYY")}} amounting ${{item.attributes.amount | number: 2}}
+  .day-records.col-xs-12(ng-show="recordView == 'quotes'")
+
+    br/
+    .item.empty.text-center(ng-show="dayRecord.quote.record_count == 0")
+      br/
+      b No expiry quotes
+    .item(ng-repeat="item in dayRecord.quote.data")
+      b(ng-bind="item.attributes.quote_no")
+      br/
+      b(ng-bind="item.attributes.vendor.name")
+      br/
+      span This quote will expire on {{item.attributes.expires_at | date: 'dd/MM/yy'}}
+

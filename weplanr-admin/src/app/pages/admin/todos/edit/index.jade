@@ -1,0 +1,48 @@
+main-menu
+
+br/
+br/
+br/
+
+form#todo-form.profile-container(ng-submit="save()")
+  .form-group
+    label Name
+    input.form-control(
+      type="text"
+      ng-model="obj['name']"
+      required=true)
+  .form-group
+    label Search Terms
+    input.form-control(
+      type="text"
+      ng-model="obj['search_terms']")
+  .form-group
+    label Suggestion Copy (Female)
+    input.form-control(
+      type="text"
+      ng-model="obj['suggestion_copy']['bride']")
+  .form-group
+    label Suggestion Copy (Male)
+    input.form-control(
+      type="text"
+      ng-model="obj['suggestion_copy']['groom']")
+  .form-group
+    label Reminder Copy
+    input.form-control(
+      type="text"
+      ng-model="obj['reminder_copy']")
+  .form-group
+    label Question Copy
+    input.form-control(
+      type="text"
+      ng-model="obj['question_copy']")
+  .form-group
+    label Redirect Copy
+    input.form-control(
+      type="text"
+      ng-model="obj['redirect_copy']")
+
+  col-xs-12
+    .option-links.text-center
+      a.btn.danger-bg(ui-sref="admin.todos") Cancel
+      button.success-bg(type="submit") Save

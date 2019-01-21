@@ -1,0 +1,195 @@
+body
+  background-color $primary-bg
+  font-family Open Sans, sans-serif
+  color $primary-text
+  margin 0
+  padding 0
+  line-height 1.42857143
+  font-size 1.375rem
+  font-weight: 300
+  // -webkit-font-smoothing antialiased
+  -webkit-font-smoothing subpixel-antialiased
+
+a
+  color  $primary-text
+  outline  none
+  text-decoration  none
+  cursor pointer
+  &:hover, &:focus, &.active
+    text-decoration  none
+    color  $primary-hover
+
+i
+  &.fa
+    font-size 14px
+    margin-right 5px
+
+.disabled,
+.disabled input
+  cursor  default !important
+  pointer-events  none !important
+
+.no-scroll
+  overflow hidden
+
+// custom upload file
+input[id="upload"]
+  display  none
+
+.custom-file
+  background-color  $white
+  border  1px solid #ccc
+  display  inline-block
+  padding  11px 24px
+  cursor  pointer
+  i
+    font-size  15px
+
+ul
+  list-style none
+  margin 0
+  padding 0
+  li
+    display inline-block
+    a
+      display block
+      padding 3px 5px
+
+//forms
+input.has-error, input.has-error:focus
+  border-bottom 1px solid #e07a5f
+.form-control
+  padding  5px 5px
+  border 0
+  border-bottom 1px solid $border
+  border-radius 0
+  box-shadow none
+  &:focus
+    border 0
+    border-bottom 1px solid $border
+    box-shadow none
+  &:focus::-webkit-input-placeholder
+    color: transparent
+  &:focus::-moz-placeholder
+    color: transparent
+  &:focus:-moz-placeholder
+    color: transparent
+textarea
+  .form-control
+    width 50%
+input[type='radio']
+  -webkit-appearance none
+  width 20px
+  height 20px
+  border 1px solid #dddddd
+  border-radius 50%
+  outline none
+  position relative
+  top 5px
+input[type='radio']:before
+  content ''
+  display block
+  width 60%
+  height 60%
+  margin 20% auto
+  border-radius 50%
+input[type='radio']:checked:before
+  background-color $primary-hover
+
+
+//images
+.img-box
+  background-color  #f7f7f7
+  border  0
+  margin  10px
+  display  inline-block
+
+.img-hover
+  position  relative
+  float  left
+  margin  5px
+  i
+    display  block
+    position  absolute
+    top  0
+    left  90%
+    cursor  pointer
+.img-resize
+  width  235px
+  height  191px
+
+.img-caption
+  .picture
+    position  relative
+    left  -61px
+    top  12px
+  .text
+    position  absolute
+    bottom  -48px
+    left  8px
+    text-align  left!important
+    margin-left  70px
+    i
+      font-size  13px
+    .name
+      font-size  15px
+      font-weight  400
+
+[ng-click], [ui-sref]
+  cursor: pointer
+
+.text-right
+  text-align right
+.text-left
+  text-align left
+
+.visible-lg-block
+  display: none
+  @media (min-width: 992px)
+    display: block
+
+.growl-container.growl-fixed
+  max-width: auto
+  width: auto
+
+.growl-message
+  font-size: 12px
+
+.growl-container.growl-fixed.top-right
+  right: 5px
+
+.growl-container > .growl-item
+  padding-right: 10px
+
+.growl-container > .growl-item.ng-leave
+  -webkit-transition: 0.5s linear all 12s
+  -moz-transition: 0.5s linear all 12s
+  -o-transition: 0.5s linear all 12s
+  transition: 0.5s linear all 12s
+
+.growl-container.growl-custom > .growl-item.ng-leave
+  -webkit-transition: 0.5s linear all
+  -moz-transition: 0.5s linear all
+  -o-transition: 0.5s linear all
+  transition: 0.5s linear all
+
+.swal2-modal
+  font-family Open Sans, sans-serif
+  font-weight 300
+  .swal2-content
+    line-height inherit
+  button.styled
+    margin: 3px
+
+.banner
+  max-width: 100%
+  width: 1152px
+  height: 230px
+  object-fit: cover
+  @media only screen and (max-width 992px)
+    height: 128px
+  @media only screen and (max-width 480px)
+    height: 108px
+
+.disclaimer
+  font-size: 11px

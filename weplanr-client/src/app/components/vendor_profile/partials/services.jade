@@ -1,0 +1,7 @@
+.col-xs-12.inner-container(ng-class="{'more' : $ctrl.showState.services}")
+  b.title-label Services
+  b.title-label.green &nbsp; ({{$ctrl.services.length}})
+  a.option-link.more.pull-right(ng-click="$ctrl.seeMore(true,'services')" ng-if="!$ctrl.showState.services") See more
+  .detail-container
+    ul.tags(ng-class="{'see-all': $ctrl.showState.services}")
+      li(ng-repeat="service in $ctrl.services") {{service}}

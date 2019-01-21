@@ -1,0 +1,435 @@
+.vendor-landing-container
+  padding: 10px 10px 1px 10px
+
+  section
+    margin-bottom: 10px
+    min-height: 675px
+
+  section.landing
+    background url('/vendor/images/landing-vendor-table.jpg')
+    background-size cover
+    background-repeat no-repeat
+    margin-bottom 1rem
+    background-position calc(100%) calc(54%)
+    min-height: inherit
+    +respond-to(0, 768px)
+      background-position: calc(29%) calc(54%)
+    .landing-section
+      margin auto
+      text-align center
+      padding-top 15%
+      padding-bottom 12%
+      font-weight 300
+      +respond-to(0, 768px)
+        padding-top: 32%
+        padding-bottom 18%
+
+    .tagline
+      font-size: 3.5rem
+      letter-spacing: 1px
+      line-height: 1.25
+      margin-bottom: 30px
+      -webkit-font-smoothing: antialiased
+      opacity: 0.9
+      font-weight: 300
+      +respond-to(0, 512px)
+        font-size: 2.6rem
+        font-weight: 400
+      +respond-to(0, 438px)
+        font-size 1.8rem
+        margin-bottom: 16px
+
+    .sub-text
+      font-size: 1.8rem
+      line-height: 1.5
+      margin-bottom: 1.5rem
+      -webkit-font-smoothing: antialiased
+      opacity: 0.9
+      font-weight: 300
+      +respond-to(0, 512px)
+        font-size: 1.5rem
+      +respond-to(0, 438px)
+        font-size: 1.2rem
+
+    a.btn
+      margin-top: 35px
+      padding: 15px
+      width: 250px
+      +respond-to(0, 480px)
+        width: auto
+        padding: 8px 26px
+        font-size: 11px
+        margin-top: 16px
+
+  section.iphone
+    background-color: #fafafa
+    background-image: url('/vendor/images/iphone-big.png')
+    background-size: 25%
+    background-repeat: no-repeat
+    background-position: calc(50%) calc(85%)
+    +respond-to(0, 768px)
+      background-size: 310px auto
+      background-position: center calc(140px)
+      height: 1200px
+    +respond-to(0, 670px)
+      height: 1260px
+    +respond-to(0, 580px)
+      height: 1390px
+    +respond-to(0, 480px)
+      background-size: 206px auto
+      background-position: center calc(128px)
+      height: 1096px
+
+    .main-text
+      padding-top: 45px
+      font-size: 2rem
+      line-height: 1.5
+      text-align: center
+      opacity: 0.9
+      font-weight: 400
+      -webkit-font-smoothing: antialiased
+      +respond-to(0, 768px)
+        margin-bottom: 530px
+      +respond-to(0,480px)
+        margin-bottom: 340px
+        font-size: 14px
+
+    .icon-holder
+      float: left
+      width: 100%
+      &.first
+        margin-top: 40px
+
+      .icons
+        float: left
+        width: 50%
+
+      .icon
+        margin-bottom: 35px
+        text-align: center
+        opacity: 0.9
+        font-weight: 400
+        -webkit-font-smoothing: antialiased
+        font-size: 1.5rem
+        line-height: 1.5
+        +respond-to(0,512px)
+          letter-spacing -0.2px
+          font-size 1.5rem
+        +respond-to(0,480px)
+          font-size 1.1rem
+
+        img
+          width: 55px
+          margin-bottom: 20px
+          +respond-to(0,480px)
+            width: 42px
+
+  section.better-business
+    background-color: #f5efef
+    background-image: url('/vendor/images/iphone-black-landscape.png')
+    background-size: 55%
+    background-repeat: no-repeat
+    background-position: calc(-18%) calc(60%)
+    +respond-to(0, 768px)
+      background-size: 365px auto
+      background-position: calc(-49px) calc(157px)
+      min-height: 800px
+    +respond-to(0, 670px)
+      min-height: 870px
+    +respond-to(0, 570px)
+      background-size: 405px auto
+      background-position: calc(-60px) calc(127px)
+      min-height: 930px
+    +respond-to(0, 480px)
+      background-size: 320px auto
+      background-position: calc(-49px) calc(120px)
+      min-height: 1050px
+    +respond-to(0, 360px)
+      min-height: 1130px
+
+    .main-text
+      padding-top: 45px
+      font-size: 2rem
+      line-height: 1.5
+      text-align: center
+      opacity: 0.9
+      font-weight: 400
+      -webkit-font-smoothing: antialiased
+      +respond-to(0,480px)
+        font-size: 18px
+
+    .reasons
+      float: left
+      width: 50%
+      margin-top: 55px
+      margin-left: 50%
+      padding: 10px
+      +respond-to(0, 768px)
+        margin-left: 48%
+      +respond-to(0, 670px)
+        margin-left: 50%
+      +respond-to(0, 570px)
+        width: 100%
+        margin-left: 0
+        margin-top: 340px
+      +respond-to(0, 480px)
+        margin-top: 290px
+      +respond-to(0, 400px)
+        margin-top: 240px
+
+      .reason
+        .step-number
+          float: left
+          width: 45px
+          background: white
+          text-align: center
+          color: #ce4a5f
+          border-radius: 50%
+          font-size: 2.5rem
+          line-height: 45px
+          margin-top: 5px
+          +respond-to(0,480px)
+            font-size: 18px
+            width: 35px
+            line-height: 35px
+        .writeup
+          width: 100%
+          max-width: 452px
+          float: left
+          margin-left: 25px
+          font-size: 1.5rem
+          line-height: 1.5
+          opacity: 0.9
+          font-weight: 300
+          -webkit-font-smoothing: antialiased
+          +respond-to(0, 1200px)
+            max-width: 400px
+          +respond-to(0, 768px)
+            margin-left: 10px
+            max-width: 280px
+          +respond-to(0, 670px)
+            max-width: 240px
+          +respond-to(0, 570px)
+            max-width: 470px
+          +respond-to(0, 420px)
+            max-width: 320px
+          +respond-to(0, 400px)
+            max-width: 290px
+          +respond-to(0, 360px)
+            max-width: 250px
+          +respond-to(0, 320px)
+            max-width: 222px
+
+          .bold
+            font-weight: bold
+
+          .text-header
+            width: 100%
+            font-size: 2.5rem
+            letter-spacing: 1px
+            line-height: 1.25
+            margin-top: 10px
+            font-weight: 400
+            +respond-to(0, 480px)
+              font-size: 18px
+
+          .text-body
+            margin-top: 15px
+            width: 100%
+
+            a
+              text-decoration: underline
+
+  section.say-i-do
+    clear: both
+    padding-top: 105px
+    padding-left: 83px
+    background-image: url('/vendor/images/woman-getting-make-up.jpg')
+    background-size: 100%
+    background-repeat: no-repeat
+    background-position: calc(9%) calc(20%)
+    text-align: center
+    color: #ffffff
+    +respond-to(0,768px)
+      background-size: cover
+      background-position: center
+    +respond-to(0,520px)
+      padding-top: 11rem
+      padding-left: 0
+
+    .price-holder
+      background-color: rgba(248,242,242,0.7)
+      height: 455px
+      width: 400px
+      max-width: 100%
+      text-align: center
+      color: #333333
+      +respond-to(0,520px)
+        max-width: 95%
+        margin: auto
+
+      .tagline
+        padding-top: 30px
+        font-size: 4rem
+        letter-spacing: 1px
+        line-height: 1.25
+        -webkit-font-smoothing: antialiased
+        opacity: 0.9
+        font-weight: bold
+
+      .sub-text
+        padding-top: 5px
+        font-size: 1.8rem
+        line-height: 1.2
+        // -webkit-font-smoothing: antialiased
+        opacity: 0.9
+        font-weight: 500
+
+      p
+        font-size: 1.8rem
+        line-height: 1.5
+        opacity: 0.9
+        font-weight: 400
+        -webkit-font-smoothing: antialiased
+
+      p.price
+        padding-left: 20px
+        background-color: rgb(255,255,255)
+        margin: 42px 20px 20px
+        +respond-to(0,520px)
+          padding-left: 8px
+          padding-right: 8px
+
+        .just
+          margin-right: 5px
+          position: relative
+          top: -20px
+          font-size: 1.8rem
+
+        .current-price
+          font-size: 4.5rem
+          font-weight: 100
+
+        .special-text,
+        .price-text
+          position: relative
+          top: -20px
+          left: 5px
+          font-size: 1.4rem
+
+        .price-text
+          top: 0px
+          left: -37px
+
+      p.limited-time
+        font-weight: bold
+        font-size: 2.5rem
+        color: #333333
+        background-color: rgb(255,255,255)
+        width: 280px
+        margin: 28px auto
+        max-width: 100%
+
+      a.btn
+        margin-top: 10px
+        padding: 15px
+        width: 250px
+        max-width: 100%
+
+  section.faqs
+    background-color: #fafafa
+    color: #333333
+
+    .text-header
+      width: 100%
+      font-size: 2.0rem
+      letter-spacing: 1px
+      line-height: 1.25
+      opacity: 0.9
+      font-weight: 500
+      -webkit-font-smoothing: antialiased
+      text-align: center
+      padding-top: 90px
+
+    .questions-holder
+      text-align: left
+      padding: 35px 0 0 105px
+      +respond-to(0,480px)
+        width: 100%
+        max-width: 400px
+        padding: 35px 0 0 10px
+
+      .question
+        margin-bottom: 10px
+
+        .question-header
+          cursor: pointer
+          font-size: 2.0rem
+          letter-spacing: 1px
+          line-height: 1.25
+          opacity: 0.9
+          font-weight: 450
+          -webkit-font-smoothing: antialiased
+          text-align: left
+          padding: 0
+          color: #6d6d6d
+
+          .icon-chev
+            display: inline-block
+            content: '&nbsp;'
+            background-image: url('/vendor/images/icon-red-chevron-right.png')
+            background-repeat: no-repeat
+            background-position: calc(50%) calc(90%)
+            width: 20px
+            height: 20px
+            margin-right: 25px
+
+        .question-body
+          font-size: 1.5rem
+          line-height: 1.5
+          opacity: 0.9
+          font-weight: 400
+          -webkit-font-smoothing: antialiased
+          padding: 15px 85px 0 45px
+          color: #6d6d6d
+
+      .question.active
+        .question-header
+          color: #333333
+          font-weight: 500
+
+          .icon-chev
+            background-image: url('/vendor/images/icon-red-chevron-down.png')
+            background-position: calc(50%) calc(80%)
+
+  section.get-started
+    background-image: url('/vendor/images/vendor-landing-last-box.jpg')
+    background-size: cover
+    color: #ffffff
+    text-align: center
+    +respond-to(0,768px)
+      background-size: cover
+      background-position: center
+
+    .tagline
+      padding-top: 180px
+      font-size: 3.5rem
+      letter-spacing: 1px
+      line-height: 1.25
+      margin-bottom: 30px
+      -webkit-font-smoothing: antialiased
+      opacity: 0.9
+      font-weight: 300
+
+    .sub-text
+      font-size: 1.8rem
+      line-height: 1.5
+      margin-bottom: 1.5rem
+      -webkit-font-smoothing: antialiased
+      opacity: 0.9
+      font-weight: 400
+
+    a.btn
+      margin-top: 35px
+      padding: 15px
+      width: 250px

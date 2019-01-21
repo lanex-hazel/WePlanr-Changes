@@ -1,0 +1,120 @@
+#vendor-profile.row.no-margin
+  .col-xs-12.no-padding
+    #carousel.carousel
+      ul.carousel-dots
+        li(ng-repeat="photo in $ctrl.vendor.photo_urls")
+          i.fa.fa-circle(ng-class="{'active': $index == $ctrl.currentSlide, 'show': $ctrl.display($index)}")
+      .carousel-item.carousel-active.animate
+        .carousel-controls(aria-hidden="true")
+          .icon.icon-arrow-left(ng-click="$ctrl.openGallery()" ng-class="{'disabled': $ctrl.vendor.photo_urls.length == 0}")
+          .icon.icon-arrow-right(ng-click="$ctrl.openGallery()" ng-class="{'disabled': $ctrl.vendor.photo_urls.length == 0}")
+          img(ng-class="{'default': !$ctrl.vendor.cover_photo}" ng-src="{{$root.setPhoto($ctrl.vendor.cover_photo,true)}}")
+          .shadow(ng-click="$ctrl.openGallery()" ng-class="{'disabled': $ctrl.vendor.photo_urls.length == 0}")
+
+  .block-content.col-xs-12.col-md-3
+    #contact-details.col-xs-12.btn-actions
+      #avatar-photo(ng-class="{'default': !$ctrl.vendor.profile_photo}" ng-style="{ 'background-image' : 'url(' + $root.setPhoto($ctrl.vendor.profile_photo) + ')'}")
+      
+  .block-content.col-xs-12.col-md-6
+    #contact.col-xs-12.inner-container.btn-actions.contact
+      h1#name(ng-bind="$ctrl.vendor.business_name")
+      #location-address
+        b.hide-mobile(ng-bind="$ctrl.vendor.public_contact_name")
+        span.hide-mobile &nbsp;|
+        .icon.icon-map-marker {{$ctrl.vendor.address_summary}}
+  .block-content.col-xs-12.col-md-3
+    .col-xs-12.inner-container.btn-actions.buttons
+      ul.btn-list
+        li.btn-msg
+          a.btn-green(ng-click="$ctrl.composeMsg()" ng-if="$ctrl.isLoggedin") SEND MESSAGE
+          a.btn-green(ng-if="!$ctrl.isLoggedin" ng-click="$ctrl.openModal('register-modal',true)") SEND MESSAGE
+        li.btn-fave.icon.icon-heart.icon-animate(ng-if="!($ctrl.isFave() > -1) && $ctrl.isLoggedin" ng-click="$ctrl.favorite()" ng-class="{'disabled':$ctrl.process}")
+        li.btn-fave.icon.icon-f.icon-heart-fave.icon-animate(ng-if="$ctrl.isFave() > -1 && $ctrl.isLoggedin" ng-click="$ctrl.unfavorite()" ng-class="{'disabled':$ctrl.process}")
+        li.btn-fave.icon.icon-heart.icon-animate(ng-if="!($ctrl.isFave() > -1) && !$ctrl.isLoggedin" ng-click="$ctrl.favorite()" ng-class="{'disabled':$ctrl.process}")
+        li.btn-fave.icon.icon-f.icon-heart-fave.icon-animate(ng-if="$ctrl.isFave() > -1 && !$ctrl.isLoggedin" ng-click="$ctrl.unfavorite()" ng-class="{'disabled':$ctrl.process}")
+      br.hide-mobile
+
+  .bs-container.row.no-margin
+    .block-content.col-xs-12.col-md-9.animate(ng-show="$ctrl.showState.more" ng-style="$ctrl.height()")
+
+      a.icon.icon-exit(ng-click="$ctrl.seeMore(false)")
+      br
+      profile-about(ng-if="$ctrl.showState.about")
+      profile-locations(ng-show="$ctrl.showState.location")
+      profile-packages(ng-if="$ctrl.showState.packages")
+      profile-services(ng-if="$ctrl.showState.services")
+    .block-content.col-xs-12.col-md-3.animate(ng-if="!$ctrl.showState.more")
+      br
+      profile-ratings(ng-hide="true")
+      .hide-mobile
+        profile-packages
+      .hide-desktop
+        profile-about
+        profile-services
+        profile-packages
+        .col-xs-12.inner-container
+          calendar(vendor-id="$ctrl.vendor.slug")
+        .col-xs-12.inner-container
+          b.title-label Service Locations
+          b.title-label.green &nbsp; ({{$ctrl.locations.length}})
+          a.option-link.more.pull-right(ng-click="$ctrl.seeMore(true,'location')" ng-if="!$ctrl.showState.location") See more
+          .detail-container
+            ul.tags.service-location
+              li(ng-repeat="location in $ctrl.locations | limitTo: 3")
+                .icon-map-marker &nbsp;
+                span(ng-bind="location")
+        profile-portfolio
+        .col-xs-12.inner-container
+          b.title-label Social
+          .detail-container
+            ul
+              li(ng-repeat="(key, value) in $ctrl.vendor.social_channels track by $index")
+                a.social-links(ng-if="$index <= 4" ng-href="http://{{value}}" target="_blank")
+                  img(ng-src="vendor/images/icon-gray-{{key}}.png")
+        .col-xs-12.inner-container
+          b.title-label Website
+          .detail-container
+            a.option-link(ng-href="http://{{$ctrl.vendor.website}}" target="_blank" ng-bind="$ctrl.vendor.website")
+        .col-xs-12.inner-container.abn
+          b.title-label ABN
+          div(style="display:inline-block;")
+            b.verified(ng-class="{'not':!$ctrl.vendor.business_number}" ng-bind="!!$ctrl.vendor.business_number ? 'VERIFIED' : 'UNVERIFIED'") VERIFIED
+          br
+          span(ng-bind="$ctrl.vendor.business_number | numDisplay")
+    .hide-mobile.col-md-6.animate(ng-if="!$ctrl.showState.more")
+      br
+      profile-about
+      profile-services
+      profile-portfolio
+    #profile-right.hide-mobile.col-md-3(ng-class="{'box-overlay': $ctrl.showState.more}")
+      br
+      .col-md-12.inner-container
+        b.title-label Availability
+        .detail-container
+          calendar(vendor-id="$ctrl.vendor.slug")
+      .col-xs-12.inner-container
+        b.title-label Service Locations
+        b.title-label.green &nbsp; ({{$ctrl.locations.length}})
+        a.option-link.more.pull-right(ng-click="$ctrl.seeMore(true,'location')" ng-if="!$ctrl.showState.location") See more
+        .detail-container
+          ul.tags.service-location
+            li(ng-repeat="location in $ctrl.locations | limitTo: 3")
+              .icon-map-marker &nbsp;
+              span(ng-bind="location")
+      .col-xs-12.inner-container
+        b.title-label Social
+        .detail-container
+          ul
+            li(ng-repeat="(key, value) in $ctrl.vendor.social_channels track by $index")
+              a.social-links(ng-if="$index <= 4" ng-href="http://{{value}}" target="_blank")
+                img(ng-src="vendor/images/icon-gray-{{key}}.png")
+      .col-xs-12.inner-container
+        b.title-label Website
+        .detail-container
+          a.option-link(ng-href="http://{{$ctrl.vendor.website}}" target="_blank" ng-bind="$ctrl.vendor.website")
+      .col-xs-12.inner-container.abn
+        b.title-label ABN
+        div(style="display:inline-block;")
+          b.verified(ng-class="{'not':!$ctrl.vendor.business_number}" ng-bind="!!$ctrl.vendor.business_number ? 'VERIFIED' : 'UNVERIFIED'") VERIFIED
+        br
+        span(ng-bind="$ctrl.vendor.business_number | numDisplay")

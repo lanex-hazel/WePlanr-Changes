@@ -1,0 +1,15 @@
+section#questionare-1
+  .card-section
+    .card-label
+      b HOW EXCITING!
+    .card-questionare
+      p So what can we help you with today?
+      input.form-control(
+        ng-model="q"
+        placeholder="Photography? Makeup? Cake?"
+        ng-model-options='{ debounce: 100 }'
+        ng-change="changeCard(q,'q1')"
+        ng-enter="enterCard(q, 'q1')"
+      )
+      a.btn.btn-gray.animate-if(ng-if="!uiState.step1" ng-click="openModal('register-modal', 'signupa')") NO IDEA! HELP!
+      a.btn.btn-success.animate-if(ng-if="uiState.step1" ui-sref="main.search({q: q, redirect: true})") SEARCH

@@ -1,0 +1,136 @@
+#portfolio-modal
+  .modal
+    width 100%
+    overflow-x hidden
+    overflow-y scroll
+  .modal-body
+    margin 15px 5px
+    background transparent
+    color $white
+    .icon-exit
+      float right
+      &:before
+        color white
+        font-size 27px
+        -webkit-font-smoothing none
+        border 1px solid rgba(245, 239, 239, 0.102)
+    .exit-modal
+      position absolute
+      right 15px
+      top 15px
+      z-index 1
+      .icon.icon-exit
+        right unset
+    .icon-exit:before
+      border 2px solid $white
+    +respond-to(0,768px)
+      margin 0
+      .slideshow, .caption
+        position absolute
+        bottom 15px
+        right 5px
+      .slideshow
+        bottom 60px
+  .modal-backdrop
+    background $light-black
+
+  .carousel
+    overflow hidden
+    position relative
+    width 1152px
+    max-width 100%
+    margin 15px auto
+    +respond-to(0,768px)
+      height 100vh
+      margin auto
+
+  .carousel-item
+    opacity 0
+    pointer-events none
+    position absolute
+    top 0
+    transition(opacity 0.6s ease-in-out)
+    width 100%
+    height 615px
+    background-size contain
+    background-position top center
+    background-repeat no-repeat
+    text-align center
+    +respond-to(0,768px)
+      height 100vh
+      background-position center
+  .carousel-active
+    opacity 1
+    pointer-events auto
+    position static
+    &.animate
+      transition(all linear 0.5s)
+      opacity 1
+    .carousel-caption
+      transition(opacity 0.6s ease-in)
+      opacity 1
+    img
+      border: 3px solid
+
+  .carousel-controls
+    height: 100%
+    width: 100%
+    @media (max-width: 1023px)
+      visibility hidden
+    [class*='icon-']
+      position absolute
+      line-height 30px !important
+      top 45%
+      &:after
+        font-weight: normal
+        font-size 40px
+        color $white
+        cursor pointer
+    .icon-arrow-right
+      right 15px
+
+  .carousel-control
+    background: rgba(0, 0, 0, 0.2)
+    cursor: pointer
+    font-size: 28px
+    height: 100%
+    line-height: 40px
+    text-align: center
+    transition: background 0.1s ease-in-out
+    width: 50%
+    z-index: 2
+
+  .carousel-paginate
+    padding 5px 60px
+    h4
+      font-weight 400
+      letter-spacing 2px
+    .carousel-dots
+      i.fa
+        font-size 12px
+        color $white
+        display none
+        &.active
+          color rgb(206, 66, 87)
+        &.show
+          display block
+
+  #small-slideshow
+    margin auto
+    width 540px
+    overflow hidden
+    overflow-x scroll
+    white-space nowrap
+    +respond-to(0,480px)
+      width 300px
+    li
+      max-width 161.5px
+      height 115.5px
+      img
+        max-width 100%
+        height 100%
+      &.active
+        background $white
+        padding 3px
+        img
+          margin 0 auto

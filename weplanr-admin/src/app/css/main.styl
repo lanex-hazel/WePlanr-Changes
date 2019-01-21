@@ -1,0 +1,138 @@
+body
+  background-color: $primary-bg
+  font-family: 'Ubuntu'
+  font-size: 14px
+  color: $primary-text
+  margin: 0
+  padding: 0
+  position: relative
+  line-height: 1.42857143
+  -webkit-font-smoothing: antialiased
+a
+  color: $primary-text
+  outline: none
+  text-decoration: none
+  &:hover
+    text-decoration: none
+    color: $primary-hover
+  &:focus
+    color: $primary-hover
+    text-decoration: none
+
+i
+  &.fa
+    font-size: 14px
+    margin-right: 3px
+
+.disabled,
+.disabled input
+  cursor: default !important
+  pointer-events: none !important
+
+// custom upload file
+input[id="upload"]
+  display: none
+
+// table
+.table
+  background-color: $white
+  border: 1px solid $light-gray
+  th
+    background-color: $dark-gray
+    color: $white
+  .action-td
+    width: 140px
+    a
+      font-size: 12px
+      cursor: pointer
+      &:first-child
+        margin-right: 10px
+
+
+// containers
+.main-container
+  max-width 100%
+  margin-top 67px
+  margin-left 0!important
+  margin-right 0!important
+  padding 8px 16px
+
+.content-container
+  max-width 90%
+  margin auto
+  background-color #ffffff
+  padding 30px
+
+.menu-list
+  .menu-list-item
+    margin 0 25px
+    a
+      display block
+      padding 8px 16px
+      font-size 1.75rem
+      line-height 1.75
+      color $primary-text
+      font-weight 300
+      opacity .4
+      border-bottom 2px solid $white
+      &.active, &:hover
+        border-bottom 2px solid $primary-hover
+        text-decoration none
+        opacity 1
+      i
+        margin-right 5px
+      span
+        font-weight 500
+
+textarea
+  .form-control
+    width: 50%
+
+//buttons
+.btn-block
+  display: block
+  width: 84%
+
+.btn-close
+  position: absolute
+  right: 15px
+  background-repeat: no-repeat
+  top: 16px
+  font-size: 26px
+
+.btn
+  border: 0px
+  border-radius: 0px
+  padding: 7px 15px
+  font-size: 14px
+  font-weight: 200
+  line-height: 1.42857143
+  text-align: center
+  white-space: nowrap
+  vertical-align: middle
+  font-weight: 200
+
+.container-relative
+  position: relative
+  float: left
+  i
+    display: block
+    position: absolute
+    top: 9px
+    left: 4px
+    cursor: pointer
+    z-index: 1000
+    font-size: 30px
+
+.has-error
+  border: 1px solid $danger
+
+.error
+  color: $danger
+
+.social-links
+  margin-left:165px
+  margin-top: 5px
+  .form-control
+    width: 25%
+    display: inline-block

@@ -1,0 +1,16 @@
+.content-container
+  .user-container
+    main-menu
+    .row
+      .col-md-3 
+        h3 Todos
+      .user-list
+        .user-item-container.col-xs-12(ng-repeat="obj in collection | orderBy:'id'" ng-show="!loading")
+          .user-data.col-xs-9
+            span(ng-bind="obj.attributes.name")
+          .col-xs-3
+            ul.pull-right
+              li(ui-sref="admin.todos_edit({id: obj.id})")
+                a.btn-backlink
+                  i.fa.fa-pencil
+                  span Edit

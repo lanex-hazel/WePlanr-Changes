@@ -1,0 +1,156 @@
+header
+.main-content
+  .content-container(style="min-height: 76vh;")
+    .vendor-register-container
+      a.icon.icon-exit.pull-right(ui-sref="main.vendor_landing")
+      h3.text-center(style="clear: both;") Business Registration
+      h5.text-center $99 ONCE-OFF FEE | LIMITED TIME
+
+      form.vendor-form-container(name="vendor_form" ng-submit="submit()" autocomplete="off" ng-disabled="uiState.loading" ng-model-options="{ debounce: { 'default': 500, 'blur': 0 } }")
+        .row
+          .col-md-12
+            .form-group
+              select.form-control(ng-model="params.primary_service_id" ng-change="resetServices()" required=true)
+                option(value="") Choose your primary category
+                option(ng-repeat="obj in group_categories | orderBy:'order_rank'" value="{{obj.id}}")
+                  | {{obj.name}}
+          .col-md-12
+            .form-group(ng-class="{'error': error.services}")
+              ui-select.ui-select-custom(multiple tagging tagging-label='false' remove-selected="false" ng-model='params.services' theme='bootstrap' title='Services' ng-class="{'disabled': params.primary_service_id == null }" ng-if="params.primary_service_id != '14'")
+                ui-select-match(placeholder='Select all services that apply...') {{$item}}
+                ui-select-choices(ui-disable-choice="params.primary_service_id == null" repeat=" service in selected_category[0].services | filter:$select.search"){{service}}
+              .form-error(ng-class="{'show': error.services}") Please select a service
+              tags-input(ng-if="params.primary_service_id == '14'" ng-model="tag_list" replace-spaces-with-dashes="false" placeholder="Enter custom tag, e.g. pet minding, ice cream cart, dance instructor...")
+          .col-md-12
+            .form-group
+              input.form-control(
+                ng-model="params.business_name"
+                name="name"
+                type="text"
+                placeholder="Business Name"
+                required=true
+              )
+          .col-md-12
+            .form-group
+              input.form-control(
+                ng-model="params.firstname"
+                name="firstname"
+                type="text"
+                placeholder="First Name"
+                required=true
+                pattern="^[a-zA-Z ]+$"
+              )
+          .col-md-12
+            .form-group
+              input.form-control(
+                ng-model="params.lastname"
+                name="lastname"
+                type="text"
+                placeholder="Last Name"
+                required=true
+                pattern="^[a-zA-Z ]+$"
+              )
+          .col-md-12
+            .form-group
+              input.form-control(
+                ng-model="params.email"
+                name="email"
+                type="email"
+                placeholder="Email"
+                required=true
+                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,3}$"
+              )
+          .col-md-12
+            .form-group
+              input.form-control(
+                ng-model="params.password"
+                name="password"
+                type="password"
+                placeholder="Password"
+                required=true
+                minlength="8"
+                ng-change="validatePassword()"
+              )
+          .col-md-12
+            .form-group
+              input.form-control(
+                ng-model="params.repeat_password"
+                id="repeat_password"
+                name="repeat_password"
+                type="password"
+                placeholder="Repeat Password"
+                required=true
+                minlength="8"
+                ng-change="validatePassword()"
+              )
+          .col-md-12
+            .form-group
+              input.form-control(
+                ng-model="params.promo_code"
+                name="promo_code"
+                type="text"
+                placeholder="Referral Code"
+              )
+          .col-md-12
+            .form-group
+              input.form-control(
+                ng-model="params.number"
+                name="number"
+                type="number"
+                pattern="[0-9]+"
+                placeholder="Credit Card Number"
+                required=true
+              )
+          .col-md-6
+            .form-group
+              select.form-control(ng-model="params.exp_month" required=true)
+                option(value="") Select Expiry Month
+                option(value="1") January
+                option(value="2") February
+                option(value="3") March
+                option(value="4") April
+                option(value="5") May
+                option(value="6") June
+                option(value="7") July
+                option(value="8") August
+                option(value="9") September
+                option(value="10") October
+                option(value="11") November
+                option(value="12") December
+          .col-md-6
+            .form-group
+              select.form-control(ng-model="params.exp_year" required=true)
+                option(value="") Select Expiry Year
+                option(ng-repeat="year in yearOptions" value="{{year}}")
+                  | {{year}}
+          .col-md-12
+            .form-group
+              input.form-control(
+                ng-model="params.cvc"
+                name="cvc"
+                type="password"
+                placeholder="CVC"
+                required=true
+              )
+        .row
+          .col-md-12
+            br
+            p By clicking REGISTER I agree to WePlanr's
+            p
+              a(ui-sref="main.terms") Terms and Conditions
+              | &nbsp;and&nbsp;
+              a(ui-sref="main.policy") Privacy Policy
+            br
+            spinner(ng-show="uiState.loading")
+            button.btn.btn-success.btn-block.btn-round(ng-hide="uiState.loading") Register
+
+
+modal#check-email-modal
+  .modal
+    .modal-body
+      a.pull-right.icon.icon-exit(ng-click="closeModal()")
+      section.animate
+        p Please check your email and confirm your account.
+        br/
+        a.btn.btn-success(ng-click="closeModal()") OK
+  .modal-backdrop

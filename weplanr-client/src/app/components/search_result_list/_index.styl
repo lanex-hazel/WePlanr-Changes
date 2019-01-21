@@ -1,0 +1,41 @@
+#search-result-container
+  color $light-black
+  margin-top 0
+  .content-container
+    padding-top 3rem
+  .search-copy
+    font-weight 400
+    text-transform: inherit
+    font-size: initial
+    line-height: initial
+  .search-results
+    margin-left 2rem
+    margin-right 2rem
+    +respond-to(0, 768px)
+      margin-top 3rem !important
+      margin 0
+      border 0
+    .collection
+      padding 0
+    .items
+      margin 0 2rem 0.5rem
+      width 22.2%
+      z-index 0
+      +respond-to(0,768px)
+        width 253px
+        margin 0
+        .feature-display
+          height 232px
+    .fadeout
+      width 100%
+    .services
+      margin-bottom 3em
+  .search-again
+    margin-top 69px
+
+  .flex-container
+    display -webkit-flex
+    display flex
+    flex-flow row wrap
+    -webkit-flex-flow row wrap
+    margin-top 2rem

@@ -1,0 +1,29 @@
+.user-menu-list
+  border-bottom: 1px solid rgb(237, 237, 237)
+  .menu-list-item
+    a:before
+      margin-right 8px
+@media only screen and (max-width 1200px)
+  .user-menu-list
+    padding-bottom 1.5rem
+    border-bottom 1px solid #f7f8f9
+    margin-bottom 1rem
+    margin 0 auto
+    .menu-list-item
+      margin 0 5px
+      &:first-child
+        display none
+      a
+        color rgb(86, 93, 100)
+        font-size 1.2rem
+        font-weight 500
+        padding 0 15px
+        &:before
+          font-size 1.5rem
+          color rgb(86, 93, 100)
+          display block
+          font-weight normal
+          line-height 2
+          margin auto
+        &.icon-mail:before
+          font-size 1.3rem

@@ -1,0 +1,83 @@
+.header-container
+  .header
+    nav#mobile-header-nav.hide-desktop
+      ul
+        li.pull-left(style="padding-left: 0;" ng-class="{'toggle-menu': $root.menuView}")
+          a.icon.icon-menu(header-scroll ng-click="menuToggle(true)" ng-show="!$root.menuView && (showBurgerMenu || loggedIn())")
+          a.icon.icon-exit(ng-click="menuToggle(false)" ng-show="$root.menuView")
+        li.text-links(ng-if="!loggedIn() && !$root.menuView && !showBurgerMenu")
+          a.vendor(ui-sref="main.vendor_landing" ng-if="$root.isCustomer") I'm A Business
+          a.user(ui-sref="main.intro" ng-if="$root.isVendor") I'm Getting Married
+        li.text-links(ng-if="$root.menuView")
+          a Menu
+        li.pull-right(style="padding-right: 0;")
+          a.icon.icon-search(ng-href="/{{searchUrl}}" style="padding-right: 0;" ng-if="loggedIn()")
+          a.icon.icon-search(ui-sref="main.search(params.search)" ui-sref-options="{reload: true}" ng-if="!loggedIn()")
+        li.pull-right.text-links(ng-if="!loggedIn() && !$root.menuView")
+          a(ng-click="openModal('login-modal')") Login
+        li.pull-right(ng-if="loggedIn()")
+          #avatar.mobile-header-dropdown(ui-sref="vendor.settings" ng-if="isVendor" ng-class="{'default': !currentVendor.profile_photo}" ng-style="{ 'background-image' : 'url(' + $root.setPhoto(currentVendor.profile_photo) + ')'}" )
+          #avatar.mobile-header-dropdown(ui-sref="user.settings" ng-if="!isVendor" ng-class="{'default': !currentUser.profile_photo}" ng-style="{ 'background-image' : 'url(' + $root.setPhoto(currentUser.profile_photo) + ')'}")
+    nav#header-nav.hide-mobile
+      ul
+        li.pull-left(style="padding-left: 0;" ng-class="{'toggle-menu': $root.menuView}")
+          a.icon.icon-menu(ng-click="menuToggle(true)" ng-show="!$root.menuView")
+          a.icon.icon-exit(ng-click="menuToggle(false)" ng-show="$root.menuView")
+        li.text-links(style="padding-left: 5%;")
+          a.vendor.btn.btn-clear-border.icon-after.icon-caret(ui-sref="main.vendor_landing" ng-if="!loggedIn() && !params.query && !showState.currentProfile && $root.isCustomer") I'm A Business &nbsp;
+          a.user.btn.btn-clear-border.icon-after.icon-caret(ui-sref="main.intro" ng-if="!loggedIn() && !params.query && !showState.currentProfile && $root.isVendor") I'm Getting Married &nbsp;
+          a.btn.btn-clear.icon-arrow-leftb.search-title.animate(ng-click="goBack()" ng-if="showState.currentProfile && !$root.menuView") &nbsp; Back to {{$root.goBackTo}} &nbsp;
+            span.keyword / {{$root.search_contact_name}}
+          a.btn.btn-clear.page-label(ng-show="loggedIn()" ng-bind-html="pageTitle")
+        
+        li.pull-right(style="padding-right: 0;")
+          a.icon.icon-search(ng-href="/{{searchUrl}}" style="padding-right: 0;" ng-if="loggedIn()")
+          a.icon.icon-search(ui-sref="main.search(params.search)" ui-sref-options="{reload: true}" ng-if="!loggedIn()")
+        li.pull-right.text-links(ng-if="!loggedIn()")
+          a.btn.btn-success.icon-after.icon-caret(ng-click="openModal('register-modal')" ng-if="$root.isCustomer") Sign Up&nbsp;
+          a.btn.btn-success.icon-after.icon-caret(ui-sref="main.vendor_register" ng-if="$root.isVendor") Sign Up&nbsp;
+        li.pull-right.text-links(ng-if="!loggedIn()")
+          a.btn.btn-clear(ng-click="openModal('login-modal')") Login
+        li.pull-right.text-links.header-dropdown(ng-if="loggedIn() && isVendor" ng)
+          a#username.btn.btn-clear-border.icon-after.icon-caret(style="width:164px;" ng-bind-html="!!currentVendor.business_name ? currentVendor.business_name + '&nbsp;&nbsp;': 'Business name &nbsp;'")
+          .dropdown(style="width:164px;")
+            ul
+              li
+                a.icon-after.icon-caret-down.text-center(ng-bind-html="!!currentVendor.business_name ? currentVendor.business_name + '&nbsp;': 'Business name &nbsp;'")
+              li.pleft-15
+                a(ui-sref="vendor.settings({tab:'profile'})" ui-sref-active="active")
+                  span Edit Settings
+              li.pleft-15(ng-show="$root.referralState.vendor")
+                a(ui-sref="vendor.settings({tab:'referral'})" ui-sref-active="active")
+                  span Referral
+              li.pleft-15
+                a(ng-click="logout()")
+                  span Log out
+        li.pull-right(ng-if="loggedIn() && isVendor")
+          #avatar(ng-class="{'default': !currentVendor.profile_photo}" ng-style="{ 'background-image' : 'url(' + $root.setPhoto(currentVendor.profile_photo) + ')'}" )
+        li.pull-right.text-links.header-dropdown(ng-if="loggedIn() && !isVendor" ng)
+          a.btn.btn-clear-border.icon-after.icon-caret(ng-bind-html="userInfo()")
+          .dropdown
+            ul
+              li
+                a.icon-after.icon-caret-down(ng-bind-html="userInfo()")
+              li.pleft-15
+                a(ui-sref="user.settings({tab:'profile'})" ui-sref-active="active")
+                  span Edit Settings
+              li.pleft-15(ng-show="$root.referralState.customer")
+                a(ui-sref="user.settings({tab:'referral'})" ui-sref-active="active")
+                  span Referral
+              li.pleft-15(ng-show="$root.rewardState.customer")
+                a(ui-sref="user.settings({tab:'rewards'})" ui-sref-active="active")
+                  span Rewards
+              li.pleft-15
+                a(ng-click="logout()")
+                  span Log out
+        li.pull-right(ng-if="loggedIn() && !isVendor")
+          #avatar(ng-class="{'default': !currentUser.profile_photo}" ng-style="{ 'background-image' : 'url(' + $root.setPhoto(currentUser.profile_photo) + ')'}" )
+
+    img.header-logo(ui-sref="main.intro" ui-sref-opts="{reload: true, inherit: false}" src="/vendor/images/logo.png")
+  .mobile-breadcrumb.hide-desktop(ng-if="showState.currentProfile")
+    a.btn.btn-clear.icon-arrow-leftb.search-title.animate(ng-click="goBack()") &nbsp; Back to {{$root.goBackTo}} &nbsp;
+      span.keyword / {{$root.search_contact_name}}
+

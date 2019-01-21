@@ -1,0 +1,24 @@
+.modal
+  .modal-body
+    .exit-modal
+      a.icon.icon-exit(ng-click="$ctrl.closeModal()")
+    .row
+      #slideshow-container.col-xs-12(style="position:relative;")
+        #slideshow.carousel(ng-swipe-left="$ctrl.nextSlide()" ng-swipe-right="$ctrl.prevSlide()")
+          .carousel-item.animate(ng-repeat="photo in $ctrl.photos track by $index" ng-class="{'carousel-active': $index == $ctrl.currentSlide}")
+            img.carousel-img(ng-src="{{$root.setPhoto(photo.url)}}")
+        .carousel-controls(aria-hidden="true")
+          .icon-arrow-left(ng-click="$ctrl.prevSlide()")
+          .icon-arrow-right(ng-click="$ctrl.nextSlide()")
+      .slideshow.col-xs-12
+        ul#small-slideshow
+          li(ng-repeat="photo in $ctrl.photos track by $index" ng-class="{'active': $index == $ctrl.currentSlide}")
+            img(ng-src="{{$root.setPhoto(photo.url)}}" ng-click="$ctrl.setSlideIndex($index)")
+      .hide-mobile.col-md-4.carousel-paginate
+        h4(ng-bind="($ctrl.currentSlide + 1) + '/' + $ctrl.count")
+      .caption.col-xs-12.col-md-4.text-center(style="padding: 5px;")
+        h4(style="font-weight: 100;" ng-bind="$ctrl.caption")
+      .hide-mobile.col-md-4.carousel-paginate.text-right
+        ul.carousel-dots
+          li(ng-repeat="photo in $ctrl.photos")
+            i.fa.fa-circle(ng-class="{'active': $index == $ctrl.currentSlide, 'show': $ctrl.display($index)}")

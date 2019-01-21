@@ -1,0 +1,9 @@
+.col-xs-12.inner-container(ng-class="{'more' : $ctrl.showState.packages}")
+  b.title-label Services & Pricing
+  .pull-right
+    a.option-link.more(ng-click="$ctrl.seeMore(true,'packages')" ng-if="!$ctrl.showState.packages") See more
+  #packages.detail-container(ng-class="{'see-all' : $ctrl.showState.packages}")
+    table
+      tr(ng-repeat="package in $ctrl.vendor.pricing_and_packages")
+        td.service(ng-bind="package.name")
+        td.text-right(ng-bind="package.price | priceDisplay")

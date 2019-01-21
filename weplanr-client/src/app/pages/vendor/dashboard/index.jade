@@ -1,0 +1,106 @@
+header(logout="logout()" current-user="currentUser" current-vendor="currentVendor" page-title="Dashboard" search-url="vendor/search")
+.main-content
+ .vendor-dashboard-container
+    .content-container.white-box(style="position:relative;")
+      vendor-nav
+      .block-container
+        #options-container
+          #profile.item2
+            .cover-photo(ng-class="{'default': !currentVendor.cover_photo}" ng-style="{'background-image' : 'url(' + $root.setPhoto(currentVendor.cover_photo,true) + ')' }")
+            section
+              .profile-section
+                ul
+                  li.avatar(ng-class="{'default': !currentVendor.profile_photo}" style="position:absolute; top: 28px;" ng-style="{'background-image' : 'url(' + $root.setPhoto(currentVendor.profile_photo) + ')'}")
+                  li(style="padding-left:48px;")
+                    span.name(ng-bind="currentVendor.business_name")
+                    .address.icon.icon-map-marker(ng-show="currentVendor.address_summary") &nbsp;{{currentVendor.address_summary}}
+          .item.calendar-c(ng-click="redirectToCalendar($event)")
+            calendar-dashboard.calendar-custom.row(vendor-id="currentVendor.slug")
+          .item.messages(ng-click="goToMsg()")
+            .section-label(ng-hide="unreadCount") No new messages
+            .section-label(ng-if="unreadCount") New Messages
+              .badge-success.pull-right
+                |{{unreadCount}}
+            .section-content(ng-if="unreadCount")
+              .message
+                .user-info
+                  .dashboard-profile-photo(ng-style="{'background-image': 'url('+ sanitizeLink(currentSnippet.attributes.profile_photo) +')'}")
+                  .contact
+                    .name
+                      |{{currentSnippet.attributes.name}}
+                p.message-text
+                  |{{currentSnippet.attributes.snippet}}
+              .message-indicators(ng-if="snippets.length > 1")
+                span.indicator(ng-repeat="obj in snippets" ng-class="{active: currentSnippet.attributes.uid == obj.attributes.uid}")
+          .item.transactions(ui-sref="vendor.transactions")
+            .section-label Transactions
+              i.fa.fa-angle-right.arrow-link.pull-right
+            .transaction-type(ng-show="totals.invoices")
+              span.h4 Invoices
+              span.figure
+                span(ng-bind="totals.invoices.sent")
+                small Sent 
+                span(style="margin: 0 6px; color: #ce4257; font-size: 15px; font-size: normal;") vs
+                span(ng-bind="totals.invoices.paid")
+                small Paid
+            .transaction-type(ng-show="totals.quotes")
+              span.h4 Quotes
+              span.figure
+                span(ng-bind="totals.quotes.raised")
+                small Raised 
+                span(style="margin: 0 6px; color: #ce4257; font-size: 15px; font-size: normal;") vs
+                span(ng-bind="totals.quotes.accepted")
+                small Accepted
+          .item.earnings(ui-sref="vendor.earnings")
+            .section-label Earnings
+              i.fa.fa-angle-right.arrow-link.pull-right
+            .earning-total
+              p(ng-bind-html="earnings.total | parseInt | priceDisplay")
+            br/
+            .earning-item
+              .lbl Paid
+              .value
+                i.fa.fa-usd
+                span.digit(ng-bind="earnings.paid | parseInt | russianNum")
+            .earning-item
+              .lbl Expected
+              .value
+                i.fa.fa-usd
+                span.digit(ng-bind="earnings.expected | parseInt | russianNum")
+            .earning-item
+              .lbl Held
+              .value
+                i.fa.fa-usd
+                span.digit(ng-bind="earnings.held | parseInt | russianNum")
+          .item2.views.profile-views-container(ui-sref="vendor.stats({slug: currentVendor.slug})")
+            .section-label
+              |Statistics
+              span.pull-right(style="margin-top:-3px")
+                i.fa.fa-angle-right.arrow-link
+            .stats-summary.row.no-margin
+              .col-sm-3.col-xs-6
+                span.figure(ng-bind="totals.bookings")
+                span.h4 BOOKINGS
+              .col-sm-3.col-xs-6
+                span.figure(ng-bind="totals.inquiries")
+                span.h4 ENQUIRIES
+              .col-sm-3.col-xs-6
+                span.figure(ng-bind="totals.views")
+                span.h4 PROFILE VIEWS
+              .col-sm-3.col-xs-6
+                span.figure(ng-bind="totals.favorites")
+                span.h4 FAVOURITES
+      #welcome-popup.animate(ng-if="$root.welcome_modal")
+        .dialog.hide-mobile
+          b WELCOME
+          card-step1
+          card-step2
+          card-step3
+          card-step4
+          card-step5
+        .dialog.hide-desktop
+          mobile-card-step1
+          mobile-card-step2
+          mobile-card-step3
+          mobile-card-step4
+          mobile-card-step5

@@ -1,0 +1,69 @@
+#directory-container(style="border-top: 0")
+  .row.no-margin
+    .vendor-container.col-xs-12.expand
+      .search-container.mobile-breadcrumb
+        span.icon.icon-search
+        input.search-bar.form-control(placeholder="Search" ng-model="$ctrl.query.q" ng-enter="$ctrl.showList()")
+        span.icon.icon-exit(ng-show="$ctrl.query.q" ng-click="$ctrl.query.q=''; $ctrl.showList()")
+      .mobile-breadcrumb
+        a.btn.btn-clear(ng-show="!$ctrl.listCategory && $ctrl.selected.value == 'category'" ng-click="$ctrl.selectedService = ''; $ctrl.searchList=[]; $ctrl.showList(true)") &nbsp; Back to {{$ctrl.selected.name}}
+        a.btn.btn-clear(ng-click="$ctrl.selected = $ctrl.label_options[1]; $ctrl.selectedService = ''; $ctrl.searchList=[]; $ctrl.showList(true)" ng-if="!$ctrl.listCategory && $ctrl.selected.value == 'favorite'") Back to all categories
+      #category-selected
+        a(ng-click="$ctrl.selected = $ctrl.label_options[0]; $ctrl.setService('')" ng-if="$ctrl.listCategory && $ctrl.selected.value == 'category'") Favourites
+
+        span.label-selected(ng-if="$ctrl.selected.value == 'category'" ng-bind="$ctrl.selectedService")
+
+        span.hide-desktop.count.pull-right(ng-bind="$ctrl.vendors[$ctrl.selectedService].length" style="margin-right: 15px;")
+      ui-select#filter-location(ng-model="$ctrl.selectLocation" theme="selectize" on-select="$ctrl.filterLocation($item)" ng-if="$ctrl.selectedService || $ctrl.searchList.length > 0")
+        ui-select-match(placeholder=" Select a location") {{$select.selected.attributes.name | uppercase}}
+        ui-select-choices(repeat="item in $ctrl.locations | filter: $select.search")
+          span(ng-bind-html="item.attributes.name | uppercase | highlight: $select.search")
+      .list
+        spinner.text-center.animate(style="width: 100%;" ng-if="$ctrl.loading")
+        
+
+        #category-list.item.animate(ng-repeat="item in $ctrl.categories" ng-if="$ctrl.selected.value == 'category' && $ctrl.listCategory && !$ctrl.loading")
+          .cover-photo.overlay.text-center(ng-style="{ 'background-image': 'url(/vendor/images/catalogue/' + (item.attributes.name | fileFormat) + '.jpg)'}" ng-click="$ctrl.setService(item.attributes.name)")
+            a.btn.btn-category(ng-bind="item.attributes.name" ng-click="$ctrl.setService(item.attributes.name)")
+
+        .item.animate(ng-repeat="item in $ctrl.vendors[$ctrl.selectedService]" ng-if="!$ctrl.loading && $ctrl.selected.value == 'category' && !$ctrl.listCategory")
+          a.pull-right.icon.icon-heart(ng-if="!($ctrl.isFave(item) > -1)" ng-click="$ctrl.fave({vendor:item})" ng-class="{'disabled' : processing}")
+          a.pull-right.icon-f.icon-heart-fave(ng-if="$ctrl.isFave(item) > -1" ng-click="$ctrl.unfave({vendor:item})" ng-class="{'disabled' : processing}")
+          .cover-photo(ng-class="{'default': item.attributes.photo_urls.length == 0}" ui-sref="main.vendorprofile({id: item.attributes.slug})" ng-style="{ 'background-image': 'url(' + $root.setBGImage(item.attributes.photo_urls) + ')'}")
+          br
+          ul(style="position: relative;")
+            li.avatar(ng-class="{'default': !item.attributes.profile_photo}" style="position:absolute;" ng-style="{'background-image' : 'url(' + $root.setPhoto(item.attributes.profile_photo) + ')'}")
+            li(style="padding-left:52px;")
+              span.name(ui-sref="main.vendorprofile({id:item.attributes.slug})" ng-bind="item.attributes.business_name")
+              br
+              span.address.icon-map-marker(ui-sref="main.vendorprofile({id:item.attributes.slug, location: true})") &nbsp;{{item.attributes.address_summary}}
+          ul.services
+            li(ng-repeat="service in item.attributes.services track by $index") {{service}}
+
+        .item.animate(ng-repeat="item in $ctrl.searchList" ng-if="!$ctrl.loading && $ctrl.selected.value == 'category' && $ctrl.selectedService == '' && !$ctrl.listCategory")
+          a.pull-right.icon.icon-heart(ng-if="!($ctrl.isFave(item) > -1)" ng-click="$ctrl.fave({vendor:item})" ng-class="{'disabled' : processing}")
+          a.pull-right.icon-f.icon-heart-fave(ng-if="$ctrl.isFave(item) > -1" ng-click="$ctrl.unfave({vendor:item})" ng-class="{'disabled' : processing}")
+          .cover-photo(ng-class="{'default': item.attributes.photo_urls.length == 0}" ui-sref="main.vendorprofile({id: item.attributes.slug})" ng-style="{ 'background-image': 'url(' + $root.setBGImage(item.attributes.photo_urls) + ')'}")
+          br
+          ul(style="position: relative;")
+            li.avatar(ng-class="{'default': !item.attributes.profile_photo}" style="position:absolute;" ng-style="{'background-image' : 'url(' + $root.setPhoto(item.attributes.profile_photo) + ')'}")
+            li(style="padding-left:52px;")
+              span.name(ui-sref="main.vendorprofile({id:item.attributes.slug})" ng-bind="item.attributes.business_name")
+              br
+              span.address.icon-map-marker(ui-sref="main.vendorprofile({id:item.attributes.slug, location: true})") &nbsp;{{item.attributes.address_summary}}
+          ul.services
+            li(ng-repeat="service in item.attributes.services track by $index") {{service}}
+        .text-center.animate(style="margin:30px auto;font-size:18px;" ng-if="(($ctrl.vendors[$ctrl.selectedService].length == 0 && $ctrl.selectedService != '') || ($ctrl.searchList.length == 0 && $ctrl.selectedService == '')) && $ctrl.selected.value == 'category' && !$ctrl.loading && !$ctrl.listCategory") No results found
+        .item.animate(ng-repeat="item in $ctrl.faveVendors" ng-if="!$ctrl.loading && $ctrl.selected.value == 'favorite' && !$ctrl.listCategory")
+          a.pull-right.icon-f.icon-heart-fave(ng-if="$ctrl.isFave(item) > -1" ng-click="$ctrl.unfave({vendor:item})" ng-class="{'disabled' : processing}")
+          .cover-photo(ng-class="{'default': !item.attributes.sample_photo}" ui-sref="main.vendorprofile({id: item.attributes.slug})" ng-style="{ 'background-image': 'url(' + $root.setPhoto(item.attributes.sample_photo,true) + ')'}")
+          br
+          ul(style="position: relative;")
+            li.avatar(ng-class="{'default': !item.attributes.profile_photo}" style="position:absolute;" ng-style="{'background-image' : 'url(' + $root.setPhoto(item.attributes.profile_photo) + ')'}")
+            li(style="padding-left:52px;")
+              span.name(ui-sref="main.vendorprofile({id:item.attributes.slug})" ng-bind="item.attributes.business_name")
+              br
+              span.address.icon-map-marker(ui-sref="main.vendorprofile({id:item.attributes.slug, location: true})") &nbsp;{{item.attributes.address_summary}}
+          ul.services
+            li(ng-repeat="service in item.attributes.services track by $index") {{service}}
+        .text-center.animate(style="margin:30px auto;font-size:18px;" ng-if="$ctrl.count == 0 && $ctrl.selected.value == 'favorite' && !$ctrl.loading && !$ctrl.listCategory") No favourites yet

@@ -1,0 +1,131 @@
+.user-vprofile-container
+  .content-container
+    margin-bottom 15px
+    padding 0
+    
+  .screen-container
+    width 100%
+    padding-top 20px
+  
+  .grid-container
+    padding 1em
+  
+  .detail-container
+    padding-top 1em
+  
+  .img-carousel
+    padding 0
+    padding 5px
+    padding-top 12px
+
+  .main-slider
+    height 100vh
+  
+  .bg-image
+    background-size: cover
+    height: 100%
+    width: 100%
+    background-position: top center
+  
+  #thumbnail-container
+    overflow-x scroll
+    overflow-y hidden
+    white-space nowrap
+    .thumb
+      display inline-block
+      background-size cover
+      width 190px
+      height 180px
+      transition border 0.2s ease-in
+  
+  .vendor-profile-photo
+    display inline-block
+    width 53px
+    height 53px
+    border-radius 50%
+    background-repeat no-repeat
+    background-position center center
+    background-size cover
+    margin-right 10px
+    margin-left 5px
+    position absolute
+    &.photo-block
+      display block
+  
+  .option-link
+    color $primary-hover
+    &:hover
+      font-weight 700
+  
+  .contact
+    padding-left 70px
+    .location
+     display block
+     font-size 15px
+     color $secondary-text
+     i
+       font-size 0.95em
+       margin-right 3px
+  span
+    &.title
+      font-weight 500
+      text-transform uppercase
+    &.title-name
+      font-weight 400
+      font-size 1.75em
+    &:nth-child(4)
+      color $secondary-text
+  
+  .btn-send
+    border-radius 30px
+    color $white
+    background-color $green-btn
+    text-transform uppercase
+    font-size 14px
+
+  .about
+    display block
+    display -webkit-box
+    height 64px
+    margin 0 auto
+    line-height 1.6
+    -webkit-line-clamp 3
+    overflow hidden
+  li
+    color $secondary-text
+    &.service-item-list
+      padding 8px 16px
+      border 1px solid $border
+      border-radius 60px
+      opacity 0.8
+      i.fa.fa-map-marker
+        opacity 0.5
+    &.sub-item
+      text-transform lowercase
+    &.ratings
+      opacity 0.5
+      i
+        font-size 1.4em
+        vertical-align middle
+        width 1.4em
+        text-align center
+        &.fill
+          color $yellow
+    &.packages
+      padding 8px
+      display block
+    i
+      color $secondary-text
+      opacity 0.8
+      font-size 0.75em
+      margin-right 5px
+  a
+    &.web-link
+      font-weight 400
+      color $primary-hover
+      &:hover
+        text-decoration underline
+        font-weight 300
+    &.social-links
+      &:hover
+        background-color: transparent

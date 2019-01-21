@@ -1,0 +1,36 @@
+section#questionare-2
+  .card-section
+    .card-label
+      b THAT'S OKAY, THAT'S WHAT WE'RE HERE FOR!
+    .card-questionare
+      p Do you have a date?
+      div
+        .select
+          select.form-control(
+            placeholder="Day"
+            ng-model="selected_date.day"
+            ng-change="setDate(selected_date)"
+            ng-enter="enterCard(details.date, 'q2')"
+          )
+            option(value="") Day
+            option(ng-repeat="option in days" value="{{option}}") {{option}}
+        .select
+          select.form-control(
+            placeholder="Month"
+            ng-model="selected_date.month"
+            ng-change="setDate(selected_date)"
+            ng-enter="enterCard(details.date, 'q2')"
+          )
+            option(value="") Month
+            option(ng-repeat="option in months" value="{{option.id}}") {{option.name}}
+        .select
+          select.form-control(
+            placeholder="Year"
+            ng-model="selected_date.year"
+            ng-change="setDate(selected_date)"
+            ng-enter="enterCard(details.date, 'q2')"
+          )
+            option(value="") Year
+            option(ng-repeat="option in years" value="{{option}}") {{option}}
+      a.btn.btn-gray.animate-if(ng-if="!uiState.step2" ng-click="changeCard(undefined,'q2')") I DON'T KNOW YET
+      a.btn.btn-success.animate-if(ng-if="uiState.step2" ng-click="changeCard(active_search.date,'q2')") NEXT

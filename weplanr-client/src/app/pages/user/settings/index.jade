@@ -1,0 +1,239 @@
+header(logout="logout()" current-user="user" page-title="Edit settings" search-url="user/search")
+.main-content
+  #settings-container.dashboard-container
+    .content-container.white-box(ng-show="!$root.menuView")
+      label.nav-toggle(for="drop") {{ currentTab }}
+        .icon-arrow-nav.pull-right
+      input#drop(type="checkbox")
+      ul.menu-list.center-text(style="padding: 25px 0 0; border-bottom: 1px solid rgb(248,248,248);")
+        li.menu-list-item
+          a.icon-profile.title(ui-sref="user.settings({tab:'profile'})" ui-sref-active="active") &nbsp;Profile
+        li.menu-list-item
+          a.icon-settings(ui-sref="user.settings({tab:'account'})" ui-sref-active="active") &nbsp;Account
+        li.menu-list-item(ng-show="$root.referralState.customer")
+          a.icon-present(ui-sref="user.settings({tab:'referral'})" ui-sref-active="active") &nbsp;Referral
+        li.menu-list-item(ng-show="$root.rewardState.customer")
+          a.icon-starHero(ui-sref="user.settings({tab:'rewards'})" ui-sref-active="active") &nbsp;Rewards
+
+      .inner-settings-container(ng-if="currentTab=='profile'")
+        .photo-container
+          .inner-container
+            .img(ng-class="{'default': !profile_photo}" ng-style="{'background-image': 'url('+ $root.setPhoto(profile_photo) +')'}")
+
+            .progress(ng-show="uploading")
+              .progress-bar(role='progressbar', aria-valuenow='50', aria-valuemin='0', aria-valuemax='100',
+                  ng-style="{ width: uploadPercent + '%' }" ng-bind="uploadPercent + '%'")
+
+            span(ng-disabled="uploading" type="file" ng-model="user.profile_photo" ngf-select="" ngf-accept="'image/*'" ngf-change="setImage($files)")
+              span(ng-show="!uploading")
+                |+ UPLOAD A PHOTO OF YOU AND YOUR PARTNER
+
+        form.inner-container(ng-submit="saveProfile()")
+          .row
+            .col-xs-12.col-md-6
+              .form-group
+                label.form-label YOUR NAME
+                input.form-control(
+                  ng-model="user.firstname"
+                  required=true
+                )
+              .form-group
+                label.form-label YOUR LAST NAME
+                input.form-control(
+                  ng-model="user.lastname"
+                  required=true
+                )
+              .form-group
+                label.form-label BRIDE OR GROOM
+                ui-select(ng-model="user.role" theme="selectize")
+                  ui-select-match {{user.role | capitalize}}
+                  ui-select-choices(repeat="item in brideOrGroom")
+                    span {{item | capitalize}}
+              .form-group
+                label.form-label DATE
+                input.form-control.wedding-date(
+                  ng-model="user.wedding_details.date"
+                  single-picker="true"
+                  date-picker="true"
+                  format="dateFormat"
+                  min-date="minDate"
+                  max-date="maxDate"
+                  ng-class="{'has-error':!form_valid}"
+                )
+                span.errors.danger.animate(ng-if="!form_valid") Please enter valid wedding date
+              .form-group
+                label.form-label BUDGET
+                span.input-prefix $
+                input.form-control.has-prefix(
+                  ng-model="user.wedding_details.budget"
+                  spaced-numbers=" "
+                  maxlength="9"
+                  required=true
+                )
+            .col-xs-12.col-md-6
+              .form-group
+                label.form-label PARTNER'S FIRST NAME
+                input.form-control(
+                  ng-model="user.partner.firstname"
+                  required=true
+                )
+              .form-group
+                label.form-label PARTNER'S LAST NAME
+                input.form-control(
+                  ng-model="user.partner.lastname"
+                  required=true
+                )
+              .form-group
+                label.form-label BRIDE OR GROOM
+                ui-select(ng-model="user.partner.role" theme="selectize")
+                  ui-select-match {{user.partner.role | capitalize}}
+                  ui-select-choices(repeat="item in brideOrGroom")
+                    span {{item | capitalize}}
+              .form-group
+                label.form-label WEDDING LOCATION
+                span.input-prefix
+                  i.fa.fa-map-marker
+                input.form-control.has-prefix(
+                  ng-model="user.wedding_details.location"
+                  id="wedding-location"
+                  required=true
+                )
+
+              .form-group
+                label.form-label NUMBER OF GUESTS
+                input.form-control(
+                  ng-model="user.wedding_details.no_of_guests"
+                  required=true
+                )
+              
+        .row.actions-container(ng-show="loading")
+          spinner
+        .row.actions-container(ng-show="!loading")
+          .inner-container.non-mobile
+            a.cancel-btn(ng-click="goToDashboard()") CANCEL &amp; DO NOT SAVE
+            a.save-btn(ng-click="saveProfile()") SAVE &amp; CLOSE
+            a.save-btn(ng-click="saveProfile('account')") SAVE &amp; CONTINUE
+          .inner-container.mobile
+            a.save-btn(ng-click="saveProfile('account')") SAVE &amp; CONTINUE
+            br/
+            a.save-btn(ng-click="saveProfile()") SAVE &amp; CLOSE
+            br/
+            .cancel-btn(ng-click="goToDashboard()") CANCEL &amp; DO NOT SAVE
+            br/
+            .delete-btn(ng-click="deleteAccount()" style="font-weight:normal;") DELETE ACCOUNT
+          br/
+
+      .inner-settings-container(ng-if="currentTab=='account'")
+        br/
+        form.inner-container
+          .row
+            .col-xs-12.col-md-6
+              .form-group
+                label.form-label EMAIL
+                input.form-control(
+                  ng-model="user.email"
+                  required=true
+                )
+            .col-xs-12.col-md-6
+              .form-group
+                label.form-label PASSWORD
+                input.form-control(
+                  ng-model="user.password"
+                  type="password"
+                  required=true
+                  placeholder="********"
+                )
+          .row
+            .col-xs-12.col-md-6
+              .form-group
+                label.form-label PARTNER'S EMAIL
+                input.form-control(
+                  ng-model="user.partner.email"
+                  required=true
+                )
+          .row
+            .col-xs-12.col-md-6
+              .form-group
+                label.form-label EMAIL MESSAGE NOTIFICATION
+                br
+                input.radio-form-control(type="radio" ng-value="'always'" ng-model="user.msg_notif_setting")
+                span.radio-option-text All Messages
+                br
+                input.radio-form-control(type="radio" ng-value="'weekly'" ng-model="user.msg_notif_setting")
+                span.radio-option-text Weekly Summary
+                br
+                input.radio-form-control(type="radio" ng-value="'off'" ng-model="user.msg_notif_setting")
+                span.radio-option-text Off
+          .row
+            .col-xs-12
+              .form-group
+                label.form-label BANK CARDS
+          .row(style="padding: 0 15px;")
+            .account.card(ng-repeat="obj in cardAccounts")
+              img(ng-src="/vendor/images/card-{{obj.attributes.card_type | lowercase}}.gif" alt="")
+              p.account-number
+                | {{ obj.attributes.number }}
+            .add-account(ng-if="cardAccounts.length == 0" ng-click="showCardForm()")
+              i.fa.fa-plus-circle
+              p Add a card
+            .add-account(ng-if="cardAccounts.length > 0" ng-click="showCardForm()")
+              i.fa.fa-pencil-square-o
+              p Change card
+          br/
+          br/
+          br/
+        .row.actions-container(ng-show="loading")
+          spinner
+        .row.actions-container(ng-show="!loading")
+          .inner-container.non-mobile
+            a.cancel-btn(ng-click="goToDashboard()") CANCEL &amp; DO NOT SAVE
+            a.save-btn(ng-click="saveProfile()") SAVE &amp; CLOSE
+            a.save-btn(ng-click="saveProfile('profile')") SAVE &amp; CONTINUE
+          .inner-container.mobile
+            a.save-btn(ng-click="saveProfile('profile')") SAVE &amp; CONTINUE
+            br/
+            a.save-btn(ng-click="saveProfile()") SAVE &amp; CLOSE
+            br/
+            .cancel-btn(ng-click="goToDashboard()") CANCEL &amp; DO NOT SAVE
+            br/
+            .delete-btn(ng-click="deleteAccount()" style="font-weight:normal;") DELETE ACCOUNT
+          br/
+
+      .inner-settings-container(ng-if="currentTab=='referral' && $root.referralState.customer")
+        br
+        img.banner(src="/vendor/images/banner-referral.png" alt="WePlanr")
+        user-referral
+
+      .inner-settings-container(ng-if="currentTab=='rewards' && $root.rewardState.customer")
+        br
+        img.banner(src="/vendor/images/banner-rewards.png" alt="WePlanr")
+        user-rewards
+
+new-card(ng-show="showNewCard" title="cardAccounts.length == 0 ? 'Add New Card' : 'Change Card'" on-save="onSaveCard()" on-cancel="showNewCard=false")
+
+modal#photo-crop-upload(ng-class="{'show':!!myImage, 'in':!!myImage}")
+  .modal
+    .modal-body
+      a.pull-right.icon.icon-exit(ng-click="cancelUpload()")
+      section
+        p Upload Photo
+      section
+        .crop-area
+          img-crop(
+            image="myImage"
+            result-image="croppedImage"
+            area-type="circle"
+            result-image-quality="1.0"
+            result-image-size="600"
+            result-image-format="image/jpeg")
+        br
+      section
+        .hide-mobile
+          a.btn.btn-gray(ng-click="cancelUpload()") CANCEL
+          | &nbsp;&nbsp;&nbsp;&nbsp;
+          a.btn.btn-green(ng-click="uploadPhoto(croppedImage)") UPLOAD PHOTO
+        .hide-desktop
+          a.btn.btn-green(ng-click="uploadPhoto(croppedImage)") UPLOAD PHOTO
+          br
+          a.btn.btn-gray(ng-click="cancelUpload()") CANCEL
+  .modal-backdrop

@@ -1,0 +1,20 @@
+.header-container(ng-style="{'background-color': '#fff', 'position': 'static'}")
+  .header(ng-style="{'background-color': '#fff'}")
+    nav
+      ul
+        li.pull-right(style="padding-right: 0;")
+          a.icon.icon-exit(ng-href="/")
+#search-result-container.main-content
+  .content-container
+    uvendor-search
+    search-result-list(
+      collection="collection"
+      data="query"
+      current-page="page.number"
+      state="uiState"
+      search="search(params, new_search)"
+      fave="favorite(obj)"
+      unfave="unfavorite(obj)"
+      redirect-url="user.vendor.show"
+      search-title="searchTitle"
+      fave-vendors="faveVendors")

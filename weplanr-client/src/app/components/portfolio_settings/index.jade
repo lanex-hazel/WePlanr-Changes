@@ -1,0 +1,31 @@
+.portfolio-settings-container
+  .row.no-margin
+    .col-xs-12.inner-block-container
+      .title Photos
+      .progress.animate.pull-right(ng-if="$ctrl.uploading")
+        #bulkprogress.progress-bar(role='progressbar', aria-valuenow='50', aria-valuemin='0', aria-valuemax='100')
+      .inline.pull-right(style="margin: 5px;" ngf-select="$ctrl.check_files($files)" ng-model="$ctrl.files" ngf-multiple="true" ng-disabled="$ctrl.uploading || $ctrl.loading" ngf-keep="true" ngf-accept="'image/*'" ngf-validate="{size: {max: '5MB'}, width: {min:600}, height: {min: 600}, pattern: '.jpg,.jpeg,.png'}" ngf-model-options="{allowInvalid: true}")
+        a.add-link(ng-bind="$ctrl.uploading ? 'Uploading...' : 'Add new photos'")
+    .col-xs-12.inner-block-container
+      .col-xs-12.col-sm-6.col-md-3.image-block-container(ng-repeat="image in $ctrl.photos")
+        .img-display-container
+          a.icon.icon-cover.icon-fillstar(ng-if="image.cover_photo")
+          a.icon.icon-cover.icon-starHero(ng-if="!image.cover_photo" ng-click="$ctrl.setCover({obj:image})" ng-class="{'active': image.cover_photo, 'disabled': image.cover_photo}")
+          .show-image(ng-style="{ 'background-image' : 'url(' + $root.setPhoto(image.url) + ')'}" ng-class="{'isCover': image.cover_photo}")
+            a.icon.icon-delete(ng-click="$ctrl.destroy({image: image})" ng-hide="image.cover_photo")
+      .col-xs-12.col-sm-6.col-md-3.image-block-container(ng-repeat="image in $ctrl.uploadFiles track by $index")
+        .img-display-container(ng-class="{'lr': image.$error}")
+          .show-image
+            img(ngf-src="image")
+            a.icon.icon-delete(ng-click="$ctrl.remove($index,$ctrl.uploadFiles)")
+      .col-xs-12.col-sm-6.col-md-3.image-block-container
+        .img-upload-container.icon.icon-add(ngf-select="$ctrl.check_files($files)" ng-model="$ctrl.files" ngf-multiple="true" accept="image/*" ngf-keep="true" ngf-validate="{size: {max: '5MB'}, width: {min:600}, height: {min: 600}, pattern: '.jpg,.jpeg,.png'}" ng-disabled="$ctrl.uploading" ngf-model-options="{allowInvalid: true}" )
+    .col-xs-12.settings-block.fill-container.settings-menu-option
+      div(ng-show="!$ctrl.uploading && !$ctrl.loading")
+        .col-xs-12.col-sm-pull-0.col-sm-12.col-md-push-3.col-md-6.no-padding.option-save(style="z-index:1;")
+          a.btn.btn-green(ng-click="$ctrl.onUpload($ctrl.uploadFiles,'account')" ng-disabled="$ctrl.uploading || $ctrl.loading") SAVE &amp; CONTINUE
+        .col-xs-12.col-sm-pull-0.col-sm-12.col-md-5.col-md-push-1.no-padding.option-save
+          a.btn.btn-green(ng-click="$ctrl.onUpload($ctrl.uploadFiles)" ng-disabled="$ctrl.uploading || $ctrl.loading") SAVE &amp; CLOSE
+        .col-xs-12.col-xs-pull-0.col-sm-12.col-md-1.col-md-pull-11.no-padding
+          a.btn.cancel-info(ui-sref="vendor.dashboard" ng-disabled="$ctrl.uploading || $ctrl.loading") CANCEL &amp; DO NOT SAVE
+      spinner(ng-show="$ctrl.uploading || $ctrl.loading")

@@ -1,0 +1,54 @@
+#organisr-add-item
+  .modal > .modal-body
+    padding: 40px 15px 27px
+    color: #4a4a4a
+    margin-top: 25%
+    &.expand
+      margin-top: 6%
+    +respond-to(768px, 0px)
+      margin-top: 35%
+      &.expand
+        margin-top: 17%
+    +respond-to(481px,736px)
+      margin-top: 0
+    @media (min-height 375px) and (max-height 375px) and (min-width 812px) and (max-width 812px)
+      margin-top: 0
+    > .icon-exit:before
+      border: 0
+    .title-label
+      font-size: 18px
+      letter-spacing: -0.9px
+      text-align: center
+      margin-bottom: 28px
+    .form-label
+      font-size: 12px
+      font-weight: 600
+      letter-spacing: -1.2px
+      text-align: center
+      color: #818080
+    .form-control
+      font-size: 16px
+      letter-spacing: -1.2px
+    .select-dropdown
+      padding: 0
+      &:after
+        content: "\e91b"
+        right: 4px
+        bottom: 4px
+      > .select-form
+        font-size: 16px
+        letter-spacing: -1.2px
+    .form-group > .form-error
+      font-size: 12px
+      color: $primary-hover
+      visibility: hidden
+      &.show
+        visibility: visible
+    .btn-create
+      border-radius: 7px
+      font-size: 16px
+      font-weight: 600
+      letter-spacing: -0.8px
+      text-align: center
+      color: #ffffff
+      padding: 7px 22px

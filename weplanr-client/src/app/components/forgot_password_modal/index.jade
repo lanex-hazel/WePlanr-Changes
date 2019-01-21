@@ -1,0 +1,37 @@
+.modal
+  .modal-body
+    a.pull-right.icon.icon-exit(ng-click="close('forgot-modal')")
+    div.animate(ng-show="!email_sent")
+      section
+        p Forgot Password?
+      section
+        br
+        form(name="forgotForm" novalidate="true" autocomplete="off" ng-model-options="{ updateOn: 'default', allowInvalid: true }")
+          .form-input
+            input.form-control(
+              type="email"
+              name="forgotEmail"
+              ng-model="inputEmail"
+              required=true
+              ng-class="{'has-error': uiState.error && !inputEmail}"
+              ng-enter="forgot()"
+            )
+            label(for="forgotEmail") Email
+            span.errors.danger.animate(ng-if="uiState.error && !inputEmail") Please enter an email
+        br
+      section
+        .btn-container
+          spinner(ng-show="uiState.loading")
+          a.btn.btn-success(ng-click="forgot()" ng-show="!uiState.loading") RETRIEVE PASSWORD
+          br
+          a.log-in(ng-click="redirect('forgot-modal','login-modal')") LOGIN
+    div.animate(ng-show="email_sent")
+      section
+        p Retrieve Password
+      section
+        br
+        p Check your email.
+        br
+      section
+        .btn-container
+          a.btn.btn-success(ng-click="close('forgot-modal')" ng-show="!uiState.loading") OK

@@ -1,0 +1,116 @@
+header(logout="logout()" current-user="currentUser" page-title="Quote")
+.main-content
+  #raise-quote-container.row.no-margin.content-container
+    .col-xs-12.col-md-12.col-lg-12.no-padding
+
+      p#quote-details
+        a.pull-right.icon.icon-exit(ui-sref="user.messages")
+        strong QUOTE #
+          span(ng-bind="quote.quote_no")
+        br/
+        | Date: 
+        span(ng-bind="quote.updated_at | date:'d MMM yyyy'")
+        span(ng-if="quote.status == 'offered'")
+          br/
+          | This quotation expires in 7 days on 
+          span(ng-bind="expiryDate | date:'d MMM yyyy'")
+        br/
+        span(ng-bind="quote.vendor.business_name")
+        br/
+        small
+          em(ng-bind="gstNotice")
+
+      br/
+      br/
+
+      #quote-table-row
+        table#quote-table
+          thead
+            tr
+              th ITEM
+              th DESCRIPTION
+              th QTY
+              th COST
+              th TOTAL
+                span(ng-if="quote.is_gst")  (INC GST)
+          tbody
+            tr(ng-repeat="obj in quote.quote_items")
+              td(ng-bind="obj.name")
+              td(ng-bind="obj.description")
+              td(ng-bind="obj.quantity")
+              td(ng-bind="obj.cost | currency:'$ '")
+              td(ng-bind="obj.total | currency:'$ '")
+          tfoot
+            tr
+              td(colspan="4")
+                strong*TOTAL SERVICE FEE
+              td(ng-bind="quoteTotal | currency:'$ '")
+            tr
+              td(colspan="100%") &nbsp;
+            tr
+              td(colspan="4")
+                strong PAYMENT SCHEDULE
+              td
+            tr(ng-if="quote.delivery_date")
+              td.payment-date(colspan="4")
+                |FINAL DELIVERY DATE 
+                span(ng-bind-html="quote.delivery_date | date: 'dd/MM/yyyy'")
+              td
+            tr
+              td(colspan="4") 40% DEPOSIT REQUIRED TO SECURE BOOKING
+              td(ng-bind="deposit | currency:'$ '")
+            tr
+              td.payment-date(colspan="4") 60% DUE ON 
+                span(ng-bind="quote.payment_due | date: 'dd/MM/yyyy'")
+              td(ng-bind="dueCost | currency:'$ '")
+            tr(ng-show="discount > 0")
+              td.payment-date(colspan="4") DISCOUNT FEE
+              td(ng-bind="discount | currency:'- $ '")
+            tr(ng-show="discount > 0")
+              td.payment-date(colspan="4") 60% TOTAL DUE ON
+                span(ng-bind="quote.payment_due | date: 'dd/MM/yyyy'")
+              td(ng-bind="dueCost - discount | currency:'$ '")
+            tr
+              td(colspan="100%") &nbsp;
+            tr(ng-if="quote.status != 'offered'")
+              td.action(colspan="100%")
+                strong(ng-class="{green: quote.status == 'accepted'}" ng-bind="quote.status | uppercase")
+            tr(ng-if="quote.status == 'offered'" ng-hide="loading")
+              td.action(colspan="100%")
+                a.btn.btn-gray(ng-click="reject()") DECLINE
+                |&nbsp;
+                a.btn.btn-green(ng-click="book()") ACCEPT
+            tr(ng-show="loading")
+              td.action(colspan="100%")
+                spinner(style="display: inline-block; margin-right: 65px;")
+
+new-card(ng-show="showNewCard" title="'Add Payment Method'" on-save="cardSave()" on-cancel="cardCancel()")
+modal#todo-item(ng-class="{'show': uiState.selectTodoModal, 'in': uiState.selectTodoModal}")
+  .modal
+    .modal-body
+      a.pull-right.icon.icon-exit(ng-click="uiState.selectTodoModal = false")
+      section
+        p Select an organisr item
+          br
+          | for this booking
+      section.todo-checklist
+        .todo-box(ng-class="{'less': todos.length < 4}")
+          .todo-items(ng-repeat="item in todos" ng-if="todos.length > 0")
+            input(type="radio" value="item" ng-model="selectedTodo" ng-class="{'disabled': loading}" name="todo" ng-change="createParams(item)")
+            | &nbsp;&nbsp;&nbsp;&nbsp;
+            span(ng-bind="item.attributes.name")
+            br
+        br
+        .add-item(ng-click="toggleModal()")
+          span ADD CUSTOM ITEM
+      section
+        a.btn.btn-block.btn-green(ng-show="!loading" ng-click="payNow()") BOOK AND PAY NOW
+        spinner(ng-show="loading")
+  .modal-backdrop
+organisr-add-modal(
+  add-modal="uiState.createTodoModal"
+  services="services"
+  items="items"
+  save="addItem(obj)"
+  ng-if="uiState.createTodoModal"
+)

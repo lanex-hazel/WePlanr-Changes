@@ -1,0 +1,57 @@
+header(logout="logout()" current-user="currentUser" page-title="Dashboard" search-url="user/search")
+.main-content
+  .dashboard-container
+    .content-container(ng-show="!$root.menuView")
+      #dashboard
+        .hide-mobile
+          user-nav
+        spinner.animate(ng-if="loading")
+        #dashboard-profile(ng-if="!loading")
+          user-profile
+        .hide-desktop
+          user-nav
+        #dashboard-profile-blocks(ng-if="!loading")
+          .item
+            user-date
+          .item
+            user-budget
+          .item
+            user-todo
+          .item
+            user-message
+        #dashboard-suggestion.animate(ng-if="currentUser.user_settings.customised")
+          br
+          br
+          br
+          vendors-togo-list
+          br
+          br
+          user-favourite
+          br
+          br
+      #welcome-popup.animate(ng-if="$root.welcome_modal")
+        .dialog.hide-mobile
+          b WELCOME
+          .pull-right.icon.icon-arrow-right 
+            span Help &nbsp;
+          .box
+            h2 Welcome to your Wedding Planning Dashboard!
+            p Personalise your account now so we can help you plan your wedding better.
+              br
+              | Do you want to personalise your Dashboard now?
+            .row
+              .col-xs-12.col-md-6.col-md-push-6.text-left
+                a.btn.btn-success(ui-sref="user.settings") PERSONALISE NOW
+              .col-xs-12.col-md-6.col-md-pull-6.text-right
+                a.btn.btn-gray(ng-click="personaliseDashboard()") REMIND ME LATER
+        .dialog.hide-desktop
+          section
+            p.welcome Welcome to your Wedding Planning Dashboard!
+          section
+            p Personalise your account now so we can help you plan your wedding better.
+              br
+              | Do you want to personalise your Dashboard now?
+            br
+            a.btn.btn-gray(ng-click="personaliseDashboard()") REMIND ME LATER
+          section
+            a.btn.btn-success(ui-sref="user.settings") PERSONALISE NOW

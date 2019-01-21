@@ -1,0 +1,65 @@
+vendor-nav > ul
+  border-bottom 1px solid #ededed
+  &.menu-list
+    padding-bottom 7px !important
+
+.nav-toggle, input[id="drop"]
+  display none
+
+
+@media screen and (max-width 768px)
+  .nav-toggle + a, .menu-list
+    display none
+
+  .nav-toggle
+    display block
+    text-align center
+    padding 15px 30px
+    border-bottom 1px solid #ededed
+    position relative
+    font-weight normal
+    cursor pointer
+    text-transform capitalize
+    .icon-arrow-nav:after
+      position absolute
+      right 37px
+      top 20px
+      font-size 10px
+
+  label
+    margin-bottom 0
+
+  input[id="drop"]:checked + ul
+    display block
+
+  .menu-list
+    padding 0
+    .menu-list-item
+      margin 0
+      width 100%
+      a
+        border 0
+        &.active, &:hover
+          color $primary-hover
+          border 0
+        &:before
+          font-size 0
+
+#vendor-menu
+  +respond-to(0,1200px)
+    padding-bottom: 15px
+  .menu-list-item
+    +respond-to(0,1200px)
+      width: 108px
+      > a
+        font-size: 0
+        &:before
+          font-size: 18px
+    +respond-to(0,768px)
+      width: 68px
+    +respond-to(0,512px)
+      width: 52px
+    +respond-to(0,400px)
+      width: 45px
+    +respond-to(0,320px)
+      width: 43px

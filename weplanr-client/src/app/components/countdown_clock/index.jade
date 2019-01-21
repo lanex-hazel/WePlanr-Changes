@@ -1,0 +1,14 @@
+ul.countdown
+  li.countdown-item
+    | {{!!date ? date_diff.months : '00'}}
+    span.countdown-label-item(ng-bind="date_diff.months == '01' ? 'MONTH' : 'MONTHS'")
+  li.countdown-item &nbsp; :
+    span.countdown-label-item &nbsp;
+  li.countdown-item
+    | {{!!date ? date_diff.days : '00'}}
+    span.countdown-label-item(ng-bind="date_diff.days == '01' ? 'DAY' : 'DAYS'")
+  li.countdown-item &nbsp; :
+    span.countdown-label-item &nbsp;
+  li.countdown-item
+    | {{!!date ? date_diff.hours : '00'}}
+    span.countdown-label-item(ng-bind="date_diff.hours == '01' ? 'HOUR' : 'HOURS'")

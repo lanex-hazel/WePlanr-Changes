@@ -1,0 +1,10 @@
+modal#organisr-remove-item.show.in
+  .modal
+    .modal-body
+      a.pull-right.icon.icon-exit(ng-click="$ctrl.removeModal = false")
+      .title-label
+        | Would you like to delete this item?
+      .btn-actions
+        a.btn.btn-cancel(ng-click="$ctrl.removeModal = false") CANCEL
+        a.btn.btn-success(ng-click="$ctrl.submit()") YES
+  .modal-backdrop

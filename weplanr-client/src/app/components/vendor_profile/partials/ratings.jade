@@ -1,0 +1,8 @@
+.col-xs-12.inner-container
+  br
+  b.title-label Rating
+  b.green &nbsp; (143 reviews)
+  .detail-container
+    ul
+      li.ratings(ng-repeat="rating in $ctrl.maxRating")
+        .icon.icon-fillstar(ng-class="{'fill': rating <= $ctrl.rate}")

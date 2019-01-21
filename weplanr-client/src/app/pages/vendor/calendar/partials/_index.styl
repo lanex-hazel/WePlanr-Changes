@@ -1,0 +1,274 @@
+#mobile-calheader
+  background-color rgb(244, 244, 244)
+  max-width 100%
+  .week
+    display inline-block
+    margin-bottom 5px
+    span.day
+      width 14.28%
+  
+  #mcontrols
+    display block
+    margin 0 auto
+    width 420px
+    max-width 100%
+    background-color rgb(244, 244, 244)
+    position relative
+    [class*='icon-']
+      position absolute
+      line-height 30px !important
+      z-index 1
+      top 0
+      &:after
+        font-weight normal
+        position absolute
+        padding 1px 13px
+        border 2px solid #ededed
+        border-radius 50%
+        font-size 12px
+        cursor pointer
+        top 5px
+    .icon-arrow-left:after
+      left 8px
+    .icon-arrow-right
+      right 58px
+    span
+      display block
+      width 420px
+      max-width 100%
+      margin-left: 40px*-1
+      text-align: center
+      padding-right: 30px
+      padding-left: 30px
+      color: inherit
+      margin auto
+      font-size 30px
+      background-color rgb(244, 244, 244)
+      height 60px
+    .day-yr
+      position relative
+      top -20px
+      font-size 18px
+      text-align center
+#mcontrol-view 
+  padding-top 25px
+  padding-bottom 25px
+  width 420px
+  margin 0 auto
+  max-width 100%
+  a
+    border 1px solid rgb(235, 235, 235)
+    background-color white
+    padding 10px 24px
+    font-size 16px
+    color rgb(56, 59, 64)
+    &:first-child
+      border-radius 23px 0 0 23px
+    &:last-child
+      border-radius 0 23px 23px 0
+    &.active, &:hover
+      background-color $green-btn
+      color white
+
+#mobile-day, #mobile-month
+  a
+    width 100%
+  .actions-container
+    background-color $green-btn
+    padding 25px 15px
+    text-align center
+    &.sub
+      background-color rgb(244, 244, 244)
+    +respond-to(0,320px)
+      .btn-clear-border
+        font-size 12px
+  .btn-clear-border
+    background-color white
+    color $primary-hover
+      
+  .booking
+    position relative
+    padding 15px 0
+    border-bottom 1px solid rgb(235, 235, 235)
+    img
+      width 27px
+      height 27px
+      background-color #383b40
+      border-radius 50%
+      position absolute
+      top 23px
+      left 7px
+  table
+    width 100%
+    tbody
+      td
+        font-size 12px
+        line-height 1.5
+        padding 0 15px
+        &.actions
+          width 15%
+          text-align right
+          padding-left 0
+          .delete:before
+            font normal normal normal 12px/1 FontAwesome
+            content '\f014'
+            margin-right 2px
+          .edit:before
+            font normal normal normal 12px/1 FontAwesome
+            content '\f040'
+            margin-right 2px
+        &.client
+          font-size 18px
+          padding-left 40px
+          max-width 164px
+          overflow hidden
+          white-space nowrap
+          text-overflow ellipsis
+        &.location
+          padding-left 40px
+          &:before
+            content "\e903"
+            font-size 8px
+            margin-right 3px
+        &.date
+          font-size 11px
+      tr.details>td
+        color rgba(56, 59, 64, 0.6)
+  .booking-date
+    text-align center
+    background-color rgb(244, 244, 244)
+    color rgba(56, 59, 64, 0.6)
+    padding 10px 0
+    font-size 15px
+    &.closed
+      background rgba(206, 66, 87, 0.6) !important
+    &.not-available
+      background #383b40 !important
+      color white !important
+  #booking-add-form
+    padding 30px
+    a
+      width 100%
+    .form-input
+      padding-top 0.5rem
+      margin-bottom 5px
+      height 60px
+      position relative
+      margin-right auto
+      margin-left auto
+      font-size 15px
+    .icon-map-marker
+      &:before
+        color rgba(56, 59, 64, 0.4)
+        position absolute
+        z-index 2
+        font-size 10px
+        top 20px
+      input, label
+        padding-left 15px
+        &:valid
+          .icon-map-marker:before
+            color rgb(56, 59, 64)
+    .icon-caret-down:after
+      position absolute
+      font-size 5px
+      top 22px
+      right 10px
+      color rgb(206, 66, 87)
+      z-index 2
+    .timepicker
+      cursor pointer
+    .form-control
+      font-size 15px
+      width 100%
+      display initial
+      padding 0
+      line-height 2
+    .disabled
+      cursor default
+      text-align right
+    input
+      background none
+      position relative
+      bottom -5px
+      left 0
+      z-index 1
+      outline 0
+      margin-bottom 0.2rem
+      &:valid, &.not-empty
+        background white
+      &:focus + label, &:valid + label, &.not-empty + label
+        color rgba(39, 43, 47, 0.302)
+        font-size 12.5px
+        padding 5px 0px
+        z-index 2
+        top -8px
+    label
+      transition(all 0.2s linear)
+      position absolute
+      bottom 18px
+      left 0
+      color rgba(56, 59, 64, 0.4)
+      font-weight normal
+      +respond-to(0,480px)
+        bottom 24px
+
+#mobile-month, #mobile-year
+  .week
+    display inline-block
+    margin-bottom 5px
+    float none
+    div.day
+      width 14.28%
+      display inline-block
+      float none
+      border 0
+      height 50px
+      position relative
+      +respond-to(480px,0)
+        height 75px
+      span.day
+        display block
+        float none
+        width 40px
+        height 40px
+        border-radius 50%
+        text-align center
+        margin 0 auto
+        border 0
+        line-height 40px !important
+        +respond-to(480px,0)
+          width 62px
+          height 62px
+          line-height 62px !important
+      .badge-success
+        width 20px
+        height 20px
+        line-height 20px
+        font-size 9px
+        padding 0
+        position absolute
+        top -7px
+        right 0
+        text-align center
+        border 1px solid white
+        +respond-to(480px,0)
+          width 28px
+          height 28px
+          line-height 28px
+          font-size 12px
+          right 12px
+ #mobile-year
+  span.day.different-month
+    visibility hidden
+  .month-header
+    text-align center
+    padding 25px 0
+    
+  .month-calendar
+    text-align center
+    font-size 22px
+    border-bottom 1px solid rgb(235, 235, 235)
+    display inline-block
+    padding 10px 0
+    

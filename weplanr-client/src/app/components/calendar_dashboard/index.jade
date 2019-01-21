@@ -1,0 +1,16 @@
+.calendar-header
+  .icon-arrow-left(ng-click="previous()")
+  span {{month.format('MMMM')}}
+  .icon-arrow-right(ng-click="next()")
+.week.names
+  span.day Su
+  span.day Mo
+  span.day Tu
+  span.day We
+  span.day Th
+  span.day Fr
+  span.day Sa
+.week(ng-repeat="week in weeks")
+  .day(ng-class="{ 'not-available': day.isUnavailable, 'different-month': !day.isCurrentMonth, 'partial': day.isBookedYr, 'closed': day.isClosed }" ng-repeat="day in week.days")
+    span(ng-bind="day.number")
+    .legend(ng-bind="getStatus(day)")

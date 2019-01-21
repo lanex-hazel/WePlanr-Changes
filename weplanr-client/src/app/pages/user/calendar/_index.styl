@@ -1,0 +1,280 @@
+.bs-container
+  padding-right: 15px
+  padding-left: 15px
+  margin-right: auto
+  margin-left: auto
+#ucalendar-container
+  max-width: 90%
+  padding-top: 40px
+  padding-bottom: 40px
+  overflow: auto
+  height: 605px
+  position: relative
+  +respond-to(0,768px)
+    max-width: 100%
+    padding: 0
+    .controls
+      padding-top: 15px
+      padding-bottom: 15px
+      background-color: rgb(244, 244, 244)
+
+  .calendar-header
+    [class*='icon-']
+      position relative
+      line-height 30px !important
+      &:after
+        font-weight normal
+        position absolute
+        padding 1px 13px
+        border 1px solid #ededed
+        border-radius 50%
+        font-size 12px
+        cursor pointer
+        top 4px
+        color $primary-hover
+    .icon-arrow-right
+      left 38px*-1
+    span
+      float: left
+      width: 100%
+      margin-left: 40px*-1
+      text-align: center
+      padding-right: 30px
+      padding-left: 30px
+      color: inherit
+      margin auto
+      font-size 30px
+  .disabled
+    span
+      color rgba(56, 59, 64, 0.2)
+    [class*='icon-']
+      cursor none
+      &:after
+        opacity 0.2
+        color: #ce4257 !important
+
+  .common-header
+    line-height: 42px
+    a
+      border 1px solid rgb(235, 235, 235)
+      padding 6px 16px
+      font-size 15px
+      background-color: $white
+      &:first-child
+        border-radius 23px 0 0 23px
+      &:last-child
+        border-radius 0 23px 23px 0
+      &.active, &:hover
+        background-color $green-btn
+        color white
+
+  .week
+    float: left
+    width: 100%
+    &:last-child
+      margin-bottom 60px
+      background-color rgb(244, 244, 244)
+    &:nth-last-child(2)
+      span, div
+        &.blank
+          border-bottom 0 !important
+        &.day
+          border-bottom: 1px solid #d0d1d2
+    &.names 
+      border 0
+      > span, div
+        &.day
+          color rgba(56, 59, 64, 0.6)
+          background-color rgb(244, 244, 244)
+          font-size 15px !important
+          text-align center !important
+          height auto !important
+          border 0 !important
+        &.blank
+          font-size 0px !important
+        +respond-to(0,480px)
+          &.day
+            font-size 12px
+    span, div
+      &.blank
+        font-size 0px !important
+        width 2% !important
+        border-top 0 !important
+        background-color rgb(244, 244, 244) !important
+        &:first-of-type
+          border-left 0 !important
+        &:last-of-type
+          border-right 0 !important
+      &.day
+        float: left
+        width: 13.71%
+        border-left: 1px solid #d0d1d2
+        border-top: 1px solid #d0d1d2
+        font-size: 20px
+        text-align left
+        background white
+        color rgb(56, 59, 64)
+        height 105.7px
+        line-height 33px !important
+        display inline-block
+        vertical-align top
+        &:last-child
+          border-right 1px solid #d0d1d2
+        &.today
+          background: #8fd381 !important
+          color: $white
+        &.different-month
+          background-color rgb(244, 244, 244)
+        &.has-record
+          background rgba(56, 59, 64, 0.4)
+      .badge-success
+        border-radius 50%
+        background-color $green-btn
+        width 26px
+        margin-top 6px
+        margin-left auto
+        line-height: 18px !important
+      .col-sm-3
+        padding-left: 7px
+
+  #day-modal
+    position: absolute
+    top: 101px
+    left: calc(100% - 749px)
+    .dialog
+      width: 430px
+      min-height: 596px
+      max-height: 675px
+      margin: auto
+      overflow: hidden
+      background-color: $white
+      border: 1px solid rgba(0, 0, 0, 0.1)
+      &::-webkit-scrollbar
+        display: none
+      .common-header
+          height: 78px
+          padding-top: 15px
+          padding-bottom: 15px
+          box-shadow 0px 1px 76px 0px rgba(0, 0, 0, 0.05) inset
+
+  .day-records
+    overflow-y: auto
+    min-height: 401px
+    max-height: 579px
+    padding: 0
+
+  #day-view
+    padding-left: 15px
+    padding-right: 15px
+
+  .selection
+    font-weight: 500
+    padding: 6px 12px
+    border-right: 1px solid $primary-text
+    &:last-child
+      border-right: 0
+    &.active
+      font-weight: 700
+  .due-items
+    overflow-y: scroll
+    overflow-x: hidden
+  .label-item
+    margin: 12px
+  .item
+    line-height: 2
+    box-shadow 0px 1px 76px 0px rgba(0, 0, 0, 0.05) inset
+    padding: 6px 12px
+    border-left: 4px solid rgb(56, 59, 64)
+    min-height: 94px
+    margin-top: 12px
+    &.empty
+      height: 87px
+
+  #year-view
+    .month-header 
+      margin-left 0
+      +respond-to(0,768px)
+        text-align center
+        margin 25px 0
+      b
+        font-size 15px
+        text-align left
+        margin-left 0
+        line-height 40px !important
+        height 40px
+    .week
+      background-color white
+      margin-left -5px
+      span.day
+        width 28px
+        height 28px
+        font-size 13px
+        line-height 28px !important
+        text-align center
+        vertical-align middle
+        border 0
+        margin 2px
+        +respond-to(992px, 1200px)
+          margin 2px 0.34px
+        &.different-month
+          visibility hidden
+        &.has-record, &.today
+          border-radius 50%
+        &:first-child
+          margin-left 0
+
+    .month-calendar
+      height: 230px
+      +respond-to(0,768px)
+        height: inherit
+
+  +respond-to(0,768px)
+    #year-view, #month-view
+      .week
+        display inline-block
+        margin-bottom 5px
+        float none
+        div.day
+          width 14.28%
+          display inline-block
+          float none
+          border 0
+          height 50px
+          position relative
+          +respond-to(480px,0)
+            height 75px
+          span.day
+            display block
+            float none
+            width 40px
+            height 40px
+            border-radius 50%
+            text-align center
+            margin 0 auto
+            border 0
+            line-height 40px !important
+            +respond-to(480px,0)
+              width 62px
+              height 62px
+              line-height 62px !important
+            +respond-to(0,480px)
+              font-size 12px !important
+          .badge-success
+            width 20px
+            height 20px
+            line-height 20px
+            font-size 9px
+            padding 0
+            position absolute
+            top -7px
+            right calc(20% + 3px)
+            text-align center
+            border 1px solid white
+            +respond-to(480px,0)
+              width 28px
+              height 28px
+              line-height 28px
+              font-size 12px
+              right 12px
+            +respond-to(0,480px)
+              right 0 !important

@@ -1,0 +1,88 @@
+#user-settings
+  .row
+    .col-xs-12
+      a.btn-backlink(ng-click="return()") &lt;&lt; Return to list
+    .col-xs-offset-2.col-xs-8
+      ul.text-center.nav-list
+        li
+          a(ng-click="uiState.currentTab = 'account'" ng-class="{'active': uiState.currentTab == 'account'}") Account
+        li
+          a(ng-click="uiState.currentTab = 'profile'" ng-class="{'active': uiState.currentTab == 'profile'}") Profile
+    .col-xs-offset-2.col-xs-8(ng-show="uiState.currentTab == 'account'")
+      .settings-container
+        .row
+          .group-details.col-xs-12
+        .row.form-group
+          .col-xs-3
+            label Email
+          .col-xs-6
+            span(ng-bind="currentUser.email")
+        .row.form-group.last
+          .col-xs-3
+            label Partner's Email
+          .col-xs-6
+            span(ng-bind="hasPartner && partnerDetails.email ? partnerDetails.email : 'No email provided yet'")
+    .col-xs-12(ng-show="uiState.currentTab == 'profile'")
+      #profile-avatar.col-xs-6(ng-style="{ 'background-image' : 'url(' + setPhoto(avatar_photo) + ')'}")
+      .col-xs-6.settings-container
+        .row
+          .group-details.col-xs-12 User Details
+        .row.form-group
+          .col-xs-4
+            label Firstname
+          .col-xs-6
+            span(ng-bind="currentUser.firstname")
+        .row.form-group
+          .col-xs-4
+            label Lastname
+          .col-xs-6
+            span(ng-bind="currentUser.lastname")
+        .row.form-group
+          .col-xs-4
+            label Mobile Number
+          .col-xs-6
+            span(ng-bind="currentUser.phone")
+        .row.form-group.last
+          .col-xs-4
+            label  Bride or Groom
+          .col-xs-6
+            span(ng-bind="currentUser.role")
+        .row
+          .group-details.col-xs-12 Partner's Details
+        .row.form-group
+          .col-xs-4
+            label Firstname
+          .col-xs-6
+            span(ng-bind="hasPartner && partnerDetails.firstname ? partnerDetails.firstname : 'No firstname provided yet'")
+        .row.form-group
+          .col-xs-4
+            label Lastname
+          .col-xs-6
+            span(ng-bind="hasPartner && partnerDetails.lastname ? partnerDetails.lastname : 'No lastname provided yet'")
+        .row.form-group.last
+          .col-xs-4
+            label Bride or Groom
+          .col-xs-6
+            span(ng-bind="hasPartner && partnerDetails.role ? partnerDetails.role: 'No role provided yet'")
+        .row
+          .group-details.col-xs-12 Wedding Details
+        .row.form-group
+          .col-xs-4
+            label Location
+          .col-xs-6
+            span(ng-bind="!!weddingDetails.location ? weddingDetails.location : 'No wedding location provided yet'")
+        .row.form-group
+          .col-xs-4
+            label Date
+          .col-xs-6
+            span(ng-bind="!!weddingDetails.date ? (weddingDetails.date | date: 'd MMM, yyyy') : 'No wedding date yet'")
+        .row.form-group
+          .col-xs-4
+            label Budget
+          .col-xs-6
+            span(ng-bind="!!weddingDetails.budget ? weddingDetails.budget : '0'")
+        .row.form-group.last
+          .col-xs-4
+            label Number of Guests
+          .col-xs-6
+            span(ng-bind="!!weddingDetails.no_of_guests ? weddingDetails.no_of_guests : '0'")

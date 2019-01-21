@@ -1,0 +1,91 @@
+#profile(ng-style="!!currentUser.profile_photo && { 'background-image' : 'url(' + setPhoto(currentUser.profile_photo) + ')'}" ng-class="{'white-overlay': !currentUser.user_settings.customised, 'custom-overlay':currentUser.user_settings.customised}")
+  div(ng-if="!currentUser.user_settings.customised")
+    br
+    .upload.icon.icon-camera(ui-sref="user.settings" ng-hide="!!currentUser.profile_photo")
+      .upload-text
+        a(ui-sref="user.settings") 
+          b &#43; UPLOAD A PHOTO
+    br
+    p {{currentUser.firstname}}
+      | and&nbsp;
+      span.partner(ng-bind-html="!!currentUser.partner ? currentUser.partner.firstname : 'Partner&#39;s Name'" ng-show="!editEnable.partner" ng-class="{'default' : !!currentUser.partner}")
+      | &nbsp;&nbsp;
+      a.editable.animate(ui-sref="user.settings" ng-hide="!!currentUser.partner") EDIT
+    .address.icon.icon-map-marker
+      | &nbsp;
+      span(ng-bind="!!currentUser.wedding_details.location ? currentUser.wedding_details.location : 'Wedding Location'" ng-show="!editEnable.location")
+      | &nbsp;&nbsp;
+      a.editable.animate(ui-sref="user.settings" ng-hide="!!currentUser.wedding_details.location") EDIT
+    br
+    br
+    br
+    br.hide-mobile
+    p.welcome-text 
+      b WELCOME TO YOUR WEDDING
+        br
+        | PLANNING DASHBOARD
+    br
+  .with-content(ng-if="currentUser.user_settings.customised")
+    p {{currentUser.firstname}} & {{currentUser.partner.firstname}}
+    .contact-details.hide-desktop
+      span(ng-bind="wedding_date.day")
+      | &nbsp;
+      span(ng-bind="wedding_date.mon")
+      | &nbsp;
+      span(ng-bind="wedding_date.yr")
+      | &nbsp;|&nbsp;
+      span(ng-bind="currentUser.wedding_details.location")
+    .address.icon.icon-map-marker.hide-mobile
+      | &nbsp;
+      span(ng-bind="currentUser.wedding_details.location")
+    br
+    countdown-clock(date="cur_wedding_date")
+    br
+    br
+    br
+    p.welcome-text 
+      b WELCOME BACK!
+    br
+  .card.animate(ng-if="!currentUser.user_settings.customised && !currentUser.user_settings.continue")
+    div
+      .card-box
+        p(ng-bind-html="personalise_question")
+      br
+      .row.no-margin
+        .col-xs-6.col-md-6.text-right
+          a.btn.btn-gray(ng-click="customNo()") No
+        .col-xs-6.col-md-6.text-left
+          a.btn.btn-green(ui-sref="user.settings") Yes
+  .card.animate(ng-if="(currentUser.user_settings.customised || currentUser.user_settings.continue) && currentUser.outstanding_todo != null" ng-switch on="currentUser.user_settings.state")
+    div(ng-switch-when="main.search|main.vendorprofile" ng-switch-when-separator="|")
+      .card-box
+        p Back to your search results?
+      br
+      br
+      .row.no-margin
+        .col-xs-6.col-md-6.text-right
+          a.btn.btn-gray(ng-click="updateCard()") No
+        .col-xs-6.col-md-6.text-left
+          a.btn.btn-green(ng-click="updateCard(true)") Yes
+    div(ng-switch-when="enquiry")
+      .card-box
+        p Back to your enquiry?
+      br
+      br
+      .row.no-margin
+        .col-xs-6.col-md-6.text-right
+          a.btn.btn-gray(ng-click="updateCard()") No
+        .col-xs-6.col-md-6.text-left
+          a.btn.btn-green(ng-click="updateCard(true)") Yes
+    div(ng-switch-default)
+      .card-box
+        p(ng-bind="display_copy")
+      br
+      .row.no-margin(ng-if="mod == 0")
+        .col-xs-6.col-md-6.text-right
+          a.btn.btn-gray(ng-click="searchWithTodo()") No
+        .col-xs-6.col-md-6.text-left
+          a.btn.btn-green(ui-sref="user.organiser" ui-sref-active="active") Yes
+      .row.no-margin(ng-if="mod != 0")
+        .col-xs-12.col-md-12.col.text-center
+          a.btn.btn-green(style="width:50%;" ng-click="searchWithTodo()") OK

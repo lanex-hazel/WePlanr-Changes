@@ -1,0 +1,36 @@
+section#suggestions
+  br
+  br
+  br
+  p Here are some
+    br.hide-desktop
+    | &nbsp;of our&nbsp;
+    span.fave favourites
+    br.hide-mobile
+    | &nbsp;to help
+    br.hide-desktop
+    | &nbsp;you get started!
+  br
+  spinner(ng-show="uiState.loading")
+  .collection(ng-show="!uiState.loading")
+    div(ng-repeat="(key,val) in collection" ng-if="collection[key].length > 0")
+      span.category(ng-bind="key")
+      .pull-right.icon.icon-arrow-right.hide-mobile
+        span.more(ui-sref="main.search({q: key, services: 'Reception Ceremony', redirect: true})") See more &nbsp;
+      br
+      .search-results
+        div(equalize-height)
+          .items(equalize-height-add ng-repeat="item in collection[key]" ng-swipe-left="scroll($event,true)" ng-swipe-right="scroll($event,false)")
+            .feature-vendor
+              a.pull-right.icon.icon-heart(ng-if="!(isFave(item) > -1)" ng-click="favorite(item)")
+              a.pull-right.icon-f.icon-heart-fave(ng-if="isFave(item) > -1" ng-click="unfavorite(item)")
+              a(ui-sref="main.vendorprofile({id: item.attributes.slug})")
+                .feature-display(ng-class="{'default': item.attributes.photo_urls.length == 0}" ng-style="{ 'background-image': 'url(' + setBGImage(item.attributes.photo_urls) + ')'}")
+            .mtop-15
+              img(ng-class="{'default': !item.attributes.profile_photo}" ng-src="{{setPhoto(item.attributes.profile_photo)}}")
+              .user-info
+                span.name(ui-sref="main.vendorprofile({id:item.attributes.slug})") {{item.attributes.business_name}}
+                .icon.icon-map-marker
+                  span.location(ui-sref="main.vendorprofile({id: item.attributes.slug,location:true})") &nbsp;{{item.attributes.address_summary}}
+            ul.services
+              li(ng-repeat="service in fetchServices(item.attributes) track by $index") {{service}}

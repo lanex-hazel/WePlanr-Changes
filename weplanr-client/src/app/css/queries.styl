@@ -1,0 +1,19 @@
+respond-to(min, max)
+  if max == 0
+    @media only screen and (min-width min)
+      {block}
+  else if min == 0
+    @media only screen and (max-width max)
+      {block}
+  else if min != 0 AND max != 0
+    @media only screen and (min-width min) and (max-width max)
+      {block}
+
+
++respond-to(769px, 0)
+  .hide-desktop
+    display: none !important
+
++respond-to(0, 768px)
+  .hide-mobile
+    display: none !important

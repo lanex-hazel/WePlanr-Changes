@@ -1,0 +1,58 @@
+#mobile-profile.row.no-margin
+  .col-xs-12.no-padding
+    #carousel
+      ul.main-slider(rn-carousel rn-carousel-index="slideIndex2" rn-carousel-auto-slide)
+        li(ng-repeat="photo in $ctrl.vendor.photo_urls")
+          img.bg-image(ng-src="http://api.weplanr.spstage.com{{photo.url}}")
+      #thumbnail-container.col-xs-12.no-padding
+        img.thumb(ng-repeat="photo in $ctrl.vendor.photo_urls" ng-click="$parent.slideIndex2=$index" ng-src="http://api.weplanr.spstage.com{{photo.url}}" ng-class="{'no-left-margin': $index == 0}")
+  .col-xs-12.inner-container
+    .detail-container
+      img.vendor-profile-photo(ng-if="!$ctrl.vendor.profile_photo" src="/vendor/images/default_user.png")
+      img.vendor-profile-photo(ng-if="$ctrl.vendor.profile_photo" ng-src="http://api.weplanr.spstage.com{{$ctrl.vendor.profile_photo}}")
+      .contact
+        span(ng-bind="$ctrl.vendor.public_contact_name")
+        .location.icon-map-marker &nbsp;&nbsp;
+          span(ng-bind="$ctrl.vendor.business_address")
+      .contact.pull-right
+        .icon.icon-fave
+  .col-xs-12.inner-container
+    span.title-label Services
+      .detail-container
+        ul.services-item
+          li(ng-repeat="service in $ctrl.vendor.services track by $index")
+            span(ng-bind="service")
+  .col-xs-12.inner-container
+      span.title-label About
+      .detail-container(ng-bind="$ctrl.vendor.about")
+  .col-xs-12.inner-container
+      span.title-label Rating
+      .detail-container
+        ul
+          li.ratings(ng-repeat="rating in $ctrl.maxRating")
+            i.fa.fa-star(ng-class="{'fill': rating <= $ctrl.rate}")
+  .col-xs-12.inner-container
+    .detail-container
+      a.btn.btn-send.btn-block(ng-href="/register") Send Message
+  .col-xs-12.inner-container
+    .detail-container
+      calendar
+  .col-xs-12.inner-container
+    .detail-container
+      span.title-label Services & Pricing
+      .detail-container
+        table
+          tr(ng-repeat="package in $ctrl.vendor.pricing_and_packages")
+            td.service(ng-bind="package.name")
+            td.text-right(ng-bind="package.price | priceDisplay")
+  .col-xs-12.inner-container
+    span.title-label In the Internet
+      .detail-container
+        ul
+          li(ng-repeat="(key, value) in $ctrl.vendor.social_channels")
+            a.social-links(ng-href="http://{{value}}" target="_blank")
+              img(ng-src="vendor/images/icon-gray-{{key}}.png")
+  .col-xs-12.inner-container
+    span.title-label Visit Website
+      .detail-container
+        a.option-link(ng-href="http://{{$ctrl.vendor.website}}" target="_blank" ng-bind="$ctrl.vendor.website")

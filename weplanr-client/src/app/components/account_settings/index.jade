@@ -1,0 +1,127 @@
+.account-settings-container
+  .row.no-margin
+    .col-xs-12.col-md-12.inner-block-container
+      form(name="acccountForm" novalidate="true" autocomplete="off")
+        label.form-label(style="text-transform: none; font-style: italic;") Information on this page is visible on your profile
+      .row
+        .col-xs-12.col-md-6
+          .form-group
+            label.form-label Email
+            input.form-control(
+              name="email"
+              ng-model="$ctrl.user.email"
+              required=true
+              ng-class="{'error': $ctrl.acccountForm.email.$error.required}"
+              email-available
+            )
+        .col-xs-12.col-md-6
+          .form-group
+            .pull-right
+              a.edit-link(ng-show="$ctrl.disabled" ng-click="$ctrl.toggle(false)") Edit
+              a.edit-link(ng-show="!$ctrl.disabled" ng-click="$ctrl.toggle(true)") Cancel
+            label.form-label Password
+            input.form-control.animate(
+              type="password"
+              name="password"
+              ng-model="$ctrl.user.newpassword"
+              ng-class="{'error': $ctrl.acccountForm.password.$error.required, 'disabled' : $ctrl.disabled}"
+              ng-if="!$ctrl.disabled"
+            )
+            input.form-control.animate.disabled(
+              type="password"
+              ng-model="$ctrl.passview"
+              ng-if="$ctrl.disabled"
+            )
+      .row
+        .col-xs-12.col-md-6
+          .form-group
+            label.form-label Registered Trading Name
+            input.form-control(
+              name="registered_trading_name"
+              ng-model="$ctrl.vendor.registered_trading_name"
+              ng-class="{'error': $ctrl.acccountForm.registered_trading_name.$error.required}" 
+            )
+        .col-xs-12.col-md-6
+          .form-group
+            label.form-label ABN/ACN
+            input.form-control(
+              abn-format
+              name="business_number"
+              maxlength="14"
+              ng-model="$ctrl.vendor.business_number"
+              ng-class="{'error': $ctrl.acccountForm.business_number.$error.required}"
+            )
+      .row
+        .col-xs-12.col-md-6
+          .form-group
+            label.form-label Registered for GST?
+            br
+            input.radio-form-control(type="radio" name="gst" ng-value="false" ng-model="$ctrl.vendor.registered_for_gst")
+            span.radio-option-text No
+            input.radio-form-control(type="radio" name="gst" ng-value="true" ng-model="$ctrl.vendor.registered_for_gst")
+            span.radio-option-text Yes
+        .col-xs-12.col-md-6
+          .form-group
+            label.form-label Insurance cover?
+            br
+            input.radio-form-control(type="radio" name="insurance" ng-value="false" ng-model="$ctrl.vendor.insurance")
+            span.radio-option-text No
+            input.radio-form-control(type="radio" name="insurance" ng-value="true" ng-model="$ctrl.vendor.insurance")
+            span.radio-option-text Yes
+      .row
+        .col-xs-12
+          div(ng-show="$ctrl.user.connected_to_stripe" style="font-size: 13px; color: #bebfc0; font-weight: 300; margin-bottom: 0.6rem;")
+            em You already have a connected stripe account. You may change it by connecting again.
+            br/
+          a(href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_B2wMELmw7iwPtiFbqd21ZLMYajHSCO0F&scope=read_write")
+            img(src="/vendor/images/blue-on-light.png")
+      br/
+      .row
+        .col-xs-12
+          label.form-label(style="text-transform: none; font-style: italic;") Registered Business address (cannot be a PO box)
+        .col-xs-12.col-md-6
+          .form-group
+            label.form-label Street Address
+            input.form-control(ng-model="$ctrl.vendor.registered_street_address")
+        .col-xs-12.col-md-6
+          .form-group
+            label.form-label Suburb
+            input.form-control(ng-model="$ctrl.vendor.registered_suburb")
+        .col-xs-12.col-md-6
+          .form-group
+            label.form-label State
+            input.form-control(ng-model="$ctrl.vendor.registered_state")
+        .col-xs-12.col-md-6
+          .form-group
+            label.form-label country
+            input.form-control(ng-model="$ctrl.vendor.registered_country")
+        .col-xs-12.col-md-6
+          .form-group
+            label.form-label post code
+            input.form-control(ng-model="$ctrl.vendor.registered_post_code")
+
+      .row
+        .col-xs-12.col-md-6
+          .form-group
+            label.form-label Email message notification
+            br
+            input.radio-form-control(type="radio" ng-value="'always'" ng-model="$ctrl.vendor.msg_notif_setting")
+            span.radio-option-text All Messages
+            br
+            input.radio-form-control(type="radio" ng-value="'weekly'" ng-model="$ctrl.vendor.msg_notif_setting")
+            span.radio-option-text Weekly Summary
+            br
+            input.radio-form-control(type="radio" ng-value="'off'" ng-model="$ctrl.vendor.msg_notif_setting")
+            span.radio-option-text Off
+
+    .col-xs-12.settings-block.fill-container.settings-menu-option
+      div(ng-show="!$ctrl.loading")
+        .col-xs-12.col-sm-pull-0.col-sm-12.col-md-push-3.col-md-6.no-padding.option-save(style="z-index:1;")
+          a.btn.btn-green(ng-click="$ctrl.onSubmit(acccountForm,'profile')") SAVE &amp; CONTINUE
+        .col-xs-12.col-sm-pull-0.col-sm-12.col-md-4.col-md-push-2.no-padding.option-save
+          a.btn.btn-green(ng-click="$ctrl.onSubmit(acccountForm)") SAVE &amp; CLOSE
+        .col-xs-12.col-xs-pull-0.col-sm-12.col-md-1.col-md-pull-8.no-padding(style="z-index:1;")
+          a.btn.cancel-info(ui-sref="vendor.dashboard") CANCEL &amp; DO NOT SAVE
+        .col-xs-12.col-xs-pull-0.col-sm-12.col-md-1.col-md-pull-12.no-padding
+          a.btn.delete-info(ng-click="$ctrl.deactivate()") DELETE ACCOUNT
+      spinner(ng-show="$ctrl.loading")

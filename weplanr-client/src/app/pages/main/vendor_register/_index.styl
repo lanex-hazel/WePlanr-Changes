@@ -1,0 +1,54 @@
+.vendor-register-container
+  width 100%
+  padding 30px
+  
+  .vendor-form-container
+    padding-top 30px
+    margin 0 auto
+    @media(min-width: 426px)
+      max-width 50%
+
+    p
+      font-weight 400
+      font-size 1.69rem
+      line-height 0.5
+      word-spacing -3px
+      text-align center
+      +respond-to(1500px, 0)
+        font-size 1.84rem
+      +respond-to(0, 768px)
+        font-size 1.5rem
+    a
+      color $primary-hover
+      text-decoration underline
+    .form-group > .form-error
+      font-size: 12px
+      color: $primary-hover
+      line-height: 1.5
+      display: none
+    .form-group
+      &.error
+        margin-bottom: 0
+    .tags > .input, .ui-select-custom .ui-select-search
+      &::-webkit-input-placeholder
+        font-style: italic
+        font-weight: 300
+        color: rgba(0, 0, 0, 0.3)
+      &:-moz-placeholder
+        font-style: italic
+        font-weight: 300
+        color: rgba(0, 0, 0, 0.3)
+      &::-moz-placeholder
+        font-style: italic
+        font-weight: 300
+        color: rgba(0, 0, 0, 0.3)
+      &:-ms-input-placeholder
+        font-style: italic
+        font-weight: 300
+        color: rgba(0, 0, 0, 0.3)
+      &:focus::-webkit-input-placeholder
+        color: transparent
+      &:focus::-moz-placeholder
+        color: transparent
+      &:focus:-moz-placeholder
+        color: transparent

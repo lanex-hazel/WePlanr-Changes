@@ -1,0 +1,17 @@
+ul.menu-list.text-left
+  li.menu-list-item
+    a(ui-sref="admin.dashboard" ui-sref-active="active") Dashboard
+  li.menu-list-item
+    a(ui-sref="admin.vendors" ui-sref-active="active") Businesses
+  li.menu-list-item
+    a(ui-sref="admin.users.index" ui-sref-active="active") Couples
+  li.menu-list-item
+    a(ui-sref="admin.todos" ui-sref-active="active") Todos
+  li.menu-list-item
+    a(ui-sref="admin.settings" ui-sref-active="active") Settings
+  li.menu-list-item
+    a(ui-sref="admin.customer_rewards" ui-sref-active="active") Couple Rewards
+  li.menu-list-item
+    a(ui-sref="admin.vendor_rewards" ui-sref-active="active") Business Rewards
+  li.menu-list-item
+    a(ui-sref="admin.transactions.inquiries.index" ng-class="{'active': state.$current.includes['admin.transactions']}") Transactions

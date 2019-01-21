@@ -1,0 +1,124 @@
+#message-page
+  header(ng-class="{hide: mobileView == 'messages'}" logout="logout()" current-vendor="currentVendor" page-title="Messages" search-url="vendor/search")
+  .main-content(ng-class="{'no-margin-top': mobileView == 'messages'}")
+    .messages-container
+      .content-container.white-box
+        vendor-nav
+        #chat-container.row.no-margin
+          #chatlist.vendor.col-md-4(ng-class="{hide: mobileView != 'conversations'}")
+            br/
+            br/
+            .tab
+              span(ng-class="{active: tab == 'inquiry'}" ng-click="tab = 'inquiry'")
+                |CLIENT ENQUIRIES
+                span.unread(ng-show="unreadCount.inquiry")
+                  |{{unreadCount.inquiry}}
+              span(ng-class="{active: tab == 'booking'}" ng-click="tab = 'booking'")
+                |BOOKED CLIENTS
+                span.unread(ng-show="unreadCount.booking")
+                  |{{unreadCount.booking}}
+            br/
+            br/
+
+            .search-container
+              span.icon.icon-search
+              input(placeholder="Search in messages" ng-model="searchTerm" ng-change="(searchTerm.length == 0 || searchTerm.length > 2) && fetchConversations()")
+              span.icon.icon-exit(ng-show="searchTerm" ng-click="clearSearch()")
+
+            br/
+
+            .chat(ng-repeat="obj in conversations[tab] | orderBy: 'attributes.updated_at':true" ng-click="selectConvers(obj)" ng-class="{active: obj.attributes.uid == selectedConvers.uid}")
+              .chat-online-status(ng-class="{online: obj.attributes.online}") &#9679;
+              .chat-profile-pic(ng-class="{'default': !obj.attributes.profile_photo}" ng-style="{'background-image': 'url('+ setPhoto(obj.attributes.profile_photo) +')'}")
+              .chat-info
+                .receiver
+                  .receiver-name
+                    |{{obj.attributes.user.wedding.name}}
+                  .chat-timestamp
+                    |{{obj.attributes.updated_at | chatTime | capitalizeAll}}
+
+          #chatbox.vendor.col-md-8(ng-if="selectedConvers" ng-class="{hide: mobileView != 'messages'}")
+            .chat-header.visible-lg-block
+              span.chat-header-pic(ng-class="{'default': !selectedConvers.profile_photo}" ng-style="{'background-image': 'url('+ setPhoto(selectedConvers.profile_photo) +')'}" ui-sref="vendor.customer_profile({id: selectedConvers.user.wedding.uid})")
+              span.chat-header-name(ui-sref="vendor.customer_profile({id: selectedConvers.user.wedding.uid})" ng-bind="selectedConvers.user.wedding.name")
+              br/
+              span.chat-header-online-indicator(ng-class="{online: selectedConvers.online}") &#9679;
+              span.chat-header-status(ng-class="{online: selectedConvers.online}" ng-bind="selectedConvers.online ? 'online' : 'offline'")
+            .chat-header.mobile(ng-click="switchToConversations()")
+              img.back-to-conversations.visible-md-8(src="/vendor/images/chevron-left.png")
+              span.chat-header-name(ng-bind="selectedConvers.user.wedding.name" ui-sref="vendor.customer_profile({id: selectedConvers.user.wedding.uid})")
+              span.chat-header-pic(ng-class="{'default': !selectedConvers.profile_photo}" ng-style="{'background-image': 'url('+ setPhoto(selectedConvers.profile_photo) +')'}" ui-sref="vendor.customer_profile({id: selectedConvers.user.wedding.uid})")
+              br/
+              span.msg-date(ng-bind="lastMsgTime() | date: 'd MMMM, h:mm'")
+              div(style="border-bottom: 1px solid #f1f1f1; margin: 10px 0;")
+              span.chat-header-online-indicator(ng-class="{online: selectedConvers.online}") &#9679;
+              span.chat-header-status(ng-class="{online: selectedConvers.online}" ng-bind="selectedConvers.online ? 'online' : 'offline'")
+
+            .msg-list(style="min-height: 400px; height: 70vh; padding-bottom: 50px;")
+              .msg(ng-repeat="(key, value) in messages" ng-class="{sent: value[0].sent_by == 'vendor'}")
+                .msg-date
+                  |{{ key | date: 'd MMMM, h:mm'}}
+                .msg-profile-pic(ng-class="{'default': !getProfilePhoto(value[0])}" ng-style="{'background-image': 'url('+ setPhoto(getProfilePhoto(value[0])) +')'}")
+                .contents(ng-if="value[0].quote == null")
+                  .contents
+                    .content(ng-repeat="obj in value")
+                      span(ng-bind-html="obj.content")
+                .contents.quote(ng-if="value[0].quote")
+                  .content.row.no-margin
+                    .col-xs-5
+                      strong Quote \#{{value[0].quote.quote_no}}
+                      br/
+                      span.grey Total amount
+                    .col-xs-7.text-right
+                      a(ng-show="!(value[0].quote.status == 'accepted' || value[0].quote.status == 'fulfilled')" ui-sref="vendor.quote({quote_id: value[0].quote.id})") See more
+                        br/
+                      ul(ng-show="value[0].invoice.length > 0 && (value[0].quote.status == 'accepted' || value[0].quote.status == 'fulfilled')")
+                        li(ng-repeat="invoice in value[0].invoice | orderBy:'-':true")
+                          a(ui-sref="vendor.payment({payment_id: invoice})" ng-bind="invoice")
+                      strong {{value[0].quote.total | currency:'$ ':2}}
+                    .col-xs-12(style="border-bottom: 1px solid #e8e8e8; margin: 2rem 0;")
+                    .col-xs-6
+                      small.grey {{ value[0].created_at | date: 'd MMMM yyyy' | capitalizeAll }}
+                    .col-xs-6.text-right
+                      strong(ng-class="{ green: value[0].quote.status == 'accepted' || value[0].quote.status == 'booking secured' }")
+                        |{{value[0].quote.status | uppercase}}
+
+
+            .new-msg
+              form
+                textarea(enter-submit="send()" id="newMsg" placeholder="Enter your message" ng-model="newMsg" autocomplete="off")
+                a#raise-quote.btn.btn-success(ng-click="raiseQuote()")
+                  span.hidden-xs.hidden-sm RAISE QUOTE
+                  span.hidden-xs.hidden-md.hidden-lg RAISE
+                  span.hidden-sm.hidden-md.hidden-lg
+                    i.fa.fa-file-text(style="display: block; margin-top: 10px;")
+                button#send-msg.btn.btn-success(ng-click="send()")
+                  span.hidden-xs.hidden-sm SEND MESSAGE
+                  span.hidden-xs.hidden-md.hidden-lg SEND
+                  span.hidden-sm.hidden-md.hidden-lg
+                    i.fa.fa-paper-plane
+
+modal#connect-to-stripe(ng-class="{'show': showConnect2Stripe, 'in': showConnect2Stripe}" style="width: 715px;")
+  .modal
+    .modal-body
+      a.pull-right.icon.icon-exit(ng-click="showConnect2Stripe=false")
+      section
+        p(style="font-size: 18px;")
+          |It seems you have not yet setup your account to receive payments.
+          |Click on Connnect with Stripe’ to get started’
+        a(ng-click="connectToStripe()")
+          img(src="/vendor/images/blue-on-light.png")
+  .modal-backdrop
+
+modal#update-abn-modal(ng-class="{'show': showABNRequired, 'in': showABNRequired}" style="width: 715px;")
+  .modal
+    .modal-body
+      a.pull-right.icon.icon-exit(ng-click="showABNRequired=false")
+      section
+        p
+          |ABN/ACN and GST setting must be provided to raise quote
+        br/
+        a.btn.btn-round.btn-gray(style="" ng-click="showABNRequired=false") Cancel
+        |&nbsp;
+        a.btn.btn-round.btn-green(style="" ui-sref="vendor.settings({tab: 'account'})") Go to Settings
+  .modal-backdrop

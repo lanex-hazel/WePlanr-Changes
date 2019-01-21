@@ -1,0 +1,56 @@
+.custom-form
+  .title-form.hide-desktop
+    | Add your notes here.
+    a.pull-right.hide-desktop.icon.icon-exit.exit-modal(ng-click="$ctrl.toggleForm({obj:null,enable:''})")
+  .budget-items
+    .budget-column.heading
+      .label-item
+      .label-item.empty.hide-mobile
+      .label-item.hide-mobile PLANNED
+      .label-item.empty.hide-mobile 
+      .label-item.hide-mobile ACTUAL
+      .label-item.empty.hide-mobile 
+      .label-item.hide-mobile PAID
+      .label-item.empty.hide-mobile 
+      .label-item.hide-mobile OWING
+      .label-item.empty.hide-mobile 
+    .budget-column.highlight.gray
+      .label-item
+        .checkbox(ng-class="{'checked': $ctrl.obj.attributes.status == 'booked'}")
+        | {{$ctrl.obj.attributes.name}}
+      .label-item.empty.hide-mobile
+      .label-item.hide-mobile
+        .form-control {{$ctrl.parseNum($ctrl.obj.attributes.planned) | moneyFormat}}
+      .label-item.empty.hide-mobile
+      .label-item.hide-mobile
+        .form-control {{$ctrl.parseNum($ctrl.obj.attributes.actual) | moneyFormat}}
+      .label-item.empty.hide-mobile
+      .label-item.hide-mobile
+        .form-control {{$ctrl.parseNum($ctrl.obj.attributes.paid) | moneyFormat}}
+      .label-item.empty.hide-mobile
+      .label-item.hide-mobile(ng-class="{'hide-mobile' : column[3]}")
+        .form-control {{($ctrl.parseNum($ctrl.obj.attributes.actual) - $ctrl.parseNum($ctrl.obj.attributes.paid)) | moneyFormat}}
+      .label-item.empty.hide-mobile
+      .label-item.pull-right
+        a.icon.icon-exit.hide-desktop(ng-class="{'disabled': $ctrl.obj.attributes.status == 'booked'}" ng-click="$ctrl.removeModal = true")
+  .title-form.hide-mobile
+    | Add your notes here.
+    a.pull-right.hide-mobile.icon.icon-exit.exit-modal(ng-click="$ctrl.toggleForm({obj:null,enable:''})")
+  form.vendor-form(name="form" autocomplete="off")
+    .vendor-form-group.notes
+      .form-group
+        label.form-label NOTES &nbsp;&nbsp;&nbsp;
+          span.required.animate(ng-show="$ctrl.saved") Notes added!
+        textarea.form-control(
+          type="text"
+          name="note"
+          ng-model="$ctrl.note"
+          maxlength="500")
+        .form-error(ng-class="{'show': $ctrl.formInvalid}") Note can only be up to 500 characters
+        .form-label.hide-desktop(style="text-align: left !important; height: 17px;")
+          span.required(ng-show="$ctrl.saved") Notes added!
+      
+    .vendor-form-group.btn-actions
+      .form-group
+        br
+        .btn-success.btn-create(ng-click="$ctrl.submit()") SAVE NOTES

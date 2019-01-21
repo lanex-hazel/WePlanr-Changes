@@ -1,0 +1,67 @@
+.footer-container
+  background $primary-bg
+  color $primary-text
+  margin-left 0 !important
+  margin-right 0 !important
+  width 100%
+  .footer
+    margin auto
+    max-width 1152px
+  .footer-content
+    font-size 1.3rem
+    opacity 0.8
+    width 100%
+    position relative
+    padding 1.5rem 0
+    .bold
+      display inline-block
+      font-weight 500
+    &.copyright
+      text-align center
+    &.social-links
+      text-align right
+    &.align-footer
+      top 11px
+   a
+    padding 5px
+    display inline-block
+    &:hover
+      opacity 1
+    img
+      width 28px
+      height 28px
+      opacity 0.6
+      vertical-align top
+#terms
+  background-color $primary-bg
+  text-align center
+  padding 1.5rem
+  font-size 1.5rem
+  font-weight 500
+  border-bottom 1px solid rgba(56,59,64,0.1)
+  color #383b40
+  a
+    text-decoration underline
+    text-decoration-color rgba(56,59,64,0.4)
+    -moz-text-decoration-color rgba(56,59,64,0.4)
+    &:hover
+      color #383b40
+@media screen and (max-width 768px)
+  .footer-container
+    border-top 1px solid rgba(75, 77, 82,0.102)
+    .footer-content
+      text-align center !important
+      padding 0
+      padding-bottom 1.5rem
+      &.align-footer
+        top 0px
+      &.language
+        padding-top 5rem
+      &.copyright
+        padding-bottom 3rem
+  #terms
+    background-color $white
+    border-bottom 0
+    li
+      &:nth-child(even)
+        display none

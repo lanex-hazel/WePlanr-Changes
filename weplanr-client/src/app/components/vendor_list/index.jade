@@ -1,0 +1,28 @@
+#recommend
+  .content
+    br
+    br
+    b.head-label {{$ctrl.title}}&nbsp;
+    b.head-label.success(ng-show="$ctrl.collection.length > 0") ({{$ctrl.collection.length}})
+    a.pull-right.link.hide-mobile(ng-show="$ctrl.collection.length > 0" ng-href="{{$ctrl.seeMore}}") See more &nbsp;
+      i.fa.fa-angle-right.mleft-10
+    .search-results
+      div(equalize-height)
+        .items(equalize-height-add ng-repeat="item in $ctrl.collection | limitTo: 4" ng-swipe-left="scroll($event,true)" ng-swipe-right="scroll($event,false)")
+          .feature-vendor
+            a.pull-right.icon.icon-heart(ng-if="!($ctrl.isFave(item.id) > -1) && $ctrl.isLoggedin" ng-click="$ctrl.fave({obj:item})" ng-class="{'disabled' : processing}")
+            a.pull-right.icon-f.icon-heart-fave(ng-if="$ctrl.isFave(item.id) > -1 && $ctrl.isLoggedin" ng-click="$ctrl.unfave({obj:item})" ng-class="{'disabled' : $ctrl.processing}")
+            a.pull-right.icon.icon-heart(ng-if="!($ctrl.isFaveNonLoggedIn(item) > -1) && !$ctrl.isLoggedin" ng-click="$ctrl.fave({obj:item})" ng-class="{'disabled' : processing}")
+            a.pull-right.icon-f.icon-heart-fave(ng-if="$ctrl.isFaveNonLoggedIn(item) > -1 && !$ctrl.isLoggedin" ng-click="$ctrl.unfave({obj:item})" ng-class="{'disabled' : $ctrl.processing}")
+            a(ui-sref="{{$ctrl.viewProfile}}({id:item.attributes.slug})" ng-class="{'disabled' : $ctrl.processing}")
+              .feature-display(ng-style="{ 'background-image': 'url(' + $root.setBGImage(item.attributes.photo_urls) + ')'}")
+          .mtop-15
+            img(ng-src="{{$root.setPhoto(item.attributes.profile_photo)}}")
+            .user-info
+              span.name(ui-sref="{{$ctrl.viewProfile}}({id:item.attributes.slug})") {{item.attributes.business_name}}
+              .icon.icon-map-marker
+                span.location(ui-sref="{{$ctrl.viewProfile}}({id:item.attributes.slug, location:true})") &nbsp;{{item.attributes.address_summary}}
+          ul.services
+            li(ng-repeat="service in $ctrl.fetchServices(item.attributes) track by $index") {{service}}
+  br
+  br

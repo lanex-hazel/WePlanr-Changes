@@ -1,0 +1,109 @@
+.content-container
+  .user-container
+    main-menu
+
+    br/
+    ul.nav.nav-tabs
+      li(ng-class="{'active': activeTab==1}" ng-click="activeTab=1")
+        a Referral
+      li(ng-class="{'active': activeTab==2}" ng-click="activeTab=2")
+        a Rewards
+
+      br/
+
+    div(ng-hide="activeTab != 1")
+      .col-md-12(style="margin: 20px 0 1rem;")
+        form#search-form.form-horizontal(ng-submit="fetchReferrals()")
+          .form-group
+            label.col-sm-2.col-form-label(for="cstatus") Status: 
+            select.col-sm-10.form-control(id="cstatus" ng-model="statusFilter")
+              option(value="all") All
+              option(value="pending") Pending
+              option(value="successful") Successful
+          .form-group
+            label.col-sm-2.col-form-label(for="referral-date-rangepicker") Date of referral: 
+            input.col-sm-10.form-control(id="referral-date-rangepicker")
+          .form-group
+            .col-sm-2
+            .col-sm-10(style="padding-left: 0;")
+              button.btn.btn-default(type="submit")
+                i.fa.fa-search
+                span Search
+              label.btn.btn-success(ng-click="exportReferrals()")
+                i.fa.fa-download
+                span CSV Download
+      spinner(ng-show="loading")
+      table.table.table-responsive#customer-referral-report(ng-hide="loading")
+        thead
+          tr
+            th First Name
+            th Last Name
+            th Email
+            th Date of referral
+            th Gift card sent
+            th Notified
+            th Referred Business (Email)
+            th.text-center Successful registration
+            th Date of registration
+        tbody(ng-repeat="obj in referrals")
+          tr
+            td(ng-bind="obj.attributes.referrer.firstname")
+            td(ng-bind="obj.attributes.referrer.lastname")
+            td.email.btn-backlink(ng-bind="obj.attributes.referrer.email" ui-sref="admin.users.detail({id: obj.attributes.referrer.slug})")
+            td(ng-bind="obj.attributes.created_at | date: 'd MMM, yyyy h:mma'")
+            td
+              label.switch
+                input(type="checkbox" ng-model="obj.attributes.gift_card_sent" ng-change="toggleReferral(obj, 'gift_card_sent')")
+                span.slider.round(ng-class="{'text-white': obj.attributes.gift_card_sent}" ng-bind="obj.attributes.gift_card_sent ? 'Sent' : 'Pending'")
+            td
+              label.switch
+                input(type="checkbox" ng-model="obj.attributes.notified" ng-change="toggleReferral(obj, 'notified')")
+                span.slider.round(ng-class="{'text-white': obj.attributes.notified}" ng-bind="obj.attributes.notified ? 'Sent' : 'Pending'")
+            td.email.btn-backlink
+              a.btn-backlink(ng-hide="obj.attributes.referred_slug" ng-bind="obj.attributes.referred_email")
+              a.btn-backlink(ng-show="obj.attributes.referred_slug" ng-bind="obj.attributes.referred_email" ui-sref="admin.vendors_detail({id: obj.attributes.referred_slug})")
+            td.text-center(ng-style="{color: obj.attributes.registered_date ? 'green' : 'red', fontSize: '2rem'}") &#9679;
+            td(ng-bind="obj.attributes.registered_date | date: 'd MMM, yyyy h:mma'")
+
+
+    div(ng-hide="activeTab != 2")
+      .col-md-12(style="margin: 20px 0 1rem;")
+        form#search-form.form-horizontal(ng-submit="fetchRewards()")
+          .form-group
+            label.col-sm-2.col-form-label(for="reward-date-rangepicker") Date of reward: 
+            input.col-sm-10.form-control(id="reward-date-rangepicker")
+          .form-group
+            .col-sm-2
+            .col-sm-10(style="padding-left: 0;")
+              button.btn.btn-default(type="submit")
+                i.fa.fa-search
+                span Search
+              label.btn.btn-success(ng-click="exportRewards()")
+                i.fa.fa-download
+                span CSV Download
+      spinner(ng-show="loading")
+      table.table#customer-referral-report(ng-hide="loading")
+        thead
+          tr
+            th First Name
+            th Last Name
+            th Email
+            th Transaction Amount
+            th Datetime
+            th Gift card sent
+            th Notified
+        tbody(ng-repeat="obj in rewards")
+          tr
+            td(ng-bind="obj.attributes.firstname")
+            td(ng-bind="obj.attributes.lastname")
+            td.email.btn-backlink(ng-bind="obj.attributes.email" ui-sref="admin.users.detail({id: obj.attributes.slug})")
+            td.text-right(ng-bind="obj.attributes.quote_amount | currency:'$ ':2")
+            td(ng-bind="obj.attributes.created_at | date: 'd MMM, yyyy h:mma'")
+            td
+              label.switch
+                input(type="checkbox" ng-model="obj.attributes.gift_card_sent" ng-change="toggleReward(obj, 'gift_card_sent')")
+                span.slider.round(ng-class="{'text-white': obj.attributes.gift_card_sent}" ng-bind="obj.attributes.gift_card_sent ? 'Sent' : 'Pending'")
+            td
+              label.switch
+                input(type="checkbox" ng-model="obj.attributes.notified" ng-change="toggleReward(obj, 'notified')")
+                span.slider.round(ng-class="{'text-white': obj.attributes.notified}" ng-bind="obj.attributes.notified ? 'Sent' : 'Pending'")

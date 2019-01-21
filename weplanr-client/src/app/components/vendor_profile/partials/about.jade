@@ -1,0 +1,5 @@
+.col-xs-12.inner-container(style="height: 332px" ng-class="{'more' : $ctrl.showState.about}")
+  b.title-label About
+  a.option-link.more.pull-right(ng-click="$ctrl.seeMore(true,'about')" ng-if="!$ctrl.showState.about") See more
+  .detail-container
+    .about(ng-bind-html="$ctrl.vendor.about" ng-class="{'less' : !$ctrl.showState.about}")

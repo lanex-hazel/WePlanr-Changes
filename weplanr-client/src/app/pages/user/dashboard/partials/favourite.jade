@@ -1,0 +1,18 @@
+.vendors-container
+  .label FAVOURITES&nbsp;
+    span.count ({{fave_vendors.length}})
+  a.pull-right.see-more.hide-mobile(ng-show="fave_vendors.length > 0" ng-href="/user/favourites") See more &nbsp;
+    i.fa.fa-angle-right.mleft-10
+  .text-center.label.no-data(ng-show="fave_vendors.length <= 0") No favourite vendors yet
+  .searched-results
+    .items(ng-show="fave_vendors.length > 1" ng-repeat="item in fave_vendors | limitTo: 4" ng-swipe-left="scroll($event,true)" ng-swipe-right="scroll($event,false)")
+      .business-photo
+        .cover-photo(ng-class="{'default': !item.attributes.sample_photo, 'disabled' : processing}" ng-style="{ 'background-image': 'url(' + $root.setPhoto(item.attributes.sample_photo) + ')'}" ui-sref="user.vendor.show({id:item.attributes.slug})")
+        a.pull-right.unfave-btn(ng-if="isFave(item.id) > -1" ng-click="unfavorite(item)" ng-class="{'disabled' : processing}")
+      .vendor-details
+        .avatar-photo(ng-class="{'default': !item.attributes.profile_photo}" ng-src="{{$root.setPhoto(item.attributes.profile_photo)}}")
+        .business-info
+          .name(ui-sref="user.vendor.show({id:item.attributes.slug})") {{item.attributes.business_name}}
+          .location(ui-sref="user.vendor.show({id:item.attributes.slug,location:true})") &nbsp;{{item.attributes.address_summary}}
+        .services
+          .item(ng-repeat="service in item.attributes.services track by $index") {{service}}

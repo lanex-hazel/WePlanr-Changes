@@ -1,0 +1,39 @@
+.search-form-container
+  .row
+    .col-xs-12
+      .search-label
+        span Search
+    .col-xs-12
+      .div-form.form-group.no-margin
+        input.form-control.search(ng-model="$ctrl.data.name" ng-enter="$ctrl.search({q:$ctrl.data})")
+        .icon-search-position.icon-search
+        .filter-search
+          .pull-right(ng-click="$ctrl.searchToggle($ctrl.toggle)" )
+            span(ng-class="{'toggle-active': $ctrl.toggle}") Add Filter
+  div(ng-show="$ctrl.toggle")
+    .filter-options
+      .row
+        .col-xs-12.col-md-3
+          .form-group
+            .location
+              label.filter-label Service Location
+              ui-select(ng-model="$ctrl.data.locations" theme="selectize" ng-change="$ctrl.search({q:$ctrl.data})")
+                ui-select-match(placeholder="Select a location...") {{$select.selected}}
+                ui-select-choices(repeat="item as item in $ctrl.loc  | filter: $select.search")
+                  span(ng-bind-html="item | highlight: $select.search")
+        .col-xs-12.col-md-3
+          .form-group
+            label.filter-label Availability
+            input.form-control.date(
+              ng-model="$ctrl.data.date"
+              single-picker="true"
+              date-picker="true"
+              limit-legal-age="false"
+              prevent-today="true"
+              placeholder="Availability..."
+              ng-change="$ctrl.search({q:$ctrl.data})"
+            )
+    .row.no-margin
+      .col-xs-12.reset-filter-container
+        .form-group.pull-right
+          a(ng-click="$ctrl.reset()") Reset filter

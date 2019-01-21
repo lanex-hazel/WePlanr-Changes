@@ -1,0 +1,41 @@
+weplanr-loader(show="preloader.show")
+div(ng-if="!preloader.show" ng-style="$root.searchWrapper && {'background-color': '#fff'}")
+  #wrapper
+    div(ui-view ng-show="!$root.menuView")
+    div(ng-show="$root.menuView")
+      header(current-user="currentUser" current-vendor="vendor" page-title="Menu")
+      .main-content
+        .content-container
+          ul.burger-menu(ng-show="!currentUser")
+            li
+              a.link(ng-click="openModal('register-modal')") SIGN UP
+            li
+              a.link(ng-click="openModal('login-modal')") LOGIN
+            li(ng-if="$root.isCustomer")
+              a.link(ui-sref="main.vendor_landing" ui-sref-active="active") I'M A BUSINESS
+            li(ng-if="$root.isVendor")
+              a.link(ui-sref="main.intro" ui-sref-active="active") I'M GETTING MARRIED
+            li
+              a.link(ui-sref="main.directory"  ui-sref-opts="{reload: true, inherit: false}" ui-sref-active="active") &nbsp;&nbsp;VENDOR CATALOGUE
+            li
+              a.link(ui-sref="main.terms" ui-sref-active="active") TERMS &amp; CONDITIONS
+              a.link(ui-sref="main.policy" ui-sref-active="active") PRIVACY POLICY
+              a.link(href="mailto:hello@weplanr.com") CONTACT US
+          burger-menu-customer
+          burger-menu-vendor
+    footer(ng-hide="$root.searchWrapper" ng-class="{'hide-mobile' : $root.menuView}")
+modal#register-modal
+  register-modal
+  .modal-backdrop
+modal#login-modal
+  login-modal
+  .modal-backdrop
+modal#forgot-modal
+  forgot-password-modal
+  .modal-backdrop
+modal#reset-modal
+  reset-password-modal
+  .modal-backdrop
+modal#invited-vendor-register-modal
+  invited-vendor-register-modal
+  .modal-backdrop

@@ -1,0 +1,98 @@
+.modal
+  .modal-body
+    a.pull-right.icon.icon-exit(ng-click="close('register-modal')")
+    section(ng-show="!uiState.registered")
+      p(ng-bind-html="heading")
+    section.animate(ng-show="!uiState.registered")
+      span.title(ng-bind="uiState.generic ? 'SIGN UP NOW' : 'REGISTER AN ACCOUNT NOW'")
+      br
+      form(name="registerForm" novalidate="true" autocomplete="off" onsubmit="return false;")
+        .form-input
+          input.form-control(
+            type="text"
+            id="firstname"
+            name="firstname"
+            required=true
+            ng-model="form.firstname"
+            ng-enter="registerCustomer(registerForm)"
+            ng-class="{'has-error': registerForm.firstname.$touched && registerForm.firstname.$error.required}"
+          )
+          label(for="firstname") Your first name
+          span.errors.danger.animate(ng-if="registerForm.firstname.$touched && registerForm.firstname.$error.required") Please enter your first name.
+        .form-input
+          input.form-control(
+            type="text"
+            id="lastname"
+            name="lastname"
+            required=true
+            ng-model="form.lastname"
+            ng-enter="registerCustomer(registerForm)"
+            ng-class="{'has-error': registerForm.lastname.$touched && registerForm.lastname.$error.required}"
+          )
+          label(for="lastname") Your last name
+          span.errors.danger.animate(ng-if="registerForm.lastname.$touched && registerForm.lastname.$error.required") Please enter your last name.
+        .form-input
+          input.form-control(
+            type="email"
+            name="email"
+            required=true
+            ng-model="form.email"
+            pattern="[a-zA-Z0-9._%+-]+@[a-zA-z0-9.-]+\.[a-z]{2,3}$"
+            ng-enter="registerCustomer(registerForm)"
+            ng-focus="uiState.pattern = false"
+            ng-blur="uiState.pattern = true"
+            ng-class="{'not-empty': !registerForm.email.$error.required, 'has-error' : (registerForm.email.$touched && registerForm.email.$error.required) || (registerForm.email.$error.pattern && uiState.pattern && uiState.error) || (registerForm.email.$error.invalidEmail && registerForm.email.$pristine)}"
+          )
+          label(for="email") Email
+          span.errors.danger.animate(ng-if="registerForm.email.$touched && registerForm.email.$error.required") Please enter an email address.
+          span.errors.danger.animate(ng-if="registerForm.email.$error.pattern && uiState.pattern && uiState.error") Please enter a valid email address.
+          span.errors.danger.animate(ng-if="registerForm.email.$error.invalidEmail && registerForm.email.$pristine") This email is already registered.
+        .form-input
+          input.form-control(
+            type="tel"
+            name="phone"
+            required=true
+            ng-model="form.phone"
+            pattern="(0|\\+?61)?[ \\-]?(4|5)([0-9][ \\-]?){7}[0-9]"
+            ng-focus="uiState.phonePattern = false"
+            ng-blur="uiState.phonePattern = true"
+            ng-enter="registerCustomer(registerForm)"
+            ng-class="{'not-empty': !registerForm.phone.$error.required, 'has-error' : (registerForm.phone.$touched && registerForm.phone.$error.required) || (registerForm.phone.$error.phonePattern && uiState.phonePattern && uiState.error)}"
+          )
+          label(for="phone") Mobile number
+          span.errors.danger.animate(ng-if="registerForm.phone.$touched && registerForm.phone.$error.required") Please enter your mobile number
+          span.errors.danger.animate(ng-if="registerForm.phone.$error.pattern && uiState.phonePattern && uiState.error") Please enter a valid mobile number
+        .form-input
+          input.form-control(
+            type="password"
+            id="password"
+            name="password"
+            required=true
+            ng-model="form.password"
+            minlength="8"
+            ng-enter="registerCustomer(registerForm)"
+            ng-class="{'not-empty': !registerForm.password.$error.required, 'has-error':(registerForm.password.$touched && registerForm.password.$error.required) || (registerForm.password.$error.minlength && uiState.pattern && uiState.error)}"
+            ng-focus="uiState.pattern = false"
+            ng-blur="uiState.pattern = true"
+            )
+          label(for="fullname") Password
+          span.errors.danger.animate(ng-if="registerForm.password.$touched && registerForm.password.$error.required") Please enter a password.
+          span.errors.danger.animate(ng-if="registerForm.password.$error.minlength && uiState.pattern && uiState.error") Password must be atleast 8 characters.
+      br
+      #signup-terms
+        p By clicking REGISTER I agree to WePlanr's
+        p
+          a(ng-click="close('register-modal')" ui-sref="main.terms") Terms and Conditions
+          | &nbsp;and&nbsp;
+          a(ng-click="close('register-modal')" ui-sref="main.policy") Privacy Policy
+        br
+    section.animate(ng-show="!uiState.registered")
+      .btn-container
+        spinner(ng-show="uiState.loading")
+        a.btn.btn-success(ng-click="registerCustomer(registerForm)" ng-class="{'disabled':uiState.loading}" ng-show="!uiState.loading") REGISTER FOR FREE
+        br
+        a.log-in(ng-click="redirect('register-modal','login-modal')") I ALREADY HAVE AN ACCOUNT
+    section.animate(ng-show="uiState.registered")
+      p Please check your email and confirm your account.
+      br
+      a.btn.btn-success(ng-click="close('register-modal')") OK

@@ -1,0 +1,104 @@
+#chatlist.vendor
+  .tab > span
+    &.active
+      background-color: $green-btn
+    .unread
+      background-color: #3f4349
+
+#chatbox.vendor
+  .msg-list
+    max-height: calc(100% - 162px)
+  .msg.sent
+    .contents:not(.quote)
+      margin-right: 25px
+  .chat-header
+    /*background-position: 25%*/
+    /*background-size: cover*/
+    /*color: rgba(255,255,255,.80)*/
+    /*padding: 20px 0 25px*/
+    /*position: relative*/
+
+    /*&.mobile*/
+      /*color: #444*/
+    /*&.inner*/
+      /*display: block*/
+      /*margin: 10px 0*/
+      /*.chat-header-wedding-date, .chat-header-wedding-location*/
+        /*width: 49%*/
+        /*> div*/
+          /*margin: auto*/
+          /*width: inherit*/
+
+    /*.overlay*/
+      /*position: absolute*/
+      /*top: 0*/
+      /*left: 0*/
+      /*background-color: rgba(0,0,0,.55)*/
+      /*width: 100%*/
+      /*height: 100%*/
+      /*z-index: 10*/
+    > div
+      display: inline-block
+      vertical-align: top
+      text-align: left
+      position: relative
+      z-index: 11
+      span
+        display: block
+      i, .label
+        color: rgba(255,255,255,.55)
+      i
+        font-size: 12px
+      .label
+        font-size: 11px
+        font-weight: 100
+        padding: 0
+        text-align: left
+    .chat-header-wedding-location, .chat-header-wedding-date
+      padding-top: 12px
+      > span
+        padding-bottom: 5px
+    /*.chat-header-name*/
+      /*width: 40%*/
+      /*text-align: left*/
+      /*padding-left: 20px*/
+      /*+respond-to(0,480px)*/
+        /*width 100%*/
+      /*.chat-header-pic*/
+        /*width: 36px*/
+        /*height: 36px*/
+      /*span:not(.label)*/
+        /*display: inline-block*/
+        /*font-size: 18px*/
+      /*span.label*/
+        /*display: block*/
+        /*padding-top: 8px*/
+    .chat-header-wedding-date
+      width: 22%
+    .chat-header-wedding-location
+      width: 22%
+    .chat-header-status
+      width: 12%
+      padding-top: 12px
+      position: relative
+      span
+        display: inline-block
+      .online-indicator
+        position: absolute
+        top: 4px
+        left: 0
+        font-size: 20px
+        color: #ce4257
+        &.online
+          color: #99d98b
+      .online-status
+        margin-left: 16px
+    +respond-to(0,480px)
+      .chat-header-wedding-date,.chat-header-wedding-location
+        width 33.33%
+  textarea#newMsg
+    width: calc(100% - 330px) !important
+    @media (max-width: 992px)
+      width: calc(100% - 197px) !important
+    @media (max-width: 767px)
+      width: calc(100% - 95px) !important

@@ -1,0 +1,196 @@
+modal
+  display none
+  .modal
+    position fixed
+    top 50%
+    right 0
+    bottom 0
+    left 50%
+    transform translate(-50%, -50%)
+    display block
+    z-index 1000
+    height 100%
+    width 512px
+    max-width 98%
+    +respond-to(0, 320px)
+      max-width 100%
+
+    .modal-body
+      padding 0
+      background #fff
+      margin-top 7rem
+      position relative
+      +respond-to(0, 768px)
+        margin-left 1.5rem
+        margin-right 1.5rem
+      +respond-to(0, 320px)
+        margin-left 0.5rem
+        margin-right 0.5rem
+
+      section
+        color rgb(98, 98, 98)
+        line-height 1.2
+        text-align center
+        font-size 2.3rem
+        font-weight 100
+        padding 2rem 8rem 0
+        +respond-to(1824px, 0)
+          font-size 2.5rem
+        +respond-to(0, 768px)
+          font-size 2rem
+          padding-top 2.5rem
+          padding-right 0 !important
+          padding-left 0 !important
+        &:nth-of-type(even)
+          background-color rgb(255, 255, 255)
+          box-shadow 0px 1px 76px 0px rgba(0, 0, 0, 0.05)
+        &:first-of-type
+          padding 2.8rem 9rem 1rem
+          +respond-to(1824px, 0)
+            padding-left 7.9rem
+            padding-right 7.9rem
+        &:last-of-type
+          padding-bottom 2.8rem
+        .btn-success
+          font-weight bold
+          width 90%
+          +respond-to(0, 768px)
+            width 278px
+          +respond-to(1824px, 0)
+            width 100%
+        .log-in
+          color rgb(216, 116, 129)
+          line-height 1
+          font-size 1.2rem
+          font-weight bold
+        .title
+          font-weight bold
+          +respond-to(1824px, 0)
+            font-size 2.3rem
+          +respond-to(0, 768px)
+           font-size 2rem !important
+        .form-input
+          padding-top 0.5rem
+          margin-bottom 1rem
+          height 60px
+          position relative
+          overflow hidden
+          margin-right auto
+          margin-left auto
+          font-size 2rem
+          +respond-to(1824px, 0)
+            font-size 2.3rem
+        .form-control
+          font-size 2rem
+          width 90%
+          display initial
+          font-weight 400
+          padding 0
+          +respond-to(1824px, 0)
+            font-size 2.3rem
+            width 100%
+          +respond-to(0, 768px)
+            width 278px
+        .errors
+          display block
+          font-size 1.2rem
+          position absolute
+          left 17px
+          bottom -1px
+          +respond-to(1824px, 0)
+            left 0
+          +respond-to(0, 768px)
+            left 102px
+          +respond-to(0, 500px)
+            left 49px
+          +respond-to(0, 375px)
+            left 29px
+          +respond-to(0, 360px)
+            left 30px
+          +respond-to(0, 320px)
+            left 17px
+        input, select
+          background none
+          position relative
+          bottom -5px
+          left 0
+          z-index 1
+          outline 0
+          margin-bottom 0.2rem
+          &:valid, &.not-empty
+            background white
+          &:focus + label, &:valid + label, &.not-empty + label
+            color rgba(39, 43, 47, 0.302)
+            font-size 55%
+            padding 5px 6px
+            z-index 0
+            top -6.5px
+        label
+          transition(all 0.2s linear)
+          position absolute
+          padding 1px 6px
+          left 12px
+          bottom 15px
+          font-weight 300
+          color rgba(39, 43, 47, 0.302)
+          +respond-to(1824px, 0)
+            left -5px
+          +respond-to(0, 768px)
+            left 97px
+          +respond-to(0, 500px)
+            left 42px
+          +respond-to(0, 375px)
+            left 23px
+          +respond-to(0, 360px)
+            left 16px
+          +respond-to(0, 320px)
+            left 10px
+        input[type="checkbox"]
+          -webkit-appearance none
+          width 20px
+          height 20px
+          border 1px solid #dddddd
+          border-radius 50%
+          outline none
+          position relative
+          top 5px
+          &:before
+            content ''
+            display block
+            width 60%
+            height 60%
+            margin 20% auto
+            border-radius 50%
+          &:checked:before
+            background-color $green-btn
+        p
+          margin-bottom 13px
+          line-height 1.5
+      .icon
+        position absolute
+        right 15px
+        top 13px
+        &:before
+          font-size 1.4rem
+          padding 0.3rem
+        +respond-to(0, 768px)
+          right 8px
+          top 13px
+      form
+        padding-top 1.5rem
+
+  .modal-backdrop
+    position fixed
+    top 0px
+    left 0px
+    height 100%
+    width 100%
+    background #000
+    z-index 900
+    opacity 0.75
+
+body.modal-open
+  overflow hidden
+  height 100%
+  width: 100%
+  position: fixed

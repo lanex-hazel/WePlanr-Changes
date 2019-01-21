@@ -1,0 +1,50 @@
+modal#new-bank.show.in
+  form(ng-submit="submit()")
+    .modal
+      .modal-body
+        a.pull-right.icon.icon-exit(ng-click="cancel()")
+        section
+          p New Bank Account
+        br/
+        .form-group
+          label.form-label Bank Name
+          input.form-control(ng-model="newBank.bank_name" required="true")
+        .form-group
+          label.form-label Account Name
+          input.form-control(ng-model="newBank.account_holder_name" required="true")
+        .form-group
+          label.form-label Account Number
+          input.form-control(ng-model="newBank.account_holder_number" type="number" pattern="[0-9]+" required="true")
+        .form-group
+          label.form-label Routing Number
+          input.form-control(ng-model="newBank.routing_number" type="number" pattern="[0-9]+")
+        .form-group
+          label.form-label Account Type
+          ui-select(ng-model="newBank.account_type" theme="selectize" ng-required="true")
+            ui-select-match {{newBank.account_type | capitalize}}
+            ui-select-choices(repeat="item in accountTypes")
+              span {{item | capitalize}}
+        .form-group
+          label.form-label Holder Type
+          ui-select(ng-model="newBank.account_holder_type" theme="selectize" ng-required="true")
+            ui-select-match {{newBank.account_holder_type | capitalize}}
+            ui-select-choices(repeat="item in holderTypes")
+              span {{item | capitalize}}
+        .form-group
+          label.form-label Country
+          input.form-control(ng-model="newBank.country" required="true" placeholder="AUS")
+        section.actions-container(ng-hide="loading")
+          .hide-mobile
+            a.btn.btn-gray(ng-click="cancel()") CANCEL
+            div(style="display: inline-block;")
+            button.btn.btn-green SAVE BANK
+            br/
+          .hide-desktop
+            div(style="display: inline-block;")
+            button.btn.btn-green SAVE BANK
+            br/
+            a.btn.btn-gray(ng-click="cancel()") CANCEL
+          br/
+        section(ng-show="loading")
+          spinner
+    .modal-backdrop

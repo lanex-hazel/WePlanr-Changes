@@ -1,0 +1,48 @@
+#user-referral-container
+  br
+  p.text-center ^Receive a&nbsp;
+    b $50 Gift Card
+    | &nbsp;useable at over 30 major retailers including Coles, Woolworths, Myer, David Jones, iTunes, JB Hi Fi and more when you successfully refer a wedding business to WePlanr. Plus, all businesses you refer to WePlanr will also receive&nbsp;
+    b $10 off
+    | &nbsp;their registration fee. A small token of our appreciation from us, to you, to say thanks for your support!
+  br
+  table
+    tbody
+      tr.form-input
+        td(width="100%" style="padding-right: 15px;")
+          input.form-control(
+            name="email"
+            type="text"
+            ng-model="refer.email"
+            ng-class="{'has-error': refer.error && !refer.email || refer.pattern}"
+            ng-enter="referVendor()"
+            placeholder="Add friend's email address"
+          )
+        td(width="25%")
+          a.btn.btn-success(ng-click="referVendor(referForm)") REFER A VENDOR
+      tr.form-input
+        td.errors(colspan="2" valign="top")
+          .animate(ng-if="refer.error && !refer.email") Please enter an email
+          .animate(ng-if="refer.pattern") Please enter a valid email
+    br
+  br
+  p.copy-instruction.text-center Copy &amp; Paste Your Unique Referral Code Below
+  h3.code.text-center {{user.referral_code}}
+  br
+  .refer(style="height:80px;")
+    h4 Your savings
+    .text-center
+      .divider.credits.text-left.mleft-15
+        | Gift cards received
+      .divider.credits.col-right
+        span(ng-bind="gift_cards")
+  .refer.no-divider
+    h4 Referrals
+    table
+      .list
+        div(style="width: 100%" ng-if="referred_list.length <= 0") None
+        div(style="width: 100%" ng-repeat="item in referred_list" ng-if="referred_list.length > 0")
+          .email(ng-bind="item.attributes.referred_email")
+  br
+  br
+  .disclaimer ^The Customer Referral Promotion is only valid when businesses use the unique invitation code provided to them by you upon their registration to WePlanr. Your unique invitation code can be found on your referral page and can be sent automatically to the recipient when you provide WePlanr with an eligible email address. Successful registration require their payment of a non-refundable registration fee. Businesses referred to you via the Concierge service are excluded from this promotion. Your electronic gift card will be emailed to the primary address registered to your WePlanr account. Allow 1-2 business days to receive your gift card from when the referred business registers to WePlanr. Please refer to additional gift card terms and conditions set out at www.giftpay.com.au. This promotion is valid until 30 March 2018. WePlanr reserves the right to amend the terms of this promotion at any time, without notice.

@@ -1,0 +1,40 @@
+#mobile-day(ng-show="view == 'day'")
+  .actions-container.row.no-margin
+    .col-xs-6.no-padding.text-left(style="padding-right:5px;")
+      a.btn.btn-clear-border.animate(ng-if="!isBlocked(currentDay) && !isClosed(currentDay)" ng-click="setBlock(currentDay, 'fullybooked')") Mark as fully booked
+    .col-xs-6.no-padding.text-right(style="padding-left:5px;")
+      a.btn.btn-clear-border.animate(ng-if="!isClosed(currentDay) && !isBlocked(currentDay)" ng-click="setBlock(currentDay, 'closed')") Mark as closed
+    .col-xs-12
+      a.btn.btn-gray.animate(ng-if="isBlocked(currentDay)" ng-click="unsetBlock('fullybooked')" ) Unmark as fully booked
+      a.btn.btn-gray.animate(ng-if="isClosed(currentDay)" ng-click="unsetBlock('closed')" ) Unmark as closed
+  #booking-add-form
+    a.btn.btn-clear-border(ng-if="hasEvent && !state.edit" ng-click="state.add = true") + Add new booking
+    booking-add-form(ng-show="!hasEvent || (hasEvent && state.add)")
+    booking-edit-form(ng-show="state.edit")
+  .actions-container.sub.row(ng-if="!hasEvent || (hasEvent && state.add)")
+    .col-xs-6.text-left(style="padding-right:5px;")
+      a.btn.btn-gray.animate(ng-click="changeView('month')" ng-if="!hasEvent") CANCEL
+      a.btn.btn-gray.animate(ng-click="onCancel()" ng-if="hasEvent") CANCEL
+      
+    .col-xs-6.text-right(style="padding-left:5px;")
+      a.btn.btn-success.animate(ng-click="onBook(form, currentDay)") SAVE
+  .actions-container.sub.row(ng-if="(hasEvent && state.edit)")
+    .col-xs-6.text-left(style="padding-right:5px;")
+      a.btn.btn-gray.animate(ng-if="state.edit" ng-click="toggleEdit(false)") CANCEL
+      
+    .col-xs-6.text-right(style="padding-left:5px;")
+      a.btn.btn-success.animate(ng-if="state.edit" ng-click="onEdit(bookedDays[currentTab])" ) SAVE
+  .booking(ng-repeat="booking in bookedDays track by $index" ng-show="!state.add && !state.edit")
+    table
+      tbody
+        tr
+          td.client(ng-bind="booking.attributes.client")
+          td.text-right(ng-bind="booking.attributes.schedule_time_12hr")
+          td.actions
+            a.edit(ng-click="changeTab($index); toggleEdit(true)") Edit
+        tr.details
+          td.location(ng-bind="booking.attributes.location")
+          td.text-right.date(ng-bind="currentDay.format('DD MMM YYYY') | capitalizeAll")
+          td.actions
+            a.delete(ng-click="onDelete(bookedDays[$index],currentDay)") Remove
+    img

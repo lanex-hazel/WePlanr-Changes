@@ -1,0 +1,140 @@
+header(logout="logout()" current-vendor="currentVendor" page-title="Raise Quote")
+.main-content
+  #raise-quote-container.row.no-margin.content-container
+    form.col-xs-12.col-md-12.col-lg-12.no-padding(name="form")
+
+      p#quote-details
+        a.pull-right.icon.icon-exit(ui-sref="vendor.messages")
+        strong(ng-bind="weddingName")
+        br/
+        span(ng-bind="'Date ' + quote_details.issue_date")
+        br/
+        | This quotation expires in 7 days on 
+        span(ng-bind="quote_details.expiry_date")
+        br/
+        span(ng-bind="quote_details.name")
+        br/
+        small
+          em(ng-bind="quote_details.gst")
+
+      br/
+      br/
+      a.add-service(ng-click="addNew()")
+        i.fa.fa-plus-circle
+        |Add Service
+      #quote-table-row
+        table#quote-table
+          thead
+            tr
+              th
+              th ITEM
+              th DESCRIPTION
+              th QTY
+              th COST
+              th TOTAL (INC GST)
+          tbody
+            tr(ng-show="quote_items.length == 0")
+              td(align="left" colspan="100%")
+                em Please add a service
+            tr(ng-show="quote_items.length > 0" ng-repeat="item in quote_items track by $index")
+              td
+                i.fa.fa-times(ng-click="removeService($index)" style="color: #ce4257; font-size: 24px; vertical-align: top;")
+                .form-error close
+              td
+                ui-select#ui-select-service(name="service" required="true" ng-model="item.selService" theme="selectize" on-select="setService($item, $index)")
+                  ui-select-match(placeholder="Select a service...") {{$select.selected.name}}
+                  ui-select-choices(repeat="item as item in services | filter: $select.search")
+                    span(ng-bind-html="item.name | highlight: $select.search")
+                .form-error(ng-class="{'show': formInvalid && form.service.$error.required}") Please select a service
+              td
+                input.form-control(type="text" ng-model="item.description")
+                .form-error Please enter a description
+              td
+                input.form-control(
+                  name="quantity"
+                  type="number"
+                  integer-only="true"
+                  required="true"
+                  ng-model="item.quantity"
+                  min="0"
+                  ng-change="changeCost(item.cost,$index)"
+                  style="text-align: right; min-width: 58px;"
+                  placeholder="Qty"
+                )
+                .form-error(ng-class="{'show': formInvalid && form.quantity.$error.required}") Please enter a quantity
+              td
+                input.form-control(
+                  style="text-align: right;"
+                  name="cost"
+                  type="text"
+                  decimal-only="true"
+                  ng-model="item.cost"
+                  ng-format="currency:$ "
+                  placeholder="Cost"
+                  ng-blur='changeCost(item.cost,$index); validateCost(item,$index)'
+                  ng-enter='changeCost(item.cost,$index); validateCost(item,$index)'
+                  ng-change="totalCost()"
+                  required="true"
+                )
+                .form-error(ng-class="{'show':item.error.cost}") *Please add a value $1.00 or above
+              td
+                span(ng-bind="item.total | currency:'$ ':2")
+          tfoot
+            tr
+              td
+              td(colspan="4")
+                strong*TOTAL SERVICE FEE
+              td(ng-bind="totalCost() | currency:'$ ':2")
+            tr
+              td(colspan="100%") &nbsp;
+            tr
+              td
+              td(colspan="4")
+                strong PAYMENT SCHEDULE
+              td
+            tr
+              td.quote-date(colspan="5")
+                div.quote-form FINAL DELIVERY DATE
+                  input.form-control.duedate(
+                    ng-model="deliveryDate"
+                    ng-change="populateDueDate()"
+                    single-picker="true"
+                    date-picker="true"
+                    format="dd/mm/yyyy"
+                    min-date="minDate"
+                    date-only="true"
+                    required="true"
+                    name="delivery_date"
+                  )
+                  .form-error(ng-class="{'show': formInvalid && form.delivery_date.$error.required}") Please select a final delivery date
+              td &nbsp;
+            tr
+              td
+              td(colspan="4") 40% DEPOSIT REQUIRED TO SECURE BOOKING
+              td(ng-bind="deposit | currency:'$ ':2")
+            tr
+              td
+              td.quote-form.quote-date(colspan="4") 60% DUE ON
+                input.form-control.duedate(
+                  ng-model="paymentDueDate"
+                  single-picker="true"
+                  date-picker="true"
+                  format="dd/mm/yyyy"
+                  min-date="minDate"
+                  max-date="maxDate"
+                  date-only="true"
+                  required="true"
+                  name="due_date"
+                )
+                .form-error(ng-class="{'show': formInvalid && form.due_date.$error.required}") Please select a due date
+              td(ng-bind="dueCost | currency:'$ ':2")
+            tr
+              td(colspan="100%") &nbsp;
+            tr
+              td(colspan="4")
+              td(colspan="2" ng-show="loading")
+                spinner
+              td.action(ng-show="!loading")
+                a.btn.btn-gray(ng-class="{disabled: !changed}" ng-click="saveDraft()") SAVE DRAFT
+              td.action(ng-show="!loading")
+                a.btn.btn-green(ng-class="{disabled: totalCost() < 1 || invalidCost}" ng-click="saveQuote(form)") GENERATE QUOTE

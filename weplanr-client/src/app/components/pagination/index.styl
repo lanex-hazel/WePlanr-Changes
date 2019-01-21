@@ -1,0 +1,28 @@
+.pagination
+  padding: 0px
+  margin: 30px 0px 20px 0px
+  li
+    display: inline-block
+    a
+      border-radius: 0px
+      color: $secondary-text
+      padding: 8px 16px
+      border: 1px solid $border
+      &:first-child
+        border-radius: 0px
+      &:hover
+        color: $primary-hover
+    &.disabled a
+      background-color: $border
+      opacity: 0.4
+      cursor: not-allowed
+      pointer-events: none
+    &.active
+      a
+        background-color: $white
+        border-color: $border
+        color: $primary-hover
+        &:hover
+          background-color: $white
+          color: $primary-hover
+          border-color: $border

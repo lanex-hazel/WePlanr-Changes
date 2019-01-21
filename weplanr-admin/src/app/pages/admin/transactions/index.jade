@@ -1,0 +1,18 @@
+.content-container
+  #transactions.vendor-container
+    main-menu
+    .row
+      .col-xs-12
+        br
+        br
+        ul.nav.nav-tabs
+          li(ui-sref="admin.transactions.inquiries.index" ng-class="{'active': state.$current.includes['admin.transactions.inquiries'] }" ui-sref-opts="{reload: true, inherit: false}")
+            a Inquiries
+          li(ui-sref="admin.transactions.quotes.index" ng-class="{'active': state.$current.includes['admin.transactions.quotes'] }" ui-sref-opts="{reload: true, inherit: false}")
+            a Quotes
+          li(ui-sref="admin.transactions.bookings.index" ng-class="{'active': state.$current.includes['admin.transactions.bookings'] }" ui-sref-opts="{reload: true, inherit: false}")
+            a Bookings
+      .col-xs-12
+        br
+        br
+        div(ui-view)

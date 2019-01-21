@@ -1,0 +1,7 @@
+#yearView.row.animate(ng-if="view == 'year'")
+  .col-xs-12.col-md-3(style="height: 230px;" ng-repeat="d in months track by $index")
+    .month-header
+      b.text-left(ng-if="$index == 0") {{d.month}} &nbsp; {{d.year}}
+      b.text-left(ng-if="$index != 0") {{d.month}}
+    .week(ng-repeat="week in d.weeks")
+      span.day(ng-class="{ 'today': day.isToday, 'not-available': day.isUnavailable, 'different-month': !day.isCurrentMonth, 'partial': day.isBooked, 'closed': day.isClosed}" ng-repeat="day in week.days" ng-bind="day.number" ng-click="changeView('day', day.date.format('YYYY-MM-DD'))")

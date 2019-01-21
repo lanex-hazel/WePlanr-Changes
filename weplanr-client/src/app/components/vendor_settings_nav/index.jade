@@ -1,0 +1,12 @@
+label.nav-toggle(for="drop") {{ currentTab }}
+  .icon-arrow-nav.pull-right
+input#drop(type="checkbox")
+ul.menu-list.center-text
+  li.menu-list-item
+    a.icon-profile.title(ui-sref="vendor.settings({tab:'profile'})" ui-sref-active="active") &nbsp;Profile
+  li.menu-list-item
+    a.icon-portfolio.title(ui-sref="vendor.settings({tab:'portfolio'})" ui-sref-active="active")  &nbsp;Portfolio
+  li.menu-list-item
+    a.icon-settings(ui-sref="vendor.settings({tab:'account'})" ui-sref-active="active")  &nbsp;Account
+  li.menu-list-item(ng-show="$root.referralState.vendor")
+    a.icon-present(ui-sref="vendor.settings({tab:'referral'})" ui-sref-active="active")  &nbsp;Referral

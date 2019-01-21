@@ -1,0 +1,50 @@
+#search-result-container.search-results
+  .search-keywords(ng-if="$ctrl.state.loading || $ctrl.state.initial")
+    span.category.search-copy.animate(ng-if="$ctrl.searchTitle" ng-bind-html="$ctrl.searchTitle") &nbsp;
+    br
+    span.category Searching Results &nbsp;
+    span.category.keyword.success (...)
+    br
+  .collection(ng-if="!$ctrl.state.loading && !$ctrl.state.initial")
+    .search-keywords
+      span.category.search-copy.animate(ng-if="$ctrl.searchTitle" ng-bind-html="$ctrl.searchTitle") &nbsp;
+      br
+      span.category Searching Results
+      span.category.keyword(ng-if="!!$ctrl.state.keyword") &nbsp;:&nbsp; {{$ctrl.state.keyword}}
+      span.category.keyword.success &nbsp;({{$ctrl.state.count}})
+    br
+    .hide-mobile
+      div.flex-container(infinite-scroll="$ctrl.loadMore()" infinite-scroll-use-document-bottom="true" infinite-scroll-disabled="$ctrl.state.loadMore")
+        .animate-item.items(ng-repeat="item in $ctrl.collection track by $index")
+          .feature-vendor
+            a.pull-right.icon.icon-heart(ng-if="!($ctrl.isFave(item.id) > -1)" ng-click="$ctrl.fave({obj:item})" ng-class="{'disabled':$ctrl.state.processing}")
+            a.pull-right.icon-f.icon-heart-fave(ng-if="$ctrl.isFave(item.id) > -1" ng-click="$ctrl.unfave({obj:item})" ng-class="{'disabled':$ctrl.state.processing}")
+            a(ui-sref="{{$ctrl.redirectUrl}}({id:item.attributes.slug})" ng-class="{'disabled':$ctrl.state.processing}")
+              .feature-display(ng-class="{'default': item.attributes.photo_urls.length == 0}" ng-style="{ 'background-image': 'url(' + $root.setBGImage(item.attributes.photo_urls) + ')'}")
+          .mtop-15
+            img(ng-class="{'default': !item.attributes.profile_photo}" ng-src="{{$root.setPhoto(item.attributes.profile_photo)}}")
+            .user-info
+              span.name(ui-sref="{{$ctrl.redirectUrl}}({id:item.attributes.slug})" ng-class="{'disabled':$ctrl.state.processing}") {{item.attributes.business_name}}
+              .icon.icon-map-marker
+                span.location(ui-sref="{{$ctrl.redirectUrl}}({id:item.attributes.slug, location:true})") &nbsp;{{item.attributes.address_summary}}
+          ul.services
+            li(ng-repeat="service in $ctrl.fetchServices(item.attributes) track by $index") {{service}}
+      div(ng-show="$ctrl.state.loadMore")
+        spinner
+      .fadeout.animate(ng-if="$ctrl.state.scrollable")
+    .search-results.hide-desktop.mtop-30
+      div(equalize-height)
+        .items(equalize-height-add ng-repeat="item in $ctrl.collection track by $index" ng-swipe-left="$ctrl.scroll($event,true)" ng-swipe-right="$ctrl.scroll($event,false)")
+          .feature-vendor
+            a.pull-right.icon.icon-heart(ng-if="!($ctrl.isFave(item.id) > -1)" ng-click="$ctrl.fave({obj:item})" ng-class="{'disabled':$ctrl.state.processing}")
+            a.pull-right.icon-f.icon-heart-fave(ng-if="$ctrl.isFave(item.id) > -1" ng-click="$ctrl.unfave({obj:item})" ng-class="{'disabled':$ctrl.state.processing}")
+            a(ui-sref="{{$ctrl.redirectUrl}}({id:item.attributes.slug})" ng-class="{'disabled':$ctrl.state.processing}")
+              .feature-display(ng-class="{'default': item.attributes.photo_urls.length == 0}" ng-style="{ 'background-image': 'url(' + $root.setBGImage(item.attributes.photo_urls) + ')'}")
+          .mtop-15
+            img(ng-class="{'default': !item.attributes.profile_photo}" ng-src="{{$root.setPhoto(item.attributes.profile_photo)}}")
+            .user-info
+              span.ellipsis(style="width 195px;" ui-sref="{{$ctrl.redirectUrl}}({id:item.attributes.slug})") &nbsp;{{item.attributes.business_name}}
+              .icon.icon-map-marker
+                span.ellipsis.location(ui-sref="{{$ctrl.redirectUrl}}({id:item.attributes.slug, location:true})") &nbsp;{{item.attributes.address_summary}}
+          ul.services.limit
+            li(ng-repeat="service in $ctrl.fetchServices(item.attributes) track by $index") {{service}}

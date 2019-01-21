@@ -1,0 +1,104 @@
+header(logout="logout()" current-user="currentUser" page-title="Calendar" search-url="user/search")
+.main-content
+  .content-container.white-box(ng-show="!$root.menuView")
+    user-nav
+    #ucalendar-container.bs-container
+      .row.controls
+        .common-header.col-xs-12.col-md-4.hide-mobile
+          strong CALENDAR
+        .calendar-header.col-xs-12.col-md-4.col-md-push-4
+          div(ng-class="{'hide-mobile': view == 'day', 'disabled': view == 'day'}")
+            .icon.icon-arrow-left(ng-click="prev()")
+            span(ng-show="view != 'year'") {{month.format("MMMM YYYY")}}
+            span.year(ng-show="view == 'year'") {{year.format("YYYY")}}
+            .icon.icon-arrow-right(ng-click="next()")
+          .hide-desktop(ng-show="view == 'day'")
+            .icon.icon-arrow-left(ng-click="prev()")
+            span.year {{selected.format("DD MMMM")}}
+            .icon.icon-arrow-right(ng-click="next()")
+        .common-header.text-center.col-xs-12.col-md-4.col-md-pull-4
+          a(ng-click="changeView('day')" ng-class="{active : view == 'day'}") Day
+          a(ng-click="changeView('month')" ng-class="{active : view == 'month'}") Month
+          a(ng-click="changeView('year')" ng-class="{active : view == 'year'}") Year
+      br.hide-mobile
+      spinner(ng-if="loading")
+      #year-view.row(ng-show="view == 'year' && !loading")
+        .month-calendar.col-xs-12.col-md-3(ng-repeat="month in calendar track by $index")
+          .month-header
+            b.text-left(ng-if="$index == 0") {{month.month}} &nbsp; {{year.format("YYYY")}}
+            b.text-left(ng-if="$index != 0") {{month.month}}
+          .week(ng-repeat="week in month.weeks")
+            .hide-mobile
+              span.day(ng-class="{ 'today': day.isToday, 'different-month': !day.isCurrentMonth, 'has-record': day.hasRecord}" ng-repeat="day in week.days" ng-bind="day.number" ng-click="changeView('day', day.date)")
+            .hide-desktop.day(ng-repeat="day in week.days")
+              span.day(ng-class="{ 'today': day.isToday, 'different-month': !day.isCurrentMonth, 'has-record': day.hasRecord}" ng-bind="day.number" ng-click="changeView('day', day.date)")
+              .badge-success.hide-desktop(ng-bind="day.hasRecord" ng-if="day.hasRecord && day.isCurrentMonth")
+      #month-view.row(ng-show="view != 'year' && !loading" ng-class="{'hide-mobile': view == 'day'}")
+        .week.names(ng-if="!loading")
+          span.day.blank &nbsp;
+          span.day Sun
+          span.day Mon
+          span.day Tue
+          span.day Wed
+          span.day Thu
+          span.day Fri
+          span.day Sat
+          span.day.blank &nbsp;
+        .week(ng-repeat="week in weeks" ng-if="!loading")
+          .hide-mobile
+            .day.blank &nbsp;
+            .day.bs-container(ng-class="{ 'today': day.isToday, 'different-month': !day.isCurrentMonth, 'has-record': day.hasRecord}" ng-repeat="day in week.days" ng-click="changeView('day', day.date)")
+              .row
+                .col-sm-3.no-padding
+                  span(ng-bind-html=" day.number == 1 ? day.date.format('MMM') + '&nbsp;' + day.number : day.number")
+                .col-sm-9.text-right
+                  .badge-success.text-center(ng-bind="day.hasRecord" ng-if="day.hasRecord")
+            .day.blank &nbsp;
+          .hide-desktop.day(ng-repeat="day in week.days" ng-click="changeView('day', day.date)")
+            span.day(ng-class="{ 'today': day.isToday, 'has-record': day.hasRecord}"  ng-bind-html=" day.number == 1 ? day.date.format('MMM') + '&nbsp;' + day.number : day.number")
+            .badge-success.hide-desktop(ng-bind="day.hasRecord" ng-if="day.hasRecord")
+        .week.hide-mobile(style="height:33px;" ng-if="!loading")
+      .hide-desktop(ng-show="view == 'month' && !loading")
+        .col-xs-12.text-right
+          br/
+          a.selection(ng-click="recordView = 'invoices'"  ng-class="{active : recordView == 'invoices'}") Invoices
+          a.selection(ng-click="recordView = 'quotes'"  ng-class="{active : recordView == 'quotes'}") Quotes
+        .col-xs-12(ng-show="recordView == 'invoices'")
+          br/
+          .item.empty.text-center(ng-show="invoices.length == 0")
+            br/
+            b No due invoices
+          .due-items(ng-repeat="invoice in invoices")
+            .label-item(ng-repeat="(key,item) in invoice")
+              b {{key}}
+              .item(ng-repeat="i in item.data")
+                b(ng-bind="i.attributes.invoice_no")
+                br/
+                b(ng-bind="i.attributes.vendor")
+                br/
+                span This invoice is due on {{key | date: 'dd/MM/yy'}} amounting ${{i.attributes.amount | number: 2}}
+        .col-xs-12(ng-show="recordView == 'quotes'")
+          br/
+          .item.empty.text-center(ng-show="quotes.length == 0")
+            br/
+            b No expiry quotes
+          .due-items(ng-repeat="quote in quotes")
+            .label-item(ng-repeat="(key,item) in quote")
+              b {{key}}
+              .item(ng-repeat="i in item.data")
+                b(ng-bind="i.attributes.quote_no")
+                br/
+                b(ng-bind="i.attributes.vendor.name")
+                br/
+                span This quote will expire on {{i.attributes.expires_at | date: 'dd/MM/yy'}}
+      #day-view.row.hide-desktop(ng-show="view == 'day' && !loading")
+        day-record-list
+
+      #day-modal.bs-container.hide-mobile(ng-show="view == 'day' && !loading")
+        .dialog.row
+          .common-header.calendar-header.col-xs-12
+            .icon.icon-arrow-left(ng-click="prev()")
+            span.year {{selected.format("DD MMMM")}}
+            .icon.icon-arrow-right(ng-click="next()")
+          day-record-list
+          .common-header.col-xs-12

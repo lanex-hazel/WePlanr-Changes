@@ -1,0 +1,75 @@
+header(logout="logout()" current-user="currentUser" page-title="Vendor Catalogue" search-url="user/search")
+.main-content
+  .content-container(ng-show="!$root.menuView")
+    .hide-mobile
+      user-nav
+    #directory-container
+      .row.no-margin
+        .vendor-container.col-xs-12.expand
+          .search-container.mobile-breadcrumb
+            span.icon.icon-search
+            input.search-bar.form-control(placeholder="Search" ng-model="query.q" ng-enter="showList()")
+            span.icon.icon-exit(ng-show="query.q" ng-click="query.q=''; showList()")
+          .mobile-breadcrumb
+            a.btn.btn-clear(ng-show="!list_category && selected.value == 'category'" ng-click="selectedService = ''; searchList=[]; showList(true)") Back to {{selected.name}}
+            a.btn.btn-clear(ng-click="selected = label_options[1]; selectedService = ''; searchList=[]; showList(true)" ng-show="!list_category && selected.value == 'favorite'") Back to all categories
+          #category-selected
+            a(ng-click="selected = label_options[0]; showList()" ng-show="list_category && selected.value == 'category'") Favourites
+
+            span.label-selected(ng-show="selected.value == 'category'" ng-bind="selectedService")
+            
+            span.hide-desktop.count.pull-right(ng-bind="vendors[selectedService].length" style="margin-right: 15px;")
+          ui-select#filter-location(ng-model="filter_location" theme="selectize" on-select="filterLocation($item)" ng-if="!list_category && selected.value == 'category'")
+            ui-select-match(placeholder=" Select a location") {{$select.selected.attributes.name | uppercase}}
+            ui-select-choices(repeat="item in locations | filter: $select.search")
+              span(ng-bind-html="item.attributes.name | uppercase | highlight: $select.search")
+          .list
+            spinner.text-center.animate(style="width: 100%;" ng-if="loading")
+
+            #category-list.item.animate(ng-repeat="item in categories" ng-if="selected.value == 'category' && list_category && !loading")
+              .cover-photo.overlay.text-center(ng-style="{ 'background-image': 'url(/vendor/images/catalogue/' + (item.attributes.name | fileFormat) + '.jpg)'}" ng-click="setService(item.attributes.name)")
+                a.btn.btn-category(ng-bind="item.attributes.name" ng-click="setService(item.attributes.name)")              
+
+            .text-center.animate(style="margin:30px auto;font-size:18px;" ng-if="count == 0 && selected.value == 'favorite' && !loading && !list_category") No favourites yet
+            .text-center.animate(style="margin:30px auto;font-size:18px;" ng-if="((vendors[selectedService].length == 0 && selectedService != '') || (searchList.length == 0 && selectedService == '')) && selected.value == 'category' && !loading && !list_category") No results found
+ 
+            .item.animate(ng-repeat="item in vendors[selectedService]" ng-if="!loading && selected.value == 'category' && !list_category")
+              a.pull-right.icon.icon-heart(ng-if="!(isFave(item.id) > -1)" ng-click="fave_vendor(item)" ng-class="{'disabled' : processing}")
+              a.pull-right.icon-f.icon-heart-fave(ng-if="isFave(item.id) > -1" ng-click="unfave_vendor(item)" ng-class="{'disabled' : processing}")
+              .cover-photo(ng-class="{'default': item.attributes.photo_urls.length == 0}" ui-sref="user.vendor.show({id: item.attributes.slug})" ng-style="{ 'background-image': 'url(' + $root.setBGImage(item.attributes.photo_urls) + ')'}")
+              br
+              ul(style="position: relative;")
+                li.avatar(ng-class="{'default': !item.attributes.profile_photo}" style="position:absolute;" ng-style="{'background-image' : 'url(' + $root.setPhoto(item.attributes.profile_photo) + ')'}")
+                li(style="padding-left:52px;")
+                  span.name(ui-sref="user.vendor.show({id:item.attributes.slug})" ng-bind="item.attributes.business_name")
+                  br
+                  span.address.icon-map-marker(ui-sref="user.vendor.show({id:item.attributes.slug, location: true})") &nbsp;{{item.attributes.address_summary}}
+              ul.services
+                li(ng-repeat="service in item.attributes.services track by $index") {{service}}
+
+            .item.animate(ng-repeat="item in searchList" ng-if="!loading && selected.value == 'category' && selectedService == '' && !list_category")
+              a.pull-right.icon.icon-heart(ng-if="!(isFave(item.id) > -1)" ng-click="fave_vendor(item)" ng-class="{'disabled' : processing}")
+              a.pull-right.icon-f.icon-heart-fave(ng-if="isFave(item.id) > -1" ng-click="unfave_vendor(item)" ng-class="{'disabled' : processing}")
+              .cover-photo(ng-class="{'default': item.attributes.photo_urls.length == 0}" ui-sref="user.vendor.show({id: item.attributes.slug})" ng-style="{ 'background-image': 'url(' + $root.setBGImage(item.attributes.photo_urls) + ')'}")
+              br
+              ul(style="position: relative;")
+                li.avatar(ng-class="{'default': !item.attributes.profile_photo}" style="position:absolute;" ng-style="{'background-image' : 'url(' + $root.setPhoto(item.attributes.profile_photo) + ')'}")
+                li(style="padding-left:52px;")
+                  span.name(ui-sref="user.vendor.show({id:item.attributes.slug})" ng-bind="item.attributes.business_name")
+                  br
+                  span.address.icon-map-marker(ui-sref="user.vendor.show({id:item.attributes.slug, location: true})") &nbsp;{{item.attributes.address_summary}}
+              ul.services
+                li(ng-repeat="service in item.attributes.services track by $index") {{service}}
+
+            .item.animate(ng-repeat="item in fave_vendors" ng-if="!loading && selected.value == 'favorite' && !list_category")
+              a.pull-right.icon-f.icon-heart-fave(ng-if="isFave(item.id) > -1" ng-click="unfave_vendor(item)" ng-class="{'disabled' : processing}")
+              .cover-photo(ng-class="{'default': !item.attributes.sample_photo}" ui-sref="user.vendor.show({id: item.attributes.slug})" ng-style="{ 'background-image': 'url(' + $root.setPhoto(item.attributes.sample_photo,true) + ')'}")
+              br
+              ul(style="position: relative;")
+                li.avatar(ng-class="{'default': !item.attributes.profile_photo}" style="position:absolute;" ng-style="{'background-image' : 'url(' + $root.setPhoto(item.attributes.profile_photo) + ')'}")
+                li(style="padding-left:52px;")
+                  span.name(ui-sref="user.vendor.show({id:item.attributes.slug})" ng-bind="item.attributes.business_name")
+                  br
+                  span.address.icon-map-marker(ui-sref="user.vendor.show({id:item.attributes.slug, location: true})") &nbsp;{{item.attributes.address_summary}}
+              ul.services
+                li(ng-repeat="service in item.attributes.services track by $index") {{service}}

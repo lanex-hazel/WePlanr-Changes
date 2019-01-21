@@ -1,0 +1,26 @@
+.budget(ui-sref="user.organiser")
+  span.title Budget
+    .pull-right
+      i.fa.fa-angle-right.arrow-link
+    .budget-total
+      p(ng-bind-html="currentUser.wedding_details.budget | priceDisplay")
+    .budget-summary
+      table
+        tr
+          td Total Planned
+          td.budget-price-item
+            i.fa.fa-usd
+            span
+              |{{ totalPlanned | russianNum }}
+        tr
+          td Total Spend
+          td.budget-price-item
+            i.fa.fa-usd
+            span
+              |{{ totalSpend | russianNum }}
+        tr
+          td Difference
+          td.budget-price-item
+            i.fa.fa-usd
+            span
+              |{{ totalDifference | russianNum }}

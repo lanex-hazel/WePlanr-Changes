@@ -1,0 +1,22 @@
+#user-referral-container
+  br
+  p.text-center *Receive a&nbsp;
+    b $50 Gift Card
+    | &nbsp;useable at over 30 major retailers including Coles, Woolworths, Myer, David Jones, iTunes, JB Hi Fi and more for the first eligible booking you make on WePlanr and get a&nbsp;
+    b $25 Gift Card
+    | &nbsp;for every eligible booking thereafter. Just a small gift from us, to you, to say congratulations on getting one step closer to your big day!
+  br
+  br
+  .refer(style="height:150px;")
+    h4 Rewards
+    .text-center
+      .divider.credits.text-left.mleft-15
+        | Eligible transactions
+      .divider.credits.col-right
+        span(ng-bind="rewards.no_of_transactions")
+      .divider.credits.text-left.mleft-15
+        | Rewards earned
+      .divider.credits.col-right
+        span(ng-bind="rewards.credit | dollarNum")
+  br
+  .disclaimer *The Customer Reward Promotion is only valid for every single transaction with a business valued at $500 or more on WePlanr. This offer cannot be used with any other offer. This offer is not available to Concierge customers and with the Trial Rebate offer. The electronic gift card will be emailed to the primary address registered to your WePlanr account. Please refer to additional gift card terms and conditions set out at www.giftpay.com.au. This promotion is valid until 30 March 2018. WePlanr reserves the right to amend the terms of this promotion at any time, without notice.

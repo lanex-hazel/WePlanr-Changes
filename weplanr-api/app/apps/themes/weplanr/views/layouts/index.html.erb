@@ -1,0 +1,581 @@
+<html>
+  <head>
+    <!-- META SECTION -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>WePlanr</title>
+    <base href="/" />
+
+    <meta name="description" content="Plan your wedding effortlessly, organise everything beautifully. Find, book and manage everything in one place.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:title" content="Find, book and manage everything you need with WePlanr" />
+    <meta property="og:description" content="Find all your vendors in one place, chat direct and have your todo list and budget update automatically with every booking. Effortless planning, beautifully..." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.weplanr.com" />
+    <meta property="og:image" content="http://s3-ap-southeast-2.amazonaws.com/weplanr/fb-preview.png" />
+    <meta property="og:image:width" content="400" />
+    <meta property="og:image:height" content="300" />
+
+    <link rel="alternate" href="https://www.weplanr.com/" hreflang="en" />
+    <link rel="alternate" href="https://www.weplanr.com/" hreflang="en-au" />
+    <link rel="alternate" href="https://www.weplanr.com/" hreflang="en-gb" />
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="144x144" href="./vendor/images/apple-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="./vendor/images/apple-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="./vendor/images/apple-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="57x57" href="./vendor/images/apple-icon-57x57.png" />
+    <link rel="shortcut icon" href="./vendor/images/favicon.ico">
+    <!-- END META SECTION -->
+
+    <script type="text/javascript">
+      if (window.location.pathname != '/index' && localStorage.getItem('access_token')) window.location = '/index';
+      if (/\?t=/.exec(window.location.search)) window.location = window.location.origin + '/index' + window.location.search;
+    </script>
+
+    <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=all" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--link rel="stylesheet" href="./css/landing-icons.css"-->
+
+    <%= stylesheet_link_tag theme_asset_path("css/main") %>
+    <%= javascript_include_tag theme_asset_path("js/main.js") %>
+
+    <style>
+      #main > .container-fluid { padding: 0; }
+      #main > .container-fluid > .row:first-child { display: none; }
+      #main > .container-fluid .post-content > h1 { display: none; }
+
+      body {
+        background-color: #fff;
+        color: #272b2f;
+        font-family: Open Sans,sans-serif;
+        font-size: 1.375rem;
+        font-weight: 300;
+        -webkit-font-smoothing: subpixel-antialiased;
+      }
+
+      a, a:hover, a:active, a:focus {
+        color: #272b2f;
+      }
+
+      i.material-icons {
+        color: #272b2f;
+        vertical-align: middle;
+      }
+
+      #wrapper {
+        width: 1152px;
+        max-width: 100%;
+        margin: 0 auto;
+      }
+
+      a.btn-border {
+        font-size: 14px;
+        padding: .6rem 1.5rem !important;
+      }
+      #header .btn-default > i {
+        margin-left: 0;
+      }
+
+      #main {
+        background-color: #ffffff;
+        margin-top: 60px;
+        padding: 10px;
+      }
+      .scrollable {
+        height: ;
+      }
+
+      .content {
+      }
+
+      @media only screen and (max-width: 768px){
+        #main {
+          border-top: 1px solid rgba(56,59,64,0.1);
+          border-bottom: 1px solid rgba(56,59,64,0.1);
+        }
+      }
+
+      /* header.css */
+      #header .navbar {
+        background-color: #fff;
+        position: fixed;
+        top: 0;
+        max-width: 100%;
+        width: 1152px;
+        height: 60px;
+        overflow: hidden;
+        border-radius: 0;
+        z-index: 1;
+      }
+
+      .header-nav {
+        display: inline-block;
+        float: left;
+      }
+
+      .header-nav .right {
+        margin-top: 12px;
+      }
+
+      #header a:hover, #header  a:active, #header a:focus {
+        background-color: transparent;
+      }
+
+      #header-logo {
+        max-width: 38%;
+        height: 17px;
+        margin: 0 auto;
+        position: absolute;
+        top: 2.5rem;
+        left: 50%;
+        -webkit-transform: translate(-50%);
+        transform: translate(-50%);
+        z-index: 10;
+        cursor: pointer;
+      }
+
+      #consumer .btn-default:hover, #consumer .btn-default:active, #consumer .btn-default:focus {
+        background-color: rgba(206,66,87,0.78) !important;
+        border-color: rgba(206,66,87,0.78);
+        color: #ffffff;
+      }
+
+      #consumer .btn-default:hover > i, #consumer .btn-default:active > i, #consumer .btn-default:focus > i {
+        color: #ffffff;
+      }
+
+      @media only screen and (max-width: 768px){
+        #header .navbar {
+          background-color: #ffffff;
+          padding-left: 10px !important;
+          padding-right: 10px !important;
+        }
+
+        #consumer > a {
+          border: 0 !important;
+          padding-left: 0 !important;
+        }
+
+        #header .btn-border, .btn-border:hover, .btn-round, .btn-round:hover {
+          border: 1.4px solid transparent;
+        }
+
+        #header .btn-default > i {
+          margin-left: 0;
+          display: none;
+        }
+        .header-nav .right {
+          margin-top: 17px !important;
+        }
+      }
+
+      @media only screen and (max-width: 320px) {
+        #header-logo {
+          max-width: 27%;
+          height: 12px;
+          top: 2.7rem;
+          left: 49%;
+        }
+
+      }
+
+      /* footer.css */
+      #footer {
+        font-size: 1.3rem;
+        opacity: 0.8;
+      }
+
+      #nav-footer-links {
+        padding: 15px;
+        border-bottom: 1px solid rgba(56,59,64,0.1);
+      }
+
+      #nav-footer-links > li > a {
+        font-size: 1.5rem;
+        font-weight: 500;
+        text-decoration: underline;
+        -webkit-text-decoration-color: rgba(56,59,64,0.4);
+        text-decoration-color: rgba(56,59,64,0.4);
+        -moz-text-decoration-color: rgba(56,59,64,0.4);
+      }
+
+      #social-links a, #nav-footer-links a {
+        padding: 5px;
+      }
+
+      #social-links img {
+        width: 28px;
+        height: 28px;
+        opacity: 0.6;
+        vertical-align: top;
+      }
+
+      #footer .col-md-4 {
+        padding: 15px;
+      }
+
+      @media only screen and (max-width: 992px){
+        #footer .col-md-4 {
+          text-align: center !important;
+          padding-top: 0;
+        }
+        #footer .top {
+          padding-top: 45px !important;
+        }
+      }
+
+      @media only screen and (max-width: 768px){
+        .col-xs-12, .col-sm-12 {
+          padding: 0;
+        }
+        #nav-footer-links {
+          background-color: #ffffff;
+          border-bottom: 0;
+        }
+      }
+
+      /* queries.css */
+      @media only screen and (max-width: 768px){
+        .hide-mobile {
+          display: none !important;
+        }
+      }
+
+      @media only screen and (min-width: 769px){
+        .hide-desktop {
+          display: none !important;
+        }
+      }
+
+      /* navbar.css*/
+      .nav-custom {
+        padding-top: 11px;
+      }
+
+      .nav-custom > li {
+        display: inline-block;
+        line-height: 1.42857143;
+      }
+
+      .nav-custom > li > a:hover, .nav-custom > li > a:active, .nav-custom > li > a:focus {
+        background-color: transparent;
+      }
+
+      /* button.css */
+      .btn-default {
+        color: #272b2f;
+        border: 0;
+        padding: 0.6rem 1.5rem !important;
+        background-color: transparent;
+      }
+
+      .btn-border, .btn-border:hover, .btn-round, .btn-round:hover {
+        border-radius: 9px;
+        border: 1.4px solid rgba(0,0,0,0.102);
+      }
+
+      .btn-round, .btn-round:hover {
+        border-radius: 50%
+      }
+
+      .btn-icon {
+        padding: 7px 9px !important;
+      }
+
+      .btn-round > i {
+        width: 22px;
+        margin: auto;
+        transform: scaleX(-1);
+        -moz-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        -ms-transform: scaleX(-1);
+      }
+
+      .btn-success {
+        background-color: #5bc836 !important;
+        color: #ffffff;
+        border-color: #5bc836;
+      }
+      .btn-success:hover, .btn-success:active, .btn-success:focus {
+        background-color: #73d054 !important;
+      }
+
+      .btn-success > i {
+        color: #ffffff !important;
+      }
+
+      .btn-cancel, .btn-cancel:hover {
+        background-color: #272b2f !important;
+        color: #ffffff;
+        border-color: #272b2f;
+      }
+
+      .btn-default > i {
+        font-size: 10px;
+        color: #ce4257;
+        margin-left: 6px;
+      }
+
+      .btn:active, .btn:active:focus {
+        box-shadow: none;
+        outline: none;
+        background-color: transparent !important;
+      }
+
+      /* customer landing*/
+      .bs-container {
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+      }
+      #customer-landing .landing{
+        min-height: 378px;
+        margin-bottom: 10px;
+        -webkit-font-smoothing: antialiased;
+        font-size: 1.8rem;
+      }
+
+      #customer-landing .landing a{
+        font-size: 15px;
+        line-height: 1.5;
+        max-width: 100%;
+        width: 206px;
+        padding: 12px 24px !important;
+        -webkit-font-smoothing: initial;
+      }
+
+      #customer-welcome {
+        background: url(https://s3-ap-southeast-2.amazonaws.com/weplanr/weplanr/customer-landing.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center 25%;
+        color: #ce4257;
+        padding-top: 15%;
+        padding-bottom: 13%;
+      }
+
+      #customer-welcome p {
+        opacity: 0.9;
+      }
+
+      #tagline {
+        font-size: 3.5rem;
+      }
+
+      #customer-features {
+        background: hsla(0,0%,91%,0.2);
+        padding-top: 30px;
+        padding-bottom: 30px;
+      }
+
+      #customer-features > div > .list{
+        padding-top: 50px;
+      }
+
+      #customer-features .item {
+        max-width: 196px;
+        margin: 30px auto;
+        font-size: 1.8rem;
+        font-weight: 400;
+        line-height: 2;
+        color: rgba(32,32,32,0.6);
+      }
+
+      #feature-image > img {
+        width: 300px;
+        max-width: 100%;
+      }
+
+      #customer-enquiry {
+        background: url(https://s3-ap-southeast-2.amazonaws.com/weplanr/weplanr/onboard-tulips.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        box-shadow: inset 2000px 0 0 0 rgba(39,43,47,0.3);
+        color: rgba(0,0,0,0.6);
+        padding-top: 10%;
+        padding-bottom: 10%;
+        margin-bottom: 0 !important;
+      }
+
+      #card {
+        margin: auto;
+        width: 709px;
+        max-width: 90%;
+      }
+
+      #card > b {
+        color: #ffffff;
+      }
+
+      #card > div > p.start {
+        color: #202020;
+        font-size: 4rem;
+        margin-bottom: 30px;
+      }
+
+      #card > div {
+        background-color: #ffffff;
+        width: 100%;
+        height: 380px;
+        margin-top: 30px;
+        padding: 15% 15px;
+        font-size: 3rem;
+        line-height: 1;
+      }
+
+      #card > div > .row {
+        margin-top: 45px;
+      }
+
+      @media only screen and (min-width: 992px){
+        .col-md-push-a5 {
+          left: 45%;
+        }
+        .col-md-pull-a5 {
+          right: 45%;
+        }
+      }
+
+      @media only screen and (min-width: 601px) and (max-width: 992px) {
+        #card > div {
+          padding: 10% 15px;
+        }
+      }
+
+      @media only screen and (max-width: 992px){
+        #card > div > .col-xs-12, #card > div > .row > .col-md-6  {
+          margin: 7px 0;
+        }
+
+        #card > div a {
+          width: 426px !important;
+          max-width: 80%;
+        }
+      }
+
+      @media only screen and (max-width: 768px){
+        #customer-landing .landing {
+          font-size: calc(1.8rem / 1.4);
+        }
+        #tagline {
+          font-size: calc(3.5rem / 1.4);
+        }
+        #customer-features > div > .list {
+          padding-top: 0;
+        }
+      }
+
+      @media only screen and (max-width: 480px){
+        #customer-landing .landing {
+          font-size: calc(1.8rem / 1.8);
+        }
+        #customer-features .item {
+          font-size: 1.5rem;
+        }
+        #tagline, #card > div {
+          font-size: calc(3.5rem / 1.8);
+          margin-top: 30px;
+        }
+        #card > div > p.start {
+          font-size: calc(4rem / 1.5);
+        }
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+
+      <div id="header">
+        <nav class="navbar">
+          <a href="/index?menu" id="burger-menu" class="header-nav wp-icon burger-menu hide-mobile"></a>
+          <div id="consumer" class="header-nav">
+            <a class="btn btn-default btn-border right" href="/vendor/app">
+              <span>I'm A Business</span>
+              <i class="material-icons">play_arrow</i>
+            </a>
+          </div>
+          <a href="/search" class="header-nav pull-right wp-icon search"></a>
+          <div class="header-nav pull-right hide-mobile">
+            <a class="btn btn-default btn-border btn-success right" href="/index?signup" style="position: relative;">
+              <span>Sign Up</span>
+              <i class="material-icons" style="position: absolute; top: 12px;">play_arrow</i>
+            </a>
+            &nbsp;
+          </div>
+          <div class="header-nav pull-right">
+            <a class="btn btn-default right" href="/index?login">
+              Login
+            </a>
+          </div>
+          <img id="header-logo" src="https://s3-ap-southeast-2.amazonaws.com/weplanr/weplanr/logo.png" />
+
+        </nav>
+      </div>
+
+      <div id="main">
+        <%= yield %>
+      </div>
+
+      <div id="footer" class="bs-container">
+        <div class="row">
+          <div class="col-sm-12 col-xs-12">
+            <ul id="nav-footer-links" class="nav nav-custom text-center">
+              <li><a href="http://blog.weplanr.com" target="_blank" class="links">BLOG</a></li>
+              <li class="hide-mobile">-</li>
+              <li><a class="links" href="/privacy-policy">PRIVACY POLICY</a></li>
+              <li class="hide-mobile">-</li>
+              <li><a class="links" href="/terms-and-conditions">TERMS &amp; CONDITIONS</a></li>
+              <li class="hide-mobile">-</li>
+              <li><a href="mailto:hello@weplanr.com" class="links">CONTACT US</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4 col-sm-12 col-xs-12 top">International <strong>EN</strong></div>
+          <div id="social-links" class="col-md-4 col-md-push-4 col-sm-12 col-xs-12 text-right">
+            <a href="http://www.facebook.com/weplanr" target="_blank">
+              <img src="https://s3-ap-southeast-2.amazonaws.com/weplanr/weplanr/icon-gray-facebook.png" />
+            </a>
+            <a href="http://www.instagram.com/weplanr" target="_blank">
+              <img src="https://s3-ap-southeast-2.amazonaws.com/weplanr/weplanr/icon-gray-instagram.png" />
+            </a>
+            <a href="http://au.pinteres.com/weplanr" target="_blank">
+              <img src="https://s3-ap-southeast-2.amazonaws.com/weplanr/weplanr/icon-gray-pinterest.png" />
+            </a>
+          </div>
+          <div class="col-md-4 col-md-pull-4 col-xs-12 text-center">&copy; <span id="year"></span> WePlanr, All Rights Reserved</div>
+        </div>
+      </div>
+
+    </div>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+        var date = (new Date()).getFullYear();
+        document.getElementById("year").innerHTML = date;
+
+        var menu = $("#burger-menu");
+        var consumer = $("#consumer");
+
+        $(window).on("scroll", function(e){
+          if (this.pageYOffset > 59) {
+            consumer.addClass("hide-mobile");
+            menu.removeClass("hide-mobile");
+          } else {
+            menu.addClass("hide-mobile");
+            consumer.removeClass("hide-mobile");
+          }
+        });
+      });
+    </script>
+
+    <!-- Olark -->
+    <script type="text/javascript" async> ;(function(o,l,a,r,k,y){if(o.olark)return; r="script";y=l.createElement(r);r=l.getElementsByTagName(r)[0]; y.async=1;y.src="//"+a;r.parentNode.insertBefore(y,r); y=o.olark=function(){k.s.push(arguments);k.t.push(+new Date)}; y.extend=function(i,j){y("extend",i,j)}; y.identify=function(i){y("identify",k.i=i)}; y.configure=function(i,j){y("configure",i,j);k.c[i]=j}; k=y._={s:[],t:[+new Date],c:{},l:a}; })(window,document,"static.olark.com/jsclient/loader.js");
+    olark.identify('9946-961-10-5127');</script>
+
+  </body>
+</html>

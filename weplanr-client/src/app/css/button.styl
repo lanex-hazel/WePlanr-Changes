@@ -1,0 +1,59 @@
+.btn-block
+  display block
+  width 100%
+
+.btn
+  border 0px
+  border-radius 0px
+  font-weight 100
+  &:active
+    box-shadow: none
+    -webkit-box-shadow: none
+
+.btn-circle
+  padding: 13px 13px
+  display: inline-block
+  -moz-border-radius: 60px
+  -webkit-border-radius: 60px
+  border-radius: 60px
+  border: 1px solid $border
+
+.btn-round
+  border-radius 24px
+
+buttons(color, bg-color)
+  color color
+  background-color bg-color
+  border-radius 9px
+  padding 12px 24px
+  &:hover, &:focus, &:active, &.disabled
+    color color
+    background-color mix(white, bg-color, 15%)
+    cursor pointer
+  &.no-hover
+    &:hover, &:focus, &:active, &.disabled
+      color color
+      background-color bg-color
+
+.btn-success
+  buttons(#fff, $green-btn)
+
+.btn-gray
+  buttons(#ffffff,rgb(56, 59, 64))
+
+.btn-primary
+  buttons(rgba(38, 40, 44, 0.6), #fff)
+  border 1px solid rgba(172, 172, 172, 0.6)
+
+.btn-green
+  buttons(#fff, $green-btn)
+
+.btn-clear
+  buttons(rgb(32, 32, 32), transparent)
+
+.btn-clear-border
+  buttons(rgb(32, 32, 32), transparent)
+  border 1.4px solid rgba(0, 0, 0, 0.102)
+
+.swal2-modal button.styled
+  border-radius: 9px

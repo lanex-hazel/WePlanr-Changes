@@ -1,0 +1,39 @@
+.sidebar-panel
+  .brand
+    img.logo(src="/vendor/images/logo.png")
+  
+  .nav-profile.dropdown
+    a.dropdown-toggle(ng-click="openDropdown()")
+      .user-image
+        img.avatar.img-circle(alt="user" src="/vendor/images/ninja.png" title="user")
+      .user-info.expanding-hidden Admin
+        small.bold(ng-bind="user.role")
+    .dropdown-menu(ng-if="uiState.showDropdown")
+      a.dropdown-item(href="#")  Settings
+      .dropdown-divider
+      a.dropdown-item(ng-click="logout()")  Logout
+
+  nav
+    p.nav-title MENU
+    ul.nav
+      li
+        a(href="/admin/dashboard")
+          i.material-icons.text-primary dashboard
+          span Dashboard
+
+      li
+        a(href="/admin/schools")
+          i.material-icons.text-success assignment
+          span Schools
+      li
+        a(href="/admin/programs")
+          i.material-icons.text-success folder
+          span Programs
+  
+
+          span Schools
+      li
+        a(href="/admin/users")
+          i.material-icons.text-success folder
+          span Users
+  

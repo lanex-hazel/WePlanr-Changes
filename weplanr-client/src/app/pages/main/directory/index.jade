@@ -1,0 +1,22 @@
+header(page-title="Vendor Directory" search-url="search")
+.main-content
+  .content-container.white-box(ng-show="!$root.menuView")
+    vendor-catalogue(
+      loading="loading"
+      query="query"
+      count="count"
+      locations="locations"
+      categories="categories"
+      search="search()"
+      search-category="searchCategory()"
+      favorite="favorite()"
+      vendors="vendors"
+      fave-vendors="fave_vendors"
+      search-list="searchList"
+      unfave="unfave(vendor)"
+      fave="fave(vendor)"
+      selected-service="selected_service"
+      select-location="filter_location"
+      selected="selected"
+      list-category="listCategory"
+   )

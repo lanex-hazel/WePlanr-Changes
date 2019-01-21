@@ -1,0 +1,95 @@
+header(logout="logout()" current-user="currentUser" page-title="Payment Confirmation")
+.main-content
+  #quote.row.no-margin.content-container
+    .col-xs-12.no-padding
+      a.pull-right.icon.icon-exit(ng-click="goBack()")
+      h4 PAYMENT CONFIRMATION # {{obj.attributes.invoice_no}}
+
+      br/
+      br/
+
+      .row.quote-details
+        .col-xs-12.col-md-6
+          .row
+            .col-xs-3
+              .strong To
+            .col-xs-9(ng-bind="obj.attributes.wedding")
+          .row
+            .col-xs-3
+              .strong Quote Issued
+            .col-xs-9(ng-bind="obj.attributes.quote.created_at | date:'d MMMM yyyy'")
+          .row.strong(ng-show="obj.attributes.status == 'paid'")
+            .col-xs-3 Payment Made
+            .col-xs-9(ng-bind="obj.attributes.updated_at | date:'d MMMM yyyy'")
+          .row.strong(ng-show="obj.attributes.status != 'paid'")
+            .col-xs-3 Payment Due
+            .col-xs-9(ng-bind="obj.attributes.quote.payment_due | date:'d MMMM yyyy'")
+          .row.strong
+            .col-xs-3 Delivery Date
+            .col-xs-9(ng-bind="obj.attributes.quote.delivery_date | date:'d MMMM yyyy'")
+
+        .col-xs-12.col-md-6
+          .row
+            .col-xs-3
+              .strong From
+            .col-xs-9(ng-bind="obj.attributes.vendor.business_name")
+          .row
+            .col-xs-3
+              .strong ABN
+            .col-xs-9(ng-bind="obj.attributes.vendor.business_number")
+
+      br/
+      br/
+
+      .row.table-row
+        table
+          thead
+            tr
+              th Service
+              th Description
+              th Qty
+              th Cost
+              th Amount AUD
+          tbody
+            tr(ng-repeat="item in obj.attributes.quote_items")
+              td(ng-bind="item.name")
+              td(ng-bind="item.description")
+              td(ng-bind="item.quantity")
+              td(ng-bind="item.cost | currency:''")
+              td.strong(ng-bind="item.cost | currency:''")
+          tfoot
+            tr
+              td
+              td
+              td
+              td Subtotal
+              td(ng-bind="obj.attributes.payment.subtotal | currency:''")
+            tr
+              td
+              td
+              td
+              td Total GST 10%
+              td(ng-bind="obj.attributes.payment.total_gst | currency:''")
+            tr.strong
+              td
+              td
+              td
+              td Total AUD
+              td(ng-bind="obj.attributes.payment.total | currency:''")
+            tr
+              td
+              td
+              td
+              td Less Amount Paid
+              td(ng-bind="(obj.attributes.payment.total - obj.attributes.payment.amount_due) | currency:''")
+            tr.strong.amount-due
+              td
+              td
+              td
+              td Amount Due AUD
+              td(ng-bind="obj.attributes.payment.amount_due | currency:''")
+        br/
+
+        .pull-right(style="width: 137px;")
+          a.btn.btn-green(ng-hide="loading" ng-if="obj.attributes.quote.status != 'fulfilled'" ng-click="payFull(obj.attributes.quote_id)") PAY IN FULL NOW!
+          spinner(ng-show="loading")

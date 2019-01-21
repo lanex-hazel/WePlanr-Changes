@@ -1,0 +1,28 @@
+#monthView.animate(ng-if="view == 'month' || view == 'day'")
+  .week.names
+    span.day.blank &nbsp;
+    span.day Sun
+    span.day Mon
+    span.day Tue
+    span.day Wed
+    span.day Thu
+    span.day Fri
+    span.day Sat
+    span.day.blank none
+  .week(ng-repeat="week in weeks")
+    div.day.blank none
+    div.day(ng-class="{ 'today': day.isToday, 'different-month': !day.isCurrentMonth, 'partial': day.isBooked, 'not-available': day.isUnavailable, 'closed': day.isClosed}" ng-repeat="day in week.days" ng-click="changeView('day', day.date.format('YYYY-MM-DD'))")
+      .animate(ng-if="!day.isBooked && !day.isClosed && !day.isUnavailable")
+        | &nbsp;
+        span(ng-bind-html=" day.number == 1 ? day.date.format('MMM') + '&nbsp;' + day.number : day.number")
+      #schedule.animate(ng-if="day.isBooked || day.isClosed || day.isUnavailable")
+        .row.no-margin
+          .col-xs-12.col-md-3(style="padding-left: 7px;")
+            span(ng-bind="day.date.format('D')")
+          .col-xs-12.col-md-9.text-right(style="padding-left:0px;")
+            #time(style="padding-top: 5px;" ng-if="day.isUnavailable") FULLY BOOKED
+            #time(style="padding-top: 5px;" ng-if="day.isClosed") CLOSED
+            .badge-success(ng-bind="day.noOfBookings" ng-if="!day.isUnavailable && !day.isClosed")
+        
+    div.day.blank none
+  .week(style="height:35px;")

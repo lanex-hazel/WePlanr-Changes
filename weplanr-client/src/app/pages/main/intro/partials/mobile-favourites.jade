@@ -1,0 +1,23 @@
+#favourites
+  #favourites-list
+    .vendors(ng-repeat="data in collection[key]" ng-swipe-left="scroll($event,true)" ng-swipe-right="scroll($event,false)")
+      .col-xs-12.img-featured-container.no-padding
+        a.icon-heart(ng-click="$ctrl.fave({obj:data})")
+        //- a(ng-href="/profile/{{data.id}}")
+        .featured-photo(ng-if="data.attributes.photo_urls.length == 0" ng-style="{ 'background-image' : 'url(/vendor/images/sample.jpg)'}")
+        .featured-photo(ng-if="data.attributes.photo_urls.length > 0"
+        ng-style="{ 'background-image' : 'url(http://api.weplanr.spstage.com' + data.attributes.photo_urls[0].url + ')'}")
+      .col-xs-12.vendor-details
+        .img-container
+          img.avatar-photo(ng-if="!!data.attributes.profile_photo" ng-src="http://api.weplanr.spstage.com{{data.attributes.profile_photo}}")
+          img.avatar-photo(ng-if="data.attributes.profile_photo == ''" src="/vendor/images/default_user.png")
+        .vendor-info
+          a.name(ng-href="/profile/{{data.id}}")
+            span.mright-5(ng-bind="data.attributes.public_contact_name")
+          br
+          .address.icon-map-marker &nbsp;
+            span(ng-bind="data.attributes.business_address")
+      .col-xs-12.no-padding.service-wrap
+        ul.service-list
+          li.service-item-list(ng-repeat="service in data.attributes.services track by $index")
+            span.services-text(ng-bind="service")

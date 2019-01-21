@@ -1,0 +1,31 @@
+#quote
+  padding 20px
+  .strong
+    font-weight 500
+  .quote-details .row
+    margin-bottom 10px
+  .table-row
+    overflow-x scroll
+  table
+    width 100%
+    margin auto
+    td, th
+      padding 8px
+      &:nth-child(2)
+        width 50%
+      &:nth-child(3), &:last-child
+        width 135px
+      &:last-child
+        text-align right
+    tbody
+      border-top 1px solid #ccc
+      border-bottom 1px solid #ccc
+    tfoot
+      tr.amount-due
+        td:nth-child(2)
+          font-size 15px
+        td:last-child
+          font-size 24px
+        td:nth-last-child(-n+2)
+          border-top 1px solid #ccc
+          border-bottom 1px solid #ccc

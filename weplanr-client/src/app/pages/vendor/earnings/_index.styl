@@ -1,0 +1,88 @@
+#earnings
+  padding 25px
+  +respond-to(0, 480px)
+    padding 0px
+  b
+    line-height 3.5
+  table
+    width 100%
+    tbody
+      td
+        font-size 15px
+        color rgba(56, 59, 64, 0.502)
+        line-height 2
+        padding 30px
+        vertical-align text-bottom
+        &:first-child
+          font-weight: 600
+        &:last-child
+          font-size 30px
+          color rgb(56, 59, 64)
+          line-height 1
+        +respond-to(0, 480px)
+          font-size 12px
+          &:last-child
+            font-size 15px
+        +respond-to(0, 480px)
+          padding 30px 15px
+      tr.transaction>td
+        border-top 2px solid rgba(56, 59, 64, 0.051)
+        padding-top 40px
+      tr.booked>td
+        background-color rgb(248, 248, 248)
+        padding 50px 30px
+        &:last-child
+          font-size 40px
+          line-height 0.75
+          +respond-to(0, 480px)
+            font-size 20px
+        +respond-to(0, 480px)
+          padding 50px 15px
+      .paid, .expected, .held
+        font-size 18px
+        margin-right 5px
+      .paid
+        color rgb(201, 230, 194)
+      .expected
+        color rgb(141, 191, 233)
+      .held
+        color rgba(155, 157, 159, 0.302)
+      .aud
+        font-size 17px
+        font-weight 100
+        +respond-to(0, 480px)
+          font-size 12px
+  .select
+    position relative
+    margin auto
+    padding 0 15px
+    +respond-to(0, 480px)
+      padding 0
+    &:after
+      position absolute
+      right 18px
+      bottom 18.5px
+      z-index 1
+      text-align center
+      box-sizing border-box
+      content: "\f0da"
+      color #ce4257
+      font normal normal normal 12px/1 FontAwesome
+    select
+      font-size 20px
+      line-height 1.5
+      border-radius 0
+      -webkit-appearance none
+      -moz-appearance none
+      appearance none
+      padding 0 5px
+      height 50px
+  .canvas-wrapper
+    padding-left 15px
+    padding-right 15px
+    +respond-to(0, 480px)
+      padding-left 0
+      padding-right 0
+  +respond-to(0, 768px)
+    .content
+      margin-top 30px

@@ -1,0 +1,66 @@
+.modal
+  .modal-body
+    a.pull-right.icon.icon-exit(ng-click="close('reset-modal', false)")
+    div.animate(ng-show="!set_password")
+      section
+        p Password Reset
+      section
+        form(name="resetForm" novalidate="true" autocomplete="off" ng-model-options="{ updateOn: 'default', allowInvalid: true }" style="position: relative;")
+          span.errors.danger.animate(style="top: -19px; font-size: 1.8rem;" ng-if="uiState.error" ng-bind="uiState.error")
+          .form-input
+            input.form-control(
+              type="email"
+              name="resetEmail"
+              ng-model="user.email"
+              required=true
+            )
+            label(for="resetEmail") Email
+            span.errors.danger.animate(ng-if="resetForm.resetEmail.$touched && resetForm.resetEmail.$error.required") Please enter an email
+          .form-input
+            input.form-control(
+              type="password"
+              name="tempPassword"
+              ng-model="user.password"
+              required=true
+            )
+            label(for="tempPassword") Temporary Password
+            span.errors.danger.animate(ng-if="resetForm.tempPassword.$touched && resetForm.tempPassword.$error.required") Please enter a temporary password
+          .form-input
+            input.form-control(
+              type="password"
+              id="newPassword"
+              name="newPassword"
+              ng-model="user.new_password"
+              required=true
+              minlength="8"
+            )
+            label(for="newPassword") New Password
+            span.errors.danger.animate(ng-if="resetForm.newPassword.$touched && resetForm.newPassword.$error.required") Please enter a password
+            span.errors.danger.animate(ng-if="resetForm.newPassword.$error.minlength") Password must be atleast 8 characters
+          .form-input
+            input.form-control(
+              type="password"
+              name="confirmPassword"
+              ng-model="user.confirm_password"
+              pw-check="newPassword"
+              required=true
+              minlength="8"
+            )
+            label(for="confirmPassword") Confirm Password
+            span.errors.danger.animate(ng-if="resetForm.confirmPassword.$touched && resetForm.confirmPassword.$error.required && resetForm.newPassword.$valid") Please repeat your password
+            span.errors.danger.animate(ng-if="resetForm.confirmPassword.$dirty && resetForm.confirmPassword.$error.pwmatch && !resetForm.confirmPassword.$error.required") Password does not match
+        br
+      section
+        .btn-container
+          spinner(ng-show="uiState.loading")
+          a.btn.btn-success(ng-click="reset(resetForm)" ng-show="!uiState.loading") RESET PASSWORD
+    div.animate(ng-show="set_password")
+      section
+        p Password Reset
+      section
+        br
+        p Successfully reset your password.
+        br
+      section
+        .btn-container
+          a.btn.btn-success(ui-sref="main.intro" ui-sref-opts="{reload: true, inherit: false}" ng-show="!uiState.loading") OK

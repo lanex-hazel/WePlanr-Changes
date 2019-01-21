@@ -1,0 +1,393 @@
+.vendor-dashboard-container
+  .block-container
+    display flex
+    display -webkit-flex
+    flex-flow row wrap
+    justify-content center
+    margin 5px
+    height: 600px
+    overflow-y: scroll
+    &::-webkit-scrollbar
+      display: none
+    +respond-to(0,1140px)
+      margin 0
+
+    +respond-to(0, 768px)
+      #profile
+        order 1
+      .messages
+        order 2
+      .calendar-c
+        order 3
+      .earnings
+        order 4
+      .transactions
+        order 5
+      .profile-views-container
+        order 6
+
+    #profile
+      position relative
+      color white
+      .cover-photo
+        position absolute
+        width 100%
+        height 100%
+        background-size cover
+        background-position center
+        background-repeat no-repeat
+        box-shadow inset 2000px 0 0 0 rgba(39,43,47,0.3)
+        -webkit-box-shadow inset 2000px 0 0 0 rgba(39,43,47,0.3)
+        -mox-box-shadow inset 2000px 0 0 0 rgba(39,43,47,0.3)
+        z-index 1
+        &.default
+          background-size: 95%
+      section
+        z-index 2
+        position absolute
+        bottom 0
+        left 0
+        padding 3rem 1.5rem 2rem
+        //border-bottom 1.2px solid rgba(75, 77, 82,0.102)
+        font-size 1.5rem
+        color white
+        .reviewee
+          font-size 1.6rem
+          font-weight 500
+          line-height 1.2
+          vertical-align 10px
+        p
+          line-height 1.5
+      .text-label
+        font-weight bold
+
+      .avatar
+        width 32px
+        height 32px
+        background-size cover
+        background-position center
+        background-color: $white
+        background-repeat: no-repeat
+        border-radius 50%
+        &.default
+          background-color: $default-photo-bg
+          background-size: 98%
+        &.reviewer
+          width 28px
+          height 28px
+          display inline-block
+        +respond-to(1280px, 0)
+          width 42px
+          height 42px
+
+      .name
+        font-size 2.2rem
+        line-height 0.75
+        vertical-align 2px
+        +respond-to(1280px, 0)
+          font-size 2rem
+          font-weight 500
+          vertical-align 9px
+
+      .address
+        line-height 2
+        &:before
+          font-size 1rem
+          color white
+        +respond-to(1280px, 0)
+          font-size 1rem
+          margin-top -0.7rem
+
+      .icon-fillstar:after
+        color rgb(238, 203, 37)
+        font-size 2.8rem
+        margin-left 0.5rem
+        margin-right 0.5rem
+      .icon-fillstar:first-child:after
+        margin-left 0 !important
+      .icon-fillstar:last-child:after
+        margin-right 0 !important
+
+    #options-container
+      //width 74%
+      display flex
+      display -webkit-flex
+      flex-flow row wrap
+      +respond-to(0, 1140px)
+        width 100%
+        justify-content center
+        padding-bottom 2rem
+      .item
+        color #383b40
+        width 24%
+        min-width 260px
+        height 280px
+        margin 5px
+        +respond-to(0, 1024px)
+          margin 10px
+        +respond-to(0, 768px)
+          width 80%
+          height 320px
+          margin 10px
+          &:first-child
+            margin-top 20px
+      .item2
+        width 48.8%
+        height 280px
+        margin 5px
+        +respond-to(0, 768px)
+          width 80%
+          height 320px
+      .item, .item2
+        +respond-to(0, 480px)
+          width 85%
+        +respond-to(0, 320px)
+          width 286px
+
+  .section-label
+    text-transform uppercase
+    font-weight 500
+    color rgb(56, 59, 64)
+
+  .section-content
+    padding 15px 0
+    height 100%
+
+  .user-info
+    margin 0 auto
+    text-align center
+    img
+      width 35px
+      height 35px
+      border-radius 50%
+      vertical-align top
+    .contact
+      display inline-block
+      margin-left 5px
+      .name
+        font-size 18px
+      .icon-map-marker:before
+        font-size 10px
+        color $secondary-text
+      .location
+        font-size 14px
+        padding-top 5px
+        color $secondary-text
+        font-weight 400
+
+  .messages
+    background-color $light-blue
+    padding: 30px 15px !important
+    .section-label
+      padding: 0 12px 6px
+    .user-info
+      text-align left
+      .contact .name
+        font-size 20px
+        width: 177px
+        overflow: hidden
+        white-space: nowrap
+        text-overflow: ellipsis
+    .message-indicators
+      margin: auto
+      text-align: center
+      span.indicator
+        display: inline-block
+        border-radius: 50%
+        border: 1px solid #d7d7d7
+        margin: 16px 4px
+        height: 10.5px
+        width: 10.5px
+        &.active
+          background-color: #df6476
+          border-color: #df6476
+    .message
+      background-color white
+      padding 15px
+      height: 80%
+      .user-info
+        > *
+          vertical-align: top
+      .dashboard-profile-photo
+        background-color: #32383f
+        display: inline-block
+        border-radius: 50%
+        width: 28px
+        height: 28px
+        background-size: 100% 100%
+        -webkit-background-size: 100% 100%
+        -moz-background-size: 100% 100%
+        -o-background-size: 100% 100%
+      .name
+        font-size: 20px
+        font-weight: 500
+      p
+        &.message-text
+          font-size 12px
+          padding 5px
+          line-height 1.5
+          overflow hidden
+          text-overflow ellipsis
+          display -webkit-box
+          -webkit-box-orient vertical
+          -webkit-line-clamp 5
+
+  .calendar-c
+    background-color $light-gray
+    padding 30px
+    position relative
+    .calendar-custom
+      float none
+      margin 0 auto
+      position absolute
+      top 23px
+      width 80%
+      +respond-to(0, 768px)
+        width 90%
+      +respond-to(0, 480px)
+        width 85%
+      .calendar-header
+        background-color $light-gray
+        padding-bottom 5px
+        span
+          width 92%
+        .icon-arrow-right
+          left -20px
+      .week .day
+        width 12.28%
+        height 24px
+        line-height 24px !important
+        background-color $light-gray
+        margin 2px 2px
+        +respond-to(0, 768px)
+          width 30px
+          height 30px
+          line-height 30px !important
+          margin 2px 27px
+        +respond-to(0, 480px)
+          margin 2px 6px
+        +respond-to(0, 400px)
+          margin 2px 4px
+        +respond-to(0, 320px)
+          margin 2px 1.5px
+        &.not-available
+          border-radius 50%
+          background: #383b40 !important
+          color: white !important
+        &.closed
+          border-radius 50%
+          background rgba(206, 66, 87, 0.6) !important
+          color: white !important
+        &.partial
+          border-radius 50%
+          background rgba(56, 59, 64, 0.4)
+          color white
+        &:first-child
+          margin-left 0
+        &:last-child
+          margin-right 0
+      .week
+        background-color $light-gray
+        padding-top 3px
+        width 100%
+
+  .transactions
+    background-color $light-pink
+    .h4
+      font-size 14px
+      text-decoration underline
+    .transaction-type
+      margin 20px 5px
+    .figure
+      font-size 23px
+      font-weight 400
+      small
+        font-size 15px
+        font-weight 300
+        margin-left 4px
+
+  .earnings
+    background-color $light-green
+    .earning-total
+      padding-top 4rem
+      border-bottom 1px solid
+      font-size 4.75rem
+      text-align right
+      font-weight 100
+      p
+        margin 0
+        &::first-letter
+          font-size 28px
+    .earning-item
+      margin-top 4px
+      font-size 1.2rem
+      .lbl, .value
+        display inline-block
+      .value
+        float right
+      .digit
+        color #383b40
+      i
+        font-size 1rem
+
+  .profile, .reviews, .ratings
+    padding 15px 30px
+
+  .messages, .transactions, .earnings, .profile-views-container
+    height 320px
+    padding 30px
+    .arrow-link
+      color $primary-hover
+      font-size 18px
+      padding 0.5rem 1rem
+      border-radius 60%
+      border 2px solid rgba(47, 53, 60, 0.102)
+      margin 0
+
+  .profile-views-container
+    background-color #faefe8
+    margin 5px !important
+    padding 30px
+    .section-label
+      span
+        color: #ce4257
+        label
+          font-weight: 300
+          font-size: 1.4rem
+    .icon-arrow-right
+      display inline
+      text-align right
+      +respond-to(0, 768px)
+        padding-right 3rem
+     .icon-arrow-right:after
+      font-weight normal
+      padding 8px 12px
+      border 1px solid #ededed
+      border-radius 23px
+      font-size 12px
+      cursor pointer
+    .stats-summary
+      padding 3rem 0
+      margin-top 10%
+      > .col-sm-3
+        padding: 0 14px
+      span
+        text-align center
+
+  .figure
+    display block
+    font-size 3.825rem
+    font-weight 500
+
+  .h4
+    display block
+    font-size 1.425rem
+  
+  #welcome-popup .box
+    .icon, .icon:before, img
+      font-size: 18px
+      margin-top: 20px
+    h2, .welcome
+      margin-top: 10px
+      margin-bottom: 20px
+      line-height: 1.2

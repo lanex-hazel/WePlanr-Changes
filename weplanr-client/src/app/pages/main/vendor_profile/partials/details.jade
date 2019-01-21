@@ -1,0 +1,93 @@
+.vprofile
+  .grid.grid--gutters
+    .grid-cell.grid-half
+      .grid.grid--gutters
+        .grid-cell
+          .grid-container
+            img.vendor-profile-photo(ng-src="http://api.weplanr.spstage.com{{vendor.profile_photo}}")
+            .contact
+              span.title-name(ng-bind="vendor.public_contact_name")
+              .location
+                i.fa.fa-map-marker
+                span.mleft-5(ng-bind="vendor.business_address")
+        .grid-cell
+          .grid-container
+            ul
+              li
+                i.fa.fa-heart-o.btn-circle
+              li
+                a.btn.btn-send(ng-href="#") Send Message
+      .grid.grid--gutters
+        .grid-cell
+          .grid-container
+            span.title About
+            .detail-container
+              .about(ng-bind="vendor.about")
+              a.option-link(ng-click="toggleAbout(true)") more...
+        .grid-cell
+          .grid-container
+            span.title Service Locations
+            span.title.success.mleft-5 ({{vendor.locations.length}})
+            .detail-container
+              ul
+                li.service-item-list(ng-repeat="location in vendor.locations")
+                  i.fa.fa-map-marker
+                  span(ng-bind="location")
+      .grid.grid--gutters
+        .grid-cell
+          .grid-container
+            span.title Rating
+            span.title.success.mleft-5 (143 views)
+            .detail-container
+              ul
+                li.ratings(ng-repeat="rating in maxRating")
+                  i.fa.fa-star(ng-class="{'fill': rating <= rate}")
+        .grid-cell
+          .grid-container
+            span.title Services
+            .detail-container
+              ul
+                li.service-item-list.sub-item(ng-repeat="service in vendor.services")
+                  span(ng-bind="service")
+      .grid.grid--gutters
+        .grid-cell
+          .grid-container
+            span.title Services & Pricing
+            .detail-container
+              .grid.grid--gutters
+                .grid-cell
+                  .grid-container
+                    ul
+                      li.packages(ng-repeat="package in vendor.pricing_and_packages")
+                        span(ng-bind=" package.name")
+                .grid-cell
+                  .grid-container
+                    ul
+                      li.packages.text-right(ng-repeat="package in vendor.pricing_and_packages")
+                        span(ng-bind=" package.price")
+        .grid-cell
+          .grid-container
+            span.title Availability
+            .detail-container
+              calendar
+      .grid.grid--gutters
+        .grid-cell
+          .grid-container
+            span.title Social
+            .detail-container
+              ul
+                li(ng-repeat="(key, value) in vendor.social_channels")
+                  a.social-links(ng-href="{{value}}") 
+                    img(ng-src="vendor/images/icon-gray-{{key}}.png" width="30px")
+        .grid-cell
+          .grid-container
+            span.title Website
+            .detail-container
+              a.web-link(ng-href="{{vendor.website}}" target="_blank" ng-bind="vendor.website")
+    
+    .grid-cell.grid-half.img-carousel
+      ul.main-slider(rn-carousel rn-carousel-index="slideIndex2" rn-carousel-auto-slide)
+        li(ng-repeat="photo in vendor.photo_urls")
+          img.bg-image(image-fillfield ng-src="http://api.weplanr.spstage.com{{photo.url}}")
+      #thumbnail-container.col-md-12.no-padding
+        img.thumb(image-fillfield ng-repeat="photo in vendor.photo_urls" ng-click="$parent.slideIndex2=$index" ng-src="http://api.weplanr.spstage.com{{photo.url}}")

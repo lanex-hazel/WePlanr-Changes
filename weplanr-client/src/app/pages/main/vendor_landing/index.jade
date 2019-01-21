@@ -1,0 +1,218 @@
+header
+.main-content
+  .content-container(style="min-height: 76vh;")
+    .vendor-landing-container
+      section.landing
+        .landing-section
+          p.tagline
+            | Spend more time doing what you love,
+            br
+            | we take care of the rest.
+
+          p.sub-text
+            | Find, book and manage your business
+            br.hide-desktop
+            | &nbsp;in one place.
+
+          a.btn.btn-success(ui-sref="main.vendor_register") JOIN NOW
+
+      section.iphone
+        p.main-text
+           | Whether you're in the office or on the go, our sleek, modern
+           br
+           | and intuitive tools help you manage your business better
+
+        .icon-holder.first.row.no-margin
+          .col-xs-6
+            .icon
+              img(src="/vendor/images/icon-red-eye.png")
+              p
+                | Make a great first impression
+                br
+                | with personalised profiles
+          .col-xs-6
+            .icon
+              img(src="/vendor/images/icon-red-list.png")
+              p
+                | Pay a once-off registration fee and have full
+                br
+                | creative control of your business, no lock
+                br
+                | in contracts or on-going subscription fees
+        .icon-holder.row.no-margin
+          .col-xs-6
+            .icon
+              img(src="/vendor/images/icon-red-dollar.png")
+              p
+                | Hassle-free payments; quote, invoice, track
+                br
+                | and remind customers when a payment
+                br
+                | is due all from your dashboard
+          .col-xs-6
+            .icon
+              img(src="/vendor/images/icon-red-speech-bubble.png")
+              p
+                | Connect directly with customers
+                br
+                | through our chat feature
+        .icon-holder.row.no-margin
+            .col-xs-6
+              .icon
+                img(src="/vendor/images/icon-red-calendar.png")
+                p
+                  | Never miss a booking again with our
+                  br
+                  | integrated calendar and booking
+            .col-xs-6
+              .icon
+                img(src="/vendor/images/icon-red-stats.png")
+                p
+                  | A better way to do business; track
+                  br
+                  | your views, sales and conversations with
+                  br
+                  | our intuitive reporting tools
+      section.better-business
+        p.main-text
+          | Experience Better Business in 3 easy steps
+
+        .reasons
+          .reason
+            b.step-number 1
+            span.writeup
+              .text-header Set Up Shop
+              .text-body
+                p
+                  | Register as a business, pay a once-off registration fee, set up your profile and
+                  | start connecting with your dream clients. Tell them who you are, why you love
+                  | what you do and show off some of your best work.
+
+          .reason
+            b.step-number 2
+            span.writeup
+              .text-header Save the Date
+              .text-body
+                p
+                  | Once you and your customer agree on the price and scope of your services, a
+                  | 40% deposit is required to secure your services and their date. Once the
+                  | deposit is paid, we'll leave you to do your thing while we do ours!
+
+          .reason
+            b.step-number 3
+            span.writeup
+              .text-header Live Happily Ever After
+              .text-body
+                p
+                  | Couples will need to pay the final 60% before their big day. You'll receive half
+                  | of this payment immediately, and get the other half once the job is completed,
+                  | giving both you and your clients the happily ever after you deserve.
+                  //| For more information about transaction fees and payments, read our&nbsp;
+                  //a(href='#vendor-landing-faq') FAQs
+
+      section.say-i-do
+        .price-holder
+          p.tagline
+            | Say I Do!
+
+          p.sub-text
+            | Become a registered
+            br
+            | business today
+
+          p.price
+            span.just JUST
+            span.current-price $99
+            span.special-text
+              | SPECIAL PRICE
+
+          p.limited-time FOR A LIMITED TIME
+
+          a.btn.btn-success(ui-sref="main.vendor_register") JOIN NOW
+
+      section.faqs#vendor-landing-faq
+        .text-header FAQ
+
+        .questions-holder
+          .question(ng-class="{ 'active': activeFaq == 'vendor_costs' }")
+            .question-header(ng-click="setActiveFaq('vendor_costs')")
+              i.icon-chev
+
+              span What costs are involved to become a registered business?
+
+            .question-body(ng-if="activeFaq == 'vendor_costs'")
+              | Coming Soon
+
+          .question(ng-class="{ 'active': activeFaq == 'get_paid' }")
+            .question-header(ng-click="setActiveFaq('get_paid')")
+              i.icon-chev
+
+              span How do I get paid?
+
+            .question-body(ng-if="activeFaq == 'get_paid'")
+              | Coming Soon
+
+          .question(ng-class="{ 'active': activeFaq == 'provide_contracts' }")
+            .question-header(ng-click="setActiveFaq('provide_contracts')")
+              i.icon-chev
+
+              span Does WePlanr provide contracts for each project?
+
+            .question-body(ng-if="activeFaq == 'provide_contracts'")
+              | Coming Soon
+
+          .question(ng-class="{ 'active': activeFaq == 'legally_responsible' }")
+            .question-header(ng-click="setActiveFaq('legally_responsible')")
+              i.icon-chev
+
+              span Who is legally responsible for works engaged through WePlanr?
+
+            .question-body(ng-if="activeFaq == 'legally_responsible'")
+              | Coming Soon
+
+          .question(ng-class="{ 'active': activeFaq == 'invite_customers' }")
+            .question-header(ng-click="setActiveFaq('invite_customers')")
+              i.icon-chev
+
+              span Can I invite customers to use the platform?
+
+            .question-body(ng-if="activeFaq == 'invite_customers'")
+              | Coming Soon
+
+          .question(ng-class="{ 'active': activeFaq == 'dispute_review' }")
+            .question-header(ng-click="setActiveFaq('dispute_review')")
+              i.icon-chev
+
+              span Can I dispute a review?
+
+            .question-body(ng-if="activeFaq == 'dispute_review'")
+              | Coming Soon
+
+          .question(ng-class="{ 'active': activeFaq == 'wedding_canceled' }")
+            .question-header(ng-click="setActiveFaq('wedding_canceled')")
+              i.icon-chev
+
+              span What happens if the wedding is cancelled?
+
+            .question-body(ng-if="activeFaq == 'wedding_canceled'")
+              | Coming Soon
+
+          .question(ng-class="{ 'active': activeFaq == 'insurance' }")
+            .question-header(ng-click="setActiveFaq('insurance')")
+              i.icon-chev
+
+              span Is there insurance?
+
+            .question-body(ng-if="activeFaq == 'insurance'")
+              | Coming Soon
+
+      section.get-started
+        p.tagline
+          | Let's get started
+
+        p.sub-text
+          | SPEND MORE TIME
+          br.hide-desktop
+          | &nbsp;DOING WHAT YOU LOVE
+
+        a.btn.btn-success(ui-sref="main.vendor_register") SIGN UP AS A BUSINESS

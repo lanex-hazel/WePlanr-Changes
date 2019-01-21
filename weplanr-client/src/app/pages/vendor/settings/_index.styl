@@ -1,0 +1,285 @@
+.vendor-settings-container
+  .list-margin
+    margin 0 30px
+  .inline
+    display inline-block !important
+  .form-group
+    margin-bottom 30px
+    .sub-form
+      margin-bottom 5px
+      &.left
+        padding-left 0
+        padding-right 5px
+        .form-control
+          color #bebfc0
+      &.right
+        padding-left 5px
+        padding-right 0
+  label
+    &.form-label
+      opacity 0.6
+      font-size 12px
+      font-weight 500
+      color #bebfc0
+      text-transform uppercase
+  .form-control
+    line-height 1.5
+    font-size 18px
+    font-weight 400
+    &.right
+      text-align right
+    &.disabled
+      border-bottom 0
+  .img-avatar
+    width 47px
+    height 47px
+    display inline-block
+    border-radius 50%
+    object-fit cover
+    background-color: $white
+    &.default
+      background-color: $default-photo-bg
+      object-fit: contain
+  
+  .about-textarea
+    height auto
+    width 100%
+    resize none
+    line-height 1.5em
+    overflow-y hidden
+  
+  .location-container
+    border 0
+    border-bottom 1px solid $border
+    font-size 12px
+    line-height 1.5
+    color $primary-text
+    padding-bottom 5px
+    margin-bottom 10px
+    position relative
+    li.location-item
+      border solid 1px rgba(39, 43, 47, 0.5)
+      background-color: $white
+      margin 5px
+      width auto
+      display inline-block
+      a
+        padding 5px
+        cursor pointer
+        line-height 1.6
+        margin 0
+        text-transform capitalize
+        color: $primary-text
+        &:hover
+          border 0
+    .icon-map-marker:before, .icon-exit:before
+      color $primary-text
+      font-size 8px
+      font-weight normal
+
+  .delete-info
+    color $secondary-text
+    font-weight 500
+    margin 0
+    opacity 0.8
+    padding-left 0
+    padding-right 0
+    &:hover
+      text-decoration underline
+
+  .cancel-info
+    color $light-black
+    font-weight 500
+    margin 0
+    padding-left 0
+    padding-right 0
+    &:hover
+      text-decoration underline
+      
+  .save-info
+    top -1px
+    background-color $green-btn
+    color #ffffff
+    border-radius 40px
+    &:hover
+      background-color mix(black, $green-btn, 15%)
+  
+  .remove-option
+    position relative
+    i.fa-close
+      position absolute
+      top 8px
+      left 5px
+
+  .portfolio-container
+    padding 0 40px
+
+  .settings-block
+    padding 30px 24%
+    &.fill-container
+      background-color $unfill
+    .option-save
+      text-align right
+  +respond-to(992px,1024px)
+    .col-md-push-3
+      left: 21%
+  +respond-to(0, 992px)
+    .settings-menu-option
+      text-align: center
+      .option-save
+        text-align: center
+        padding 5px
+
+  .progress
+    display inline-block
+    width calc(100% - 65px)
+    max-width 400px
+    vertical-align bottom
+    margin 5px
+    .progress-bar
+      background-color #f0506b
+
+  .btn-green
+    padding 6px 12px
+    font-weight 400
+
+  .scroll-box
+    overflow: scroll
+    height: 606px
+
+  #referral-container
+    padding: 15px 30px
+    min-height: 351px
+    width: 800px
+    max-width: 100%
+    margin auto
+    p
+      font-size: 15px
+    .code
+      color: $primary-hover
+      margin-top: 5px
+    .copy-instruction
+      font-size: 30px
+      +respond-to(0,768px)
+        font-size: 16px
+    .btn-success
+      padding 8px 16px
+    table
+      width 100%
+      tbody
+        &.list
+          display: block
+          height: 136px
+          overflow-y: auto
+        td
+          height 34px
+          font-size 16px
+          line-height 2.3
+          +respond-to(0,320px)
+            font-size: 12.5px
+          .form-control
+            border: 1px solid rgba(56, 59, 64, 0.102)
+            &::-webkit-input-placeholder
+              font-style: italic
+              font-weight: 400
+              color: rgba(0, 0, 0, 0.3)
+              font-size: 13px
+            &:-moz-placeholder
+              font-style: italic
+              font-weight: 400
+              color: rgba(0, 0, 0, 0.3)
+              font-size: 13px
+            &::-moz-placeholder
+              font-style: italic
+              font-weight: 400
+              color: rgba(0, 0, 0, 0.3)
+              font-size: 13px
+            &:-ms-input-placeholder
+              font-style: italic
+              font-weight: 400
+              color: rgba(0, 0, 0, 0.3)
+              font-size: 13px
+            &:focus::-webkit-input-placeholder
+              color: transparent
+            &:focus::-moz-placeholder
+              color: transparent
+            &:focus:-moz-placeholder
+              color: transparent
+        tr.form-input > td
+          border 0
+          &.errors
+            color $danger
+            font-size 12px
+  #refer
+    width: 100%
+    margin: 0 auto 30px
+    border-top: 1px solid #c4c4c4
+    padding-top: 25px
+    .divider
+      width: 50%
+      display: inline-block
+      float: left
+      font-size: 16px
+      line-height: 2.3
+      +respond-to(0,768px)
+        width: 100%
+      &.credits
+        border: 1px solid #c4c4c4
+        border-bottom: 0
+        border-right: 0
+        padding: 4px
+        +respond-to(0,768px)
+          width: 50%
+        +respond-to(0,320px)
+          font-size: 12.5px
+        &:nth-last-child(-n+2)
+          border-bottom: 1px solid #c4c4c4
+          margin-bottom 30px
+        &.col-right
+          border-left: 0
+          border-right: 1px solid #c4c4c4
+          width: 45%
+          text-align: right
+
+#photo-crop-vendor
+  section
+    padding-left 1.5rem
+    padding-right 1.5rem
+  .btn
+    font-size 1.3rem
+    font-weight 500
+    line-height 1.5
+    padding 8px 44px
+    margin-bottom 15px
+    &.btn-green
+      background-color rgb(102,212,126)
+    &.btn-gray
+      background-color #bbb
+  .crop-area
+    background #E4E4E4
+    overflow hidden
+    width 480px
+    height 300px
+    max-width 90%
+    margin 0 auto
+    
+@media screen and (max-width 768px)
+  .vendor-settings-container
+    .settings-block
+      padding 30px 55px
+    .selectize-control.single .selectize-input input
+      height 34px
+      font-size 12px
+      width 100% !important
+    .ui-select-multiple.ui-select-bootstrap .ui-select-match-item
+      font-size 12px !important
+    .form-control, .selectize-control.single .selectize-input span
+      font-size 14px !important
+    label.form-label
+      font-size 10px !important
+
+    .settings-menu-option .btn-round
+      width 50%
+
+    .link-option
+      text-align right

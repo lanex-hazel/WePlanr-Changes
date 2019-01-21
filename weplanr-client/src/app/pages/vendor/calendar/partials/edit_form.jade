@@ -1,0 +1,47 @@
+form(name="bookingForm" autocomplete="off")
+  .form-input.icon.icon-caret-down
+    input.form-control.edit-timepicker.timepicker-with-dropdown(
+      type="text"
+      id="booktime"
+      name="booktime"
+      required=true
+      ng-model="bookedDays[currentTab].attributes.schedule_time"
+    )
+    label(for="name") Time
+  .form-input
+    input.form-control(
+      type="text"
+      id="name"
+      name="name"
+      required=true
+      ng-model="bookedDays[currentTab].attributes.client"
+      maxlength="32"
+      ng-disabled="bookedDays[currentTab].attributes.system_booking"
+      ng-class="{'text-right': bookedDays[currentTab].attributes.system_booking}"
+    )
+    label(for="name") Name
+  .form-input.icon.icon-map-marker
+    input.form-control(
+      form-geoaddress
+      address="bookedDays[currentTab].attributes.location"
+      type="text"
+      id="book_location"
+      name="location"
+      required=true
+      ng-model="bookedDays[currentTab].attributes.location"
+      maxlength="28"
+      placeholder=""
+      ng-disabled="bookedDays[currentTab].attributes.system_booking"
+      ng-class="{'text-right': bookedDays[currentTab].attributes.system_booking}"
+    )
+    label(for="location") Location
+  .form-input
+    input.form-control(
+      type="text"
+      id="details"
+      name="details"
+      required=true
+      ng-model="bookedDays[currentTab].attributes.details"
+      maxlength="32"
+    )
+    label(for="details") Details

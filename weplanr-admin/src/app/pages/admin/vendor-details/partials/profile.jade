@@ -1,0 +1,242 @@
+.profile-container
+  form(name="vendorForm" novalidate="true" autocomplete="off")
+    .form-group
+      img.avatar.animate(src="{{avatar}}")
+      div(type="file" ng-model="profile_photo" ngf-select="" ngf-change="setImage($files)" ng-disabled="uploadOngoing" ngf-accept="'image/*'" style="display: inline; margin-left: 15px;")
+        a.btn.btn-success(ng-bind="uploadOngoing ? 'Uploading...' : 'Upload a new avatar'" ng-disabled="uploadOngoing")
+    .form-group
+      label ID
+      input.form-control(
+        ng-change="updatePrimaryService()"
+        type="text"
+        name="internal_id"
+        ng-model="vendor.internal_id"
+        pattern="^[0-9]+\.[0-9]+$")
+      span.error(ng-show="vendorForm.internal_id.$error.pattern") Must be valid format (eg. 12.3)
+    .form-group
+      label Business name
+      input.form-control(
+        type="text"
+        name="business_name"
+        ng-model="vendor['business_name']"
+      )
+    .form-group
+      label Business Number
+      input.form-control(
+        type="text"
+        name="business_number"
+        ng-model="vendor['business_number']"
+        pattern="^[0-9 ]+$")
+      span.error(ng-show="vendorForm.business_number.$error.pattern") Can only contain numbers
+    .form-group
+      label Registered Business Street Address
+      input.form-control(
+        type="text"
+        ng-model="vendor['registered_street_address']")
+    .form-group
+      label Registered Business Suburb
+      input.form-control(
+        type="text"
+        ng-model="vendor['registered_suburb']")
+    .form-group
+      label Registered Business State
+      input.form-control(
+        type="text"
+        ng-model="vendor['registered_state']")
+    .form-group
+      label Registered Business Country
+      input.form-control(
+        type="text"
+        ng-model="vendor['registered_country']")
+    .form-group
+      label Registered Business Post Code
+      input.form-control(
+        type="text"
+        ng-model="vendor['registered_post_code']")
+    .form-group
+      label Public Contact First Name
+      input.form-control(
+        type="text"
+        name="public_contact_firstname"
+        ng-model="vendor['firstname']")
+      span.error(ng-show="vendorForm.public_contact_firstname.$error.pattern") Can only contain letters
+    .form-group
+      label Public Contact Last Name
+      input.form-control(
+        type="text"
+        name="public_contact_lastname"
+        ng-model="vendor['lastname']")
+      span.error(ng-show="vendorForm.public_contact_lastname.$error.pattern") Can only contain letters
+    .form-group
+      label Suburb
+      input.form-control(
+        type="text"
+        ng-model="vendor['suburb']")
+    .form-group
+      label State
+      input.form-control(
+        type="text"
+        ng-model="vendor['state']")
+    .form-group
+      label Address Summary
+      input.form-control(
+        type="text"
+        name="address_summary"
+        ng-model="vendor['address_summary']")
+    .form-group
+      label Group Category
+      input.form-control(disabled="true" ng-model="primaryService")
+    .form-group
+      label Primary Services
+      ui-select(multiple tagging tagging-label='false' remove-selected="false" ng-model='vendor.primary_services' theme='bootstrap' style='width: 100%; height: auto !important;' title='Services' ng-class="{'disabled': vendor.primary_service_id == 14}")
+        ui-select-match(placeholder='Choose a primary service...') {{$item.attributes.name}}
+        ui-select-choices(repeat='service.attributes.name as service in primary_services | filter:$select.search') {{service.attributes.name}}
+    .form-group
+      label Secondary Services
+      ui-select(multiple tagging tagging-label='false' remove-selected="false" ng-model='vendor.secondary_services' theme='bootstrap' style='width: 100%; height: auto !important;' title='Services')
+        ui-select-match(placeholder='Choose a secondary service...') {{$item.attributes.name}}
+        ui-select-choices(repeat='service.attributes.name as service in secondary_services | filter:$select.search') {{service.attributes.name}}
+    .form-group
+      label Service Locations
+      ui-select(multiple tagging ng-model='vendor.locations' theme='bootstrap' style='width: 100%; height: auto !important;' title='Service Location')
+        ui-select-match(placeholder='Choose a location...') {{$item.attributes.name}}
+        ui-select-choices(repeat='loc.attributes.name as loc in locationOpt | filter:$select.search') {{loc.attributes.name}}
+    .form-group
+      label Other Service Locations
+      tags-input(ng-model="vendor.other_location_list" replace-spaces-with-dashes="false" placeholder='Add other possible locations')
+    .form-group
+      label Tags
+      tags-input(ng-model="vendor.tag_list" replace-spaces-with-dashes="false" placeholder='Add search tags')
+    .form-group
+      label Website
+      input.form-control(
+        type="text"
+        name="website"
+        ng-model="vendor['website']"
+        pattern="^(http://|https://)?www\.[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$"
+        placeholder="www.example.com")
+      span.error(ng-show="vendorForm.website.$error.pattern") Invalid URL eg., www.example.com
+    .form-group
+      label About
+      textarea.form-control(
+        type="text"
+        name="about"
+        rows="3"
+        ng-model="vendor['about']")
+    .form-group
+      label Service and Price
+      a(ng-click="addData(newVar.packages)") &nbsp; Add Services
+      .row(ng-repeat="new in newVar.packages")
+        .col-xs-6.form-container
+          input.form-control(ng-model="new.name" placeholder="Service")
+        .col-xs-5.form-container
+          input.form-control(ng-model="new.price" placeholder="$")
+        .col-xs-1.no-padding.form-container
+          a.remove-option(ng-click="removeData($index,newVar.packages)") Remove
+      .row(ng-repeat="package in vendor.pricing_and_packages")
+        .col-xs-6.form-container
+          input.form-control(ng-model="package.name")
+        .col-xs-5.form-container
+          input.form-control(ng-model="package.price")
+        .col-xs-1.no-padding.form-container
+          a.remove-option(ng-click="removeData($index,vendor.pricing_and_packages)") Remove
+    .form-group
+      label Social Channels
+      a(ng-click="addData(newVar.links)") &nbsp; Add Socials
+      
+      .row(ng-repeat="new in newVar.links")
+          .col-xs-6.form-container
+            select.form-control(ng-model="selectedSocial[$index]"
+              ng-change="selectedFnc($index, selectedSocial[$index])"
+              ng-options="social for social in socialOpt | exclude:selectedSocial:selectedSocial[$index]"
+            )
+              option(value="" disabled selected) Choose a social
+          .col-xs-5.form-container
+            input.form-control(ng-model="new.link" placeholder="Link")
+          .col-xs-1.no-padding.form-container
+            a.remove-option(ng-click="removeData($index,newVar.links,true)") Remove
+      .row(ng-repeat="(key,value) in vendor.social_channels" ng-if="value")
+        .col-xs-6.form-container
+          span.form-control(ng-bind="key" ng-class="{'read-only' : true}")
+        .col-xs-5.form-container
+          input.form-control(type="text"
+          name="social_channels"
+          ng-model="vendor.social_channels[key]")
+        .col-xs-1.no-padding.form-container
+          a.remove-option(ng-click="removeData(key,vendor.social_channels)") Remove
+    .form-group
+      label Searchable
+      | &nbsp;
+      input(
+        type="checkbox"
+        ng-model="vendor.searchable"
+      )
+    .form-group
+      label Anchor
+      | &nbsp;
+      input(
+        type="checkbox"
+        ng-model="vendor.anchor"
+      )
+    .form-group
+      label.radio-inline
+        input(type="radio" ng-model="vendor.vendor_type" value="standard" ng-change="updateCustomFee()")
+        strong Standard
+      label.radio-inline
+        input(type="radio" ng-model="vendor.vendor_type" value="non-profit" ng-change="updateCustomFee()")
+        strong Not for profit
+      label.radio-inline
+        input(type="radio" ng-model="vendor.vendor_type" value="custom" ng-change="updateCustomFee()")
+        strong Custom
+    .form-group.custom-vendor-fees(ng-if="vendor.vendor_type != 'standard'")
+      label Custom Vendor Fee
+      br/
+      input.form-input(
+        type="text"
+        name="fee_pcg"
+        ng-model="vendor.custom_vendor_fee_pcg"
+        ng-required="vendor.custom_vendor_fee_flat"
+        pattern="^[0-9]+$")
+      |% - 1.75% + 30¢ +
+      input.form-input(
+        type="text"
+        name="fee_flat"
+        ng-model="vendor.custom_vendor_fee_flat"
+        ng-required="vendor.custom_vendor_fee_pcg"
+        pattern="^[0-9]+$")
+      |AUD
+      br/
+      span.error(ng-show="vendorForm.fee_pcg.$error.pattern") Transaction must be valid format (eg. 99, 199). 
+      span.error(ng-show="vendorForm.fee_flat.$error.pattern") Flat must be valid format (eg. 99, 199)
+  .col-xs-12
+      spinner.animate(ng-if="uiState.loading")
+      .option-links.text-center.animate(ng-if="!uiState.loading")
+        a.danger-bg(ng-click="onCancel()") Cancel
+        a.success-bg(ng-click="onSave(vendorForm)") Save
+
+  modal#photo-crop-upload(ng-class="{ show: !!myImage, in: !!myImage }")
+    .modal
+      .modal-body
+        a.pull-right.icon.icon-exit(ng-click="$ctrl.cancelUpload()")
+        section
+          p Upload Photo
+        section
+          .crop-area
+            img-crop(
+              image="myImage"
+              result-image="croppedImage"
+              area-type="circle"
+              result-image-quality="1.0"
+              result-image-size="600"
+              result-image-format="image/jpeg")
+          br
+        section
+          .hide-mobile
+            a.btn.btn-gray(ng-click="cancelUpload()") CANCEL
+            | &nbsp;&nbsp;&nbsp;&nbsp;
+            a.btn.btn-green(ng-click="uploadAvatar(croppedImage)") UPLOAD PHOTO
+          .hide-desktop
+            a.btn.btn-green(ng-click="uploadAvatar(croppedImage)") UPLOAD PHOTO
+            br
+            a.btn.btn-gray(ng-click="cancelUpload()") CANCEL
+     .modal-backdrop

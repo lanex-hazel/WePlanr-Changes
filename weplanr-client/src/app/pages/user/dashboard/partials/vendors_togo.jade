@@ -1,0 +1,18 @@
+.vendors-container
+  .label HERE ARE SOME BUSINESSES YOU MIGHT LIKE&nbsp;
+    span.count ({{collection.length}})
+  a.pull-right.see-more.hide-mobile(ng-show="collection.length > 0" ng-click="searchWithTodo()") See more &nbsp;
+    i.fa.fa-angle-right.mleft-10
+  .searched-results
+    .items(ng-repeat="item in collection | limitTo: 4" ng-swipe-left="scroll($event,true)" ng-swipe-right="scroll($event,false)")
+      .business-photo
+        .cover-photo(ng-class="{'default': item.attributes.photo_urls.length == 0, 'disabled' : processing}" ng-style="{ 'background-image': 'url(' + setBGImage(item.attributes.photo_urls) + ')'}" ui-sref="user.vendor.show({id:item.attributes.slug})")
+        a.pull-right.fave-btn(ng-if="!(isFave(item.id) > -1)" ng-click="favorite(item)" ng-class="{'disabled' : processing}")
+        a.pull-right.unfave-btn(ng-if="isFave(item.id) > -1" ng-click="unfavorite(item)" ng-class="{'disabled' : processing}")
+      .vendor-details
+        .avatar-photo(ng-class="{'default': !item.attributes.profile_photo}" ng-style="{ 'background-image': 'url(' + setPhoto(item.attributes.profile_photo) + ')'}")
+        .business-info
+          .name(ui-sref="user.vendor.show({id:item.attributes.slug})") {{item.attributes.business_name}}
+          .location(ui-sref="user.vendor.show({id:item.attributes.slug,location:true})") &nbsp;{{item.attributes.address_summary}}
+        .services
+          .item(ng-repeat="service in fetchServices(item.attributes) track by $index") {{service}}

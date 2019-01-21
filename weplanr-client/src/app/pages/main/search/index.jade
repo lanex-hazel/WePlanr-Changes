@@ -1,0 +1,12 @@
+#search-header
+  header(ng-if="!uiState.form" params="{search: {q: query.q, search:true}}")
+  .header-container.search-head.animate(ng-if="uiState.form" ng-style="{'position': 'static'}")
+    .header(ng-style="{'background-color': '#fff'}")
+      nav#mobile-header-nav
+        ul
+          li.pull-right(style="padding-right: 0;")
+            a.icon.icon-exit(ng-href="/")
+#search.main-content
+  .content-container
+    vendor-search.animate(ng-if="uiState.form")
+    vendor-result

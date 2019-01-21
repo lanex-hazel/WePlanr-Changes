@@ -1,0 +1,222 @@
+header(logout="logout()" current-user="currentUser" page-title="Organisr" search-url="user/search")
+.main-content
+  .content-container.white-box(ng-show="!$root.menuView")
+    user-nav
+    #organiser-container
+      .item-summary
+        .box.light-blue
+          .progress-filter.first
+            round-progress.round-progress(
+              max="itemCnt"
+              current="completed"
+              color="#71b2fd"
+              bgcolor="#e7e5e8"
+              radius="100"
+              stroke="30"
+              semi="false"
+              rounded="false"
+              clockwise="true"
+              responsive="true"
+              duration="800"
+              animation="easeInOutQuart"
+              animation-delay="0")
+            .item-progress(ng-class="{'ones': pending <= 9}") {{pending}}
+            .filters.small items remaining
+          .progress-filter.second
+            .filters.large Hi {{name}}!
+            .filters
+              div(ng-hide="uiState.filter == 'overdue'")
+                | You have&nbsp;
+                strong {{completed}}&nbsp;
+                a.link(ng-class="{'disabled': uiState.filter == 'booked'}" ng-click="changeFilter('booked')" ng-bind="completed <= 1 ? 'item booked.' : 'items booked.'")
+              div
+                | You have&nbsp;
+                strong {{pending}}&nbsp;
+                a.link(ng-class="{'disabled': uiState.filter == 'pending'}" ng-click="changeFilter('pending')" ng-bind="pending <= 1 ? 'item left to book.' : 'items left to book.'")
+              div(ng-if="uiState.filter == 'all' || uiState.filter == 'removed'")
+                strong {{(items | statusOverdue:remainingMonths).length}}&nbsp;
+                | of these are now&nbsp;
+                a.link(ng-click="changeFilter('overdue')") overdue.
+              div(ng-if="uiState.filter == 'overdue'")
+                | These&nbsp;
+                strong {{(items | statusOverdue:remainingMonths).length}}&nbsp;
+                | are now overdue.
+              a.link(ng-click="changeFilter('all')" ng-if="uiState.filter != 'all' && uiState.filter != 'removed'") Go back to view all items?
+
+
+        organisr-overview(max-budget="maxBudget" planned="totalPlanned" actual="totalActual" save="saveBudget(budget)")
+      .category-container
+        .search-form
+          .icon.icon-search
+          input.search-bar(placeholder="Search in to-do items" ng-model="uiState.query")
+        .button-actions
+          a.btn-success.btn-add(ng-click="openModal(true)") &nbsp;&nbsp;ADD ITEM
+          a.btn-delete(ng-click="changeFilter('removed')" ng-show="uiState.filter != 'removed'") DELETED ITEMS
+          a.btn-delete.back(ng-click="changeFilter('all')" ng-show="uiState.filter == 'removed'") Go Back
+        .category-tabs
+          a.view.category(ng-click="changeView('category')" ng-class="{'active': uiState.view == 'category'}")
+            span CATEGORY VIEW
+          | |
+          a.view.timeline(ng-click="changeView('timeline')" ng-class="{'active': uiState.view == 'timeline'}")
+            span TIMELINE VIEW
+          .mobile-navigation.pull-right.hide-desktop(ng-hide="uiState.filter == 'removed'")
+            .icon.icon-arrow-left.active(ng-click="navigate(false)" ng-if="currentColumn != 0")
+            .icon.icon-arrow-right.active(ng-click="navigate(true)" ng-if="currentColumn != 2")
+        spinner(ng-if="loading")
+        .budget-breakdown(ng-if="uiState.filter != 'removed' && !loading")
+          .budget-column
+            .label-item
+            .label-item.empty
+            .label-item.header-label(ng-class="{'hide-mobile' : column[0]}") PLANNED
+            .label-item.empty(ng-class="{'hide-mobile' : column[0]}")
+            .label-item.header-label(ng-class="{'hide-mobile' : column[1]}") ACTUAL
+            .label-item.empty(ng-class="{'hide-mobile' : column[1]}")
+            .label-item.header-label(ng-class="{'hide-mobile' : column[2]}") PAID
+            .label-item.empty(ng-class="{'hide-mobile' : column[2]}")
+            .label-item.header-label(ng-class="{'hide-mobile' : column[3]}") OWING
+            .label-item.empty(ng-class="{'hide-mobile' : column[3]}")
+          .budget-column.highlight
+            .label-item.header-item TOTAL
+            .label-item.empty
+            .label-item.header-amount(ng-class="{'hide-mobile' : column[0]}") {{totalPlanned | moneyFormat}}
+            .label-item.empty(ng-class="{'hide-mobile' : column[0]}")
+            .label-item.header-amount(ng-class="{'hide-mobile' : column[1]}") {{totalActual | moneyFormat}}
+            .label-item.empty(ng-class="{'hide-mobile' : column[1]}")
+            .label-item.header-amount(ng-class="{'hide-mobile' : column[2]}") {{totalPaid | moneyFormat}}
+            .label-item.empty(ng-class="{'hide-mobile' : column[2]}")
+            .label-item.header-amount(ng-class="{'hide-mobile' : column[3], 'non-zero': totalOwing > 0, 'zero': totalOwing <= 0 }") {{totalOwing | moneyFormat}}
+            .label-item.empty(ng-class="{'hide-mobile' : column[3]}")
+          #budget-items-scroll
+            .budget-items(ng-repeat="arr in filterItems | orderBy: 'label.order_rank':uiState.order" ng-hide="(arr.items | filter: uiState.query).length == 0" ng-class="{'end': $last || ($index == filterItems.length -2)}")
+              .budget-column
+                .label-item.item-category {{arr.label.name | uppercase}}
+              .budget-column.highlight.gray(ng-repeat="obj in arr.items | orderBy: 'attributes.position' | filter: uiState.query")
+                .label-item
+                  .checkbox(ng-class="{'checked': obj.attributes.status == 'booked'}")
+                  a.icon.overdue.icon-overdue(ng-class="{'inactive' : obj.attributes.status != 'overdue'}")
+                    span.tooltip-text.due(ng-bind="obj.attributes.status != 'overdue' ? 'Not overdue' : 'Overdue'")
+                  a.name(ng-click="toggleVendorForm(obj,'add')" ng-if="obj.attributes.status != 'booked'") {{obj.attributes.name}}
+                    span.tooltip-text Booked a business outside of WePlanr? Add their details here.
+                  a.name(ng-click="toggleVendorForm(obj,'edit')" ng-if="obj.attributes.status == 'booked' && !!obj.attributes.outside_vendor") {{obj.attributes.name}}
+                  a.name(ng-click="toggleVendorForm(obj,'booked')" ng-if="obj.attributes.status == 'booked' && !!obj.attributes.vendor") {{obj.attributes.name}}
+                .label-item.empty
+                .label-item(ng-class="{'hide-mobile' : column[0]}")
+                  input.editable(
+                    ng-blur="editable = false; updatePlanned(obj)"
+                    ng-model="obj.attributes.planned"
+                    ng-class="{'editActive': editable}"
+                    ng-focus="editable = true"
+                    ng-enter="editable = false; updatePlanned(obj)"
+                    maxlength="8"
+                    prefixed-spaced-numbers=""
+                  )
+                .label-item.empty(ng-class="{'hide-mobile' : column[0]}")
+                .label-item(ng-class="{'hide-mobile' : column[1]}")
+                  input.editable(
+                    ng-class="{'editActive': obj.attributes.actual > 0}"
+                    ng-model="obj.attributes.actual"
+                    maxlength="8"
+                    prefixed-spaced-numbers=""
+                    ng-focus="toggleVendorForm(obj,'add')"
+                    ng-if="obj.attributes.status != 'booked'"
+                  )
+                  input.editable(
+                    ng-class="{'editActive': obj.attributes.actual > 0}"
+                    ng-model="obj.attributes.actual"
+                    maxlength="8"
+                    prefixed-spaced-numbers=""
+                    ng-focus="toggleVendorForm(obj,'edit')"
+                    ng-if="obj.attributes.status == 'booked' && !!obj.attributes.outside_vendor"
+                  )
+                  input.editable(
+                    ng-class="{'editActive': obj.attributes.actual > 0}"
+                    ng-model="obj.attributes.actual"
+                    maxlength="8"
+                    prefixed-spaced-numbers=""
+                    ng-focus="toggleVendorForm(obj,'booked')"
+                    ng-if="obj.attributes.status == 'booked' && !!obj.attributes.vendor"
+                  )
+                .label-item.empty(ng-class="{'hide-mobile' : column[1]}")
+                .label-item(ng-class="{'hide-mobile' : column[2]}")
+                  input.editable(
+                    ng-class="{'editActive': obj.attributes.paid > 0}"
+                    ng-model="obj.attributes.paid"
+                    maxlength="8"
+                    prefixed-spaced-numbers=""
+                    ng-focus="toggleVendorForm(obj,'add')"
+                    ng-if="obj.attributes.status != 'booked'"
+                  )
+                  input.editable(
+                    ng-class="{'editActive': obj.attributes.paid > 0}"
+                    ng-model="obj.attributes.paid"
+                    maxlength="8"
+                    prefixed-spaced-numbers=""
+                    ng-focus="toggleVendorForm(obj,'edit')"
+                    ng-if="obj.attributes.status == 'booked' && !!obj.attributes.outside_vendor"
+                  )
+                  input.editable(
+                    ng-class="{'editActive': obj.attributes.paid > 0}"
+                    ng-model="obj.attributes.paid"
+                    maxlength="8"
+                    prefixed-spaced-numbers=""
+                    ng-focus="toggleVendorForm(obj,'booked')"
+                    ng-if="obj.attributes.status == 'booked' && !!obj.attributes.vendor"
+                  )
+                .label-item.empty(ng-class="{'hide-mobile' : column[2]}")
+                .label-item(ng-class="{'hide-mobile' : column[3], 'non-zero': (obj.attributes.actual - obj.attributes.paid) > 0, 'zero': (obj.attributes.actual - obj.attributes.paid) <= 0}")
+                  | {{(obj.attributes.actual - obj.attributes.paid) | moneyFormat}}
+                .label-item.empty(ng-class="{'hide-mobile' : column[3]}")
+                .label-item.actions
+                  button.btn-more &#9679;&#9679;&#9679;
+                  ul.dropdown-items(ng-class="{'add': obj.attributes.status != 'booked'}" ng-hide="uiState.vendorForm || uiState.addNotes")
+                    li(ng-click="toggleVendorForm(obj,'add')" ng-if="obj.attributes.status != 'booked'") Add Booking
+                    li(ng-click="toggleVendorForm(obj,'edit')" ng-if="obj.attributes.status == 'booked' && !!obj.attributes.outside_vendor") Edit Booking
+                    li(ng-click="toggleVendorForm(obj,'booked')" ng-if="obj.attributes.status == 'booked' && !!obj.attributes.vendor") View Booking
+                    li(ng-click="toggleNoteModal(obj,true)") Add Notes
+                    li(ng-click="toggleRemoveModal(obj)" ng-show="obj.attributes.status != 'booked'") Delete
+        .budget-deleted(ng-if="uiState.filter == 'removed' && !loading")
+          .budget-items(ng-if="removedItems.length <= 0")
+            .budget-column
+            .budget-column.highlight.gray.text-center
+              strong NO DELETED ITEMS
+          .budget-items(ng-repeat="arr in removedItems | orderBy: 'label.id':uiState.order" ng-if="removedItems.length > 0")
+            .budget-column
+              .label-item.item-category {{arr.label.name | uppercase}}
+            .budget-column.highlight.gray(ng-repeat="obj in arr.items | filter: uiState.query")
+              .label-item
+                .checkbox
+                | {{obj.attributes.name}}
+              .label-item.right.pull-right
+                a.restore-link(ng-click="restoreItem(obj.attributes.id)") RESTORE ITEM
+      .mobile-form-overlay.top(ng-if="uiState.vendorForm" ng-class="{'show-form' : uiState.vendorForm}")
+        add-vendor-form(
+          obj="selectedItem"
+          mode="uiState.formType"
+          toggle-form="toggleVendorForm(obj,mode)"
+          remove-modal="uiState.removeModal"
+          save="addVendor(obj,params)"
+          update="updateVendor(obj,params)"
+          ng-if="uiState.vendorForm")
+      .mobile-form-overlay.top(ng-if="uiState.addNotes" ng-class="{'show-form' : uiState.addNotes}")
+        organisr-add-notes(
+          obj="selectedItem"
+          toggle-form="toggleNoteModal(obj,enable)"
+          save="saveNotes(obj,params)"
+        )
+organisr-remove-modal(
+  obj="selectedItem"
+  remove-modal="uiState.removeModal"
+  remove="removeItem(obj)"
+  ng-if="uiState.removeModal"
+)
+organisr-add-modal(
+  add-modal="uiState.addModal"
+  suggested-tags="suggestedTags"
+  suggesting="suggesting"
+  items="items"
+  services="services"
+  save="addItem(obj)"
+  suggest="fetchTags(params)"
+  ng-if="uiState.addModal"
+  close="openModal(val)"
+)

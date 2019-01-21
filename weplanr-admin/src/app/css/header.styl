@@ -1,0 +1,36 @@
+.navbar-header
+  position: relative
+  float: none
+  z-index: 1000
+  
+.navbar-brand
+  position: absolute
+  margin: 0 auto
+  left: 45%
+  font-weight: 200
+  font-size: 23px
+  .navbar-title
+    font-weight: 400
+    color: $dark-red
+  .navbar-subtitle
+    color: $light-gray
+
+@media only screen and (min-width: 320px)
+  .navbar-brand
+    left: 28%
+
+@media (min-width: 375px) and (max-width: 424px)
+  .navbar-brand
+    left: 32%
+
+@media (min-width: 425px) and (max-width: 767px)
+  .navbar-brand
+    left: 35%
+
+@media (min-width: 768px) and  (max-width: 1023px)
+  .navbar-brand
+    left: 43%
+
+@media (min-width: 1024px) and  (max-width: 2560px)
+  .navbar-brand
+    left: 45%

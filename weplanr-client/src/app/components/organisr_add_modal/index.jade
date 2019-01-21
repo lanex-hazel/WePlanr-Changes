@@ -1,0 +1,63 @@
+modal#organisr-add-item.show.in
+  .modal
+    .modal-body(ng-class="{'expand': $ctrl.selectedService.attributes.name == 'Others'}")
+      a.pull-right.icon.icon-exit(ng-click="$ctrl.close({val:false})")
+      .title-label
+        | Please create your new item.
+      form.todo-item-form(name="form" autocomplete="off")
+        .form-group
+          label.form-label ITEM NAME
+          input.form-control(
+            type="text"
+            name="itemname"
+            ng-model="$ctrl.form.name"
+            maxlength="50"
+            required=true
+          )
+          .form-error(ng-class="{'show': form.itemname.$dirty && form.itemname.$error.required}") Please enter an item name
+        .form-group
+          label.form-label SELECT A SERVICE {{$ctrl.form.service}}
+          .select-dropdown.block
+            select.select-form.form-control(
+              placeholder=""
+              name="service"
+              ng-model="$ctrl.selectedService"
+              required
+              ng-change="$ctrl.setTimeframe()"
+              ng-options="option.attributes.name for option in $ctrl.services"
+            )
+              option(value="") Select a service
+          .form-error(ng-class="{'show': form.service.$dirty && form.service.$invalid}") Please select a service
+        .form-group.form-group-suggest(ng-show="$ctrl.selectedService.attributes.name == 'Others'")
+          label.form-label SERVICE NAME
+          input.form-control(
+            type="text"
+            name="servicename"
+            ng-model="$ctrl.form.service_name"
+            ng-model-options="{ debounce: 500 }"
+            ng-change="$ctrl.suggestTags()"
+            maxlength="50"
+            required
+          )
+          ul.dropdown(ng-show="$ctrl.form.service_name && !$ctrl.selectedSuggested" ng-class="{'results': $ctrl.suggestedTags.length >= 4}")
+            li(ng-show="$ctrl.suggesting")
+              spinner
+            li(ng-show="!$ctrl.suggesting && $ctrl.suggestedTags.length >= 1 && $ctrl.form.service_name && !$ctrl.selectedSuggested" ng-repeat="tag in $ctrl.suggestedTags")
+              a(ng-bind="tag | capitalize" ng-click="$ctrl.selectSuggeston(tag)")
+          .form-error(ng-class="{'show': form.servicename.$dirty && form.servicename.$error.required}") Please enter an item name
+        .form-group(ng-show="$ctrl.selectedService.attributes.name == 'Others'")
+          label.form-label SELECT A TIMEFRAME {{$ctrl.form.timeframe}}
+          .select-dropdown.block
+            select.select-form.form-control(
+              placeholder=""
+              name="timeframe"
+              ng-model="$ctrl.selectedTimeframe"
+              ng-options="timeframe.desc for timeframe in $ctrl.timeframe"
+              required
+            )
+              option(value="") Select a timeframe
+          .form-error(ng-class="{'show': form.timeframe.$dirty && form.timeframe.$invalid}") Please select a timeframe
+        .form-group.text-right
+          br
+          a.btn-success.btn-create(ng-click="$ctrl.submit(form)") CREATE
+  .modal-backdrop

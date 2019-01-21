@@ -1,0 +1,48 @@
+#view-quote-container
+  padding: 60px
+  table
+    &, td, th
+      border: 1px solid #dcd7d7
+    td, th
+      padding: 4px
+      vertical-align: top
+      &:first-child, &:nth-child(n+3)
+        width: 20%
+    td:nth-child(n+3)
+      text-align: right
+    tfoot
+      text-align: right
+
+#todo-item
+  .todo-checklist
+    text-align left
+    padding-bottom 30px
+    font-size: 16px
+    > .todo-box
+      height: 86px
+      overflow-y: scroll
+      &.less
+        height: auto
+        overflow-y: hidden
+    > .todo-box > .todo-items
+        width: calc(100% - 50px)
+        margin: auto
+    > .add-item
+      font-weight: 600
+      letter-spacing: -0.6px
+      margin-right: 3px
+      width: calc(100% - 50px)
+      margin: auto
+      &:hover, &:focus, &:active, &.active
+        color: #d04055
+        text-decoration: none
+        > span
+          text-decoration: underline
+      > span
+          margin-left: 15px
+      &:before
+        content: "\e91f"
+        font-weight: normal
+  .btn-green
+    width: calc(100% - 50px)
+    margin: auto

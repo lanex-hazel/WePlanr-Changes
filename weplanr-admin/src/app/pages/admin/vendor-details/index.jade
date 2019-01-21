@@ -1,0 +1,20 @@
+.vendor-detail-container
+  .row
+    .col-xs-12
+      a.btn-backlink(ui-sref="admin.vendors({page: $root.currentPage})") &lt;&lt; Return to list
+    .col-xs-offset-2.col-xs-8
+      ul.text-center.nav-list
+        li
+          a(ng-click="uiState.currentTab = 'account'" ng-class="{'active': uiState.currentTab == 'account'}") Account
+        li
+          a(ng-click="uiState.currentTab = 'profile'" ng-class="{'active': uiState.currentTab == 'profile'}") Profile
+         li
+          a(ng-click="uiState.currentTab = 'portfolio'" ng-class="{'active': uiState.currentTab == 'portfolio'}") Portfolio
+    .col-xs-offset-2.col-xs-8
+      .animate(ng-if="uiState.currentTab == 'profile'")
+        vendor-profile
+      .animate(ng-if="uiState.currentTab == 'account'")
+        vendor-account
+    .col-xs-12
+      .animate(ng-if="uiState.currentTab == 'portfolio'")
+        vendor-photos

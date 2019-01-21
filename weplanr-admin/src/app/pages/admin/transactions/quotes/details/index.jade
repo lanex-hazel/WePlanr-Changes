@@ -1,0 +1,107 @@
+br
+a.btn-backlink(ng-click="goBack()") &lt;&lt; Return to list
+br
+br
+.col-xs-12
+  .row.form-group
+    label.col-sm-2 Couple's name
+    .col-sm-10(ng-bind="obj.wedding.name")
+  .row.form-group
+    label.col-sm-2 Business name
+    .col-sm-10(ng-bind="obj.vendor.name")
+  .row.form-group
+    label.col-sm-2 ABN
+    .col-sm-10(ng-bind="obj.vendor.business_number")
+  .row.form-group
+    label.col-sm-2 Quote No
+    .col-sm-10(ng-bind="obj.quote_no")
+  .row.form-group
+    label.col-sm-2 Date raised
+    .col-sm-10(ng-bind="obj.created_at | date: 'dd/MM/yy'")
+  .row.form-group
+    label.col-sm-2 Expires
+    .col-sm-10(ng-bind="obj.expiry_date | date: 'dd/MM/yy'")
+  .row.form-group
+    label.col-sm-2 Date of delivery
+    .col-sm-10(ng-bind="obj.delivery_date | date: 'dd/MM/yy'")
+  .row.form-group
+    label.col-sm-2 Status
+    i.col-sm-10(ng-bind="obj.status | uppercase")
+  .row.form-group
+    label.col-sm-2 Status date
+    .col-sm-10(ng-bind="(obj.status == 'fulfilled' || obj.status == 'accepted') ? (obj.accepted_at | date: 'dd/MM/yy') : '-'")
+
+  table.table.table-hover.services-table
+    thead
+      th Services
+      th Description
+      th Qty
+      th Cost
+    tbody
+      tr(ng-repeat="item in obj.items")
+        td(ng-bind="item.name")
+        td(ng-bind="item.description")
+        td.text-right(ng-bind="item.quantity")
+        td.text-right(ng-bind="item.cost | currency:'$':2")
+
+  br
+  br
+  .row.form-group
+    label.col-xs-12 Total Service Fee
+    label.col-sm-2 Amount
+    .col-sm-10(ng-bind="obj.payment.total | currency:'$':2")
+  .row.form-group
+    label.col-sm-2 Vendor GST
+    .col-sm-10(ng-bind="obj.payment.vendor_gst | currency:'$':2")
+  .row.form-group
+    label.col-sm-2 WePlanr Transaction Fee(%)
+    .col-sm-10(ng-if="obj.vendor_type == 'standard'" ng-bind="obj.payment.fee_standard_pcg + '%'")
+    .col-sm-10(ng-if="obj.vendor_type != 'standard'" ng-bind="obj.payment.fee_custom_pcg  + '%'")
+  .row.form-group(ng-if="obj.vendor_type != 'standard'")
+    label.col-sm-2 WePlanr Transaction Fee(Flat rate)
+    .col-sm-10(ng-if="obj.vendor_type != 'standard'" ng-bind="obj.payment.fee_custom_flat + ' AUD'")
+  .row.form-group
+    label.col-sm-2 WePlanr Transaction Fee
+    .col-sm-10(ng-bind="'$' + (obj.payment.wp_trnsct_fee | number: 2)")
+  .row.form-group
+    label.col-sm-2 WePlanr GST
+    .col-sm-10(ng-bind="'$' + (obj.payment.wp_gst | number: 2)")
+
+  table.table.table-hover.payment-breakdown
+    thead
+      th
+      th Booking Fee (40%)
+      th Total Final Fee (60%)
+      th Immediate Final Fee Payment (30%)
+      th Held Final Fee Payment (30%)
+    tbody
+      tr
+        td Amount
+        td.text-right(ng-bind="'$' + ((obj.payment.total * 0.40) | number: 2)")
+        td.text-right(ng-bind="'$' + ((obj.payment.total * 0.60) | number: 2)")
+        td.text-right 0
+        td.text-right 0
+      tr
+        td Vendor GST
+        td.text-right(ng-bind="obj.payment.vendor_gst * 0.40 | currency:'$':2")
+        td.text-right(ng-bind="obj.payment.vendor_gst * 0.60 | currency:'$':2")
+        td.text-right 0
+        td.text-right 0
+      tr
+        td WePlanr Transaction Fee
+        td.text-right(ng-bind="'$' + ((obj.payment.wp_trnsct_fee * 0.40) | number: 2)")
+        td.text-right(ng-bind="'$' + ((obj.payment.wp_trnsct_fee * 0.60) | number: 2)")
+        td.text-right 0
+        td.text-right 0
+      tr
+        td WePlanr GST
+        td.text-right(ng-bind="'$' + ((obj.payment.wp_gst * 0.40) | number: 2)")
+        td.text-right(ng-bind="'$' + ((obj.payment.wp_gst * 0.60) | number: 2)")
+        td.text-right 0
+        td.text-right 0
+      tr
+        td Due Date
+        td.text-right -
+        td.text-right(ng-bind="obj.status == 'fulfilled' ? '-' : (obj.payment_due | date: 'dd/MM/yy') ")
+        td.text-right -
+        td.text-right -

@@ -1,0 +1,204 @@
+.content-container
+  .dashboard-container
+    main-menu
+
+    .row
+      .col-md-12
+        h3 Dashboard
+        button.btn.btn-info.pull-right(ng-click="generateSitemap()") Generate Sitemap
+        div(ng-style="{visibility: loading ? 'visible' : 'hidden'}" style="position: relative; height: 40px;")
+          spinner(style="position: absolute; right: calc(50% - 20px);")
+    .row
+      .col-lg-6
+        h5 Couples
+        .panel.widget
+          .row.row-table.row-flush
+            .col-xs-6.b.btn-backlink(ui-sref="admin.users.index({status: 'confirmed'})")
+              .row.row-table.row-flush
+                .col-xs-4.text-center.text-success
+                  em.fa.fa-users.fa-2x
+                .col-xs-8
+                  .panel-body.text-center
+                    h4.mt0(ng-bind="data.customers.confirmed")
+                    p.mb0.text-muted.btn-backlink Verified
+            .col-xs-6.b.btn-backlink(ui-sref="admin.users.index({status: 'unconfirmed'})")
+              .row.row-table.row-flush
+                .col-xs-4.text-center.text-inverse
+                  em.fa.fa-users.fa-2x
+                .col-xs-8
+                  .panel-body.text-center
+                    h4.mt0(ng-bind="data.customers.unconfirmed")
+                    p.mb0.text-muted.btn-backlink Unverified
+
+        .panel.widget
+          .row.row-table.row-flush
+            .col-xs-4.b.btn-backlink(ui-sref="admin.transactions.inquiries.index")
+              .row.row-table.row-flush
+                .col-xs-4.text-center.text-info
+                  em.fa.fa-comment.fa-2x
+                .col-xs-8
+                  .panel-body.text-center
+                    h4.mt0(ng-bind="data.inquiries")
+                    p.mb0.text-muted.btn-backlink Inquiries
+            .col-xs-4.b.btn-backlink(ui-sref="admin.transactions.quotes.index")
+              .row.row-table.row-flush
+                .col-xs-4.text-center.text-inverse
+                  em.fa.fa-quote-left.fa-2x
+                .col-xs-8
+                  .panel-body.text-center
+                    h4.mt0(ng-bind="data.quotes")
+                    p.mb0.text-muted.btn-backlink Quotes
+            .col-xs-4.b.btn-backlink(ui-sref="admin.transactions.bookings.index")
+              .row.row-table.row-flush
+                .col-xs-4.text-center.text-success
+                  em.fa.fa-book.fa-2x
+                .col-xs-8
+                  .panel-body.text-center
+                    h4.mt0(ng-bind="data.bookings")
+                    p.mb0.text-muted.btn-backlink Bookings
+
+      .col-lg-6
+        h5 Businesses
+        .panel.widget
+          .row.row-table.row-flush
+            .col-xs-6.b.btn-backlink(ui-sref="admin.vendors({status: 'confirmed'})")
+              .row.row-table.row-flush
+                .col-xs-4.text-center.text-success
+                  em.fa.fa-truck.fa-2x
+                .col-xs-8
+                  .panel-body.text-center
+                    h4.mt0(ng-bind="data.vendors.confirmed")
+                    p.mb0.text-muted.btn-backlink Verified
+            .col-xs-6.b.btn-backlink(ui-sref="admin.vendors({status: 'unconfirmed'})")
+              .row.row-table.row-flush
+                .col-xs-4.text-center.text-inverse
+                  em.fa.fa-truck.fa-2x
+                .col-xs-8
+                  .panel-body.text-center
+                    h4.mt0(ng-bind="data.vendors.unconfirmed")
+                    p.mb0.text-muted.btn-backlink Unverified
+        .panel.widget
+          .row.row-table.row-flush
+            .col-xs-6.b.btn-backlink(ui-sref="admin.vendors")
+              .row.row-table.row-flush
+                .col-xs-4.text-center.text-info
+                  em.fa.fa-money.fa-2x
+                .col-xs-8
+                  .panel-body.text-center
+                    h4.mt0(ng-bind="data.vendors.custom_fees")
+                    p.mb0.text-muted.btn-backlink Custom Business Fees (discounted)
+            .col-xs-6.b.btn-backlink(ui-sref="admin.vendors")
+              .row.row-table.row-flush
+                .col-xs-4.text-center.text-inverse
+                  em.fa.fa-money.fa-2x
+                .col-xs-8
+                  .panel-body.text-center
+                    h4.mt0(ng-bind="data.vendors.non_profit")
+                    p.mb0.text-muted.btn-backlink Not For Profit
+
+        .panel.widget
+          .row.row-table.row-flush
+            .col-xs-6.b.btn-backlink(ui-sref="admin.transactions.quotes.index")
+              .row.row-table.row-flush
+                .col-xs-4.text-center.text-warning
+                  em.fa.fa-quote-left.fa-2x
+                .col-xs-8
+                  .panel-body.text-center
+                    h4.mt0(ng-bind="data.expired_quotes.count")
+                    p.mb0(ng-bind="data.expired_quotes.amount | currency: '$ '")
+                    p.mb0.text-muted.btn-backlink Expired Quotes
+            .col-xs-6.b.btn-backlink(ui-sref="admin.transactions.quotes.index")
+              .row.row-table.row-flush
+                .col-xs-4.text-center.text-danger
+                  em.fa.fa-list-alt.fa-2x
+                .col-xs-8
+                  .panel-body.text-center
+                    h4.mt0(ng-bind="data.overdue_invoices.count")
+                    p.mb0(ng-bind="data.overdue_invoices.amount | currency: '$ '")
+                    p.mb0.text-muted.btn-backlink Overdue Invoices
+
+      .col-lg-12
+        h5 Couple / Business Activity Report
+        span Last seen since 
+        select(ng-model="selectedRange" ng-change="fetchData()")
+          option(ng-repeat="(key, val) in rangeOptions" ng-bind="key" value="{{key}}")
+        .panel.widget(style="margin-top: 1rem;")
+          .row.row-table.row-flush
+            .col-sm-6.b.btn-backlink(ui-sref="admin.users.index({lastSeen: selectedRange})")
+              .row.row-table.row-flush
+                .col-xs-4.text-center.text-info
+                  em.fa.fa-users.fa-2x
+                .col-xs-8
+                  .panel-body.text-center
+                    h4.mt0(ng-bind="data.active_users.customers")
+                    p.mb0.text-muted.btn-backlink Active Couples
+            .col-sm-6.b.btn-backlink(ui-sref="admin.vendors({lastSeen: selectedRange})")
+              .row.row-table.row-flush
+                .col-xs-4.text-center.text-success
+                  em.fa.fa-truck.fa-2x
+                .col-xs-8
+                  .panel-body.text-center
+                    h4.mt0(ng-bind="data.active_users.vendors")
+                    p.mb0.text-muted.btn-backlink Active Businesses
+
+            .col-sm-1
+
+            .col-sm-6.b.btn-backlink(ui-sref="admin.users.index({lastSeen: selectedRange})")
+              .row.row-table.row-flush
+                .col-xs-4.text-center.text-inverse
+                  em.fa.fa-users.fa-2x
+                .col-xs-8
+                  .panel-body.text-center
+                    h4.mt0(ng-bind="data.inactive_users.customers")
+                    p.mb0.text-muted.btn-backlink Inactive Couples
+            .col-sm-6.b.btn-backlink(ui-sref="admin.vendors({lastSeen: selectedRange})")
+              .row.row-table.row-flush
+                .col-xs-4.text-center.text-inverse
+                  em.fa.fa-truck.fa-2x
+                .col-xs-8
+                  .panel-body.text-center
+                    h4.mt0(ng-bind="data.inactive_users.vendors")
+                    p.mb0.text-muted.btn-backlink Inactive Businesses
+
+
+      .col-lg-6
+        h5 Business to Business Referrals
+        .panel.widget
+          .row.row-table.row-flush
+            .col-xs-6.b.btn-backlink(ui-sref="admin.vendor_rewards({status: 'successful'})")
+              .row.row-table.row-flush
+                .col-xs-4.text-center.text-success
+                  em.fa.fa-gift.fa-2x
+                .col-xs-8
+                  .panel-body.text-center
+                    h4.mt0(ng-bind="data.referrals.vendor_to_vendor.successful")
+                    p.mb0.text-muted.btn-backlink Success
+            .col-xs-6.b.btn-backlink(ui-sref="admin.vendor_rewards")
+              .row.row-table.row-flush
+                .col-xs-4.text-center.text-info
+                  em.fa.fa-gift.fa-2x
+                .col-xs-8
+                  .panel-body.text-center
+                    h4.mt0(ng-bind="data.referrals.vendor_to_vendor.total")
+                    p.mb0.text-muted.btn-backlink Total
+
+      .col-lg-6
+        h5 Couple to Business Referrals
+        .panel.widget
+          .row.row-table.row-flush
+            .col-xs-6.b.btn-backlink(ui-sref="admin.customer_rewards({status: 'successful'})")
+              .row.row-table.row-flush
+                .col-xs-4.text-center.text-success
+                  em.fa.fa-gift.fa-2x
+                .col-xs-8
+                  .panel-body.text-center
+                    h4.mt0(ng-bind="data.referrals.customer_to_vendor.successful")
+                    p.mb0.text-muted.btn-backlink Success
+            .col-xs-6.b.btn-backlink(ui-sref="admin.customer_rewards")
+              .row.row-table.row-flush
+                .col-xs-4.text-center.text-info
+                  em.fa.fa-gift.fa-2x
+                .col-xs-8
+                  .panel-body.text-center
+                    h4.mt0(ng-bind="data.referrals.customer_to_vendor.total")
+                    p.mb0.text-muted.btn-backlink Total

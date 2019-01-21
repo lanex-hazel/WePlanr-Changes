@@ -1,0 +1,24 @@
+header(logout="logout()" current-user="currentUser" page-title="Favourites" search-url="user/search")
+.main-content
+  .content-container.white-box(ng-show="!$root.menuView")
+    user-nav
+    #favourites-container
+      br
+      strong FAVOURITES &nbsp;
+      span.success(ng-bind-html="uiState.loading ? '(...)' : '('+ uiState.count + ')'")
+      br
+      br
+      ul.list(load-scroll)
+        li(ng-repeat="item in collection" ng-class="{'unfavorite' : uiState.remove == item.id}")
+          a.pull-right.icon.icon-f.icon-heart-fave(ng-click="unfavorite(item, $index)")
+          .cover-photo(ng-class="{'default': !item.attributes.sample_photo}" ui-sref="user.vendor.show({id: item.attributes.slug})" ng-style="{ 'background-image': 'url(' + $root.setPhoto(item.attributes.sample_photo,true) + ')'}")
+          .mtop-15
+            .avatar(ng-class="{'default': !item.attributes.profile_photo}" ng-style="{ 'background-image': 'url(' + $root.setPhoto(item.attributes.profile_photo) + ')'}")
+            ul.info
+              li(ng-bind="item.attributes.business_name" ui-sref="user.vendor.show({id:item.attributes.slug})")
+              li.icon.icon-map-marker(ng-bind="item.attributes.address_summary" ui-sref="user.vendor.show({id:item.attributes.slug, location:true})")
+          ul.services
+            li(ng-repeat="service in item.attributes.services track by $index") {{service}}
+        .fadeout.animate(ng-if="!uiState.loading && uiState.scrollable")
+        spinner.animate(ng-if="uiState.loading")
+        div(style="height: 1000px" ng-if="uiState.loading && uiState.scrollable")

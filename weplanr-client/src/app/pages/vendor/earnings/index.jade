@@ -1,0 +1,55 @@
+header(logout="logout()" current-vendor="currentVendor" page-title="Earnings" search-url="vendor/search")
+.main-content
+  .content-container.white-box(ng-show="!$root.menuView")
+    vendor-nav
+    #earnings
+      .row.no-margin
+        .col-xs-12.col-md-6
+          b EARNINGS
+          br
+          table
+            tbody
+              tr.booked
+                td(style="padding-right:0;") Booked earnings for 2017
+                td.text-right
+                  span(ng-bind="formatAmount(totals.total)")
+                  span.aud &nbsp;AUD
+              tr
+                td(style="padding-right:0;")
+                  span.paid &#9679;
+                  | Paid
+                td.text-right
+                  span(ng-bind="formatAmount(totals.paid)")
+                  span.aud &nbsp;AUD
+              tr
+                td(style="padding-right:0;") 
+                  span.expected &#9679;
+                  | Expected
+                td.text-right
+                  span(ng-bind="formatAmount(totals.expected)")
+                  span.aud &nbsp;AUD
+              tr
+                td(style="padding-right:0;")
+                  span.held &#9679;
+                  | Held
+                td.text-right
+                  span(ng-bind="formatAmount(totals.held)")
+                  span.aud &nbsp;AUD
+              tr.transaction
+                td(style="padding-right:0;") Transaction Fees
+                td.text-right
+                  span(ng-bind="formatAmount(totals.transaction_fees)")
+                  span.aud &nbsp;AUD
+        .content.col-xs-12.col-md-6
+          .select
+            select.form-control(
+              placeholder="Select month"
+              ng-model="selectedMonth"
+              ng-change="updateGraph()"
+            )
+              option(value="") Select month
+              option(ng-repeat="option in months" value="{{option.id}}") {{option.name}}
+          br
+          br
+          .canvas-wrapper
+            canvas#earnings-analytics(height="292")

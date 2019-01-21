@@ -1,0 +1,20 @@
+todos:
+  - name: Makeup Trial
+    budget_percent: 0.3
+    timing: 12-8
+    category: Beauty
+    suggestion_copy_female: It's important to make sure your skin is at its best for your big day. Now is a great time to speak to a makeup artist to give you enough time for a consultation and to book a trial or two.
+    question_copy: Have you booked your makeup trial yet?
+    reminder_copy: It doesn't look like you've booked a makeup trial yet, here are some of our favourite makeup artists to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">makeup</span> artists to help you get started.
+    is_initial_plan: false
+  - name: Hair Trial
+    budget_percent: 0.3
+    timing: 12-8
+    category: Beauty
+    suggestion_copy_female: It's important to maintain your hair in good condition ahead of your wedding. Now is a great time to speak to a hairstylist to give you enough time for a consultation and to book a trial or two.
+    suggestion_copy_male: It's important for your bride to maintain her hair in good condition ahead of your wedding. Now is a great time for her to speak to a hairstylist to give her enough time for a consultation and to book a trial or two.
+    question_copy: Have you booked your hair trial yet?
+    reminder_copy: It doesn't look like you've booked a hair trial yet, here are some of our favourite hair stylists to help you get started.
+    redirect_copy: Here are some of our favourite <span class="service">hairstylists</span> to help you get started.
+    is_initial_plan: false

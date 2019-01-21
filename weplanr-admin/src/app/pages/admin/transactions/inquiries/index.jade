@@ -1,0 +1,24 @@
+table.table.table-hover.table-list
+  thead
+    tr
+      th Details
+      th Couple
+      th Couple's Message Count
+      th Business
+      th Business' Message Count
+  tbody(ng-show="!loading")
+    tr(ng-show="collection.length <= 0")
+      td(colspan="5") No data found
+    tr(ng-repeat="obj in collection" ng-show="collection.length > 0")
+      td
+        a.btn-backlink(ui-sref="admin.transactions.inquiries.show({id: obj.id})")
+          i.fa.fa-folder-open-o
+          |View
+      td(ng-bind="obj.attributes.wedding.name")
+      td(ng-bind="obj.attributes.wedding.message_count")
+      td(ng-bind="obj.attributes.vendor.business_name")
+      td(ng-bind="obj.attributes.vendor.message_count")
+spinner(ng-show="loading")
+pagination(count="count" page="page" on-change="getData(page)" ng-hide="count <= 0 || loading")
+
+

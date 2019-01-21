@@ -1,0 +1,42 @@
+ul.burger-menu(ng-show="!!currentUser && !currentUser.is_vendor")
+  li
+    input(type="checkbox" id="drop-dashboard")
+    label.drop-icon.toggle(for="drop-dashboard") &nbsp;&nbsp;DASHBOARD
+    a(href="#") Dashboard
+    ul.sub-menu
+      li
+        a(ui-sref="user.organiser" ui-sref-opts="{reload: true, inherit: false}" ui-sref-active="active") &nbsp;Organisr
+      li
+        a(ui-sref="user.messages" ui-sref-opts="{reload: true, inherit: false}" ui-sref-active="active") &nbsp;Messages
+      li
+        a(ui-sref="user.calendar" ui-sref-opts="{reload: true, inherit: false}" ui-sref-active="active") &nbsp;Calendar
+      li
+        a(ui-sref="user.favourites" ui-sref-opts="{reload: true, inherit: false}" ui-sref-active="active") &nbsp;Favourites
+  li
+    input(type="checkbox" id="drop-settings")
+    label.drop-icon.toggle(for="drop-settings") &nbsp;&nbsp;SETTINGS
+    a(href="#") Settings
+    ul.sub-menu
+      li
+        a(ui-sref="user.settings({tab: 'profile'})" ui-sref-opts="{reload: true, inherit: false}" ui-sref-active="active") &nbsp;Profile
+      li
+        a(ui-sref="user.settings({tab:'account'})" ui-sref-opts="{reload: true, inherit: false}" ui-sref-active="active") &nbsp;Account
+      li(ng-show="$root.referralState.customer")
+        a(ui-sref="user.settings({tab:'referral'})" ui-sref-opts="{reload: true, inherit: false}" ui-sref-active="active") &nbsp;Referral
+      li(ng-show="$root.rewardState.customer")
+        a(ui-sref="user.settings({tab:'rewards'})" ui-sref-opts="{reload: true, inherit: false}" ui-sref-active="active") &nbsp;Rewards
+  li
+    a.link(ui-sref="user.catalogue"  ui-sref-opts="{reload: true, inherit: false}" ui-sref-active="active") &nbsp;&nbsp;VENDOR CATALOGUE
+  li
+    input(type="checkbox" id="drop-more")
+    label.drop-icon.toggle(for="drop-more") &nbsp;MORE
+    a(href="#") More
+    ul.sub-menu
+      li
+        a(ui-sref="main.terms" ui-sref-opts="{reload: true, inherit: false}" ui-sref-active="active") Terms & Conditions
+      li
+        a(ui-sref="main.policy" ui-sref-opts="{reload: true, inherit: false}" ui-sref-active="active") Privacy Policy
+      li
+        a(href="mailto:hello@weplanr.com") Contact Us
+  li
+    a.link(ng-click="logout()") LOG OUT

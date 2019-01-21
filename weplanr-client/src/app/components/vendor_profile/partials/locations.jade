@@ -1,0 +1,13 @@
+.col-xs-12(ng-class="{'no-padding' : $ctrl.showState.location}")
+  #location-content.inner-container(style="padding-left:15px;padding-right:15px;" ng-class="{'more' : $ctrl.showState.location }")
+    b.title-label Service Locations
+    b.title-label.green &nbsp; ({{$ctrl.locations.length}})
+    a.option-link.more.pull-right(ng-click="$ctrl.seeMore(true,'location')" ng-if="!$ctrl.showState.location") See more
+    #service-loc.detail-container
+      ul.tags.service-location(ng-class="{'see-all': $ctrl.showState.location}")
+        li(ng-repeat="location in $ctrl.locations")
+          .icon-map-marker &nbsp;
+          span(ng-bind="location")
+    br
+    br
+    #location-map

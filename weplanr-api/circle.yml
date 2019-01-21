@@ -1,0 +1,6 @@
+dependencies:
+  pre:
+    - gem install bundler
+test:
+  post:
+    - CODECLIMATE_REPO_TOKEN=1645ac073b06c6de8e991d77ff07070f158a8575203a9919ec56dcbba500eda5 bundle exec codeclimate-test-reporter

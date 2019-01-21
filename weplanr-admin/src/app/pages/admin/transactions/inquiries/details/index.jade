@@ -1,0 +1,17 @@
+br
+a.btn-backlink(ng-click="goBack()") &lt;&lt; Return to list
+br
+br
+.col-xs-12
+  table.table.table-hover
+    thead
+      th Sender
+      th Receiver
+      th Message
+      th Message sent on
+    tbody
+      tr(ng-repeat="message in obj.attributes.messages | orderBy:'-created_at'")
+        td(ng-bind="message.email")
+        td(ng-bind="message.receiver")
+        td(ng-bind="!message.content ? 'Quote Sent' : message.content")
+        td(ng-bind="message.created_at | date: 'd MMM, yyyy h:mma'")

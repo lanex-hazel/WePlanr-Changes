@@ -1,0 +1,23 @@
+header(logout="logout()" current-vendor="currentVendor" page-title="Calendar" search-url="vendor/search")
+.main-content
+  .content-container.white-box(ng-show="!$root.menuView")
+    vendor-nav
+    event-calendar.event(
+      yrrange="months"
+      view="cal_view"
+      booked="events"
+      booked-days="dayEvents"
+      booked-dates="event_dates"
+      event-time="event_time"
+      has-event="hasEvent"
+      unavailable-dates="unavailable_dates"
+      closed-dates="closed_dates"
+      sel="sel"
+      state="uiState"
+      save="onSave(obj,day)"
+      remove="onRemove(obj,day)"
+      update="onUpdate(obj)"
+      get-bookings="getBookings(date)"
+      block-date="setUnavailable(day,type)"
+      unblock-date="unSetUnavailable(index,type)"
+    )

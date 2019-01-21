@@ -1,0 +1,31 @@
+.login-form-container
+  form(name="loginform" novalidate="true" autocomplete="off")
+    .row
+      .col-md-12
+        .form-group
+          input.form-control(
+            type="email"
+            name="email"
+            placeholder="Email"
+            required=true
+            ng-model="$ctrl.creds.email"
+            pattern=""
+            ng-enter="$ctrl.submit(loginform)"
+          )
+          span.error(ng-show="loginform.email.$touched && loginform.email.$error.required") This field is required
+      .col-md-12
+        .form-group
+          input.form-control(
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Password"
+            required=true
+            ng-model="$ctrl.creds.password"
+            ng-enter="$ctrl.submit(loginform)"
+          )
+          span.error(ng-show="loginform.password.$touched && loginform.password.$error.required") This field is required
+      .col-md-12
+        .form-group
+          spinner(ng-show="loading")
+          a.btn.btn-block.btn-success.btn-round(ng-click="$ctrl.submit(loginform)" ng-disabled="uiState.loading || loginform.$invalid" ng-show="!loading") Login

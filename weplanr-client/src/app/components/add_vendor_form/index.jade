@@ -1,0 +1,146 @@
+.custom-form
+  .title-form.hide-desktop
+    .heading {{$ctrl.title}}
+    .heading.subtitle-form(ng-show="$ctrl.mode == 'add'") Bookings made on the platform are added automatically.
+    a.pull-right.hide-desktop.icon.icon-exit.exit-modal(ng-click="$ctrl.toggleForm({obj:null,mode:''})")
+  .budget-items
+    .budget-column.heading
+      .label-item
+      .label-item.empty.hide-mobile
+      .label-item.hide-mobile PLANNED
+      .label-item.empty.hide-mobile 
+      .label-item.hide-mobile ACTUAL
+      .label-item.empty.hide-mobile 
+      .label-item.hide-mobile PAID
+      .label-item.empty.hide-mobile 
+      .label-item.hide-mobile OWING
+      .label-item.empty.hide-mobile 
+    .budget-column.highlight.gray
+      .label-item
+        .checkbox(ng-class="{'checked': $ctrl.obj.attributes.status == 'booked'}")
+        | {{$ctrl.obj.attributes.name}}
+      .label-item.empty.hide-mobile
+      .label-item.hide-mobile
+        .form-control {{$ctrl.parseNum($ctrl.obj.attributes.planned) | moneyFormat}}
+      .label-item.empty.hide-mobile
+      .label-item.hide-mobile
+        .form-control {{$ctrl.parseNum($ctrl.vendor.total_fee) | moneyFormat}}
+      .label-item.empty.hide-mobile
+      .label-item.hide-mobile
+        .form-control {{$ctrl.parseNum($ctrl.vendor.paid) | moneyFormat}}
+      .label-item.empty.hide-mobile
+      .label-item.hide-mobile(ng-class="{'hide-mobile' : column[3]}")
+        .form-control {{($ctrl.parseNum($ctrl.vendor.total_fee) - $ctrl.parseNum($ctrl.vendor.paid)) | moneyFormat}}
+      .label-item.empty.hide-mobile
+  .title-form.hide-mobile
+    | {{$ctrl.title}}
+    .subtitle-form(ng-show="$ctrl.mode == 'add'") Bookings made through us are added automatically.
+    a.pull-right.hide-mobile.icon.icon-exit.exit-modal(ng-click="$ctrl.toggleForm({obj:null,mode:''})")
+  form.vendor-form(ng-class="{'add': $ctrl.mode=='add'}" name="form" autocomplete="off")
+    .vendor-form-group
+      .form-group
+        label.form-label BUSINESS NAME &nbsp;&nbsp;&nbsp;
+          span.required(ng-if="$ctrl.mode != 'booked'") *
+        .form-control.static.link(ng-if="$ctrl.mode == 'booked'" ui-sref="user.vendor.show({id: $ctrl.vendor.slug})") {{$ctrl.vendor.business_name}}
+        input.form-control(
+          type="text"
+          name="business_name"
+          ng-model="$ctrl.vendor.business_name"
+          required=true
+          ng-if="$ctrl.mode != 'booked'")
+        .form-error(ng-class="{'show': $ctrl.formInvalid && form.business_name.$error.required}") Please enter a business name
+      .form-group
+        label.form-label CONTACT NAME&nbsp;&nbsp;&nbsp;
+          span.required(ng-if="$ctrl.mode != 'booked'") *
+        .form-control.static(ng-if="$ctrl.mode == 'booked'") {{$ctrl.vendor.public_contact_name}}
+        input.form-control(
+          type="text"
+          name="fullname"
+          ng-model="$ctrl.vendor.public_contact_name"
+          ng-if="$ctrl.mode != 'booked'"
+          required=true)
+        .form-error(ng-class="{'show': $ctrl.formInvalid && form.fullname.$error.required}") Please enter a contact name
+      .form-group
+        label.form-label ADDRESS &nbsp;&nbsp;&nbsp;
+          span.required(ng-if="$ctrl.mode != 'booked'") *
+        .form-control.static(ng-if="$ctrl.mode == 'booked'") {{$ctrl.vendor.address_summary}}
+        input.form-control(
+          type="text"
+          name="address"
+          ng-model="$ctrl.vendor.address_summary"
+          required=true
+          ng-if="$ctrl.mode != 'booked'")
+        .form-error(ng-class="{'show': $ctrl.formInvalid && form.address.$error.required}") Please enter an address
+      .form-group
+        label.form-label URL/WEBSITE &nbsp;&nbsp;&nbsp;
+          span.required(ng-if="$ctrl.mode != 'booked'") *
+        a.form-control.static.link(ng-if="$ctrl.mode == 'booked'" ng-href="http://{{$ctrl.vendor.website}}" target="_blank") {{$ctrl.vendor.website}}
+        input.form-control(
+          type="text"
+          name="url"
+          ng-model="$ctrl.vendor.website"
+          pattern="^www\.[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$"
+          ng-focus="$ctrl.patternInvalid.url = false"
+          ng-blur="$ctrl.patternInvalid.url = true"
+          ng-if="$ctrl.mode != 'booked'"
+          required=true)
+        .form-error(ng-class="{'show': ($ctrl.patternInvalid.url && form.url.$invalid) || ($ctrl.formInvalid && form.url.$error.required)}") Please enter a valid url e.g. www.example.com
+    .vendor-form-group
+      .form-group
+        label.form-label CONTACT NUMBER &nbsp;&nbsp;&nbsp;
+          span.required(ng-if="$ctrl.mode != 'booked'") *
+        .form-control.static(ng-if="$ctrl.mode == 'booked'") {{$ctrl.vendor.primary_phone}}
+        input.form-control(
+          type="text"
+          name="contact_number"
+          ng-model="$ctrl.vendor.primary_phone"
+          ng-if="$ctrl.mode != 'booked'"
+          required=true)
+        .form-error(ng-class="{'show': $ctrl.formInvalid && form.contact_number.$error.required}") Please enter an Austrailan contact number
+      .form-group
+        label.form-label EMAIL &nbsp;&nbsp;&nbsp;
+          span.required(ng-if="$ctrl.mode != 'booked'") *
+        .form-control.static(ng-if="$ctrl.mode == 'booked'") {{$ctrl.vendor.email}}
+        input.form-control(
+          type="text"
+          name="email"
+          ng-model="$ctrl.vendor.email"
+          pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+          ng-focus="$ctrl.patternInvalid.email = false"
+          ng-blur="$ctrl.patternInvalid.email = true"
+          ng-if="$ctrl.mode != 'booked'"
+          required=true)
+        .form-error(ng-class="{'show': ($ctrl.patternInvalid.email && form.email.$invalid) || ($ctrl.formInvalid && form.email.$error.required)}") Please enter a valid email
+      .form-group
+        label.form-label TOTAL FEE &nbsp;&nbsp;&nbsp;
+          span.required(ng-if="$ctrl.mode != 'booked'") *
+        span.input-prefix $
+        .form-control.has-prefix.static.amount(ng-if="$ctrl.mode == 'booked'") {{$ctrl.obj.attributes.actual}}
+        input.form-control.has-prefix(
+          type="text"
+          name="total_fee"
+          ng-model="$ctrl.vendor.total_fee"
+          maxlength="8"
+          spaced-numbers=""
+          required=true
+          ng-if="$ctrl.mode != 'booked'")
+        .form-error(ng-class="{'show': $ctrl.formInvalid && form.total_fee.$error.required}") Please enter a total fee
+      .form-group
+        label.form-label AMOUNT PAID &nbsp;&nbsp;&nbsp;
+          span.required(ng-if="$ctrl.mode != 'booked'") *
+        span.input-prefix $
+        .form-control.has-prefix.static.amount(ng-if="$ctrl.mode == 'booked'") {{$ctrl.obj.attributes.paid}}
+        input.form-control.has-prefix(
+          type="text"
+          name="amount_paid"
+          ng-model="$ctrl.vendor.paid"
+          maxlength="8"
+          spaced-numbers=""
+          required=true
+          ng-if="$ctrl.mode != 'booked'")
+        .form-error(ng-class="{'show': $ctrl.formInvalid && form.amount_paid.$error.required}") Please enter an amount paid
+    .vendor-form-group.btn-actions
+      .form-group
+        br
+        .btn-success.btn-create(ng-if="$ctrl.mode == 'add'" ng-click="$ctrl.submit(form)") ADD BOOKING
+        .btn-success.btn-create(ng-if="$ctrl.mode == 'edit'" ng-click="$ctrl.submit(form)") SAVE BOOKING

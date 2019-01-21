@@ -1,0 +1,82 @@
+header(logout="logout()" current-vendor="currentVendor" page-title="Transaction History" search-url="vendor/search")
+.main-content
+  .content-container.white-box(ng-show="!$root.menuView")
+    vendor-nav
+    #transaction-history
+      .row.no-margin
+        .col-xs-12
+          #rangepicker
+            label
+          br/
+        .col-xs-12.col-md-6
+          br
+          strong INVOICES
+          ul.options.pull-right(style="display:inline;")
+            li
+              a(ng-class="{'active': invoiceStatus == ''}" ng-click="getInvoices()") All
+            li
+              a(ng-class="{'active': invoiceStatus == 'paid'}" ng-click="getInvoices('paid')") Paid
+            li
+              a(ng-class="{'active': invoiceStatus == 'unpaid'}" ng-click="getInvoices('unpaid')") Sent
+          spinner(ng-show="loading.invoice" style="padding-top: 30px")
+          .content
+            table.invoice(height="140px" cellspacing="0" cellpadding="0" ng-if="invoices.length == 0 && !loading.invoice")
+              tbody
+                tr.top.bottom
+                  td(vertical-align="center" align="center" colspan="100%")
+                    b No {{invoiceState(invoiceStatus)}} invoices.
+            table.invoice(cellspacing="0" cellpadding="0" ng-repeat="invoice in invoices" ng-if="invoices.length > 0 && !loading.invoice" ng-class="{'new':invoice.attributes.status == 'paid'}")
+              tbody(ng-click="invoiceClick($event,invoice)")
+                tr.top
+                  td(style="padding-right:0;")
+                    b(ng-bind="invoice.attributes.owner")
+                  td(align="right" style="padding-left:0;")
+                    span.price(ng-bind="invoiceAddition(invoice)")
+                tr.bottom
+                  td(style="padding-right:0;")
+                    span {{describeInvoice(invoice)}}
+                    //- div(ng-show="invoice.attributes.status == 'unpaid'" style="display: inline-block;")
+                    //-     a Send a reminder
+                    //-     | &nbsp;|&nbsp;
+                    //-     a Cancel
+                  td.currency(align="right" style="padding-left:0;") AUD
+            br
+        .col-xs-12.col-md-6
+          br
+          strong QUOTES
+          ul.options.pull-right(style="display:inline;")
+            li
+              a(ng-class="{'active': quoteStatus == ''}" ng-click="getQuotes()") All
+            li
+              a(ng-class="{'active': quoteStatus == 'draft'}" ng-click="getQuotes('draft')") Draft
+            li
+              a(ng-class="{'active': quoteStatus == 'offered'}" ng-click="getQuotes('offered')") Raised
+            li
+              a(ng-class="{'active': quoteStatus == 'rejected'}" ng-click="getQuotes('rejected')") Declined
+            li
+              a(ng-class="{'active': quoteStatus == 'accepted'}" ng-click="getQuotes('accepted')") Accepted
+            li
+              a(ng-class="{'active': quoteStatus == 'expired'}" ng-click="getQuotes('expired')") Expired
+          spinner(ng-show="loading.quote" style="padding-top: 30px")
+          .content
+            table.quote(height="140px" cellspacing="0" cellpadding="0" ng-if="quotes.length == 0 && !loading.quote")
+              tbody
+                tr.top.bottom
+                  td(vertical-align="center" align="center" colspan="100%")
+                    b No {{quoteState(quoteStatus)}} quotes.
+            table.quote(cellspacing="0" cellpadding="0" ng-repeat="quote in quotes" ng-if="quotes.length > 0 && !loading.quote")
+              tbody
+                tr.top
+                  td(style="padding-right:0;")
+                    b(ng-bind="quote.attributes.wedding.name")
+                  td(align="right" style="padding-left:0;")
+                    span.price.unpaid(ng-class="{'paid': (quote.attributes.status == 'accepted' || quote.attributes.status == 'fulfilled')}" ng-bind="quoteAddition(quote)")
+                tr.bottom
+                  td.common(style="padding-right:0;")
+                    span.status {{describeQuote(quote)}}
+                    //- div(ng-show="quote.attributes.status == 'offered'" style="display: inline-block;")
+                    //-   a Send a reminder
+                    //-   | &nbsp;|&nbsp;
+                    //-   a Cancel
+                  td.currency(align="right" style="padding-left:0;") AUD
+            br

@@ -1,0 +1,115 @@
+#message-page
+  header(ng-class="{hide: mobileView == 'messages'}" logout="logout()" current-user="currentUser" page-title="Messages" search-url="user/search")
+  .main-content(ng-class="{'no-margin-top': mobileView == 'messages'}")
+    #content.content-container.white-box
+      user-nav(ng-class="{hide: mobileView == 'messages'}")
+      #chat-container.row.no-margin
+        #chatlist.col-md-4(ng-class="{hide: mobileView != 'conversations'}")
+          br/
+          br/
+          .tab
+            span(ng-class="{active: tab == 'inquiry'}" ng-click="tab = 'inquiry'")
+              |MY ENQUIRIES
+              span.unread(ng-show="unreadCount.inquiry")
+                |{{unreadCount.inquiry}}
+            span(ng-class="{active: tab == 'booking'}" ng-click="tab = 'booking'")
+              |MY VENDORS
+              span.unread(ng-show="unreadCount.booking")
+                |{{unreadCount.booking}}
+          br/
+          br/
+
+          .search-container
+            span.icon.icon-search
+            input(placeholder="Search in messages" ng-model="searchTerm" ng-change="(searchTerm.length == 0 || searchTerm.length > 2) && fetchConversations()")
+            span.icon.icon-exit(ng-show="searchTerm" ng-click="clearSearch()")
+          br/
+
+          div(ng-repeat="(key, value) in conversations[tab] | orderBy: 'attributes.updated_at':true | groupBy:'attributes.vendor_service'")
+            span.service
+              |{{key}}
+            .chat(ng-repeat="obj in value" ng-click="selectConvers(obj)" ng-class="{active: obj.attributes.vendor_uid == selectedConvers.vendor_uid}")
+              .chat-online-status(ng-class="{online: obj.attributes.online}") &#9679;
+              .chat-profile-pic(ng-class="{'default': !obj.attributes.profile_photo}" ng-style="{'background-image': 'url('+ setPhoto(obj.attributes.profile_photo) +')'}")
+              .chat-info
+                .receiver
+                  .receiver-name
+                    |{{obj.attributes.business_name}}
+                  .chat-timestamp
+                    |{{obj.attributes.updated_at | chatTime | capitalizeAll }}
+
+        #chatbox.col-md-8(ng-if="selectedConvers" ng-class="{hide: mobileView != 'messages'}")
+          .chat-header.visible-lg-block
+            span.chat-header-pic(ng-class="{'default': !selectedConvers.profile_photo}" ng-style="{'background-image': 'url('+ setPhoto(selectedConvers.profile_photo) +')'}" ui-sref="user.vendor.show({id: selectedConvers.vendor_slug})")
+            span.chat-header-name(ng-bind="selectedConvers.business_name" ui-sref="user.vendor.show({id: selectedConvers.vendor_slug})")
+            br/
+            span.chat-header-status(ng-bind="selectedConvers.public_contact_name")
+            br/
+            span.chat-header-online-indicator(ng-class="{online: selectedConvers.online}") &#9679;
+            span.chat-header-status(ng-class="{online: selectedConvers.online}" ng-bind="selectedConvers.online ? 'online' : 'offline'")
+          .chat-header.mobile(ng-click="switchToConversations()")
+            img.back-to-conversations.visible-md-8(src="/vendor/images/chevron-left.png")
+            span.chat-header-name(ng-bind="selectedConvers.business_name" ui-sref="user.vendor.show({id: selectedConvers.vendor_slug})")
+            span.chat-header-pic(ng-class="{'default': !selectedConvers.profile_photo}" ng-style="{'background-image': 'url('+ setPhoto(selectedConvers.profile_photo) +')'}" ui-sref="user.vendor.show({id: selectedConvers.vendor_slug})")
+            br/
+            span.chat-header-status(ng-bind="selectedConvers.public_contact_name")
+            br/
+            span.msg-date(ng-bind="lastMsgTime() | date: 'd MMMM, h:mm'")
+            div(style="border-bottom: 1px solid #f1f1f1; margin: 10px 0;")
+            span.chat-header-online-indicator(ng-class="{online: selectedConvers.online}") &#9679;
+            span.chat-header-status(ng-class="{online: selectedConvers.online}" ng-bind="selectedConvers.online ? 'online' : 'offline'")
+
+          .msg-list(style="min-height: 400px; height: 70vh; padding-bottom: 50px;")
+            .msg(ng-repeat="(key, value) in messages" ng-class="{sent: value[0].sent_by == 'user'}")
+              .msg-date
+                |{{ key | date: 'd MMMM, h:mm'}}
+              .msg-profile-pic(ng-class="{'default': !getProfilePhoto(value[0])}" ng-style="{'background-image': 'url('+ setPhoto(getProfilePhoto(value[0])) +')'}")
+              .contents(ng-if="value[0].quote == null")
+                .content(ng-repeat="obj in value")
+                  span(ng-bind-html="obj.content")
+              .contents.quote(ng-if="value[0].quote")
+
+                .content.row.no-margin(ng-show="value[0].quote.status != 'accepted' && value[0].quote.status != 'fulfilled'")
+                  .col-xs-6
+                    strong Quote \#{{value[0].quote.quote_no}}
+                    br/
+                    span.grey Total amount
+                  .col-xs-6.text-right(ui-sref="user.quote({vendor_slug: selectedConvers.vendor_slug, no: value[0].quote.id})")
+                    a See more
+                    br/
+                    strong {{value[0].quote.total | currency:'$ ':2}}
+                  .col-xs-12(style="border-bottom: 1px solid #e8e8e8; margin: 2rem 0;")
+                  .col-xs-6
+                    small.grey {{ value[0].created_at | date: 'd MMMM yyyy' | capitalizeAll }}
+                  .col-xs-6.text-right(ng-show="value[0].quote.status != 'offered'")
+                    strong.red {{value[0].quote.status | uppercase}}
+                  .col-xs-6.text-right(ng-show="value[0].quote.status == 'offered'")
+                    spinner(ng-show="quoteLoading" style="display: inline-block;")
+                    button.btn-success.accept-btn(ng-hide="quoteLoading" ui-sref="user.quote({vendor_slug: selectedConvers.vendor_slug, no: value[0].quote.id})") ACCEPT
+                    |&nbsp;
+                    button.btn-gray.decline-btn(ng-hide="quoteLoading" ng-click="rejectAction(value[0].quote)") DECLINE
+
+                .content.row.no-margin(ng-show="value[0].quote.status == 'accepted' || value[0].quote.status == 'fulfilled' ")
+                  .col-xs-5
+                    strong PAYMENT CONFIRMATION
+                    br/
+                    span.grey AMOUNT PAID
+                  .col-xs-7.text-right
+                    ul(ng-show="value[0].invoice.length > 0")
+                      li(ng-repeat="invoice in value[0].invoice | orderBy:'-':true")
+                        a(ui-sref="user.payment({no: invoice})" ng-bind="invoice")
+                    strong {{value[0].quote.total | currency:'$ ':2}}
+                  .col-xs-12(style="border-bottom: 1px solid #e8e8e8; margin: 2rem 0;")
+                  .col-xs-6
+                    small.grey {{ value[0].created_at | date: 'd MMMM yyyy' | capitalizeAll }}
+                  .col-xs-6.text-right
+                    strong.green {{value[0].quote.status | uppercase}}
+
+          .new-msg
+            form
+              textarea(enter-submit="send()" id="new-msg-input" placeholder="Enter your message" ng-model="newMsg" autocomplete="off")
+              button#send-msg.btn.btn-success(ng-click="send()")
+                span.hidden-xs.hidden-sm SEND MESSAGE
+                span.hidden-xs.hidden-md.hidden-lg SEND
+                span.hidden-sm.hidden-md.hidden-lg
+                  i.fa.fa-paper-plane

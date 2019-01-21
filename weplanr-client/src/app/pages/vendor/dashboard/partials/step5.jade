@@ -1,0 +1,8 @@
+.box(ng-show="currentStep == 'step5'")
+  h2 Are you ready to get started?
+  p Personalise your Dashboard now.
+  .row
+    .col-xs-12.col-md-6.col-md-push-6.text-left
+      a.btn.btn-success(ui-sref="vendor.settings") PERSONALISE NOW
+    .col-xs-12.col-md-6.col-md-pull-6.text-right
+      a.btn.btn-gray(ng-click="personaliseDashboard()") REMIND ME LATER

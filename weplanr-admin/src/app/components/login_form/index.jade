@@ -1,0 +1,26 @@
+form(class="login-form-container" name="loginForm" novalidate="true" autocomplete="off")
+  .form-group
+    input.form-control(
+      name="username"
+      type="text"
+      required="true"
+      ng-model="$ctrl.creds.username"
+      placeholder="Username"
+      ng-enter="$ctrl.submit(loginForm)"
+    )
+    .form-error
+      span.error(ng-show="loginForm.username.$touched && loginForm.username.$error.required") * Required
+  .form-group
+    input.form-control(
+      name="password"
+      type="password"
+      required="true"
+      ng-model="$ctrl.creds.password"
+      placeholder="Password"
+      ng-enter="$ctrl.submit(loginForm)"
+    )
+    .form-error
+      span.error(ng-show="loginForm.password.$touched && loginForm.password.$error.required") * Required
+  .submit-form-row
+    a.btn.btn-primary.btn-block(ng-click="$ctrl.submit(loginForm)") Login
+    spinner(ng-show="loading")

@@ -1,0 +1,43 @@
+.modal
+  .modal-body
+    form(ng-submit="submit()")
+      a.pull-right.icon.icon-exit(ng-click="close('invited-vendor-register-modal', false)")
+      div.animate
+        section
+          p Welcome to WePlanr!
+        section
+          .form-input
+            input.form-control(ng-model="invitedEmail" type="email" disabled=true)
+          .form-input
+            input.form-control(
+              placeholder="New Password"
+              type="password"
+              ng-model="password"
+              minlength="8"
+              required=true
+              ng-change="validatePassword()"
+            )
+          .form-input
+            input.form-control(
+              placeholder="Confirm Password"
+              type="password"
+              id="confirm-password"
+              ng-model="confirmPassword"
+              required=true
+              minlength="8"
+              ng-change="validatePassword()"
+            )
+        section
+          .btn-container
+            spinner(ng-show="uiState.loading")
+            button.btn.btn-success(type="submit" ng-show="!uiState.loading") CONFIRM YOUR VENDOR ACCOUNT
+
+modal#thanks-modal
+  .modal
+    .modal-body
+      a.pull-right.icon.icon-exit(ng-click="closeThanksModal()")
+      section.animate
+        p Thanks for confirming your vendor account. You can now login.
+        br/
+        a.btn.btn-success(ng-click="closeThanksModal()") OK
+  .modal-backdrop

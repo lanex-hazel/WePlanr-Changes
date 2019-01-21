@@ -1,0 +1,10 @@
+.todo(ui-sref="user.organiser")
+  span.title To Do List
+  .pull-right
+    i.fa.fa-angle-right.arrow-link(ui-sref="user.organiser" ui-sref-active="active")
+  ul.todo-list
+    li.todo-list-item(ng-repeat="todo in todos" ng-if="todos.length > 0")
+      i.fa.fa-circle-o(ng-if="todo.attributes.status != 'booked'")
+      i.fa.fa-check(style="color:#8fd381;" ng-if="todo.attributes.status == 'booked'")
+      span.pending(ng-bind="todo.attributes.name")
+  .text-center(style="white-space:normal;" ng-if="todos.length == 0") Congratulations! You have finished all your to do items.

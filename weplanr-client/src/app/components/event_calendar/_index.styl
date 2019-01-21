@@ -1,0 +1,393 @@
+event-calendar
+  float: left
+  display: block
+  background: white
+  width: 100%
+  border: 0
+  overflow: scroll
+  height: 600px
+  .day-header
+    float: left
+    width: 90%
+    background: $white
+    height: 100px
+    color: #272b2f
+    line-height: 100px !important
+    display: inline-block
+    vertical-align: middle
+    margin-left 5%
+  .calendar-header, .day-header
+    [class*='icon-']
+      position relative
+      line-height 30px !important
+      &:after
+        font-weight normal
+        position absolute
+        padding 1px 13px
+        border 1px solid #ededed
+        border-radius 50%
+        font-size 12px
+        cursor pointer
+        top 38px
+    .icon-arrow-right
+      left 38px*-1
+    
+    a
+      border 1px solid rgb(235, 235, 235)
+      padding 6px 16px
+      font-size 15px
+      &:first-child
+        border-radius 23px 0 0 23px
+      &:last-child
+        border-radius 0 23px 23px 0
+      &.active, &:hover
+        background-color $green-btn
+        color white
+        
+    span
+      float: left
+      width: 100%
+      margin-left: 40px*-1
+      text-align: center
+      padding-right: 30px
+      padding-left: 30px
+      color: inherit
+      margin auto
+      font-size 30px
+    #controls.disabled
+      span
+        color rgba(56, 59, 64, 0.2)
+      [class*='icon-']
+        cursor pointer
+        &:after
+          opacity 0.2
+   
+   .calendar-header
+    max-width 90%
+    margin auto
+    padding-top 40px
+    padding-bottom 40px
+    #controls
+      span
+        line-height 15px
+      [class*='icon-']:after
+        top -7px
+    +respond-to(0,480px)
+      #controls span
+        font-size 16px
+        text-align right
+        padding-left 0
+        padding-right 58px
+        line-height 18px
+        &.year
+          text-align center
+      #controls [class*='icon-']
+          line-height 25px !important
+          &:after
+            padding 0 10px
+            font-size 10px
+            top -2px
+      .icon-arrow-right
+        left -26px
+      .icon-arrow-left:after
+        right 27px
+    +respond-to(0, 768px)
+      #control-view
+        padding-top 30px
+  .week
+    float: left
+    width: 100%
+    &:last-child
+      margin-bottom 60px
+      background-color rgb(244, 244, 244)
+    &:nth-last-child(2)
+      span, div
+        &.blank
+          border-bottom 0 !important
+        &.day
+          border-bottom: 1px solid #d0d1d2
+    &.names 
+      border 0
+      > span, div
+        &.day
+          color rgba(56, 59, 64, 0.6)
+          background-color rgb(244, 244, 244)
+          font-size 15px !important
+          text-align center !important
+          height auto !important
+          border 0 !important
+        &.blank
+          font-size 0px !important
+        +respond-to(0,480px)
+          &.day
+            font-size 12px
+    span, div
+      &.blank
+        font-size 0px !important
+        width 2% !important
+        border-top 0 !important
+        background-color rgb(244, 244, 244) !important
+        &:first-of-type
+          border-left 0 !important
+        &:last-of-type
+          border-right 0 !important
+      &.day
+        float: left
+        width: 13.71%
+        border-left: 1px solid #d0d1d2
+        border-top: 1px solid #d0d1d2
+        font-size: 20px
+        text-align left
+        background white
+        color rgb(56, 59, 64)
+        height 105.7px
+        line-height 33px !important
+        display inline-block
+        vertical-align top
+        &:last-child
+          border-right 1px solid #d0d1d2
+        &.today
+          background: #E3F2FF
+        &.different-month
+          background-color rgb(244, 244, 244)
+        &.selected
+          background: #2875C7
+          color: white
+        &.not-available
+          background: #383b40 !important
+          color: white !important
+          #client-name, .icon-map-marker:before
+            color white !important
+        &.partial
+          background rgba(56, 59, 64, 0.4)
+        &.closed
+          background rgba(206, 66, 87, 0.6) !important
+        &.today
+          background-color: #8fd381
+          color: #fff
+      +respond-to(0,480px)
+        &.day
+          font-size 12px
+      #schedule
+        padding 5px 0
+        font-size 12px
+        line-height 1.7
+        font-weight 300
+        span
+          font-size 17px
+          font-weight 400
+        .badge-success
+          border-radius 50%
+          background-color $green-btn
+          width 26px
+          margin-top 5px
+          margin-left auto
+        +respond-to(0, 480px)
+          font-size 9px
+          span
+            font-size 12px
+          .badge-success
+            width 23px
+            height 23px
+            font-size 9px
+          
+
+  #monthView, #yearView
+    margin-left 5%
+    width 90%
+  
+  #yearView
+    .month-header 
+      margin-left 0
+      b
+        font-size 15px
+        text-align left
+        margin-left 0
+        line-height 40px !important
+        height 40px
+    .week
+      background-color white
+      margin-left -5px
+      span.day
+        width 28px
+        height 28px
+        font-size 13px
+        line-height 28px !important
+        text-align center
+        vertical-align middle
+        border 0
+        margin 2px
+        +respond-to(992px, 1200px)
+          margin 2px 0.34px
+        &.different-month
+          visibility hidden
+        &.not-available, &.partial, &.closed, &.today
+          border-radius 50%
+        &:first-child
+          margin-left 0
+  
+  #dayView
+    position relative
+    #location-text
+      position: absolute
+      right: 0
+      top: 16px
+      overflow: hidden
+      width: 227px
+      height: 25px
+      text-overflow: ellipsis
+      white-space: nowrap
+    .dialog
+      width 430px
+      height 630px
+      margin auto
+      position absolute
+      left 31.2%
+      overflow-y scroll
+      overflow-x hidden
+      top -38px
+      &::-webkit-scrollbar
+        display: none
+      +respond-to(0,768px)
+        left 30px
+        right 30px
+        margin auto
+        max-width 92%
+      +respond-to(0,480px)
+        left 4%
+      .section
+        font-size 2rem
+        padding 3rem 6rem
+        background-color rgb(255, 255, 255)
+        border 1px solid rgba(56, 59, 64, 0.102)
+        &:first-child, &:last-child
+          box-shadow 0px 1px 76px 0px rgba(0, 0, 0, 0.05) inset
+        &.schedule-time
+          background-color #b3da8a
+          padding 0
+          .tab-nav
+            width 320px
+            margin 0 auto
+          li a
+            font-size 13px
+            color rgb(56, 59, 64)
+            padding 1.2rem
+            &.active
+              background-color #fff
+          .btn-clear-border
+            background-color #fff
+            color: rgb(56, 59, 64)
+          .row
+            padding 15px 3rem
+        +respond-to(0,480px)
+          padding 15px 30px
+          &.schedule-time
+            .row
+              padding 15px 30px
+            .tab-nav
+              padding-left 30px
+              padding-right 30px
+        &.day-header
+          float none
+          margin 0
+          padding 0 6rem
+          width 100%
+          line-height 80px !important
+          height 80px
+          [class*='icon-']:after
+            top 24px
+          +respond-to(0,480px)
+            padding 0
+            .icon-arrow-left
+              left 30px
+            .icon-arrow-right
+              left -60px
+        .form-input
+          padding-top 0.5rem
+          margin-bottom 5px
+          height 60px
+          position relative
+          margin-right auto
+          margin-left auto
+          font-size 15px
+        .icon-map-marker
+          &:before
+            color rgba(56, 59, 64, 0.4)
+            position absolute
+            z-index 2
+            font-size 10px
+            top 20px
+          input, label
+            padding-left 15px
+            &:valid
+              .icon-map-marker:before
+                color rgb(56, 59, 64)
+        .icon-caret-down:after
+          position absolute
+          font-size 5px
+          top 22px
+          right 10px
+          color rgb(206, 66, 87)
+          z-index 2
+        .timepicker
+          cursor pointer
+        .form-control
+          font-size 15px
+          width 100%
+          display initial
+          padding 0
+          line-height 2
+        .disabled
+          cursor default
+          text-align right
+        input
+          background none
+          position relative
+          bottom -5px
+          left 0
+          z-index 1
+          outline 0
+          margin-bottom 0.2rem
+          &:valid, &.not-empty
+            background white
+          &:focus + label, &:valid + label, &.not-empty + label
+            color rgba(39, 43, 47, 0.302)
+            font-size 12.5px
+            padding 5px 0px
+            z-index 2
+            top -8px
+        label
+          transition(all 0.2s linear)
+          position absolute
+          bottom 18px
+          left 0
+          color rgba(56, 59, 64, 0.4)
+          font-weight normal
+          +respond-to(0,480px)
+            bottom 24px
+        .btn
+          width 100%
+          padding 6px 12px
+        .btn-clear-border, .btn-clear
+          color rgb(206, 66, 87)
+          font-size 12.5px
+  
+.ui-timepicker-standard
+  z-index 2 !important
+  a
+    text-align left
+          
+    
+ @media screen and (max-width 768px)
+  calendar
+    .calendar-header span
+      text-align left
+      padding 0
+      font-weight bold
+    .icon-arrow-left
+      left 75px*-1
+      text-align right
+  #yearView
+    padding-left 22px
+    .week span.day
+      width 12.28%

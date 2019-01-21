@@ -1,0 +1,57 @@
+$title-cell = #f7f0f0
+
+.input-file
+  width: 0.1px
+  height: 0.1px
+  opacity: 0
+  overflow: hidden
+  position: absolute
+  z-index: -1
+
+.user-tabs
+  list-style: none
+  padding: 0px
+  margin: 0px 0px 30px 0px
+  border-bottom: 1px solid #d0d0d0
+  li
+    display: inline-block
+    a
+      display: block
+      padding: 10px
+      font-size: 14px
+      margin-right: 5px
+      &.active
+        background-color: #f7f0f0
+      &:hover
+        background-color: #f7f0f0
+
+
+.table
+  tbody,thead
+    tr > td,tr >th
+      padding: 10px 15px
+      &.action-cell-lg
+        width: 150px
+        text-align: center
+      &.action-cell-md
+        width: 100px
+        text-align: center
+      &.action-cell-sm
+        width: 50px
+        text-align: center
+      &.action-cell-xs
+        width: 25px
+        text-align: center
+        padding: 10px
+      &.title-cell
+        background-color: $title-cell
+        width: 10150px0px
+        max-width: 150px
+        text-align: center
+        padding: 8px 10px
+        font-weight: bold
+  &.pushed
+    margin-bottom: 15px
+
+a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover
+    cursor: pointer !important

@@ -1,0 +1,22 @@
+header(logout="logout()" current-vendor="currentVendor" params="header_params")
+.header-container.hide-desktop(ng-if="$root.backProfile")
+  .header
+    img.header-logo(ui-sref="main.intro" ui-sref-opts="{reload: true, inherit: false}" src="/vendor/images/logo.png")
+.main-content.vprofile-main
+  .content-container(ng-show="!$root.menuView")
+    vendor-profile(vendor="selectedVendor" is-fave="isFave()" favorite="favorite()" unfavorite="unfavorite()" is-loggedin="true" process="processing" show-location="showLocation")
+    br
+    br
+    .hide-mobile
+      vendor-list(
+        collection="collection"
+        title="SUGGESTIONS"
+        fave="favoriteVendor(obj)"
+        unfave="unfavoriteVendor(obj)"
+        fave-list="faveList"
+        see-more="/vendor/search"
+        is-loggedin="true"
+        view-profile="vendor.show")
+modal#portfolio-modal
+  portfolio-modal(caption="selectedVendor.business_name" photos="selectedVendor.photo_urls" count="selectedVendor.photo_urls.length")
+  .modal-backdrop

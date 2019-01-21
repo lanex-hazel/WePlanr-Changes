@@ -1,0 +1,83 @@
+.menu-list, .user-menu-list
+  padding 15px 0 6px
+  .menu-list-item
+    margin 0 15px
+    @media only screen and (min-width 993px) and (max-width 1200px)
+      margin 0 8px
+    a
+      display block
+      padding 15px
+      line-height 1.25
+      color $secondary-text
+      border-bottom 2px solid $white
+      text-transform uppercase
+      font-size 14px
+      &:before
+        font-weight normal
+        color $secondary-text
+      &.active
+        color $primary-text
+        border-bottom 2px solid $primary-hover
+        @media only screen and (max-width 1200px)
+          border-bottom 0
+        &:before
+          color $primary-text
+      &:hover
+        color $primary-text
+        border-bottom 2px solid $primary-hover
+        @media only screen and (max-width 1200px)
+          border-bottom 0
+        &:before
+          color $primary-text
+      @media only screen and (max-width 768px)
+        &.dashboard
+          font-size: 0 !important
+          &:before
+            font-size: 18px !important
+
+.burger-menu
+  text-align: center
+  height: 675px
+  padding: 30px 15px
+  overflow: auto
+  li
+    display: block
+    font-size: 20px
+    border-bottom: 1px solid rgba(75, 77, 82, 0.102)
+    margin 0 15px
+    &:last-child
+      border-bottom: 0
+    a, label
+      line-height: 1.5
+      padding-top: 10px
+      padding-bottom: 10px
+    .link
+      font-weight: initial
+    .icon:before
+      font-size: 13px
+    .drop-icon:before
+      font-size: 16px
+    .drop-icon.more:before
+      content: "\002022\002022\002022 "
+      font-size: 16px
+  label.toggle
+    font-weight: initial
+    &:after
+      content: "\e91b"
+      font-size: 6px
+      vertical-align: middle
+      color: $primary-hover
+      margin-left: 15px
+  .toggle + a, [id^=drop]
+    display: none
+  [id^=drop]:checked ~ ul
+    display: block
+  [id^=drop]:checked + label.toggle:after
+     content: "\e900"
+     font-size: 6px
+     color: $primary-hover
+     vertical-align: middle
+  .sub-menu
+    display: none
+    > li
+      border-bottom: 0

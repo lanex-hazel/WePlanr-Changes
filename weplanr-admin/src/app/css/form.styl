@@ -1,0 +1,47 @@
+input.ng-invalid,
+input.ng-invalid:focus
+  border 1px solid $danger
+  -webkit-box-shadow 0 0 1px 1px rgba(255,0,0,0.6)
+  -moz-box-shadow 0 0 1px 1px rgba(255,0,0,0.6)
+  box-shadow 0 0 1px 1px rgba(255,0,0,0.6)
+  margin-right 3px
+
+input[type="file"].ng-invalid,
+input[type="file"].ng-invalid:focus
+  border 0
+  box-shadow none
+
+.ui-select-multiple.ui-select-bootstrap input.ui-select-search
+  width 100% !important
+
+.input-with-button
+  display: inline-block
+  width: 360px
+  max-width: 90%
+  > *
+    display: inline
+    padding: 0
+    margin: 0
+    height: 3.15rem
+    vertical-align: top
+  > input
+    border: 1px solid #f3f3f4
+    padding-left: 1rem
+    width: 80%
+    box-shadow: none
+    outline: none
+    &:focus
+      box-shadow: none
+  > button
+    width: 13%
+    background-color: #f5efef
+    border: none
+    margin-left: -4px
+
+.avatar
+  border-radius 50%
+  border 1px solid $secondary-text
+  object-fit cover
+  object-position top
+  width 52px
+  height 52px

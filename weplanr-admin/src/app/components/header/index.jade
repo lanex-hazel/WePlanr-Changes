@@ -1,0 +1,13 @@
+.header-container
+  .header-nav
+    ul.pull-right(ng-show="!loggedIn()")
+      li
+        a.sign-in.btn-backlink(ng-href="/login")
+          span Sign In
+    ul.pull-right(ng-show="loggedIn()")
+      li
+        a.sign-in.btn-backlink(ng-click="logout()") Sign Out
+    
+    .header-logo
+      .logo-container
+        img(alt="logo" src="vendor/images/logo.png" width="145px")

@@ -1,0 +1,30 @@
+.footer-container
+  .footer.row
+    #terms.col-xs-12
+      ul
+        li
+          a.links(href="http://blog.weplanr.com" target="_blank") BLOG
+        li -
+        li
+          a.links(ui-sref="main.policy") PRIVACY POLICY
+        li -
+        li
+          a.links(ui-sref="main.terms") TERMS & CONDITIONS
+        li -
+        li
+          a.links(href="mailto:hello@weplanr.com") CONTACT US
+    .col-md-4.col-xs-12.no-padding
+      .footer-content.align-footer.language
+        | International &nbsp;
+        .bold EN
+    .col-md-4.col-md-push-4.col-xs-12.no-padding
+      .footer-content.social-links
+        a(href="http://www.facebook.com/weplanr" target="_blank")
+          img(src="/vendor/images/icon-gray-facebook.png")
+        a(href="http://www.instagram.com/weplanr" target="_blank")
+          img(src="/vendor/images/icon-gray-instagram.png")
+        a(href="http://au.pinterest.com/weplanr/" target="_blank")
+          img(src="/vendor/images/icon-gray-pinterest.png")
+    .col-md-4.col-md-pull-4.col-xs-12.no-padding
+      .footer-content.copyright.align-footer
+        span &copy; {{current_year}} WePlanr, All Rights Reserved
